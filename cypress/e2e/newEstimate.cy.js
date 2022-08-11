@@ -193,23 +193,25 @@ describe('New Estimate module', () => {
         estimatesPage.sendToEmail()
     })
 
-    it('Should have correct Row total upon adding discount', () => {
+    it.only('Should have correct Row total upon adding discount', () => {
         dashboard.clickEstimatesTab()
         estimatesPage.clickAddNew()
         estimatesPage.typeSearchInput('Genius Giant Game Inc.')
         estimatesPage.clickSearch()
         cy.wait(4000)
         estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Inventory Item 1')
+        estimatesPage.inventorySearch('Air Filter')
+        cy.wait(4000)
+
+        estimatesPage.addDiscountInRow(10, 30, '%')
+        estimatesPage.checkInvoiceSubtotal()
+        estimatesPage.addDiscountInRow(10, 25, '$')
+        estimatesPage.checkInvoiceSubtotal()
+        estimatesPage.saveEstimate()
         cy.wait(4000)
         
-        estimatesPage.addDiscountinRow('%',10,30)
-        estimatesPage.checkInvoiceSubtotal()
-        estimatesPage.addDiscountinRow('$',10,25)
-        estimatesPage.checkInvoiceSubtotal()
+        estimatesPage.checkRowsTotal()
 
-        // estimatesPage.checkRowsTotal()
-        
     })
 
 })

@@ -178,7 +178,7 @@ class estimatesPage {
         return calc == elementValue
     }
 
-    addDiscountInRow(discountKind, min, max) {
+    addDiscountInRow(min, max, discountKind) {
 
 
         this.elements.addDiscountRowElement().click()
@@ -209,22 +209,58 @@ class estimatesPage {
     }
 
     checkRowsTotal = () => {
-        this.elements.tableRows().should('not.have.attr', 'class', 'editable').each(
-            // should('not.have.class', 'editable').should('not.have.class', 'subtotal')
-            $row => {
-                const total = $row.find('td').eq(11).text().replace('$', '').replace(',', '').parseFloat
-                // checkRowTotal=()=> {
+        // this.elements.tableRows().should('not.have.attr', 'class', 'editable').each(
+        //     // should('not.have.class', 'editable').should('not.have.class', 'subtotal')
+        //     $row => {
+        //         const total = $row.find('td').eq(11).text().replace('$', '').replace(',', '').parseFloat
+        //         // checkRowTotal=()=> {
 
-                // }
-                if (!$row.hasClass('editable')) {
-                    cy.log(total+total)
-                    expect()
-                }
-                else {
-                    return
-                }
-            }
-        )
+        //         // }
+        //         if (!$row.hasClass('editable')) {
+        //             cy.log(total + total)
+        //             expect()
+        //         }
+        //         else {
+        //             return
+        //         }
+        //     }
+        // )
+
+        /*
+        checkSum=(nameEl, priceEl, quantityEl, totalEl)=> {
+            const name = nameEl.innerText
+            const price = parseFloat(priceEl.innerText.replace('$',''))
+            const quantity = parseInt(quantityEl.innerText)
+            const total = parseFloat(totalEl.innerText.replace('$',''))
+            expect(price * quantity, `total for ${name}`).to.equal(total)
+        }
+
+        cy.get('#sales tbody tr').each((row)=> {
+            cy.wrap(row).find('td').spread(checkSum)
+        })
+        */
+        // moveEl,skuEl,nameEl,
+        function checkSum(moveEl, skuEl, nameEl, descEl, qtyEl, unitCostEl, profitEl, unitPriceEl, totalCostEl, priceEl, discountEl, totalEl) {
+            // const name = nameEl.innerText
+
+            const qty = parseInt(qtyEl.innerText)
+
+            const unitCost = parseFloat(unitCostEl.innerText.replace('$','').replace(' ',''))
+            const totalCost = parseFloat(totalCostEl.innerText.replace('$','').replace(' ',''))
+
+            cy.log(qty)
+            cy.log(unitCost)
+            cy.log(totalCost)
+            expect(qty*unitCost, `total for it`).to.equal(totalCost)
+
+        }
+
+        this.elements.tableRows().eq(1).each((row) => {
+            cy.wrap(row).find('td').spread(checkSum)
+        })
+
+
+
     }
 
     checkInvoiceSubtotal = () => {
