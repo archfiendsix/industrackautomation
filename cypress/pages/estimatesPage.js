@@ -216,9 +216,19 @@ class estimatesPage {
 
 
         function changeInput(nameEl, descEl, qtyEl, unitCostEl, profitEl, unitPriceEl) {
+            function getRandomInt(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+            }
             const description = descEl
-            cy.wrap(description).clear().type('TEST')
-            cy.log(description.value)
+            const randomQuantity = getRandomInt(0, 10)
+            const randomUnitCost = getRandomInt(0,1000)
+            const randomProfit = getRandomInt(0,5)
+            cy.wrap(description).clear().type('TEST Description Change')
+            cy.wrap(qtyEl).clear().type(randomQuantity)
+            cy.wrap(unitCostEl).clear().type(randomUnitCost)
+            cy.wrap(profitEl).clear().type(randomProfit)
         }
 
         this.elements.tableRows().not('.editable').each((row) => {

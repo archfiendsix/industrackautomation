@@ -30,6 +30,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 
     preventNotificationCard = () => {
+        cy.wait(4000)
         cy.get("body").then($body => {
             if (this.elements.notificationCard().length > 0) {
                 this.elements.notificationCard().then($el => {
