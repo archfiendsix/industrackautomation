@@ -6,7 +6,7 @@ class estimatesPage {
         searchButton: () => cy.get('.ibox button[type="submit"]'),
         searchItem: () => cy.get('.ibox-content .customerList ul.list-group').first(),
         proceedButton: () => cy.get('button.btn.btn-primary').contains('Proceed'),
-        partsSearch: () => cy.get('input[aria-label="Parts & services search"]'),
+        partsSearch: () => cy.get('.editable input[aria-label="Parts & services search"]'),
         actionsDropdown: () => cy.get('estimate-edit .btn-group.actions'),
         dropDownItems: () => cy.get('li a'),
         changeCustomerButton: () => cy.get('button#changeCustomerBtn'),
@@ -25,7 +25,7 @@ class estimatesPage {
         addDiscountRowElement: () => cy.get('a[data-target="#modalAddDiscountPartLine"]'),
 
         addDiscountTotalElement: () => cy.get('a[data-target="#modalAddDiscount"]'),
-        tableRows: () => cy.get('.dataTable tbody tr'),
+        tableRows: () => cy.get('.dataTable tbody tr.gradeA.odd.ng-star-inserted'),
         rowTotal: () => cy.get('.dataTable tbody tr td:nth-last-child(2) span'),
         invoiceSubTotal: () => cy.get('.table.invoice-total tbody tr:first-child() td:nth-child(2)'),
 
@@ -58,9 +58,11 @@ class estimatesPage {
 
     inventorySearch(searchItem) {
         this.elements.partsSearch()
+            .last()
             .type(searchItem)
         cy.wait(2500)
         this.elements.partsSearch()
+            .last()
             .type('{downArrow}')
             .type('{enter}')
     }
@@ -178,27 +180,29 @@ class estimatesPage {
         return calc == elementValue
     }
 
-    addDiscountInRow(min, max, discountKind) {
+    addDiscountInRow(min, max, discountKind, numberOfRows) {
 
+        for (let i = 1; i <= numberOfRows; i++) {
+            const randomRow = this.getRandomInt(0, numberOfRows)
+            this.elements.addDiscountRowElement().eq(randomRow).click()
+            cy.wait(2000)
+            if (discountKind === '$') {
+                this.elements.setDiscountValueInput().clear().type(this.getRandomInt(min, max))
+                this.elements.setDiscountModalDropdown().select('$')
 
-        this.elements.addDiscountRowElement().click()
-        cy.wait(2000)
-        if (discountKind === '$') {
-            this.elements.setDiscountValueInput().clear().type(this.getRandomInt(min, max))
-            this.elements.setDiscountModalDropdown().select('$')
+            } else if (discountKind === '%') {
+                this.elements.setDiscountValueInput().clear().type(this.getRandomInt(min, max))
+                this.elements.setDiscountModalDropdown().select('%')
 
-        } else if (discountKind === '%') {
-            this.elements.setDiscountValueInput().clear().type(this.getRandomInt(min, max))
-            this.elements.setDiscountModalDropdown().select('%')
+            }
+            else {
+                this.elements.setDiscountModalDropdown().select('$')
+                this.elements.setDiscountValueInput().clear().type(this.getRandomInt(min, max))
+            }
+
+            this.elements.setDiscountModalSaveButton().click()
 
         }
-        else {
-            this.elements.setDiscountModalDropdown().select('$')
-            this.elements.setDiscountValueInput().clear().type(this.getRandomInt(min, max))
-        }
-
-
-        this.elements.setDiscountModalSaveButton().click()
 
     }
 
@@ -206,6 +210,23 @@ class estimatesPage {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
+
+    changeTableValues = () => {
+
+
+        function changeInput(nameEl, descEl, qtyEl, unitCostEl, profitEl, unitPriceEl) {
+            const name = nameEl
+            cy.wrap(name).type('haha')
+            cy.log(name)
+        }
+
+        this.elements.tableRows().not('.editable').each((row) => {
+            cy.wrap(row).find('input, textarea').spread(changeInput)
+        })
+
+
+
     }
 
     checkRowsTotal = () => {
@@ -226,37 +247,31 @@ class estimatesPage {
         //     }
         // )
 
-        /*
-        checkSum=(nameEl, priceEl, quantityEl, totalEl)=> {
-            const name = nameEl.innerText
-            const price = parseFloat(priceEl.innerText.replace('$',''))
-            const quantity = parseInt(quantityEl.innerText)
-            const total = parseFloat(totalEl.innerText.replace('$',''))
-            expect(price * quantity, `total for ${name}`).to.equal(total)
-        }
 
-        cy.get('#sales tbody tr').each((row)=> {
-            cy.wrap(row).find('td').spread(checkSum)
-        })
-        */
-        // moveEl,skuEl,nameEl,
-        function checkSum(moveEl, skuEl, nameEl, descEl, qtyEl, unitCostEl, profitEl, unitPriceEl, totalCostEl, priceEl, discountEl, totalEl) {
+        function checkCalc(moveEl, skuEl, nameEl, descEl, qtyEl, unitCostEl, profitEl, unitPriceEl, totalCostEl, priceEl, discountEl, totalEl) {
             // const name = nameEl.innerText
 
             const qty = parseInt(qtyEl.innerText)
+            const item = skuEl.innerText + " - " + nameEl.innerText
+            const unitCost = parseFloat(unitCostEl.innerText.replace('$', '').replace(' ', ''))
+            const totalCost = parseFloat(totalCostEl.innerText.replace('$', '').replace(' ', ''))
+            const price = parseFloat(priceEl.innerText.replace('$', '').replace(' ', ''))
+            let discount = parseFloat(discountEl.innerText.replace('$', '').replace(' ', ''))
+            const total = parseFloat(totalEl.innerText.replace('$', '').replace(' ', ''))
 
-            const unitCost = parseFloat(unitCostEl.innerText.replace('$','').replace(' ',''))
-            const totalCost = parseFloat(totalCostEl.innerText.replace('$','').replace(' ',''))
-
-            cy.log(qty)
-            cy.log(unitCost)
-            cy.log(totalCost)
-            expect(qty*unitCost, `total for it`).to.equal(totalCost)
+            expect(qty * unitCost, `${item}: Total cost calculation`).to.equal(totalCost)
+            if (isNaN(discount)) {
+                discount = 0
+            }
+            else {
+                discount = discount
+            }
+            expect(price - discount, `${item}: Price($${price}) - Discount($${discount}) = Total($${total})`).to.equal(total)
 
         }
 
-        this.elements.tableRows().eq(1).each((row) => {
-            cy.wrap(row).find('td').spread(checkSum)
+        this.elements.tableRows().each((row) => {
+            cy.wrap(row).find('td').spread(checkCalc)
         })
 
 
@@ -273,8 +288,8 @@ class estimatesPage {
 
                 const sum = Cypress._.sum(totals).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-
-                this.elements.invoiceSubTotal().contains(`$${sum}`).log(`Row total of $${sum} is equal to invoice subtotal element: ${this.elements.invoiceSubTotal()} `)
+                constSub = this.elements.invoiceSubTotal().innerText.toString().replace('$', '').replace(' ', '')
+                this.elements.invoiceSubTotal().contains(`$${sum}`).log(`Row total of $${sum} is equal to invoice subtotal element: ${subTotal} `)
             })
 
 

@@ -193,7 +193,7 @@ describe('New Estimate module', () => {
         estimatesPage.sendToEmail()
     })
 
-    it.only('Should have correct Row total upon adding discount', () => {
+    it('Should have correct Row total upon adding discount', () => {
         dashboard.clickEstimatesTab()
         estimatesPage.clickAddNew()
         estimatesPage.typeSearchInput('Genius Giant Game Inc.')
@@ -202,15 +202,44 @@ describe('New Estimate module', () => {
         estimatesPage.selectCustomer()
         estimatesPage.inventorySearch('Air Filter')
         cy.wait(4000)
+        estimatesPage.inventorySearch('Inventory Item 1')
+        cy.wait(4000)
+        estimatesPage.inventorySearch('Gaming Chair')
+        cy.wait(4000)
 
-        estimatesPage.addDiscountInRow(10, 30, '%')
+        estimatesPage.addDiscountInRow(0, 30, '%',3)
         estimatesPage.checkInvoiceSubtotal()
-        estimatesPage.addDiscountInRow(10, 25, '$')
+        estimatesPage.addDiscountInRow(0, 25, '$',3)
         estimatesPage.checkInvoiceSubtotal()
         estimatesPage.saveEstimate()
         cy.wait(4000)
         
         estimatesPage.checkRowsTotal()
+
+    })
+
+    it.only('Should change input values and have correct calculations', () => {
+        dashboard.clickEstimatesTab()
+        estimatesPage.clickAddNew()
+        estimatesPage.typeSearchInput('Genius Giant Game Inc.')
+        estimatesPage.clickSearch()
+        cy.wait(4000)
+        estimatesPage.selectCustomer()
+        estimatesPage.inventorySearch('Air Filter')
+        cy.wait(4000)
+        estimatesPage.inventorySearch('Inventory Item 1')
+        cy.wait(4000)
+        estimatesPage.inventorySearch('Gaming Chair')
+        cy.wait(4000)
+
+        // estimatesPage.addDiscountInRow(0, 30, '%',3)
+        // estimatesPage.addDiscountInRow(0, 25, '$',3)
+        // estimatesPage.saveEstimate()
+        // cy.wait(4000)
+
+        estimatesPage.changeTableValues()
+        
+        // estimatesPage.checkRowsTotal()
 
     })
 
