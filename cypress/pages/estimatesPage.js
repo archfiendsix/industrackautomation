@@ -216,9 +216,9 @@ class estimatesPage {
 
 
         function changeInput(nameEl, descEl, qtyEl, unitCostEl, profitEl, unitPriceEl) {
-            const name = nameEl
-            cy.wrap(name).type('haha')
-            cy.log(name)
+            const description = descEl
+            cy.wrap(description).clear().type('TEST')
+            cy.log(description.value)
         }
 
         this.elements.tableRows().not('.editable').each((row) => {

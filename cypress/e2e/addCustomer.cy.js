@@ -16,6 +16,7 @@ describe('Add Customer', () => {
     cy.visit('/login')
     loginPage.loginAdmin('andreiv@industrack.com', 'admin')
     cy.wait(4250)
+    dashboard.preventNotificationCard()
     dashboard.clickCustomerTab()
     dashboard.clickAddCustomerButton()
 

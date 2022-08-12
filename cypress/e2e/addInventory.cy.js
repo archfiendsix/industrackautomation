@@ -19,6 +19,7 @@ describe('Add Inventory', () => {
     cy.wait(4250)
     // dashboard.clickSettings()
     // dashboard.elements.settingsButton().click()
+    dashboard.preventNotificationCard()
     settingsPage.gotoAddNewInventory()
   })
   

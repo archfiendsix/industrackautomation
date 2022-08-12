@@ -16,8 +16,11 @@ describe('New Estimate module', () => {
 
         cy.visit('/login')
         loginPage.loginAdmin('andreiv@industrack.com', 'admin')
-        cy.get('ul.dropdown-menu.dropdown-reminders').invoke('hide')
+        // cy.get('ul.dropdown-menu.dropdown-reminders').invoke('hide')
         cy.wait(4250)
+
+        /* Prevent the notification card from interfering */
+        dashboard.preventNotificationCard()
 
     })
     it('New customer, New Inventory, New Estimate e2e', () => {
@@ -207,13 +210,13 @@ describe('New Estimate module', () => {
         estimatesPage.inventorySearch('Gaming Chair')
         cy.wait(4000)
 
-        estimatesPage.addDiscountInRow(0, 30, '%',3)
+        estimatesPage.addDiscountInRow(0, 30, '%', 3)
         estimatesPage.checkInvoiceSubtotal()
-        estimatesPage.addDiscountInRow(0, 25, '$',3)
+        estimatesPage.addDiscountInRow(0, 25, '$', 3)
         estimatesPage.checkInvoiceSubtotal()
         estimatesPage.saveEstimate()
         cy.wait(4000)
-        
+
         estimatesPage.checkRowsTotal()
 
     })
@@ -238,8 +241,9 @@ describe('New Estimate module', () => {
         // cy.wait(4000)
 
         estimatesPage.changeTableValues()
-        
-        // estimatesPage.checkRowsTotal()
+        estimatesPage.saveEstimate()
+        estimatesPage.checkRowsTotal()
+
 
     })
 
