@@ -24,11 +24,13 @@ class estimatesPage {
         },
         addDiscountRowElement: () => cy.get('a[data-target="#modalAddDiscountPartLine"]'),
 
-        addDiscountTotalElement: () => cy.get('a[data-target="#modalAddDiscount"]'),
+        addInvoiceDiscountButton: () => cy.get('a[data-target="#modalAddDiscount"]'),
         tableRows: () => cy.get('.dataTable tbody tr.gradeA.odd.ng-star-inserted'),
         rowTotal: () => cy.get('.dataTable tbody tr td:nth-last-child(2) span'),
         invoiceSubTotal: () => cy.get('.table.invoice-total tbody tr:first-child() td:nth-child(2)'),
-
+        invoiceDiscount: () => cy.get('.table.invoice-total tr:nth-child(2) td:nth-child(2)'),
+        invoiceTax: () => cy.get('.table.invoice-total tr:nth-child(3) td:nth-child(2)'),
+        invoiceTotal: () => cy.get('.table.invoice-total tr.total td:nth-child(2)'),
         sendToEmailModal: {
             recipientChipRemoveIcon: () => cy.get('mat-chip-list .mat-chip-remove '),
             recipientsInputBox: () => cy.get('#mat-chip-list-input-0'),
@@ -36,8 +38,10 @@ class estimatesPage {
         },
         setDiscountValueInput: () => cy.get('input[name="setDiscountItem.discountValue"]'),
         setDiscountModalSaveButton: () => cy.get('#modalAddDiscountPartLine .btn.btn-primary'),
-        setDiscountModalDropdown: () => cy.get('#modalAddDiscountPartLine select[name="setDiscountItemdiscountKind"]')
-
+        setDiscountModalDropdown: () => cy.get('#modalAddDiscountPartLine select[name="setDiscountItemdiscountKind"]'),
+        setInvoiceDiscountValueInput: () => cy.get('input[name="discountValue"]'),
+        setInvoiceDiscountModalDropdown: () => cy.get('select[name="discountKind"]'),
+        setInvoiceDiscountModalSaveButton: () => cy.get('#modalAddDiscount .btn.btn-primary'),
     }
 
     clickAddNew() {
@@ -278,6 +282,11 @@ class estimatesPage {
             else {
                 discount = discount
             }
+           
+
+            expect(qty * unitCost, `${item}: Quantity(${qty}) * Unit Cost($${unitCost})`).to.equal(totalCost)
+            expect(qty * unitPrice, `${item}: Quantity(${qty}) * Unit Cost($${unitPrice})`).to.equal(price)
+            expect(unitCost * profitPercent + unitCost, `${item}: Unit Cost($${unitCost}) + Profit(${profitPercent})`).to.equal(unitPrice)
             expect(price - discount, `${item}: Price($${price}) - Discount($${discount}) = Total($${total})`).to.equal(total)
             expect(price - discount, `${item}: Price($${price}) - Discount($${discount}) = Total($${total})`).to.equal(total)
             expect(unitCost * profitPercent + unitCost, `${item}: Unit Cost(${unitCost}) + Profit(${profitPercent})`).to.equal(unitPrice)
@@ -291,6 +300,14 @@ class estimatesPage {
 
     }
 
+    addInvoiceDiscount = () => {
+        const randomDiscount = this.getRandomInt(1, 10)
+        this.elements.addInvoiceDiscountButton().click()
+        this.elements.setInvoiceDiscountValueInput().type(randomDiscount)
+        this.elements.setInvoiceDiscountModalDropdown().select('%')
+        this.elements.setInvoiceDiscountModalSaveButton().click()
+    }
+
     checkInvoiceSubtotal = () => {
         this.elements.rowTotal()
             .then($cells => {
@@ -302,10 +319,32 @@ class estimatesPage {
                 const sum = Cypress._.sum(totals).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
                 constSub = this.elements.invoiceSubTotal().innerText.toString().replace('$', '').replace(' ', '')
+
                 this.elements.invoiceSubTotal().contains(`$${sum}`).log(`Row total of $${sum} is equal to invoice subtotal element: ${subTotal} `)
             })
 
 
+    }
+
+    checkInvoiceTotal = () => {
+        // const invoiceSubTotal = parseFloat(this.elements.invoiceSubTotal().toString().replace('$', ''))
+        this.elements.invoiceSubTotal().then(el=> {
+            const invoiceSubTotal = parseFloat(el.innerText.replace('$', '').replace(' ', ''))
+            cy.log(invoiceSubTotal)
+        })
+        
+        
+        let invoiceDiscount = parseFloat(this.elements.invoiceDiscount().toString().replace('$', ''))
+        cy.log(invoiceDiscount)
+        const invoiceTotal = parseFloat(this.elements.invoiceTotal().toString().replace('$', ''))
+        if (isNaN(invoiceDiscount)) {
+            invoiceDiscount = 0
+        }
+        else {
+            invoiceDiscount = invoiceDiscount
+        }
+        cy.log(invoiceTotal)
+        // expect(invoiceSubTotal.parseFloat - invoiceDiscount.parseFloat).to.equal(invoiceTotal)
     }
 
     // cy.get('table tbody yd:nth-child(4)')

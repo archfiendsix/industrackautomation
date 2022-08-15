@@ -221,7 +221,7 @@ describe('New Estimate module', () => {
 
     })
 
-    it.only('Should change input values and have correct calculations', () => {
+    it.only('Should change input values and have correct calculations after save', () => {
         dashboard.clickEstimatesTab()
         estimatesPage.clickAddNew()
         estimatesPage.typeSearchInput('Genius Giant Game Inc.')
@@ -237,13 +237,13 @@ describe('New Estimate module', () => {
 
         // estimatesPage.addDiscountInRow(0, 30, '%',3)
         // estimatesPage.addDiscountInRow(0, 25, '$',3)
-        // estimatesPage.saveEstimate()
         // cy.wait(4000)
 
         estimatesPage.changeTableValues()
+        estimatesPage.addInvoiceDiscount()
         estimatesPage.saveEstimate()
         estimatesPage.checkRowsTotal()
-
+        estimatesPage.checkInvoiceTotal()
 
     })
 
