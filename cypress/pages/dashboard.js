@@ -35,7 +35,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             if (this.elements.notificationCard().length > 0) {
                 this.elements.notificationCard().then($el => {
                     if ($el.is(':visible')) {
-                        this.elements.notificationReminderIcon().click()
+                        this.elements.notificationReminderIcon().click({ force: true })
                     } else {
                         cy.log('Notification card not present')
                     }

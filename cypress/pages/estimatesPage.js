@@ -223,8 +223,8 @@ class estimatesPage {
             }
             const description = descEl
             const randomQuantity = getRandomInt(0, 10)
-            const randomUnitCost = getRandomInt(0,1000)
-            const randomProfit = getRandomInt(0,5)
+            const randomUnitCost = getRandomInt(0, 1000)
+            const randomProfit = getRandomInt(0, 5)
             cy.wrap(description).clear().type('TEST Description Change')
             cy.wrap(qtyEl).clear().type(randomQuantity)
             cy.wrap(unitCostEl).clear().type(randomUnitCost)
@@ -268,7 +268,9 @@ class estimatesPage {
             const price = parseFloat(priceEl.innerText.replace('$', '').replace(' ', ''))
             let discount = parseFloat(discountEl.innerText.replace('$', '').replace(' ', ''))
             const total = parseFloat(totalEl.innerText.replace('$', '').replace(' ', ''))
-
+            const profit = parseFloat(profitEl.innerText.replace('%', '').replace(' ', ''))
+            const profitPercent = profit / 100
+            const unitPrice = parseFloat(unitPriceEl.innerText.replace('$', '').replace(' ', ''))
             expect(qty * unitCost, `${item}: Total cost calculation`).to.equal(totalCost)
             if (isNaN(discount)) {
                 discount = 0
@@ -277,7 +279,8 @@ class estimatesPage {
                 discount = discount
             }
             expect(price - discount, `${item}: Price($${price}) - Discount($${discount}) = Total($${total})`).to.equal(total)
-
+            expect(price - discount, `${item}: Price($${price}) - Discount($${discount}) = Total($${total})`).to.equal(total)
+            expect(unitCost * profitPercent + unitCost, `${item}: Unit Cost(${unitCost}) + Profit(${profitPercent})`).to.equal(unitPrice)
         }
 
         this.elements.tableRows().each((row) => {
@@ -326,6 +329,8 @@ class estimatesPage {
     //     })
 
     // contains('#total', '$' + sum)
+
+
 }
 
 module.exports = new estimatesPage()
