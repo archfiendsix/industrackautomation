@@ -1,4 +1,4 @@
-class settings {
+class SettingsPage {
 
     /*
 cy.get('button[data-target="#modalAddNewCustomer"]').click()
@@ -25,4 +25,4 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     
 }
 
-module.exports = new settings();
+module.exports = new SettingsPage();

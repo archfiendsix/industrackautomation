@@ -1,4 +1,4 @@
-class addCustomer {
+class AddCustomerPage {
 
 
     elements = {
@@ -76,4 +76,4 @@ class addCustomer {
 }
 
 
-module.exports = new addCustomer();
+module.exports = new AddCustomerPage();

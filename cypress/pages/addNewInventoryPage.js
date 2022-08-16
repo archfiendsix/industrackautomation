@@ -1,4 +1,4 @@
-class addNewInventor {
+class AddNewInventoryPage {
 
 
     elements = {
@@ -41,4 +41,4 @@ class addNewInventor {
 }
 
 
-module.exports = new addNewInventor();
+module.exports = new AddNewInventoryPage();

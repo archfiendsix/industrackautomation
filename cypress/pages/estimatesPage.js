@@ -1,4 +1,4 @@
-class estimatesPage {
+class EstimatesPage {
     elements = {
         addNewEstimateButton: () => cy.get('.search-form button.btn-primary.m-r-sm'),
 
@@ -424,4 +424,4 @@ class estimatesPage {
 
 }
 
-module.exports = new estimatesPage()
+module.exports = new EstimatesPage()

@@ -1,4 +1,4 @@
-class dashboard {
+class Dashboard {
 
     /*
 cy.get('button[data-target="#modalAddNewCustomer"]').click()
@@ -47,4 +47,4 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 }
 
-module.exports = new dashboard();
+module.exports = new Dashboard();

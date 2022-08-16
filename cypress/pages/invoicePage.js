@@ -1,4 +1,4 @@
-class invoicePage {
+class InvoicePage {
 
     /*
 cy.get('button[data-target="#modalAddNewCustomer"]').click()
@@ -12,4 +12,4 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 }
 
-module.exports = new invoicePage();
+module.exports = new InvoicePage();

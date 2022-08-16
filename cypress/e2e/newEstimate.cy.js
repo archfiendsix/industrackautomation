@@ -1,10 +1,10 @@
-import loginPage from "../pages/loginPage";
-import dashboard from "../pages/dashboard"
-import addcustomerPage from "../pages/addcustomerPage";
-import settingsPage from "../pages/settingsPage";
-import addNewInventoryPage from "../pages/addNewInventoryPage";
-import estimatesPage from "../pages/estimatesPage";
-import invoicePage from "../pages/invoicePage";
+import LoginPage from "../pages/loginPage";
+import Dashboard from "../pages/dashboard"
+import AddCustomerPage from "../pages/addCustomerPage";
+import SettingsPage from "../pages/settingsPage";
+import AddNewInventoryPage from "../pages/addNewInventoryPage";
+import EstimatesPage from "../pages/estimatesPage";
+import InvoicePage from "../pages/invoicePage";
 
 describe('New Estimate module', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
@@ -15,235 +15,235 @@ describe('New Estimate module', () => {
     beforeEach(() => {
 
         cy.visit('/login')
-        loginPage.loginAdmin('andreiv@industrack.com', 'admin')
+        LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
         // cy.get('ul.dropdown-menu.dropdown-reminders').invoke('hide')
         cy.wait(4250)
 
         /* Prevent the notification card from interfering */
-        dashboard.preventNotificationCard()
+        Dashboard.preventNotificationCard()
 
     })
     it('New customer, New Inventory, New Estimate e2e', () => {
 
         /*new customer */
-        dashboard.clickCustomerTab()
-        dashboard.clickAddCustomerButton()
+        Dashboard.clickCustomerTab()
+        Dashboard.clickAddCustomerButton()
 
-        addcustomerPage.fillData()
+        AddCustomerPage.fillData()
 
 
 
         cy.wait(2500)
-        addcustomerPage.elements.saveButton().should('not.be.disabled')
-        addcustomerPage.elements.saveButton().click()
+        AddCustomerPage.elements.saveButton().should('not.be.disabled')
+        AddCustomerPage.elements.saveButton().click()
 
-        addcustomerPage.confirmValidityYes()
+        AddCustomerPage.confirmValidityYes()
 
         /*new inventory */
 
 
         cy.wait(3500)
 
-        // dashboard.clickSettings()
-        // dashboard.elements.settingsButton().click()
-        settingsPage.gotoAddNewInventory()
+        // Dashboard.clickSettings()
+        // Dashboard.elements.settingsButton().click()
+        SettingsPage.gotoAddNewInventory()
 
-        addNewInventoryPage.fillData()
-        addNewInventoryPage.clickSaveButton()
-        addNewInventoryPage.checkSaveSuccess()
+        AddNewInventoryPage.fillData()
+        AddNewInventoryPage.clickSaveButton()
+        AddNewInventoryPage.checkSaveSuccess()
 
         /*newEstimate*/
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Inventory Item 1')
-        estimatesPage.saveAndCloseEstimate()
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.saveAndCloseEstimate()
     })
 
 
     // it('test', () => {
     //     /*newEstimate*/
-    //     dashboard.clickEstimatesTab()
-    //     estimatesPage.clickAddNew()
-    //     estimatesPage.typeSearchInput('Genius Giant Inc.')
-    //     estimatesPage.clickSearch()
+    //     Dashboard.clickEstimatesTab()
+    //     EstimatesPage.clickAddNew()
+    //     EstimatesPage.typeSearchInput('Genius Giant Inc.')
+    //     EstimatesPage.clickSearch()
     //     cy.wait(4000)
-    //     estimatesPage.selectCustomer()
-    //     estimatesPage.inventorySearch('Inventory Item 1')
-    //     estimatesPage.saveAndCloseEstimate()
+    //     EstimatesPage.selectCustomer()
+    //     EstimatesPage.inventorySearch('Inventory Item 1')
+    //     EstimatesPage.saveAndCloseEstimate()
     // })
 
     it('Should have status Won', () => {
 
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Inventory Item 1')
-        estimatesPage.saveEstimate()
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.saveEstimate()
         cy.wait(3000)
-        estimatesPage.markAsWon()
+        EstimatesPage.markAsWon()
         cy.wait(3000)
-        estimatesPage.confirmYes()
-        estimatesPage.checkEstimateStatus('Won')
+        EstimatesPage.confirmYes()
+        EstimatesPage.checkEstimateStatus('Won')
     })
 
     it('Should have status Lost', () => {
 
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Inventory Item 1')
-        estimatesPage.saveEstimate()
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.saveEstimate()
         cy.wait(3000)
-        estimatesPage.markAslost()
+        EstimatesPage.markAslost()
         cy.wait(3000)
-        estimatesPage.confirmYes()
-        estimatesPage.checkEstimateStatus('Lost')
+        EstimatesPage.confirmYes()
+        EstimatesPage.checkEstimateStatus('Lost')
     })
 
     it('Should proceed to Add New Job Screen after converting to Job', () => {
 
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Game Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Game Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Inventory Item 1')
-        estimatesPage.saveEstimate()
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.saveEstimate()
         cy.wait(3000)
-        estimatesPage.convertToJob()
+        EstimatesPage.convertToJob()
         cy.wait(3000)
-        estimatesPage.confirmYes()
+        EstimatesPage.confirmYes()
         cy.wait(5500)
-        estimatesPage.checkAddNewJobModalTitle()
+        EstimatesPage.checkAddNewJobModalTitle()
     })
 
     it('Should successfully convert estimate to invoice', () => {
 
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Game Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Game Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Inventory Item 1')
-        estimatesPage.saveEstimate()
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.saveEstimate()
         cy.wait(3000)
-        estimatesPage.convertToInvoice()
+        EstimatesPage.convertToInvoice()
         cy.wait(3000)
-        estimatesPage.confirmYes()
-        estimatesPage.checkConvertedToInvoiceSuccess()
+        EstimatesPage.confirmYes()
+        EstimatesPage.checkConvertedToInvoiceSuccess()
         cy.wait(1500)
-        invoicePage.checkInvoiceStatus()
+        InvoicePage.checkInvoiceStatus()
     })
 
     it('Should change Customer', () => {
 
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Game Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Game Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Inventory Item 1')
-        estimatesPage.saveEstimate()
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.saveEstimate()
         cy.wait(4000)
-        estimatesPage.changeCustomer('Change to this customer')
+        EstimatesPage.changeCustomer('Change to this customer')
         cy.wait(4000)
-        estimatesPage.saveEstimate()
+        EstimatesPage.saveEstimate()
         cy.wait(2500)
-        estimatesPage.checkBillToCustomerName('Change to this customer')
+        EstimatesPage.checkBillToCustomerName('Change to this customer')
 
     })
 
     it('Should proceed to Estimate preview', () => {
 
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Game Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Game Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Inventory Item 1')
-        estimatesPage.saveEstimate()
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.saveEstimate()
         cy.wait(4000)
-        estimatesPage.previewEstimate()
-        estimatesPage.checkEstimatePreview() /* Add more Preview verifications in this method */
+        EstimatesPage.previewEstimate()
+        EstimatesPage.checkEstimatePreview() /* Add more Preview verifications in this method */
 
 
     })
 
     it('Should send estimate as email', () => {
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Game Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Game Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Inventory Item 1')
-        estimatesPage.saveEstimate()
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.saveEstimate()
         cy.wait(4000)
-        estimatesPage.sendToEmail()
+        EstimatesPage.sendToEmail()
     })
 
     it('Should have correct Row total upon adding discount', () => {
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Game Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Game Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Air Filter')
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Air Filter')
         cy.wait(4000)
-        estimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.inventorySearch('Inventory Item 1')
         cy.wait(4000)
-        estimatesPage.inventorySearch('Gaming Chair')
-        cy.wait(4000)
-
-        estimatesPage.addDiscountInRow(0, 30, '%', 3)
-        estimatesPage.checkInvoiceSubtotal()
-        estimatesPage.addDiscountInRow(0, 25, '$', 3)
-        estimatesPage.checkInvoiceSubtotal()
-        estimatesPage.saveEstimate()
+        EstimatesPage.inventorySearch('Gaming Chair')
         cy.wait(4000)
 
-        estimatesPage.checkRowsTotal()
+        EstimatesPage.addDiscountInRow(0, 30, '%', 3)
+        EstimatesPage.checkInvoiceSubtotal()
+        EstimatesPage.addDiscountInRow(0, 25, '$', 3)
+        EstimatesPage.checkInvoiceSubtotal()
+        EstimatesPage.saveEstimate()
+        cy.wait(4000)
+
+        EstimatesPage.checkRowsTotal()
 
     })
 
     it.only('Should change input values and have correct calculations after save', () => {
-        dashboard.clickEstimatesTab()
-        estimatesPage.clickAddNew()
-        estimatesPage.typeSearchInput('Genius Giant Game Inc.')
-        estimatesPage.clickSearch()
+        Dashboard.clickEstimatesTab()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.typeSearchInput('Genius Giant Game Inc.')
+        EstimatesPage.clickSearch()
         cy.wait(4000)
-        estimatesPage.selectCustomer()
-        estimatesPage.inventorySearch('Air Filter')
+        EstimatesPage.selectCustomer()
+        EstimatesPage.inventorySearch('Air Filter')
         cy.wait(4000)
-        estimatesPage.inventorySearch('Inventory Item 1')
+        EstimatesPage.inventorySearch('Inventory Item 1')
         cy.wait(4000)
-        estimatesPage.inventorySearch('Gaming Chair')
-        cy.wait(4000)
-
-        estimatesPage.addDiscountInRow(0, 30, '%',3)
-        estimatesPage.addDiscountInRow(0, 25, '$',3)
+        EstimatesPage.inventorySearch('Gaming Chair')
         cy.wait(4000)
 
-        estimatesPage.changeTableValues()
-        estimatesPage.addInvoiceDiscount()
-        estimatesPage.checkInvoiceTotal()
-        estimatesPage.saveEstimate()
-        estimatesPage.checkRowsTotal()
+        EstimatesPage.addDiscountInRow(0, 30, '%',3)
+        EstimatesPage.addDiscountInRow(0, 25, '$',3)
+        cy.wait(4000)
+
+        EstimatesPage.changeTableValues()
+        EstimatesPage.addInvoiceDiscount()
+        EstimatesPage.checkInvoiceTotal()
+        EstimatesPage.saveEstimate()
+        EstimatesPage.checkRowsTotal()
         
 
     })

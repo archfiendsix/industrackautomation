@@ -1,8 +1,8 @@
-import "../pages/loginPage"
-import loginPage from "../pages/loginPage";
-import dashboard from "../pages/dashboard"
-import settingsPage from "../pages/settingsPage";
-import addNewInventoryPage from "../pages/addNewInventoryPage";
+import "../pages/LoginPage"
+import LoginPage from "../pages/LoginPage";
+import Dashboard from "../pages/dashboard"
+import SettingsPage from "../pages/settingsPage";
+import AddNewInventoryPage from "../pages/addNewInventoryPage";
 
 require('cypress-plugin-tab');
 
@@ -15,29 +15,29 @@ describe('Add Inventory', () => {
   beforeEach(() => {
 
     cy.visit('/login')
-    loginPage.loginAdmin('andreiv@industrack.com', 'admin')
+    LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
     cy.wait(4250)
-    // dashboard.clickSettings()
-    // dashboard.elements.settingsButton().click()
-    dashboard.preventNotificationCard()
-    settingsPage.gotoAddNewInventory()
+    // Dashboard.clickSettings()
+    // Dashboard.elements.settingsButton().click()
+    Dashboard.preventNotificationCard()
+    SettingsPage.gotoAddNewInventory()
   })
   
 
 
   it('Successfully add an Inventory', () => {
 
-    addNewInventoryPage.fillData()
-    addNewInventoryPage.clickSaveButton()
-    addNewInventoryPage.checkSaveSuccess()
+    AddNewInventoryPage.fillData()
+    AddNewInventoryPage.clickSaveButton()
+    AddNewInventoryPage.checkSaveSuccess()
   })
 
   it('Save unsuccessful when you click save after leaving required fields blank', () => {
 
-    addNewInventoryPage.fillData()
-    addNewInventoryPage.elements.nameTextBox().clear()
-    addNewInventoryPage.clickSaveButton()
-    addNewInventoryPage.checkNameError()
+    AddNewInventoryPage.fillData()
+    AddNewInventoryPage.elements.nameTextBox().clear()
+    AddNewInventoryPage.clickSaveButton()
+    AddNewInventoryPage.checkNameError()
   })
 
 

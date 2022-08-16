@@ -1,4 +1,4 @@
-class loginPage {
+class LoginPage {
 
     // cy.get('#mat-input-0').type('andreiv@industrack.com')
     // cy.get('#mat-input-1').type('admin')
@@ -16,4 +16,4 @@ class loginPage {
     }
 }
 
-module.exports = new loginPage();
+module.exports = new LoginPage();
