@@ -235,15 +235,16 @@ describe('New Estimate module', () => {
         estimatesPage.inventorySearch('Gaming Chair')
         cy.wait(4000)
 
-        // estimatesPage.addDiscountInRow(0, 30, '%',3)
-        // estimatesPage.addDiscountInRow(0, 25, '$',3)
-        // cy.wait(4000)
+        estimatesPage.addDiscountInRow(0, 30, '%',3)
+        estimatesPage.addDiscountInRow(0, 25, '$',3)
+        cy.wait(4000)
 
         estimatesPage.changeTableValues()
         estimatesPage.addInvoiceDiscount()
+        estimatesPage.checkInvoiceTotal()
         estimatesPage.saveEstimate()
         estimatesPage.checkRowsTotal()
-        estimatesPage.checkInvoiceTotal()
+        
 
     })
 
