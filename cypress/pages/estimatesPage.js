@@ -282,7 +282,7 @@ class EstimatesPage {
             const profit = parseFloat(profitEl.innerText.replace('%', '').replace(' ', ''))
             const profitPercent = profit / 100
             const unitPrice = parseFloat(unitPriceEl.innerText.replace('$', '').replace(' ', ''))
-            expect(qty * unitCost, `${item}: Total cost calculation`).to.equal(totalCost)
+
             if (isNaN(discount)) {
                 discount = 0
             }
@@ -290,14 +290,6 @@ class EstimatesPage {
                 discount = discount
             }
 
-<<<<<<< HEAD
-            expect(qty * unitCost, `${item}: Quantity(${qty}) * Unit Cost($${unitCost})`).to.equal(totalCost)
-            expect(qty * unitPrice, `${item}: Quantity(${qty}) * Unit Cost($${unitPrice})`).to.equal(price)
-            expect(unitCost * profitPercent + unitCost, `${item}: Unit Cost($${unitCost}) + Profit(${profitPercent})`).to.equal(unitPrice)
-            expect(price - discount, `${item}: Price($${price}) - Discount($${discount}) = Total($${total})`).to.equal(total)
-            expect(price - discount, `${item}: Price($${price}) - Discount($${discount}) = Total($${total})`).to.equal(total)
-            expect(unitCost * profitPercent + unitCost, `${item}: Unit Cost(${unitCost}) + Profit(${profitPercent})`).to.equal(unitPrice)
-=======
             const calcTotalCost = currencyRoundOff(qty * unitCost)
             const calcPrice = currencyRoundOff(qty * unitPrice)
             const calcUnitPrice = currencyRoundOff(unitCost * profitPercent + unitCost)
@@ -307,7 +299,6 @@ class EstimatesPage {
             expect(calcUnitPrice, `${item}: Unit Cost($${unitCost}) + Profit(${profitPercent})`).to.equal(currencyRoundOff(unitPrice))
             expect(calcTotal, `${item}: Price($${price}) - Discount($${discount}) = Total($${total})`).to.equal(currencyRoundOff(total))
 
->>>>>>> 126567e (Fixed Calculations)
         }
 
         this.elements.tableRows().each((row) => {
