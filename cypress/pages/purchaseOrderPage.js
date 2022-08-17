@@ -13,8 +13,13 @@ class PurchaseOrderPage {
         },
     }
 
-    checkSaveButtonDisabled = () => {
+    deleteOp = () => {
+        this.elements.actionsDropdown.button().click()
+        this.elements.actionsDropdown.delete()
+    }
 
+    typeFilter=(text) => {
+        this.elements.filterTextBox().type(text)
     }
 
 }

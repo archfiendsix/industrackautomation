@@ -2,6 +2,7 @@ import "../pages/LoginPage"
 import LoginPage from "../pages/loginPage";
 import Dashboard from "../pages/dashboard"
 import AddCustomerPage from "../pages/addCustomerPage";
+import CustomerPage from "../pages/customerPage";
 
 require('cypress-plugin-tab');
 
@@ -18,7 +19,7 @@ describe('Add Customer', () => {
     cy.wait(4250)
     Dashboard.preventNotificationCard()
     Dashboard.clickCustomerTab()
-    Dashboard.clickAddCustomerButton()
+    CustomerPage.clickAddCustomerButton()
 
   })
 
