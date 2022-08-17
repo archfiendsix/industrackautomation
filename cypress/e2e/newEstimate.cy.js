@@ -4,7 +4,7 @@ import AddCustomerPage from "../pages/addCustomerPage";
 import SettingsPage from "../pages/settingsPage";
 import AddNewInventoryPage from "../pages/addNewInventoryPage";
 import EstimatesPage from "../pages/estimatesPage";
-import InvoicePage from "../pages/invoicePage";
+import InvoiceOverviewPage from "../pages/invoiceOverviewPage";
 
 describe('New Estimate module', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
@@ -144,7 +144,7 @@ describe('New Estimate module', () => {
         EstimatesPage.confirmYes()
         EstimatesPage.checkConvertedToInvoiceSuccess()
         cy.wait(1500)
-        InvoicePage.checkInvoiceStatus()
+        InvoiceOverviewPage.checkInvoiceStatus()
     })
 
     it('Should change Customer', () => {

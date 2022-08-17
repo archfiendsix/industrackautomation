@@ -27,7 +27,7 @@ describe('Add Customer', () => {
     //   })
 
 
-    it.only('', () => {
+    it.only('Test descending/ascending for customer page', () => {
 
         CustomerPage.customerTable.sortByNumber('ascending')
         cy.wait(4400)
