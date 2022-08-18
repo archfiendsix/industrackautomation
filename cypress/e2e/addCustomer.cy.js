@@ -1,8 +1,7 @@
-import "../pages/LoginPage"
-import LoginPage from "../pages/loginPage";
-import Dashboard from "../pages/dashboard"
-import AddCustomerPage from "../pages/addCustomerPage";
-import CustomerPage from "../pages/customerPage";
+import LoginPage from "../pages/LoginPage";
+import Dashboard from "../pages/Dashboard"
+import AddCustomerPage from "../pages/AddCustomerPage";
+import CustomerPage from "../pages/CustomerPage";
 
 require('cypress-plugin-tab');
 

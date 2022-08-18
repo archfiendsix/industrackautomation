@@ -1,8 +1,7 @@
-import "../pages/LoginPage"
 import LoginPage from "../pages/LoginPage";
-import Dashboard from "../pages/dashboard"
-import SettingsPage from "../pages/settingsPage";
-import AddNewInventoryPage from "../pages/addNewInventoryPage";
+import Dashboard from "../pages/Dashboard"
+import { InventoryListPage } from "../pages/settings/inventory";
+import AddNewInventoryPage from "../pages/AddNewInventoryPage";
 
 require('cypress-plugin-tab');
 
@@ -20,9 +19,9 @@ describe('Add Inventory', () => {
     // Dashboard.clickSettings()
     // Dashboard.elements.settingsButton().click()
     Dashboard.preventNotificationCard()
-    SettingsPage.gotoAddNewInventory()
+    InventoryListPage.gotoAddNewInventory()
   })
-  
+
 
 
   it('Successfully add an Inventory', () => {

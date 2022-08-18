@@ -1,7 +1,8 @@
-import LoginPage from "../pages/loginPage";
-import Dashboard from "../pages/dashboard";
-import CustomerPage from "../pages/customerPage";
-
+import LoginPage from "../pages/LoginPage";
+import Dashboard from "../pages/Dashboard";
+import CustomerPage from "../pages/CustomerPage";
+import { GeneralSettings } from '../pages/settings/company_settings';
+import Maps from '../pages/map/MapPage'
 require('cypress-plugin-tab');
 
 describe('Add Customer', () => {
@@ -16,7 +17,7 @@ describe('Add Customer', () => {
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
         cy.wait(4250)
         Dashboard.preventNotificationCard()
-        Dashboard.clickCustomerTab()
+        // Dashboard.clickCustomerTab()
 
     })
 
@@ -27,7 +28,7 @@ describe('Add Customer', () => {
     //   })
 
 
-    it.only('Test descending/ascending for customer page', () => {
+    it('Test descending/ascending for customer page', () => {
 
         CustomerPage.customerTable.sortByNumber('ascending')
         cy.wait(4400)
@@ -35,6 +36,11 @@ describe('Add Customer', () => {
 
     })
 
+
+    it.only('Test descending/ascending for customer page', () => {
+       Maps.elements.sortByDropdown().select('Sort by Status')
+
+    })
 
 
 })

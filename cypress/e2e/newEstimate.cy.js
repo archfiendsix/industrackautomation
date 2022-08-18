@@ -1,10 +1,10 @@
-import LoginPage from "../pages/loginPage";
-import Dashboard from "../pages/dashboard"
-import AddCustomerPage from "../pages/addCustomerPage";
-import SettingsPage from "../pages/settingsPage";
-import AddNewInventoryPage from "../pages/addNewInventoryPage";
-import EstimatesPage from "../pages/estimatesPage";
-import InvoiceOverviewPage from "../pages/invoiceOverviewPage";
+import LoginPage from "../pages/LoginPage";
+import Dashboard from "../pages/Dashboard"
+import AddCustomerPage from "../pages/AddCustomerPage";
+import SettingsPage from "../pages/SettingsPage";
+import AddNewInventoryPage from "../pages/AddNewInventoryPage";
+import EstimatesPage from "../pages/EstimatesPage";
+import InvoiceOverviewPage from "../pages/InvoiceOverviewPage";
 
 describe('New Estimate module', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
