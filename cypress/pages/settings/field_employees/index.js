@@ -1,8 +1,8 @@
-import ManageEmployees from "./ManageEmployees";
-import ManageGroups from "./ManageGroups";
+import ManageEmployeesPage from "./ManageEmployeesPage";
+import ManageGroupsPage from "./ManageGroupsPage";
 
 
 export {
-    ManageEmployees,
-    ManageGroups
+    ManageEmployeesPage,
+    ManageGroupsPage
 };

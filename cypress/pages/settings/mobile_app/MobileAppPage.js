@@ -1,4 +1,4 @@
-class OfficeUsers {
+class MobileAppPage {
     elements = {
         button: () => cy.get('input[formcontrolname="customerName"]'),
 
@@ -9,4 +9,4 @@ class OfficeUsers {
     }
 }
 
-module.exports = new OfficeUsers();
+module.exports = new MobileAppPage();
