@@ -1,5 +1,9 @@
-import OfficeUsers from "./OfficeUsers";
+import EmalTemplatesPage from "./EmalTemplatesPage";
+import InvoiceTemplatesPage from "./InvoiceTemplatesPage";
+import ProposalTemplatesPage from "./ProposalTemplatesPage";
 
 export {
-    OfficeUsers,
+    EmalTemplatesPage,
+    InvoiceTemplatesPage,
+    ProposalTemplatesPage,
 };

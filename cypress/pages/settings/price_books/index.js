@@ -1,9 +1,9 @@
-import OfficeUsers from "./OfficeUsers";
 import CategoriesPage from "./CategoriesPage";
+import FlatRatePricebookPage from "./FlatRatePricebookPage";
 import MarkupsPage from "./MarkupsPage";
 
 export {
-    OfficeUsers,
     CategoriesPage,
+    FlatRatePricebookPage,
     MarkupsPage,
 };

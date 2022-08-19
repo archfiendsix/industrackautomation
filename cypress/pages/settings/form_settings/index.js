@@ -1,5 +1,7 @@
-import OfficeUsers from "./OfficeUsers";
+import FormsPage from "./FormsPage";
+import TriggersPage from "./TriggersPage";
 
 export {
-    OfficeUsers,
+    FormsPage,
+    TriggersPage,
 };

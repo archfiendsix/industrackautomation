@@ -1,4 +1,4 @@
-class Tags {
+class TagsPage {
 
     // cy.get('#mat-input-0').type('andreiv@industrack.com')
     // cy.get('#mat-input-1').type('admin')
@@ -13,4 +13,4 @@ class Tags {
     }
 }
 
-module.exports = new Tags();
+module.exports = new TagsPage();

@@ -1,7 +1,9 @@
 import GeneralSettings from "./GeneralSettings";
-import TaxAndTerms from "./TaxAndTerms";
+import TaxAndTerms from "./TaxAndTermsPage";
+import TagsPage from "./TagsPage";
 
 export {
     GeneralSettings,
-    TaxAndTerms
+    TaxAndTerms,
+    TagsPage,
 };

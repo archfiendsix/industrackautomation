@@ -1,5 +1,5 @@
-import OfficeUsers from "./OfficeUsers";
+import SubscriptionPage from "./SubscriptionPage";
 
 export {
-    OfficeUsers,
+    SubscriptionPage,
 };
