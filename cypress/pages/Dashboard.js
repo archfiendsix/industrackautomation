@@ -41,7 +41,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     preventNotificationCard = () => {
         cy.wait(4000)
         cy.get("body").then($body => {
-            if (this.elements.notification.card().length > 0) {
+            
+            if (this.elements.notification.card().first().length > 0) {
                 this.elements.notification.card().then($el => {
                     if ($el.is(':visible')) {
                         this.elements.notification.icon().click({ force: true })
