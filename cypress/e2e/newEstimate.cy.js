@@ -1,7 +1,7 @@
 import LoginPage from "../pages/LoginPage";
 import Dashboard from "../pages/Dashboard"
 import AddCustomerPage from "../pages/AddCustomerPage";
-import SettingsPage from "../pages/SettingsPage";
+import { InventoryListPage } from "../pages/settings/inventory";
 import AddNewInventoryPage from "../pages/AddNewInventoryPage";
 import EstimatesPage from "../pages/EstimatesPage";
 import InvoiceOverviewPage from "../pages/InvoiceOverviewPage";
@@ -46,7 +46,7 @@ describe('New Estimate module', () => {
 
         // Dashboard.clickSettings()
         // Dashboard.elements.settingsButton().click()
-        SettingsPage.gotoAddNewInventory()
+        InventoryListPage.gotoAddNewInventory()
 
         AddNewInventoryPage.fillData()
         AddNewInventoryPage.clickSaveButton()
@@ -128,7 +128,7 @@ describe('New Estimate module', () => {
         EstimatesPage.checkAddNewJobModalTitle()
     })
 
-    it('Should successfully convert estimate to invoice', () => {
+    it.only('Should successfully convert estimate to invoice', () => {
 
         Dashboard.clickEstimatesTab()
         EstimatesPage.clickAddNew()
@@ -221,7 +221,7 @@ describe('New Estimate module', () => {
 
     })
 
-    it.only('Should change input values and have correct calculations after save', () => {
+    it('Should change input values and have correct calculations after save', () => {
         Dashboard.clickEstimatesTab()
         EstimatesPage.clickAddNew()
         EstimatesPage.typeSearchInput('Genius Giant Game Inc.')
@@ -235,8 +235,8 @@ describe('New Estimate module', () => {
         EstimatesPage.inventorySearch('Gaming Chair')
         cy.wait(4000)
 
-        EstimatesPage.addDiscountInRow(0, 30, '%',3)
-        EstimatesPage.addDiscountInRow(0, 25, '$',3)
+        EstimatesPage.addDiscountInRow(0, 30, '%', 3)
+        EstimatesPage.addDiscountInRow(0, 25, '$', 3)
         cy.wait(4000)
 
         EstimatesPage.changeTableValues()
@@ -244,7 +244,7 @@ describe('New Estimate module', () => {
         EstimatesPage.checkInvoiceTotal()
         EstimatesPage.saveEstimate()
         EstimatesPage.checkRowsTotal()
-        
+
 
     })
 

@@ -167,7 +167,7 @@ class EstimatesPage {
 
     checkEstimatePreview = () => {
         this.elements.estimatePreviewModalTitle().contains('Estimate Preview')
-        cy.wait(3000)
+        cy.wait(4500)
         this.elements.previewiFrame.custName().should('be.visible')
         let verifyThis = {
             customername: 'Genius Game Inc.'
