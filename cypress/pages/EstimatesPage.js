@@ -56,12 +56,14 @@ class EstimatesPage {
     clickSearch() {
         this.elements.searchButton().click({ force: true })
     }
-    selectCustomer() {
+    selectCustomer(customer_name) {
+        this.typeSearchInput(customer_name)
+        this.clickSearch()
         this.elements.searchItem().click()
         this.elements.proceedButton().click()
     }
 
-    inventorySearch(searchItem) {
+    inventorySelect(searchItem) {
         this.elements.partsSearch()
             .last()
             .type(searchItem)
@@ -327,7 +329,8 @@ class EstimatesPage {
 
                 const sum = Cypress._.sum(totals).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-                constSub = this.elements.invoiceSubTotal().innerText.toString().replace('$', '').replace(' ', '')
+                // const subTotal = this.elements.invoiceSubTotal().innerText.toString().replace('$', '').replace(' ', '')
+                const subTotal = parseFloat(this.elements.invoiceSubTotal().toString().replace('$', ''))
 
                 this.elements.invoiceSubTotal().contains(`$${sum}`).log(`Row total of $${sum} is equal to invoice subtotal element: ${subTotal} `)
             })
