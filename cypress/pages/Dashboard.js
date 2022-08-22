@@ -9,6 +9,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         addCustomerButton: () => cy.get('button[data-target="#modalAddNewCustomer"]'),
         settingsButton: () => cy.get('a[href="/settingsTab"]'),
         estimatesTab: () => cy.get('.nav.navbar-nav a[href="/estimatesTab"]'),
+        timesheetTab: () => cy.get('.nav.navbar-nav a[href="/timesheetTab"]'),
         notification: {
             icon: () => cy.get('a[title="Reminders"]'),
             card: () => cy.get('ul.dropdown-menu.dropdown-reminders'),
@@ -36,6 +37,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     clickEstimatesTab = () => {
         this.elements.estimatesTab().click()
+    }
+    clickTimesheetTab = () => {
+        this.elements.timesheetTab().click()
     }
 
     preventNotificationCard = () => {

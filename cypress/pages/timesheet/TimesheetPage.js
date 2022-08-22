@@ -16,7 +16,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             filterSearchBox: () => cy.get('crew-select .dropdown.dropdown-crew .crewList .searchField input'),
         },
 
-        addTimesheetButton: () => cy.get('.top.m-t-sm button.btn-primary.m-r-sm').contains('Add New'),
+        addTimesheetButton: () => cy.get('.filterbox .curDate+.pull-right button.btn-primary.m-r-sm'),
 
         actionsDropdown: {
             button: () => cy.get('timesheet .btn-group.actions button'),
@@ -70,12 +70,91 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             createdSort: () => cy.get('#timesheetJobListHolder .mat-table.js-drivers-info-grid thead button[aria-label="Change sorting for created"]'),
             createdSortArrow: () => cy.get('#timesheetJobListHolder .mat-table.js-drivers-info-grid thead button[aria-label="Change sorting for created"]+.mat-sort-header-arrow'),
             createdSortArrowHeader: () => cy.get('#timesheetJobListHolder .mat-table.js-drivers-info-grid thead th.mat-column-created'),
+        },
+
+        timesheetRecordsModal: {
+            fieldEmployeeDropdown: () => cy.get('mat-select.select-employee'),
+            fieldEmployeeDropdownOptions: () => cy.get('.mat-select-panel-wrap mat-option'),
+            addNewTimesheetRecordButton: () => cy.get('app-timesheet-overview button.btn.btn-w-m.btn-primary.m-r-sm').contains('Add New'),
+            addTimesheetModal: {
+                typeDropdownButton: () => cy.get('app-timesheet-edit mat-select[formcontrolname="jobTypeId"]'),
+                costCodeDropDownButton: () => cy.get('app-timesheet-edit mat-select[formcontrolname="costCodeId"]'),
+                saveChangesButton: () => cy.get('app-timesheet-edit button.btn.btn-info').contains('Save Changes'),
+            },
+            dropdownOptions: () => cy.get('.mat-select-panel-wrap mat-option')
         }
 
     }
 
-    checkInvoiceStatus = () => {
+    clickTimes = () => {
         this.elements.statusLabel().contains('Unpaid')
+
+    }
+
+    addNewTimesheet = () => {
+        this.elements.addTimesheetButton().click()
+    }
+
+    addNewTimesheetForEmployee = () => {
+
+        this.elements.timesheetRecordsModal.addNewTimesheetRecordButton().click()
+    }
+
+    selectFieldEmployee = (employeeName) => {
+        this.elements.timesheetRecordsModal.fieldEmployeeDropdown().click()
+        this.elements.timesheetRecordsModal.fieldEmployeeDropdownOptions().contains(employeeName).click()
+        // .find('option')
+        // .contains(employeeName)
+        // .as('selectOption')
+        // .then(() => {
+        //     cy.get('select')
+        //         .select(`${this.selectOption.text()}`)
+        // })
+
+    }
+
+    selectTimesheetType = (option) => {
+
+        if (option) {
+            this.elements.timesheetRecordsModal.addTimesheetModal.typeDropdownButton().click()
+            this.elements.timesheetRecordsModal.dropdownOptions().contains(option).click()
+        }
+        else {
+            cy.type('{escape}')
+        }
+    }
+
+    selectTimesheetCostCode = (option) => {
+        if (option) {
+            this.elements.timesheetRecordsModal.addTimesheetModal.costCodeDropDownButton().click({ force: true })
+            this.elements.timesheetRecordsModal.dropdownOptions().contains(option).click()
+        }
+        else {
+            cy.type('{escape}')
+        }
+    }
+
+    saveAddTimeSheet = () => {
+        this.elements.timesheetRecordsModal.addTimesheetModal.saveChangesButton().click()
+        
+
+        cy.intercept('https://onetrackwebapiprod.azurewebsites.net/api/Timesheets/Update').as('update')
+        // cy.log('@update')
+
+        cy.wait('@update').should(response=> {
+            cy.log(response)
+          })
+        // .then(el => {
+            
+
+        //     if(el.is(':disabled')) {
+        //         return
+        //     }
+        //     else {
+        //         cy.wrap(el).click()
+        //     }
+
+        // })
     }
 }
 

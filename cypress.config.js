@@ -10,6 +10,9 @@ module.exports = defineConfig({
   integration: {
     baseUrl: "https://onetrack.industrack.com"
   },
+  // "compilerOptions": {
+  //   "types": ["jest", "node"]
+  // },
   defaultCommandTimeout: 6000,
   pageLoadTimeout: 30000,
   chromeWebSecurity: false

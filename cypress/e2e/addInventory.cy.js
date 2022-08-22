@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 import LoginPage from "../pages/LoginPage";
 import Dashboard from "../pages/Dashboard"
 import { InventoryListPage } from "../pages/settings/inventory";
@@ -19,7 +21,7 @@ describe('Add Inventory', () => {
     // Dashboard.clickSettings()
     // Dashboard.elements.settingsButton().click()
     Dashboard.preventNotificationCard()
-    InventoryListPage.gotoAddNewInventory()
+    // InventoryListPage.gotoAddNewInventory()
   })
 
 
@@ -39,6 +41,21 @@ describe('Add Inventory', () => {
     AddNewInventoryPage.checkNameError()
   })
 
+
+  it.only("Test get", () => {
+
+    // cy.intercept('GET','https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBookById/1083040').as('getInfo')
+    cy.intercept('https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBookById/1083040').as('getInfo')
+    cy.log("haha")
+    cy.visit('https://onetrack.industrack.com/crmTab/overview/1083040#eyJxdWVyeSI6eyJwYWdlU2l6ZSI6NTAsInNvcnRCeSI6ImNvbXBhbnlOYW1lIiwic29ydERpcmVjdGlvbiI6ImFzYyJ9LCJleHRyYSI6ZmFsc2V9')
+
+    cy.wait(5000)
+    // Dashboard.elements.customerTab().click()
+    // cy.get('table tbody tr:first-child()').first().click({ force: true })
+    cy.wait('@getInfo').should(response=> {
+      cy.log(response.response.body.city)
+    })
+  })
 
 
 })
