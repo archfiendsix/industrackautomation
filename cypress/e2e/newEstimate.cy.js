@@ -120,7 +120,7 @@ describe('New Estimate module', () => {
         EstimatesPage.checkAddNewJobModalTitle()
     })
 
-    it.only('Should successfully convert estimate to invoice', () => {
+    it('Should successfully convert estimate to invoice', () => {
 
         Dashboard.clickEstimatesTab()
         EstimatesPage.clickAddNew()
@@ -180,7 +180,7 @@ describe('New Estimate module', () => {
         EstimatesPage.sendToEmail()
     })
 
-    it.only('Should have correct Row total upon adding discount', () => {
+    it('Should have correct Row total upon adding discount', () => {
         Dashboard.clickEstimatesTab()
         EstimatesPage.clickAddNew()
         cy.wait(4000)
