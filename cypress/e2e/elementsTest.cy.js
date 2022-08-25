@@ -38,8 +38,8 @@ describe('Add Customer', () => {
 
 
     it.only('Test descending/ascending for customer page', () => {
-       Maps.elements.sortByDropdown().select('Sort by Status')
-
+        Maps.elements.sortByDropdown().select('Sort by Status')
+       
     })
 
 

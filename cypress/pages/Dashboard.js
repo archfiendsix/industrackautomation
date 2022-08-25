@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 class Dashboard {
 
     /*
@@ -10,6 +12,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         settingsButton: () => cy.get('a[href="/settingsTab"]'),
         estimatesTab: () => cy.get('.nav.navbar-nav a[href="/estimatesTab"]'),
         timesheetTab: () => cy.get('.nav.navbar-nav a[href="/timesheetTab"]'),
+        purchaseOrderTab: () => cy.get('.nav.navbar-nav a[href="/purchaseOrderTab"]'),
         notification: {
             icon: () => cy.get('a[title="Reminders"]'),
             card: () => cy.get('ul.dropdown-menu.dropdown-reminders'),
@@ -40,6 +43,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
     clickTimesheetTab = () => {
         this.elements.timesheetTab().click()
+    }
+    clickPurchaseOrderTab=()=> {
+        this.elements.purchaseOrderTab().click()
     }
 
     preventNotificationCard = () => {

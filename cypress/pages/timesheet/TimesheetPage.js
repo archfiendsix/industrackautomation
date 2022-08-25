@@ -76,6 +76,14 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             fieldEmployeeDropdown: () => cy.get('mat-select.select-employee'),
             fieldEmployeeDropdownOptions: () => cy.get('.mat-select-panel-wrap mat-option'),
             addNewTimesheetRecordButton: () => cy.get('app-timesheet-overview button.btn.btn-w-m.btn-primary.m-r-sm').contains('Add New'),
+            deleteTimesheetRecordButton: () => cy.get('app-timesheet-overview button.btn.btn-default').contains('Delete'),
+            timeSheetRecordsTable: {
+                selectAll: () => cy.get('app-timesheet-overview table thead tr:first-child() th:first-child()'),
+            },
+            deleteConfirmModal: {
+                yesButton: () => cy.get('.ModalSchedulerJobDetails button').contains('Yes')
+            },
+
             addTimesheetModal: {
                 typeDropdownButton: () => cy.get('app-timesheet-edit mat-select[formcontrolname="jobTypeId"]'),
                 costCodeDropDownButton: () => cy.get('app-timesheet-edit mat-select[formcontrolname="costCodeId"]'),
@@ -136,16 +144,16 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     saveAddTimeSheet = () => {
         this.elements.timesheetRecordsModal.addTimesheetModal.saveChangesButton().click()
-        
+
 
         cy.intercept('https://onetrackwebapiprod.azurewebsites.net/api/Timesheets/Update').as('update')
         // cy.log('@update')
 
-        cy.wait('@update').should(response=> {
+        cy.wait('@update').should(response => {
             cy.log(response)
-          })
+        })
         // .then(el => {
-            
+
 
         //     if(el.is(':disabled')) {
         //         return

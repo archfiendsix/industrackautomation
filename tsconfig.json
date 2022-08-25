@@ -11,6 +11,11 @@
         ]
     },
     "include": [
-        "**/*.ts"
+        "./node_modules/cypress",
+        "cypress/**/*.js",
+        "**/*.ts",
+        "../cypress.d.ts",
+        "cypress/pages/Dashboard.js",
+        "cypress/tsconfig.json"
     ]
 }

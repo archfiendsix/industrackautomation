@@ -31,5 +31,20 @@ describe('Add Customer', () => {
         TimesheetPage.saveAddTimeSheet()
     })
 
+    afterAll(() => {
+
+        // cy.visit('/login')
+        // LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
+        // cy.wait(4250)
+        Dashboard.clickTimesheetTab()
+
+        TimesheetPage.addNewTimesheet()
+        TimesheetPage.selectFieldEmployee('Employee One')
+
+        TimesheetPage.elements.timesheetRecordsModal.timeSheetRecordsTable.selectAll().click()
+        TimesheetPage.elements.timesheetRecordsModal.deleteTimesheetRecordButton().click()
+        TimesheetPage.elements.timesheetRecordsModal.deleteConfirmModal.yesButton().click()
+    })
+
 
 })
