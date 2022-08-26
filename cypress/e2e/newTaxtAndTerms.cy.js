@@ -20,10 +20,17 @@ describe('Add Customer', () => {
 
     })
 
-    it.only('Basic saving function', () => {
+    it('Basic Add new tax function', () => {
         TaxAndTermsPage.addNewTax()
-        TaxAndTermsPage.fillAddNewTaxForm('New Tax',3)
+        TaxAndTermsPage.fillAddNewTaxForm('New Tax', 3)
         TaxAndTermsPage.saveAddNewTaxForm()
+    })
+
+    it('Basic Add new term function', () => {
+        TaxAndTermsPage.gotoTermsTab()
+        TaxAndTermsPage.addNewTerm()
+        TaxAndTermsPage.fillAddNewTermForm('New Term')
+        TaxAndTermsPage.saveAddNewTermForm()
     })
 
 
