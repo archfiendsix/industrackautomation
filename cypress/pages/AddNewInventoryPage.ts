@@ -11,13 +11,15 @@ class AddNewInventoryPage {
         salesDescriptionTextArea: () => cy.get('textarea#salesInfo'),
         costTextBox: () => cy.get('input#cost'),
         purchasingDescriptionTextArea: () => cy.get('textarea#purchasingInfo'),
-        // saveButton: () => cy.get('.mat-dialog-actions .btn.btn-info'),
         savedNotification: () => cy.get('.sn-content.ng-star-inserted'),
         nameErrorMessage: () => cy.get('input#name+.alert'),
+        addInventoryModal: {
+            saveButton: () => cy.get('.mat-dialog-actions .btn.btn-info'),
+        }
     }
 
     clickSaveButton = () => {
-        this.elements.saveButton().click()
+        this.elements.addInventoryModal.saveButton().click()
     }
 
     checkSaveSuccess = () => {

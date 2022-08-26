@@ -14,14 +14,14 @@ describe('Add Inventory', () => {
   })
 
   beforeEach(() => {
-
+    
     cy.visit('/login')
     LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
     cy.wait(4250)
-    // Dashboard.clickSettings()
-    // Dashboard.elements.settingsButton().click()
+    Dashboard.clickSettings()
+    Dashboard.elements.settingsButton().click()
     Dashboard.preventNotificationCard()
-    // InventoryListPage.gotoAddNewInventory()
+    InventoryListPage.gotoAddNewInventory()
   })
 
 
@@ -42,20 +42,20 @@ describe('Add Inventory', () => {
   })
 
 
-  it.only("Test get", () => {
+  // it("Test get", () => {
 
-    // cy.intercept('GET','https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBookById/1083040').as('getInfo')
-    cy.intercept('https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBookById/1083040').as('getInfo')
-    cy.log("haha")
-    cy.visit('https://onetrack.industrack.com/crmTab/overview/1083040#eyJxdWVyeSI6eyJwYWdlU2l6ZSI6NTAsInNvcnRCeSI6ImNvbXBhbnlOYW1lIiwic29ydERpcmVjdGlvbiI6ImFzYyJ9LCJleHRyYSI6ZmFsc2V9')
+  //   // cy.intercept('GET','https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBookById/1083040').as('getInfo')
+  //   cy.intercept('https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBookById/1083040').as('getInfo')
+  //   cy.log("haha")
+  //   cy.visit('https://onetrack.industrack.com/crmTab/overview/1083040#eyJxdWVyeSI6eyJwYWdlU2l6ZSI6NTAsInNvcnRCeSI6ImNvbXBhbnlOYW1lIiwic29ydERpcmVjdGlvbiI6ImFzYyJ9LCJleHRyYSI6ZmFsc2V9')
 
-    cy.wait(5000)
-    // Dashboard.elements.customerTab().click()
-    // cy.get('table tbody tr:first-child()').first().click({ force: true })
-    cy.wait('@getInfo').should(response=> {
-      cy.log(response.response.body.city)
-    })
-  })
+  //   cy.wait(5000)
+  //   // Dashboard.elements.customerTab().click()
+  //   // cy.get('table tbody tr:first-child()').first().click({ force: true })
+  //   cy.wait('@getInfo').should(response=> {
+  //     cy.log(response.response.body.city)
+  //   })
+  // })
 
 
 })

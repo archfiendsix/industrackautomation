@@ -45,58 +45,57 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
 
     customerTable = {
-        sortByNumber: (ascdesc) => {
+        sortByNumber: (ascDesc) => {
             this.elements.customerTable.numberSort().click({ force: true })
 
-            cy.log(ascdesc)
+            cy.log(ascDesc)
 
             this.elements.customerTable.numberSortHeader().invoke('attr', 'aria-sort').then(attr => {
-                if (attr !== ascdesc) {
+                if (attr !== ascDesc) {
                     this.elements.customerTable.numberSort().click({ force: true }).log('Sort clicked again')
                 }
             })
 
-            this.elements.customerTable.numberSortHeader().should('have.attr', 'aria-sort', ascdesc)
+            this.elements.customerTable.numberSortHeader().should('have.attr', 'aria-sort', ascDesc)
         },
 
-        sortByCompany: (ascdesc) => {
+        sortByCompany: (ascDesc) => {
             this.elements.customerTable.companySort().click()
 
-            cy.log(ascdesc)
+            cy.log(ascDesc)
 
             this.elements.customerTable.companySortHeader().invoke('attr', 'aria-sort').then(attr => {
-                if (attr !== ascdesc) {
+                if (attr !== ascDesc) {
                     this.elements.customerTable.companySort().click({ force: true }).log('Sort clicked again')
                 }
             })
-
-            this.elements.customerTable.companySortHeader().should('have.attr', 'aria-sort', ascdesc)
+            this.elements.customerTable.companySortHeader().should('have.attr', 'aria-sort', ascDesc)
 
         },
-        sortByFirstName: (ascdesc) => {
+        sortByFirstName: (ascDesc) => {
             this.elements.customerTable.firstNameSort().click()
-            cy.log(ascdesc)
+            cy.log(ascDesc)
 
             this.elements.customerTable.firstNameSortHeader().invoke('attr', 'aria-sort').then(attr => {
-                if (attr !== ascdesc) {
+                if (attr !== ascDesc) {
                     this.elements.customerTable.firstNameSort().click({ force: true }).log('Sort clicked again')
                 }
             })
 
-            this.elements.customerTable.firstNameSortHeader().should('have.attr', 'aria-sort', ascdesc)
+            this.elements.customerTable.firstNameSortHeader().should('have.attr', 'aria-sort', ascDesc)
         },
 
-        sortByLastName: (ascdesc) => {
+        sortByLastName: (ascDesc) => {
             this.elements.customerTable.lastNameSort().click()
-            cy.log(ascdesc)
+            cy.log(ascDesc)
 
             this.elements.customerTable.lastNameSortHeader().invoke('attr', 'aria-sort').then(attr => {
-                if (attr !== ascdesc) {
+                if (attr !== ascDesc) {
                     this.elements.customerTable.lastNameSort().click({ force: true }).log('Sort clicked again')
                 }
             })
 
-            this.elements.customerTable.lastNameSortHeader().should('have.attr', 'aria-sort', ascdesc)
+            this.elements.customerTable.lastNameSortHeader().should('have.attr', 'aria-sort', ascDesc)
         }
     }
 

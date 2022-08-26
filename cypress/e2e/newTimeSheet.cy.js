@@ -2,7 +2,7 @@ import LoginPage from "../pages/LoginPage";
 import Dashboard from "../pages/Dashboard";
 import CustomerPage from "../pages/CustomerPage";
 import { GeneralSettings } from '../pages/settings/company_settings';
-import TimesheetPage from '../pages/timesheet/TimesheetPage'
+import TimesheetPage from '../pages/timesheet/TimesheetPage';
 
 require('cypress-plugin-tab');
 
@@ -31,7 +31,7 @@ describe('Add Customer', () => {
         TimesheetPage.saveAddTimeSheet()
     })
 
-    afterAll(() => {
+    after(() => {
 
         // cy.visit('/login')
         // LoginPage.loginAdmin('andreiv@industrack.com', 'admin')

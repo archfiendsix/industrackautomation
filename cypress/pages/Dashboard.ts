@@ -6,23 +6,25 @@ class Dashboard {
 cy.get('button[data-target="#modalAddNewCustomer"]').click()
     */
     elements = {
-        industrackBrand: ()=> cy.get('.navbar-header a.navbar-brand'),
+        industrackBrand: () => cy.get('.navbar-header a.navbar-brand'),
         customerTab: () => cy.get('.navbar-nav > :nth-child(2) > a[href="/crmTab"]'),
         addCustomerButton: () => cy.get('button[data-target="#modalAddNewCustomer"]'),
         settingsButton: () => cy.get('a[href="/settingsTab"]'),
         estimatesTab: () => cy.get('.nav.navbar-nav a[href="/estimatesTab"]'),
         timesheetTab: () => cy.get('.nav.navbar-nav a[href="/timesheetTab"]'),
         purchaseOrderTab: () => cy.get('.nav.navbar-nav a[href="/purchaseOrderTab"]'),
+        companySettings: () => cy.get('ul#side-menu li a').contains('Company Settings'),
+        taxtAndTerms: () => cy.get('ul#side-menu li ul.nav-second-level li a').contains('Tax & Terms'),
         notification: {
             icon: () => cy.get('a[title="Reminders"]'),
             card: () => cy.get('ul.dropdown-menu.dropdown-reminders'),
         },
         user: {
-            avatarButton: ()=> cy.get('.nav.navbar-top-links.navbar-right li:last-child() a'),
-            profileEmail: ()=> cy.get('.nav.navbar-top-links.navbar-right li:last-child() .userinfobox a[title="Profile"]'),
-            logOut: ()=> cy.get('.nav.navbar-top-links.navbar-right li:last-child() .userinfobox a[title="LogOut"]'),
+            avatarButton: () => cy.get('.nav.navbar-top-links.navbar-right li:last-child() a'),
+            profileEmail: () => cy.get('.nav.navbar-top-links.navbar-right li:last-child() .userinfobox a[title="Profile"]'),
+            logOut: () => cy.get('.nav.navbar-top-links.navbar-right li:last-child() .userinfobox a[title="LogOut"]'),
         }
-        
+
 
     }
 
@@ -44,9 +46,18 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     clickTimesheetTab = () => {
         this.elements.timesheetTab().click()
     }
-    clickPurchaseOrderTab=()=> {
+    clickPurchaseOrderTab = () => {
         this.elements.purchaseOrderTab().click()
     }
+
+
+    gotoTaxAndTermsPage = () => {
+        this.clickSettings()
+        this.elements.companySettings().click()
+        this.elements.taxtAndTerms().click()
+
+    }
+
 
     preventNotificationCard = () => {
         cy.wait(4000)

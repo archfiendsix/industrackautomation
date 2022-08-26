@@ -15,7 +15,7 @@
         "cypress/**/*.js",
         "**/*.ts",
         "../cypress.d.ts",
-        "cypress/pages/Dashboard.js",
+        "cypress/pages/Dashboard.ts",
         "cypress/tsconfig.json"
     ]
 }
