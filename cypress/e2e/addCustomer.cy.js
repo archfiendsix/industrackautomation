@@ -115,7 +115,7 @@ describe('Add Customer', () => {
   })
 
 
-  it('Disable save if email is invalid', () => {
+  it.only('Disable save if email is invalid', () => {
     AddCustomerPage.elements.customerNumberTextBox().type('0001')
     AddCustomerPage.elements.companyNameTextBox().type('Genius Game Inc.')
     AddCustomerPage.elements.firstNameTextBox().type('Francis')
@@ -133,7 +133,7 @@ describe('Add Customer', () => {
     AddCustomerPage.elements.countryTextBox().type('United States of America')
 
     AddCustomerPage.checkEmailErrorMessage('Incorrect email')
-    AddCustomerPage.clickSaveButton()
+    // AddCustomerPage.clickSaveButton()
     AddCustomerPage.checkSaveButtonDisabled()
   })
 

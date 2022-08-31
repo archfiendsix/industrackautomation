@@ -2,7 +2,7 @@ class AddCustomerPage {
 
 
     elements = {
-        saveButton: () => cy.get('.form-horizontal > .modal-footer > .btn-primary'),
+        saveButton: () => cy.get('app-customers-edit-form .modal-footer button').contains('Save'),
         customerNumberTextBox: () => cy.get('input#customerNumber'),
         companyNameTextBox: () => cy.get('input#companyName'),
         firstNameTextBox: () => cy.get('input#firstName'),
@@ -29,7 +29,10 @@ class AddCustomerPage {
     }
 
     checkSaveButtonDisabled = () => {
-        this.elements.saveButton().should('be.disabled')
+        // this.elements.saveButton().should('be.disabled')
+        this.elements.saveButton().then(el=> {
+            expect(el).to.be.disabled
+        })
     }
 
     clickSaveButton = () => {
