@@ -2,9 +2,6 @@
 
 class Dashboard {
 
-    /*
-cy.get('button[data-target="#modalAddNewCustomer"]').click()
-    */
     elements = {
         industrackBrand: () => cy.get('.navbar-header a.navbar-brand'),
         customerTab: () => cy.get('.navbar-nav > :nth-child(2) > a[href="/crmTab"]'),

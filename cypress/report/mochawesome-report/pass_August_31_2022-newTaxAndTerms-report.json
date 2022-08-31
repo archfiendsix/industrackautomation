@@ -5,9 +5,9 @@
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2022-08-31T06:14:32.765Z",
-    "end": "2022-08-31T06:15:09.967Z",
-    "duration": 37202,
+    "start": "2022-08-31T07:00:52.365Z",
+    "end": "2022-08-31T07:01:30.654Z",
+    "duration": 38289,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "2a2f51a9-ea40-4771-8a4a-3dff3ce4351c",
+      "uuid": "7bd00216-98c1-46d1-ad2d-9bf142ef56dd",
       "title": "",
       "fullFile": "cypress/e2e/newTaxAndTerms.cy.js",
       "file": "cypress/e2e/newTaxAndTerms.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "2e88700a-0d15-4240-b0a4-917f6c635980",
+          "uuid": "327fd613-9f26-4056-a515-be3e5299fd50",
           "title": "New Taxt and Terms Module",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Basic Add new tax function",
               "fullTitle": "New Taxt and Terms Module Basic Add new tax function",
               "timedOut": null,
-              "duration": 21301,
+              "duration": 22140,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,8 +47,8 @@
               "context": null,
               "code": "_company_settings.TaxAndTermsPage.addNewTax();\n_company_settings.TaxAndTermsPage.fillAddNewTaxForm('New Tax', 3);\n_company_settings.TaxAndTermsPage.saveAddNewTaxForm();",
               "err": {},
-              "uuid": "03145e47-ba30-4559-8e71-89283c92faa5",
-              "parentUUID": "2e88700a-0d15-4240-b0a4-917f6c635980",
+              "uuid": "cc47a827-e083-45ec-b82c-80793d9c7cf0",
+              "parentUUID": "327fd613-9f26-4056-a515-be3e5299fd50",
               "isHook": false,
               "skipped": false
             },
@@ -56,7 +56,7 @@
               "title": "Basic Add new term function",
               "fullTitle": "New Taxt and Terms Module Basic Add new term function",
               "timedOut": null,
-              "duration": 15708,
+              "duration": 16079,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -65,21 +65,21 @@
               "context": null,
               "code": "_company_settings.TaxAndTermsPage.gotoTermsTab();\n_company_settings.TaxAndTermsPage.addNewTerm();\n_company_settings.TaxAndTermsPage.fillAddNewTermForm('New Term');\n_company_settings.TaxAndTermsPage.saveAddNewTermForm();",
               "err": {},
-              "uuid": "c0a58c92-1981-4b56-9175-03d95383c19f",
-              "parentUUID": "2e88700a-0d15-4240-b0a4-917f6c635980",
+              "uuid": "5779d999-dbca-486d-8e4c-6627e2009334",
+              "parentUUID": "327fd613-9f26-4056-a515-be3e5299fd50",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "03145e47-ba30-4559-8e71-89283c92faa5",
-            "c0a58c92-1981-4b56-9175-03d95383c19f"
+            "cc47a827-e083-45ec-b82c-80793d9c7cf0",
+            "5779d999-dbca-486d-8e4c-6627e2009334"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 37009,
+          "duration": 38219,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -103,7 +103,7 @@
       "options": {
         "quiet": false,
         "reportFilename": "[status]_[datetime]-[name]-report",
-        "saveHtml": true,
+        "saveHtml": false,
         "saveJson": true,
         "consoleReporter": "spec",
         "useInlineDiffs": false,
@@ -118,10 +118,11 @@
         "title": "[status]_[datetime]-[name]-report",
         "timestamp": "longDate",
         "charts": true,
-        "html": true,
+        "html": false,
         "json": true,
         "embeddedScreenshots": true,
-        "overwrite": false
+        "overwrite": false,
+        "inlineAssets": true
       },
       "version": "6.2.0"
     }

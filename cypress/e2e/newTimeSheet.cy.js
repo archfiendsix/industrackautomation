@@ -6,7 +6,7 @@ import TimesheetPage from '../pages/timesheet/TimesheetPage';
 
 require('cypress-plugin-tab');
 
-describe('Add Customer', () => {
+describe('Timesheet module', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log(err);
         return false;

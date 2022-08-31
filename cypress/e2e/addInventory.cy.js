@@ -14,7 +14,7 @@ describe('Add Inventory', () => {
   })
 
   beforeEach(() => {
-    
+
     cy.visit('/login')
     LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
     cy.wait(4250)

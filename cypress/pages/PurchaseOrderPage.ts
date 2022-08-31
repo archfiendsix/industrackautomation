@@ -20,7 +20,7 @@ class PurchaseOrderPage {
             shipViaField: () => cy.get('purchase-order-edit-dialog mat-select#shipVia'),
             inventorySearchTextbox: () => cy.get('input[placeholder="Type to search"]'),
             dropDownOption: () => cy.get('mat-option'),
-            saveButton: ()=> cy.get('purchase-order-edit-dialog .mat-dialog-actions button').contains('Save')
+            saveButton: () => cy.get('purchase-order-edit-dialog .mat-dialog-actions button').contains('Save')
 
         }
     }

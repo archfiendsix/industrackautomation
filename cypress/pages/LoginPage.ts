@@ -1,8 +1,5 @@
 class LoginPage {
 
-    // cy.get('#mat-input-0').type('andreiv@industrack.com')
-    // cy.get('#mat-input-1').type('admin')
-    // cy.get('.mat-focus-indicator').click()
     elements = {
         usernameTextBox: () => cy.get('#mat-input-0'),
         passwordTextBox: () => cy.get('#mat-input-1'),

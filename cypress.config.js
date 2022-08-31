@@ -18,7 +18,7 @@ module.exports = defineConfig({
     "title": "[status]_[datetime]-[name]-report",
     "timestamp": "longDate",
     "charts": true,
-    "html": true,
+    "html": false,
     "json": true,
     "embeddedScreenshots":true,
     "overwrite":false,

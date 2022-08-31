@@ -44,8 +44,7 @@ describe('New Estimate module', () => {
 
         cy.wait(3500)
 
-        // Dashboard.clickSettings()
-        // Dashboard.elements.settingsButton().click()
+
         InventoryListPage.gotoAddNewInventory()
 
         AddNewInventoryPage.fillData()

@@ -5,7 +5,7 @@ import PurchaseOrderPage from "../pages/PurchaseOrderPage";
 
 require('cypress-plugin-tab');
 
-describe('Add Customer', () => {
+describe('New Purchase Order Module', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log(err);
         return false;
@@ -32,7 +32,7 @@ describe('Add Customer', () => {
         PurchaseOrderPage.addPurchaseOrderModal.savePurchaseOrder()
     })
 
-    
+
 
 
 })
