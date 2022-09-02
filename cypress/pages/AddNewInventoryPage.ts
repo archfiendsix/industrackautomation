@@ -30,7 +30,7 @@ class AddNewInventoryPage {
     }
 
 
-
+   
     fillData = () => {
         this.elements.nameTextBox().type('Inventory Item 1')
         this.elements.skuTextBox().type('001')

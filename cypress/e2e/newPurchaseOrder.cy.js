@@ -21,6 +21,8 @@ describe('New Purchase Order Module', () => {
 
     })
 
+
+    //Basic adding of new purchase order from 1 vendor
     it('Basic new purchase order', () => {
         PurchaseOrderPage.clickAddNewPurchaseOrder()
         PurchaseOrderPage.addPurchaseOrderModal.selectVendor('GG')

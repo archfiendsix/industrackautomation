@@ -21,7 +21,7 @@ module.exports = defineConfig({
     "html": false,
     "json": true,
     "embeddedScreenshots":true,
-    "overwrite":false,
+    "overwrite":true,
     "inlineAssets": true
   },
   // "compilerOptions": {

@@ -26,6 +26,10 @@ describe('Add Inventory', () => {
 
 
 
+   // Basic adding of inventory
+    // Taxable inventory
+    // Cost at $1000
+    // 1 Warehouse Quantity on Hand
   it('Successfully add an Inventory', () => {
 
     AddNewInventoryPage.fillData()

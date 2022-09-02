@@ -22,6 +22,9 @@ describe('Timesheet module', () => {
 
     })
 
+    // Add new Timesheet for 1 field employee, Shift timesheet type
+    // No Cost Code, No vehicle, No job assigned, No Customer info, Time assigned is default
+
     it.only('Basic saving function', () => {
         TimesheetPage.addNewTimesheet()
         TimesheetPage.selectFieldEmployee('Employee One')
@@ -31,20 +34,20 @@ describe('Timesheet module', () => {
         TimesheetPage.saveAddTimeSheet()
     })
 
-    after(() => {
+    // after(() => {
 
-        // cy.visit('/login')
-        // LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
-        // cy.wait(4250)
-        Dashboard.clickTimesheetTab()
+    //     // cy.visit('/login')
+    //     // LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
+    //     // cy.wait(4250)
+    //     Dashboard.clickTimesheetTab()
 
-        TimesheetPage.addNewTimesheet()
-        TimesheetPage.selectFieldEmployee('Employee One')
+    //     TimesheetPage.addNewTimesheet()
+    //     TimesheetPage.selectFieldEmployee('Employee One')
 
-        TimesheetPage.elements.timesheetRecordsModal.timeSheetRecordsTable.selectAll().click()
-        TimesheetPage.elements.timesheetRecordsModal.deleteTimesheetRecordButton().click()
-        TimesheetPage.elements.timesheetRecordsModal.deleteConfirmModal.yesButton().click()
-    })
+    //     TimesheetPage.elements.timesheetRecordsModal.timeSheetRecordsTable.selectAll().click()
+    //     TimesheetPage.elements.timesheetRecordsModal.deleteTimesheetRecordButton().click()
+    //     TimesheetPage.elements.timesheetRecordsModal.deleteConfirmModal.yesButton().click()
+    // })
 
 
 })
