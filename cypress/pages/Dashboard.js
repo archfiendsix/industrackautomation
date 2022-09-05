@@ -9,9 +9,12 @@ class Dashboard {
         settingsButton: () => cy.get('a[href="/settingsTab"]'),
         estimatesTab: () => cy.get('.nav.navbar-nav a[href="/estimatesTab"]'),
         timesheetTab: () => cy.get('.nav.navbar-nav a[href="/timesheetTab"]'),
+        scheduleTab: () => cy.get('.nav.navbar-nav a[href="/schedulingTab"]'),
         purchaseOrderTab: () => cy.get('.nav.navbar-nav a[href="/purchaseOrderTab"]'),
         companySettings: () => cy.get('ul#side-menu li a').contains('Company Settings'),
+        schedulingTab: () => cy.get('ul#side-menu li a').contains('Scheduling'),
         taxtAndTerms: () => cy.get('ul#side-menu li ul.nav-second-level li a').contains('Tax & Terms'),
+        taskTemplates: () => cy.get('ul#side-menu li ul.nav-second-level li a').contains('Task Templates'),
         notification: {
             icon: () => cy.get('a[title="Reminders"]'),
             card: () => cy.get('ul.dropdown-menu.dropdown-reminders'),
@@ -34,7 +37,9 @@ class Dashboard {
     }
 
     clickSettings = () => {
-        this.elements.settingsButton().click()
+        this.elements.settingsButton().click({ force: true })
+        this.elements.settingsButton().click({ force: true })
+        cy.wait(6000)
     }
 
     clickEstimatesTab = () => {
@@ -47,12 +52,29 @@ class Dashboard {
         this.elements.purchaseOrderTab().click()
     }
 
+    clickScheduleTab = () => {
+        this.elements.scheduleTab().click()
+    }
+
+    clickSchedulingTab = () => {
+        this.elements.schedulingTab().click()
+    }
+
+    clickTaskTemplatesTab = () => {
+        this.elements.taskTemplates().click()
+    }
+
 
     gotoTaxAndTermsPage = () => {
         this.clickSettings()
         this.elements.companySettings().click()
         this.elements.taxtAndTerms().click()
 
+    }
+
+    gotoJobTemplates = () => {
+        this.clickSettings()
+        this.elements.scheduleTab().click()
     }
 
 

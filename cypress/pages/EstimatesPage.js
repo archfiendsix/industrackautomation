@@ -234,7 +234,7 @@ class EstimatesPage {
                 return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
             }
             const description = descEl
-            const randomQuantity: string = getRandomInt(0, 10).toString()
+            const randomQuantity = getRandomInt(0, 10).toString()
             const randomUnitCost = getRandomInt(0, 1000).toString()
             const randomProfit = getRandomInt(0, 5).toString()
             cy.wrap(description).clear().type('TEST Description Change')

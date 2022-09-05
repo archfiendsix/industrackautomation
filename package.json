@@ -5,18 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress run --spec \"cypress/e2e/newTaxAndTerms.cy.js\" --browser chrome --headless",
+    "test-allure": "npx cypress run --spec \"cypress/e2e/newTaxAndTerms.cy.js\" --browser chrome --headless --env allure=true",
+    "report": "npx allure generate allure-results --clean -o allure-report",
     "merge-report": "mochawesome-merge cypress/report/mochawesome-report/*.json > cypress/report/mochawesome-report/index.json && marge cypress/report/mochawesome-report/index.json --reportDir ./cypress/report/mochawesome-report/ --inline"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "allure-commandline": "^2.18.1",
     "cypress": "^10.3.1",
     "cypress-plugin-tab": "^1.0.5",
+    "mocha-allure-reporter": "^1.4.0",
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^4.2.1"
   },
   "devDependencies": {
-    "cypress-plugin-tab": "^1.0.5",
-    "typescript": "^4.7.4"
+    "cypress-plugin-tab": "^1.0.5"
   }
 }

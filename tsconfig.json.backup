@@ -1,0 +1,21 @@
+// {
+//     "compilerOptions": {
+//         "target": "es5",
+//         "lib": [
+//             "es5",
+//             "dom"
+//         ],
+//         "types": [
+//             "cypress",
+//             "node"
+//         ]
+//     },
+//     "include": [
+//         "./node_modules/cypress",
+//         "cypress/**/*.js",
+//         "**/*.ts",
+//         "../cypress.d.ts",
+//         "cypress/pages/Dashboard.js",
+//         "cypress/tsconfig.json"
+//     ]
+// }
