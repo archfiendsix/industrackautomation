@@ -156,20 +156,20 @@ describe('New Estimate module', () => {
 
     })
 
-    it('Should proceed to Estimate preview', () => {
+    // it('Should proceed to Estimate preview', () => {
 
-        Dashboard.clickEstimatesTab()
-        EstimatesPage.clickAddNew()
-        cy.wait(4000)
-        EstimatesPage.selectCustomer('Genius Giant Game Inc.')
-        EstimatesPage.inventorySelect('Inventory Item 1')
-        EstimatesPage.saveEstimate()
-        cy.wait(4000)
-        EstimatesPage.previewEstimate()
-        EstimatesPage.checkEstimatePreview() /* Add more Preview verifications in this method */
+    //     Dashboard.clickEstimatesTab()
+    //     EstimatesPage.clickAddNew()
+    //     cy.wait(4000)
+    //     EstimatesPage.selectCustomer('Genius Giant Game Inc.')
+    //     EstimatesPage.inventorySelect('Inventory Item 1')
+    //     EstimatesPage.saveEstimate()
+    //     cy.wait(4000)
+    //     EstimatesPage.previewEstimate()
+    //     EstimatesPage.checkEstimatePreview() /* Add more Preview verifications in this method */
 
 
-    })
+    // })
 
     it('Should send estimate as email', () => {
         Dashboard.clickEstimatesTab()

@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1662373374815' stop='1662373397758'>
+    <name>Add Customer</name>
+    <title>Add Customer</title>
+    <test-cases>
+        <test-case start='1662373374835' status='passed' stop='1662373397709'>
+            <name>Disable save if email is invalid</name>
+            <title>Disable save if email is invalid</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

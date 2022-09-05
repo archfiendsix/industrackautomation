@@ -27,7 +27,7 @@ module.exports = defineConfig({
   // "compilerOptions": {
   //   "types": ["jest", "node"]
   // },
-  defaultCommandTimeout: 6000,
+  defaultCommandTimeout: 8000,
   pageLoadTimeout: 30000,
   chromeWebSecurity: false,
   screenshotOnRunFailure: true
