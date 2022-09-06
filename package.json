@@ -19,6 +19,11 @@
     "mochawesome-merge": "^4.2.1"
   },
   "devDependencies": {
-    "cypress-plugin-tab": "^1.0.5"
+    "cypress-plugin-tab": "^1.0.5",
+    "allure-commandline": "^2.18.1",
+    "cypress": "^10.3.1",
+    "mocha-allure-reporter": "^1.4.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.1"
   }
 }
