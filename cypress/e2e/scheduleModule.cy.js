@@ -124,7 +124,7 @@ describe('Schedule Module', () => {
     //     Dashboard.clickSchedulingTab()
     //     Dashboard.clickTaskTemplatesTab()
     // })
-    it.only('', () => {
+    after(() => {
 
         Dashboard.clickScheduleTab()
         cy.get('.dhx_cal_event_line.test_sc_class').then($btn=> {
