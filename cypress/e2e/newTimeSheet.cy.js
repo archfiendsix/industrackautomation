@@ -13,7 +13,7 @@ describe('Timesheet module', () => {
     })
 
     beforeEach(() => {
-
+        cy.viewport(1280, 768)
         cy.visit('/login')
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
         cy.wait(4250)

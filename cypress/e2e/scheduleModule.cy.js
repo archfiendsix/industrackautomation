@@ -12,6 +12,7 @@ describe('Schedule Module', () => {
     })
 
     beforeEach(() => {
+        cy.viewport(1280, 768)
 
         cy.visit('/login')
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')

@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1662470894025' stop='1662470940097'>
+    <name>New Tax and Terms Module</name>
+    <title>New Tax and Terms Module</title>
+    <test-cases>
+        <test-case start='1662470894025' status='passed' stop='1662470918368'>
+            <name>Basic Add new tax function</name>
+            <title>Basic Add new tax function</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1662470918501' status='passed' stop='1662470940047'>
+            <name>Basic Add new term function</name>
+            <title>Basic Add new term function</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

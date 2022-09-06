@@ -11,19 +11,20 @@ module.exports = defineConfig({
   integration: {
     baseUrl: "https://onetrack.industrack.com"
   },
-  "reporter": "mochawesome",
-  "reporterOptions": {
-    "reportDir": "cypress/report/mochawesome-report",
-    "reportFilename": "[status]_[datetime]-[name]-report",
-    "title": "[status]_[datetime]-[name]-report",
-    "timestamp": "longDate",
-    "charts": true,
-    "html": false,
-    "json": true,
-    "embeddedScreenshots":true,
-    "overwrite":false,
-    "inlineAssets": true
-  },
+  "reporter": "allure",
+  // "reporterOptions": {
+  //   "reportDir": "cypress/report/mochawesome-report",
+  //   "reportFilename": "[status]_[datetime]-[name]-report",
+  //   "title": "[status]_[datetime]-[name]-report",
+  //   "timestamp": "longDate",
+  //   "charts": true,
+  //   "html": false,
+  //   "json": true,
+  //   "embeddedScreenshots":true,
+  //   "overwrite":false,
+  //   "inlineAssets": true,
+  //   "enableCharts":true,
+  // },
   "compilerOptions": {
     "types": ["jest", "node"]
   },

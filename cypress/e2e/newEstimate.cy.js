@@ -13,7 +13,7 @@ describe('New Estimate module', () => {
     })
 
     beforeEach(() => {
-
+        cy.viewport(1280, 768)
         cy.visit('/login')
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
         // cy.get('ul.dropdown-menu.dropdown-reminders').invoke('hide')
