@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress run --browser chrome --spec \"cypress/e2e/newTaxAndTerms.cy.js\"",
+    "test": "npx cypress run --browser chrome",
+    "test-per-spec": "npx cypress run --browser chrome --spec \"cypress/e2e/newTaxAndTerms.cy.js\"",
     "merge-report": "mochawesome-merge cypress/report/mochawesome-report/*.json > cypress/report/index.json && marge cypress/report/index.json --reportDir ./cypress/report/ --inline"
   },
   "author": "",
