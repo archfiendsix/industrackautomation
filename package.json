@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress run --browser chrome --headless",
-    "test-allure": "npx cypress run --spec \"cypress/e2e/newTaxAndTerms.cy.js\" --browser chrome --headless --env allure=true",
-    "report": "npx allure generate allure-results --clean -o allure-report",
-    "merge-report": "mochawesome-merge cypress/report/mochawesome-report/*.json > cypress/report/mochawesome-report/index.json && marge cypress/report/mochawesome-report/index.json --reportDir ./cypress/report/mochawesome-report/ --inline"
+    "test": "npx cypress run --browser chrome --spec \"cypress/e2e/newTaxAndTerms.cy.js\"",
+    "merge-report": "mochawesome-merge cypress/report/mochawesome-report/*.json > cypress/report/index.json && marge cypress/report/index.json --reportDir ./cypress/report/ --inline"
   },
   "author": "",
   "license": "ISC",
