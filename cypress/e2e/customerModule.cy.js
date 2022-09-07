@@ -33,21 +33,9 @@ describe('Add Customer', () => {
 
 
 
-    AddCustomerPage.elements.customerNumberTextBox().type('0001')
-    AddCustomerPage.elements.companyNameTextBox().type('Genius Game Inc.')
-    AddCustomerPage.elements.firstNameTextBox().type('Francis')
-    AddCustomerPage.elements.lastNameTextBox().type('White')
-    AddCustomerPage.elements.websiteAddressTextBox().type('https://geniusgiant.com/')
-    AddCustomerPage.elements.phoneNumberTextBox().type('8317474895')
-    AddCustomerPage.elements.emailAddressTextBox().type('dina.schill@gmail.com')
-    AddCustomerPage.elements.faxNumberTextBox().type('6692211141')
-    AddCustomerPage.elements.locationNameTextBox().type('Genius Building')
-    AddCustomerPage.elements.streetAddressTextBox().type('Cemetery Street')
-    AddCustomerPage.elements.unitNumberTextBox().type('4955')
-    AddCustomerPage.elements.cityTextBox().type('Salinas')
-    AddCustomerPage.elements.stateTextBox().type('CA')
-    AddCustomerPage.elements.postCodeTextBox().type('93901')
-    AddCustomerPage.elements.countryTextBox().type('United States of America')
+    const customerInfo = {
+    }
+    AddCustomerPage.fillData(customerInfo)
 
 
 
@@ -88,21 +76,9 @@ describe('Add Customer', () => {
 
 
 
-    AddCustomerPage.elements.customerNumberTextBox().type('0001')
-    AddCustomerPage.elements.companyNameTextBox().type('Genius Game Inc.')
-    AddCustomerPage.elements.firstNameTextBox().type('Francis')
-    AddCustomerPage.elements.lastNameTextBox().type('White')
-    AddCustomerPage.elements.websiteAddressTextBox().type('https://geniusgiant.com/')
-    AddCustomerPage.elements.phoneNumberTextBox().type('8317474895')
-    AddCustomerPage.elements.emailAddressTextBox().type('dina.schill@gmail.com')
-    AddCustomerPage.elements.faxNumberTextBox().type('6692211141')
-    AddCustomerPage.elements.locationNameTextBox().type('Genius Building')
-    AddCustomerPage.elements.streetAddressTextBox().type('Cemetery Street')
-    AddCustomerPage.elements.unitNumberTextBox().type('4955')
-    AddCustomerPage.elements.cityTextBox().type('Salinas')
-    AddCustomerPage.elements.stateTextBox().type('CA')
-    AddCustomerPage.elements.postCodeTextBox().type('93901')
-    AddCustomerPage.elements.countryTextBox().type('United States of America')
+    const customerInfo = {
+    }
+    AddCustomerPage.fillData(customerInfo)
 
 
     cy.wait(2500)
@@ -115,22 +91,12 @@ describe('Add Customer', () => {
   })
 
 
-  it('Disable save if email is invalid', () => {
-    AddCustomerPage.elements.customerNumberTextBox().type('0001')
-    AddCustomerPage.elements.companyNameTextBox().type('Genius Game Inc.')
-    AddCustomerPage.elements.firstNameTextBox().type('Francis')
-    AddCustomerPage.elements.lastNameTextBox().type('White')
-    AddCustomerPage.elements.websiteAddressTextBox().type('https://geniusgiant.com/')
-    AddCustomerPage.elements.phoneNumberTextBox().type('8317474895')
-    AddCustomerPage.elements.emailAddressTextBox().clear().type('dina.schill@')
-    AddCustomerPage.elements.faxNumberTextBox().type('6692211141')
-    AddCustomerPage.elements.locationNameTextBox().type('Genius Building')
-    AddCustomerPage.elements.streetAddressTextBox().type('Cemetery Street')
-    AddCustomerPage.elements.unitNumberTextBox().type('4955')
-    AddCustomerPage.elements.cityTextBox().type('Salinas')
-    AddCustomerPage.elements.stateTextBox().type('CA')
-    AddCustomerPage.elements.postCodeTextBox().type('93901')
-    AddCustomerPage.elements.countryTextBox().type('United States of America')
+  it.only('Disable save if email is invalid', () => {
+
+    const customerInfo = {
+      email: 'dina.schill@'
+    }
+    AddCustomerPage.fillData(customerInfo)
 
     AddCustomerPage.checkEmailErrorMessage('Incorrect email')
     // AddCustomerPage.clickSaveButton()
@@ -156,7 +122,7 @@ describe('Add Customer', () => {
     // CustomerPage.searchCustomer(customerInfo.companyName)
   })
 
-  it.only('Add Service Location to a newly created Customer - Tax Rate Added to Added Location', () => {
+  it('Add Service Location to a newly created Customer - Tax Rate Added to Added Location', () => {
     const customerInfo = {
       customerNumber: '192379182739812',
       companyName: 'Add service location to this customer',
