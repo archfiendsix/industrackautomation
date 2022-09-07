@@ -91,7 +91,7 @@ describe('Add Customer', () => {
   })
 
 
-  it.only('Disable save if email is invalid', () => {
+  it('Disable save if email is invalid', () => {
 
     const customerInfo = {
       email: 'dina.schill@'

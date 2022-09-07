@@ -6,11 +6,14 @@ class AddNewInventoryPage {
         nameTextBox: () => cy.get('input#name'),
         skuTextBox: () => cy.get('input#number'),
         vendorTextBox: () => cy.get('input[name="vendor"]'),
-        nonTaxableCheckbox: () => cy.get('input#mat-checkbox-23-input'),
+        nonTaxableCheckbox: () => cy.get('mat-checkbox[name="nonTaxable"] label'),
         salesPriceTextBox: () => cy.get('input#salesPrice'),
         salesDescriptionTextArea: () => cy.get('textarea#salesInfo'),
         costTextBox: () => cy.get('input#cost'),
         purchasingDescriptionTextArea: () => cy.get('textarea#purchasingInfo'),
+        quantityTextbox: () => cy.get('input#quantity'),
+        minOrderQuantityTextbox: () => cy.get('input#minOrderQuantity'),
+        useSerialNumbersCheckbox: ()=> cy.get('input[name="isSerial"]'),
         savedNotification: () => cy.get('.sn-content.ng-star-inserted'),
         nameErrorMessage: () => cy.get('input#name+.alert'),
         addInventoryModal: {
@@ -30,15 +33,34 @@ class AddNewInventoryPage {
     }
 
 
-   
-    fillData = () => {
-        this.elements.nameTextBox().type('Inventory Item 1')
-        this.elements.skuTextBox().type('001')
-        this.elements.vendorTextBox().type('Vendors Inc.')
-        this.elements.salesPriceTextBox().type('1000')
-        this.elements.salesDescriptionTextArea().type('This is a test sales description')
-        this.elements.costTextBox().type('1000')
-        this.elements.purchasingDescriptionTextArea().type('This is a test purchasing description')
+
+    fillData = (newInventoryInfo) => {
+
+        const inputInventoryInfo = {
+            name: newInventoryInfo.name || 'Inventory Item 1',
+            sku: newInventoryInfo.sku || '001',
+            vendor: newInventoryInfo.vendor || 'Vendors Inc.',
+            salesPriceRate: newInventoryInfo.salesPriceRate || '1000',
+            salesDescription: newInventoryInfo.salesDescription || 'This is a test sales description',
+            cost: newInventoryInfo.cost || '1000',
+            purchaseDescription: newInventoryInfo.purchaseDescription || 'This is a test purchasing description',
+            mainWarehouseQuantityOnHand: newInventoryInfo.mainWarehouseQuantityOnHand || "1",
+            reorderPoint: newInventoryInfo.reorderPoint || "1",
+            nonTaxable: newInventoryInfo.nonTaxable || false,
+            useSerialNumbers: newInventoryInfo.useSerialNumbers || false
+
+        }
+        newInventoryInfo.useSerialNumbers ? this.elements.useSerialNumbersCheckbox().click() : this.elements.useSerialNumbersCheckbox().dblclick()
+        this.elements.nameTextBox().clear().type(inputInventoryInfo.name)
+        this.elements.skuTextBox().clear().type(inputInventoryInfo.sku)
+        this.elements.vendorTextBox().clear().type(inputInventoryInfo.vendor)
+        this.elements.salesPriceTextBox().clear().type(inputInventoryInfo.salesPriceRate)
+        this.elements.salesDescriptionTextArea().clear().type(inputInventoryInfo.salesDescription)
+        this.elements.costTextBox().clear().type(inputInventoryInfo.cost)
+        this.elements.purchasingDescriptionTextArea().clear().type(inputInventoryInfo.purchaseDescription)
+        this.elements.quantityTextbox().clear().type(inputInventoryInfo.mainWarehouseQuantityOnHand)
+        this.elements.minOrderQuantityTextbox().clear().type(inputInventoryInfo.reorderPoint)
+        newInventoryInfo.nonTaxable ? this.elements.nonTaxableCheckbox().click() : this.elements.nonTaxableCheckbox().dblclick()
     }
 }
 
