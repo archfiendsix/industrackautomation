@@ -30,6 +30,27 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             lastNameSortArrow: () => cy.get('.mat-table thead button[aria-label="Change sorting for lastName"]+.mat-sort-header-arrow'),
             lastNameSortHeader: () => cy.get('.mat-table thead th.mat-column-lastName'),
 
+        },
+        customerOverview: {
+            addNewButton: () => cy.get('app-service-locations button').contains('Add New'),
+        },
+        addNewServiceLocationModal: {
+            firstNameTextBox: () => cy.get('input#firstName'),
+            lastNameTextBox: () => cy.get('input#lastName'),
+            websiteAddressTextBox: () => cy.get('input#websiteAddress'),
+            phoneNumberTextBox: () => cy.get('input#phoneNumber'),
+            emailAddressTextBox: () => cy.get('input#emailAddress'),
+            faxNumberTextBox: () => cy.get('input#faxNumber'),
+            locationNameTextBox: () => cy.get('input#locationName'),
+            streetAddressTextBox: () => cy.get('input#streetAddress'),
+            unitNumberTextBox: () => cy.get('input#unitNumber'),
+            cityTextBox: () => cy.get('input#city'),
+            stateTextBox: () => cy.get('input#stateProvince'),
+            postCodeTextBox: () => cy.get('input#postCode'),
+            countryTextBox: () => cy.get('input#country'),
+            selectATaxRateField: () => cy.get('mat-select#taxRateID'),
+            selectATaxRateFieldOption: () => cy.get('mat-option'),
+            saveButton: () => cy.get('app-location-edit-form .modal-footer button').contains('Save')
         }
 
     }
@@ -41,6 +62,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     searchCustomer = (text) => {
         this.elements.searchBox.input().type(text)
         this.elements.searchBox.searchIcon().click()
+    }
+
+    clickAddNewServiceLocation = () => {
+        this.elements.customerOverview.addNewButton().click()
     }
 
 
@@ -99,6 +124,43 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         }
     }
 
+
+
+    addNewServiceLocationModal = {
+        fillServiceLocationData: (newCustomerInfo) => {
+            const inputCustomerInfo = {
+                firstName: newCustomerInfo.firstName || 'Francis',
+                lastName: newCustomerInfo.lastName || 'White',
+                phone: newCustomerInfo.phone || '8317474895',
+                email: newCustomerInfo.email || 'dina.schill@gmail.com',
+                locationName: newCustomerInfo.locationName || 'Genius Building',
+                street: newCustomerInfo.street || 'Cemetery Street',
+                unitNumber: newCustomerInfo.unitNumber || '4955',
+                city: newCustomerInfo.city || 'Salinas',
+                state: newCustomerInfo.state || 'CA',
+                zip: newCustomerInfo.zip || '93901',
+                country: newCustomerInfo.country || 'United States of America',
+                selectATaxRate: newCustomerInfo.selectATaxRate || 'Not Selected'
+            }
+            this.elements.addNewServiceLocationModal.firstNameTextBox().type(inputCustomerInfo.firstName)
+            this.elements.addNewServiceLocationModal.lastNameTextBox().type(inputCustomerInfo.lastName)
+            this.elements.addNewServiceLocationModal.phoneNumberTextBox().type(inputCustomerInfo.phone)
+            this.elements.addNewServiceLocationModal.phoneNumberTextBox().type(inputCustomerInfo.phone)
+            this.elements.addNewServiceLocationModal.emailAddressTextBox().type(inputCustomerInfo.email)
+            this.elements.addNewServiceLocationModal.locationNameTextBox().type(inputCustomerInfo.locationName)
+            this.elements.addNewServiceLocationModal.streetAddressTextBox().type(inputCustomerInfo.street)
+            this.elements.addNewServiceLocationModal.unitNumberTextBox().type(inputCustomerInfo.unitNumber)
+            this.elements.addNewServiceLocationModal.cityTextBox().type(inputCustomerInfo.city)
+            this.elements.addNewServiceLocationModal.stateTextBox().type(inputCustomerInfo.state)
+            this.elements.addNewServiceLocationModal.postCodeTextBox().type(inputCustomerInfo.zip)
+            this.elements.addNewServiceLocationModal.countryTextBox().type(inputCustomerInfo.country)
+            this.elements.addNewServiceLocationModal.selectATaxRateField().click()
+            this.elements.addNewServiceLocationModal.selectATaxRateFieldOption().contains(inputCustomerInfo.selectATaxRate).first().click()
+        },
+        clickSaveButton: () => {
+            this.elements.addNewServiceLocationModal.saveButton().click()
+        }
+    }
 
 }
 

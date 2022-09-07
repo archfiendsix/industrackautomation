@@ -20,17 +20,17 @@ class AddCustomerPage {
         countryTextBox: () => cy.get('input#country'),
         emailErrror: () => cy.get('input#emailAddress+.alert'),
         warningModal: () => cy.get('.cdk-overlay-pane.warningModal .mat-dialog-content p'),
-        addressValidityWarningModalConfirm:()=> cy.get('.cdk-overlay-pane.warningModal .mat-dialog-actions .btn.btn-primary.mat-button.mat-button-base'),
-        sameAsCompanyCheckbox: ()=> cy.get('input#billingAddressEquals'),
-        billingStreetAddressTextbox:()=> cy.get('input#billingStreetAddress'),
-        billingCityTextbox:()=> cy.get('input#billingCity'),
-        billingStateProvinceTextbox:()=> cy.get('input#billingStateProvince'),
-        billingPostCodeTextBox:()=> cy.get('input#billingPostCode'),
+        addressValidityWarningModalConfirm: () => cy.get('.cdk-overlay-pane.warningModal .mat-dialog-actions .btn.btn-primary.mat-button.mat-button-base'),
+        sameAsCompanyCheckbox: () => cy.get('input#billingAddressEquals'),
+        billingStreetAddressTextbox: () => cy.get('input#billingStreetAddress'),
+        billingCityTextbox: () => cy.get('input#billingCity'),
+        billingStateProvinceTextbox: () => cy.get('input#billingStateProvince'),
+        billingPostCodeTextBox: () => cy.get('input#billingPostCode'),
     }
 
     checkSaveButtonDisabled = () => {
         // this.elements.saveButton().should('be.disabled')
-        this.elements.saveButton().then(el=> {
+        this.elements.saveButton().then(el => {
             expect(el).to.be.disabled
         })
     }
@@ -39,7 +39,7 @@ class AddCustomerPage {
         this.elements.saveButton().click()
     }
 
-    clickBillingAddressEquals=()=> {
+    clickBillingAddressEquals = () => {
         this.elements.sameAsCompanyCheckbox().click()
     }
 
@@ -53,29 +53,49 @@ class AddCustomerPage {
         this.elements.warningModal().should('be.visible').contains(body)
     }
 
-    fillData = () => {
-        this.elements.customerNumberTextBox().type('0001')
-        this.elements.companyNameTextBox().type('Genius Game Inc.')
-        this.elements.firstNameTextBox().type('Francis')
-        this.elements.lastNameTextBox().type('White')
-        this.elements.websiteAddressTextBox().type('https://geniusgiant.com/')
-        this.elements.phoneNumberTextBox().type('8317474895')
-        this.elements.emailAddressTextBox().type('dina.schill@gmail.com')
-        this.elements.faxNumberTextBox().type('6692211141')
-        this.elements.locationNameTextBox().type('Genius Building')
-        this.elements.streetAddressTextBox().type('Cemetery Street')
-        this.elements.unitNumberTextBox().type('4955')
-        this.elements.cityTextBox().type('Salinas')
-        this.elements.stateTextBox().type('CA')
-        this.elements.postCodeTextBox().type('93901')
-        this.elements.countryTextBox().type('United States of America')
+    fillData = (newCustomerInfo) => {
+        const inputCustomerInfo = {
+            customerNumber: newCustomerInfo.customerNumber || '0001',
+            companyName: newCustomerInfo.companyName || 'Genius Game Inc.',
+            firstName: newCustomerInfo.firstName || 'Francis',
+            lastName: newCustomerInfo.lastName || 'White',
+            companyWebsite: newCustomerInfo.companyWebsite || 'https://geniusgiant.com/',
+            phone: newCustomerInfo.phone || '8317474895',
+            email: newCustomerInfo.email || 'dina.schill@gmail.com',
+            mobile: newCustomerInfo.mobile || '6692211141',
+            locationName: newCustomerInfo.locationName || 'Genius Building',
+            street: newCustomerInfo.street || 'Cemetery Street',
+            unitNumber: newCustomerInfo.unitNumber || '4955',
+            city: newCustomerInfo.city || 'Salinas',
+            state: newCustomerInfo.state || 'CA',
+            zip: newCustomerInfo.zip || '93901',
+            country: newCustomerInfo.country || 'United States of America',
+
+
+        }
+        this.elements.customerNumberTextBox().type(inputCustomerInfo.customerNumber)
+        this.elements.companyNameTextBox().type(inputCustomerInfo.companyName)
+        this.elements.firstNameTextBox().type(inputCustomerInfo.firstName)
+        this.elements.lastNameTextBox().type(inputCustomerInfo.lastName)
+        this.elements.websiteAddressTextBox().type(inputCustomerInfo.companyWebsite)
+        this.elements.phoneNumberTextBox().type(inputCustomerInfo.phone)
+        this.elements.phoneNumberTextBox().type(inputCustomerInfo.phone)
+        this.elements.emailAddressTextBox().type(inputCustomerInfo.email)
+        this.elements.faxNumberTextBox().type(inputCustomerInfo.mobile)
+        this.elements.locationNameTextBox().type(inputCustomerInfo.locationName)
+        this.elements.streetAddressTextBox().type(inputCustomerInfo.street)
+        this.elements.unitNumberTextBox().type(inputCustomerInfo.unitNumber)
+        this.elements.cityTextBox().type(inputCustomerInfo.city)
+        this.elements.stateTextBox().type(inputCustomerInfo.state)
+        this.elements.postCodeTextBox().type(inputCustomerInfo.zip)
+        this.elements.countryTextBox().type(inputCustomerInfo.country)
     }
 
-    confirmValidityYes=()=> {
+    confirmValidityYes = () => {
         this.elements.addressValidityWarningModalConfirm().click()
     }
 
-    
+
 }
 
 

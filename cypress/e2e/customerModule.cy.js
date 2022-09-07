@@ -115,7 +115,7 @@ describe('Add Customer', () => {
   })
 
 
-  it.only('Disable save if email is invalid', () => {
+  it('Disable save if email is invalid', () => {
     AddCustomerPage.elements.customerNumberTextBox().type('0001')
     AddCustomerPage.elements.companyNameTextBox().type('Genius Game Inc.')
     AddCustomerPage.elements.firstNameTextBox().type('Francis')
@@ -135,6 +135,45 @@ describe('Add Customer', () => {
     AddCustomerPage.checkEmailErrorMessage('Incorrect email')
     // AddCustomerPage.clickSaveButton()
     AddCustomerPage.checkSaveButtonDisabled()
+  })
+
+  it('Add Service Location to a newly created Customer - Added Location has no selected tax rate', () => {
+    const customerInfo = {
+      customerNumber: '192379182739812',
+      companyName: 'Add service location to this customer'
+    }
+    AddCustomerPage.fillData(customerInfo)
+    AddCustomerPage.clickSaveButton()
+    AddCustomerPage.confirmValidityYes()
+    CustomerPage.clickAddNewServiceLocation()
+    const serviceLocationInfo = {
+
+    }
+    CustomerPage.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo)
+    CustomerPage.addNewServiceLocationModal.clickSaveButton()
+    // cy.wait(5000)
+    // Dashboard.clickCustomerTab()
+    // CustomerPage.searchCustomer(customerInfo.companyName)
+  })
+
+  it.only('Add Service Location to a newly created Customer - Tax Rate Added to Added Location', () => {
+    const customerInfo = {
+      customerNumber: '192379182739812',
+      companyName: 'Add service location to this customer',
+
+    }
+    AddCustomerPage.fillData(customerInfo)
+    AddCustomerPage.clickSaveButton()
+    AddCustomerPage.confirmValidityYes()
+    CustomerPage.clickAddNewServiceLocation()
+    const serviceLocationInfo = {
+      selectATaxRate: 'New Tax'
+    }
+    CustomerPage.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo)
+    CustomerPage.addNewServiceLocationModal.clickSaveButton()
+    // cy.wait(5000)
+    // Dashboard.clickCustomerTab()
+    // CustomerPage.searchCustomer(customerInfo.companyName)
   })
 
 
