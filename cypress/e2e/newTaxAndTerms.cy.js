@@ -33,6 +33,11 @@ describe('New Tax and Terms Module', () => {
         TaxAndTermsPage.saveAddNewTermForm()
     })
 
+    // it.only('test', () => {
+    //     const uuid = () => Cypress._.random(0, 1e20)
+    //     const id = uuid()
+    // })
+
 
 
 

@@ -10,6 +10,7 @@ class Dashboard {
         estimatesTab: () => cy.get('.nav.navbar-nav a[href="/estimatesTab"]'),
         timesheetTab: () => cy.get('.nav.navbar-nav a[href="/timesheetTab"]'),
         scheduleTab: () => cy.get('.nav.navbar-nav a[href="/schedulingTab"]'),
+        invoicesTab: () => cy.get('.nav.navbar-nav a[href="/invoicesTab"]'),
         purchaseOrderTab: () => cy.get('.nav.navbar-nav a[href="/purchaseOrderTab"]'),
         companySettings: () => cy.get('ul#side-menu li a').contains('Company Settings'),
         schedulingTab: () => cy.get('ul#side-menu li a').contains('Scheduling'),
@@ -59,7 +60,10 @@ class Dashboard {
     clickSchedulingTab = () => {
         this.elements.schedulingTab().click()
     }
-
+    
+    clickInvoicesTab = () => {
+        this.elements.invoicesTab().click()
+    }
     clickTaskTemplatesTab = () => {
         this.elements.taskTemplates().click()
     }

@@ -13,10 +13,13 @@ class AddNewInventoryPage {
         purchasingDescriptionTextArea: () => cy.get('textarea#purchasingInfo'),
         quantityTextbox: () => cy.get('input#quantity'),
         minOrderQuantityTextbox: () => cy.get('input#minOrderQuantity'),
-        useSerialNumbersCheckbox: ()=> cy.get('input[name="isSerial"]'),
+        useSerialNumbersCheckbox: () => cy.get('input[name="isSerial"]'),
         savedNotification: () => cy.get('.sn-content.ng-star-inserted'),
         nameErrorMessage: () => cy.get('input#name+.alert'),
         addInventoryModal: {
+            enterSerialBatchButton: () => cy.get('.serialbatch button').contains('Enter New Serial Batch'),
+            serialsTextarea: () => cy.get('textarea[formcontrolname="serialNumbers"]'),
+            proceedButton: () => cy.get('button[type="submit"]').contains('proceed'),
             saveButton: () => cy.get('.mat-dialog-actions .btn.btn-info'),
         }
     }
@@ -47,10 +50,12 @@ class AddNewInventoryPage {
             mainWarehouseQuantityOnHand: newInventoryInfo.mainWarehouseQuantityOnHand || "1",
             reorderPoint: newInventoryInfo.reorderPoint || "1",
             nonTaxable: newInventoryInfo.nonTaxable || false,
-            useSerialNumbers: newInventoryInfo.useSerialNumbers || false
-
+            useSerialNumbers: newInventoryInfo.useSerialNumbers || false,
+            serialNumbers: newInventoryInfo.serialNumbers || ['123', '1234', '12345']
         }
-        newInventoryInfo.useSerialNumbers ? this.elements.useSerialNumbersCheckbox().click() : this.elements.useSerialNumbersCheckbox().dblclick()
+        inputInventoryInfo.useSerialNumbers ? this.elements.useSerialNumbersCheckbox().click() : this.elements.useSerialNumbersCheckbox().dblclick()
+
+        inputInventoryInfo.useSerialNumbers && this.elements.addInventoryModal.enterSerialBatchButton().click({ force: true })
         this.elements.nameTextBox().clear().type(inputInventoryInfo.name)
         this.elements.skuTextBox().clear().type(inputInventoryInfo.sku)
         this.elements.vendorTextBox().clear().type(inputInventoryInfo.vendor)
@@ -60,7 +65,18 @@ class AddNewInventoryPage {
         this.elements.purchasingDescriptionTextArea().clear().type(inputInventoryInfo.purchaseDescription)
         this.elements.quantityTextbox().clear().type(inputInventoryInfo.mainWarehouseQuantityOnHand)
         this.elements.minOrderQuantityTextbox().clear().type(inputInventoryInfo.reorderPoint)
-        newInventoryInfo.nonTaxable ? this.elements.nonTaxableCheckbox().click() : this.elements.nonTaxableCheckbox().dblclick()
+        inputInventoryInfo.nonTaxable ? this.elements.nonTaxableCheckbox().click() : this.elements.nonTaxableCheckbox().dblclick()
+
+        
+        inputInventoryInfo.useSerialNumbers ? this.elements.addInventoryModal.enterSerialBatchButton().click({ force: true }) : expect(inputInventoryInfo.useSerialNumbers).to.equal(false)
+        if (inputInventoryInfo.useSerialNumbers) {
+            inputInventoryInfo.serialNumbers.forEach((i) => {
+                this.elements.addInventoryModal.serialsTextarea().type(i).type('{enter}')
+
+            })
+            this.elements.addInventoryModal.proceedButton().click()
+        }
+
     }
 }
 

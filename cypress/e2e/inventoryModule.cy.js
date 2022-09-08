@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import Dashboard from "../pages/Dashboard"
 import { InventoryListPage } from "../pages/settings/inventory";
 import AddNewInventoryPage from "../pages/AddNewInventoryPage";
+import { v4 as uuidv4 } from 'uuid';
 
 require('cypress-plugin-tab');
 
@@ -21,19 +22,16 @@ describe('Add Inventory', () => {
     Dashboard.clickSettings()
     Dashboard.elements.settingsButton().click()
     Dashboard.preventNotificationCard()
-    
+
   })
 
 
 
-  // Basic adding of inventory
-  // Taxable inventory
-  // Cost at $1000
-  // 1 Warehouse Quantity on Hand
   it('Successfully add an Inventory - Not using serial #s, Taxable', () => {
     InventoryListPage.gotoAddNewInventory()
     const inventoryInfo = {
-
+      name: 'Add Inventory - Taxable no SN',
+      useSerialNumbers: false,
     }
     AddNewInventoryPage.fillData(inventoryInfo)
     AddNewInventoryPage.clickSaveButton()
@@ -43,14 +41,15 @@ describe('Add Inventory', () => {
   it('Save unsuccessful when you click save after leaving required fields blank', () => {
     InventoryListPage.gotoAddNewInventory()
     const inventoryInfo = {
+      name: '',
     }
     AddNewInventoryPage.elements.nameTextBox().click().clear().type('{backspace}')
     AddNewInventoryPage.fillData(inventoryInfo)
-    AddNewInventoryPage.clickSaveButton()
+    // AddNewInventoryPage.clickSaveButton()
     // AddNewInventoryPage.checkNameError()
   })
 
-  it.only('Add an inventory that is set to non taxable - quantity on hand: 1, Reorder Point: 1', () => {
+  it('Add an inventory that is set to non taxable - quantity on hand: 1, Reorder Point: 1', () => {
     InventoryListPage.gotoAddNewInventory()
     const inventoryInfo = {
       name: 'NonTaxable',
@@ -58,23 +57,44 @@ describe('Add Inventory', () => {
     }
     AddNewInventoryPage.fillData(inventoryInfo)
     AddNewInventoryPage.clickSaveButton()
-    // AddNewInventoryPage.checkNameError()
   })
 
-  it.only('Add an inventory that is set to non taxable - Use Serial #\'s and serial numbers by batch to increase quantity on hand', () => {
+  it('Add an inventory that is set to non taxable - Use Serial #\'s and serial numbers by batch to increase quantity on hand', () => {
     InventoryListPage.gotoAddNewInventory()
+    // it.only('test', () => {
+    //     const uuid = () => Cypress._.random(0, 1e20)
+    //     const id = uuid()
+    // })
+
+    // let randomId = () => {
+    //   const uuid = () => Cypress._.random(0, 500)
+    //   const id = uuid()
+    //   return id.toString()
+    // }
     const inventoryInfo = {
-      name: 'serialNumbers',
+      sku: `SKU${uuidv4()}`,
+      name: 'serialNumbers Added',
       nonTaxable: true,
       useSerialNumbers: true,
-      serialNumbers: ['123','1234','12345']
+      serialNumbers: [`SN${uuidv4()}`, `SN${uuidv4()}`, `SN${uuidv4()}`]
     }
     AddNewInventoryPage.fillData(inventoryInfo)
     AddNewInventoryPage.clickSaveButton()
-    // AddNewInventoryPage.checkNameError()
   })
 
-  
+  it('Add an inventory (taxable) - Use Serial #\'s and serial numbers by batch to increase quantity on hand', () => {
+    InventoryListPage.gotoAddNewInventory()
+    const inventoryInfo = {
+      sku: `SKU${uuidv4()}`,
+      name: 'serialNumbers Added',
+      useSerialNumbers: true,
+      serialNumbers: [`SN${uuidv4()}`, `SN${uuidv4()}`, `SN${uuidv4()}`]
+    }
+    AddNewInventoryPage.fillData(inventoryInfo)
+    AddNewInventoryPage.clickSaveButton()
+  })
+
+
 
 
   // it("Test get", () => {

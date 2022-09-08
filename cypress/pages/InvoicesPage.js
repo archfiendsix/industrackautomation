@@ -23,8 +23,17 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             overdue: () => cy.get('.form-group.datesbox+.btn-group mat-button-toggle-group mat-button-toggle button').contains('Overdue'),
             paid: () => cy.get('.form-group.datesbox+.btn-group mat-button-toggle-group mat-button-toggle button').contains('Paid'),
         },
-        addNewInvoiceButton: () => cy.get('.top.m-t-sm button.btn-primary.m-r-sm').contains('Add New'),
-
+        addNewInvoiceButton: () => cy.get('.pull-right button').contains('Add New'),
+        addingNewInvoiceModal: {
+            searchField: () => cy.get('input.customersearchinput'),
+            searchItem: () => cy.get('.ibox-content .customerList ul.list-group').first(),
+            proceedButton: () => cy.get('button.btn.btn-primary').contains('Proceed'),
+            descriptionTextbox:()=> cy.get('input[name="invoiceDescription"]'),
+            partsSearch: () => cy.get('.editable input[aria-label="Parts & services search"]'),
+            termSelect: ()=> cy.get('select#invoiceTermId'),
+            taxTextbox: ()=> cy.get('app-tax-selector input'),
+            taxOption: ()=> cy.get('.mat-autocomplete-panel mat-option')
+        },
         actionsDropdown: {
             button: () => cy.get('app-invoices-list .btn-group.actions button'),
             viewPayments: () => cy.get('app-invoices-list .btn-group.actions button+.dropdown-menu li a').contains('View Payments'),
@@ -51,9 +60,30 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     }
 
-    // checkInvoiceStatus = () => {
-    //     this.elements.statusLabel().contains('Unpaid')
-    // }
+    addNewInvoice = (newInvoiceInfo) => {
+        const inputInvoiceInfo = {
+            customer: newInvoiceInfo.customer || 'Ace Hardware',
+            description: newInvoiceInfo.description || 'Test Desc',
+            term: newInvoiceInfo.term || 'Not Selected',
+            inventoriesToAdd: newInvoiceInfo.inventoriesToAdd || ['Inventory Item 1'],
+            tax: newInvoiceInfo.tax || 'None'
+        }
+        this.elements.addNewInvoiceButton().click()
+        cy.wait(6000)
+        this.elements.addingNewInvoiceModal.searchField().type(inputInvoiceInfo.customer)
+        this.elements.addingNewInvoiceModal.searchItem().click()
+        this.elements.addingNewInvoiceModal.proceedButton().click()
+        newInvoiceInfo.description && this.elements.addingNewInvoiceModal.descriptionTextbox().type(inputInvoiceInfo.description)
+        this.elements.addingNewInvoiceModal.termSelect().select(inputInvoiceInfo.term)
+        this.elements.addingNewInvoiceModal.taxTextbox().dblclick({force:true})
+        this.elements.addingNewInvoiceModal.taxOption().first().contains(inputInvoiceInfo.tax).click()
+        inputInvoiceInfo.inventoriesToAdd.forEach((item) => {
+            this.elements.addingNewInvoiceModal.partsSearch().type(item.toString()).wait(2000).type('{downArrow}{enter}')
+            cy.wait(2000)
+        })
+
+    }
+
 }
 
 module.exports = new InvoicesPage();
