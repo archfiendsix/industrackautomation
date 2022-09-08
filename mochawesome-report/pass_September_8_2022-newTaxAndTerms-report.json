@@ -1,0 +1,131 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-08T12:24:01.770Z",
+    "end": "2022-09-08T12:24:46.979Z",
+    "duration": 45209,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e099c30d-b216-41a4-9a07-a82cde143911",
+      "title": "",
+      "fullFile": "cypress\\e2e\\newTaxAndTerms.cy.js",
+      "file": "cypress\\e2e\\newTaxAndTerms.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5371df78-2ca6-487b-9416-033cc273832a",
+          "title": "New Tax and Terms Module",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Basic Add new tax function",
+              "fullTitle": "New Tax and Terms Module Basic Add new tax function",
+              "timedOut": null,
+              "duration": 22418,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_company_settings.TaxAndTermsPage.addNewTax();\n_company_settings.TaxAndTermsPage.fillAddNewTaxForm('New Tax', 3);\n_company_settings.TaxAndTermsPage.saveAddNewTaxForm();",
+              "err": {},
+              "uuid": "cc608096-80b7-4ec9-b995-f9bc0778b0a5",
+              "parentUUID": "5371df78-2ca6-487b-9416-033cc273832a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Basic Add new term function",
+              "fullTitle": "New Tax and Terms Module Basic Add new term function",
+              "timedOut": null,
+              "duration": 22596,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_company_settings.TaxAndTermsPage.gotoTermsTab();\n_company_settings.TaxAndTermsPage.addNewTerm();\n_company_settings.TaxAndTermsPage.fillAddNewTermForm('New Term');\n_company_settings.TaxAndTermsPage.saveAddNewTermForm();",
+              "err": {},
+              "uuid": "ff0c36c5-7c0f-4bd4-a53b-39f7235ed906",
+              "parentUUID": "5371df78-2ca6-487b-9416-033cc273832a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "cc608096-80b7-4ec9-b995-f9bc0778b0a5",
+            "ff0c36c5-7c0f-4bd4-a53b-39f7235ed906"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 45014,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": false,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
