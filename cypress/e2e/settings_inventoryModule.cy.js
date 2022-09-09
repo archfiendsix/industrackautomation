@@ -27,18 +27,32 @@ describe('Add Inventory', () => {
 
 
 
-  it('Successfully add an Inventory - Not using serial #s, Taxable', () => {
+  it('Successfully add an Inventory - Not using serial #s, None Taxable', () => {
     InventoryListPage.gotoAddNewInventory()
     const inventoryInfo = {
       name: 'Add Inventory - Taxable no SN',
       useSerialNumbers: false,
+      nonTaxable: true
+
     }
     AddNewInventoryPage.fillData(inventoryInfo)
     AddNewInventoryPage.clickSaveButton()
     AddNewInventoryPage.checkSaveSuccess()
   })
 
-  it('Save unsuccessful when you click save after leaving required fields blank', () => {
+  it('Successfully add an Inventory - Not using serial #s, Taxable', () => {
+    InventoryListPage.gotoAddNewInventory()
+    const inventoryInfo = {
+      name: 'Add Inventory - Taxable no SN',
+      useSerialNumbers: false,
+      nonTaxable: false
+    }
+    AddNewInventoryPage.fillData(inventoryInfo)
+    AddNewInventoryPage.clickSaveButton()
+    AddNewInventoryPage.checkSaveSuccess()
+  })
+
+  it('(Negative) Save unsuccessful when you click save after leaving required fields blank', () => {
     InventoryListPage.gotoAddNewInventory()
     const inventoryInfo = {
       name: '',

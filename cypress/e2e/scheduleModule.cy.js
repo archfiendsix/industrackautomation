@@ -18,13 +18,14 @@ describe('Schedule Module', () => {
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
         cy.wait(4250)
         Dashboard.preventNotificationCard()
-        Dashboard.clickScheduleTab()
+        cy.visit('/schedulingTab')
+        // Dashboard.clickScheduleTab()
 
 
     })
 
     before(() => {
-        
+
     })
 
 
@@ -128,9 +129,9 @@ describe('Schedule Module', () => {
     after(() => {
 
         Dashboard.clickScheduleTab()
-        cy.get('.dhx_cal_event_line.test_sc_class').then($btn=> {
+        cy.get('.dhx_cal_event_line.test_sc_class').then($btn => {
             cy.log($btn.length)
-            for(let i=1;i<=$btn.length;i++) {
+            for (let i = 1; i <= $btn.length; i++) {
                 cy.wait(2000)
                 // cy.wrap($btn).should('have.class','dhx_cal_event_line')
                 cy.get('.dhx_cal_event_line.test_sc_class').first().dblclick()
@@ -142,8 +143,8 @@ describe('Schedule Module', () => {
                 cy.get('[mat-dialog-content=""] > .warning > .ibox > .ibox-content > .text-center > :nth-child(2)').first().click()
                 cy.wait(2000)
             }
-            
-            
+
+
             // cy.reload()
         })
     })

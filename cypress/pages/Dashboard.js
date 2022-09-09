@@ -60,7 +60,7 @@ class Dashboard {
     clickSchedulingTab = () => {
         this.elements.schedulingTab().click()
     }
-    
+
     clickInvoicesTab = () => {
         this.elements.invoicesTab().click()
     }
@@ -70,7 +70,8 @@ class Dashboard {
 
 
     gotoTaxAndTermsPage = () => {
-        this.clickSettings()
+        // this.clickSettings()
+        cy.visit('/settingsTab')
         this.elements.companySettings().click()
         this.elements.taxtAndTerms().click()
 

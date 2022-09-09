@@ -18,7 +18,9 @@ describe('Timesheet module', () => {
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
         cy.wait(4250)
         Dashboard.preventNotificationCard()
-        Dashboard.clickTimesheetTab()
+        cy.visit('/timesheetTab')
+        Dashboard.preventNotificationCard()
+        // Dashboard.clickTimesheetTab()
 
     })
 

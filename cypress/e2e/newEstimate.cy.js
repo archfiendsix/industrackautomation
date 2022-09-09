@@ -29,7 +29,8 @@ describe('New Estimate module', () => {
     it('New customer, New Inventory, New Estimate e2e', () => {
 
         /*new customer */
-        Dashboard.clickCustomerTab()
+        // Dashboard.clickCustomerTab()
+        cy.visit('/estimatesTab/list')
         Dashboard.clickAddCustomerButton()
 
         AddCustomerPage.fillData()
@@ -55,7 +56,9 @@ describe('New Estimate module', () => {
         AddNewInventoryPage.checkSaveSuccess()
 
         /*newEstimate*/
-        Dashboard.clickEstimatesTab()
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
+        
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Inc.')
@@ -78,7 +81,8 @@ describe('New Estimate module', () => {
 
     it('Should have status Won', () => {
 
-        Dashboard.clickEstimatesTab()
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Inc.')
@@ -93,7 +97,8 @@ describe('New Estimate module', () => {
 
     it('Should have status Lost', () => {
 
-        Dashboard.clickEstimatesTab()
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Inc.')
@@ -108,7 +113,8 @@ describe('New Estimate module', () => {
 
     it('Should proceed to Add New Job Screen after converting to Job', () => {
 
-        Dashboard.clickEstimatesTab()
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Game Inc.')
@@ -124,7 +130,8 @@ describe('New Estimate module', () => {
 
     it('Should successfully convert estimate to invoice', () => {
 
-        Dashboard.clickEstimatesTab()
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Game Inc.')
@@ -141,7 +148,8 @@ describe('New Estimate module', () => {
 
     it('Should change Customer', () => {
 
-        Dashboard.clickEstimatesTab()
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Game Inc.')
@@ -172,7 +180,8 @@ describe('New Estimate module', () => {
     // })
 
     it('Should send estimate as email', () => {
-        Dashboard.clickEstimatesTab()
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Game Inc.')
@@ -183,7 +192,8 @@ describe('New Estimate module', () => {
     })
 
     it('Should have correct Row total upon adding discount', () => {
-        Dashboard.clickEstimatesTab()
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Game Inc.')
@@ -206,7 +216,8 @@ describe('New Estimate module', () => {
     })
 
     it('Should change input values and have correct calculations after save', () => {
-        Dashboard.clickEstimatesTab()
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Game Inc.')
