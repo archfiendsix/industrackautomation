@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress run --browser chrome --reporter mochawesome",
-    "test-per-spec": "npx cypress run --browser chrome --reporter mochawesome --spec \"cypress/e2e/newTaxAndTerms.cy.js\"",
+    "test-per-spec": "npx cypress run --browser chrome --reporter mochawesome --spec \"cypress/e2e/inventoryModule.cy.js\"",
     "merge-report": "mochawesome-merge cypress/report/mochawesome-report/*.json > cypress/report/index.json && marge cypress/report/index.json --reportDir ./cypress/report/ --inline",
     "allure-test": "npx cypress run --browser chrome --spec \"cypress/e2e/newTaxAndTerms.cy.js\" --reporter mocha-allure-reporter",
     "allure-report": "npx allure generate allure-results --clean allure-report"

@@ -82,11 +82,11 @@ describe('Add Inventory', () => {
     AddNewInventoryPage.clickSaveButton()
   })
 
-  it('Add an inventory (taxable) - Use Serial #\'s and serial numbers by batch to increase quantity on hand', () => {
+  it.only('Add an inventory (taxable) - Use Serial #\'s and serial numbers by batch to increase quantity on hand', () => {
     InventoryListPage.gotoAddNewInventory()
     const inventoryInfo = {
       sku: `SKU${uuidv4()}`,
-      name: 'serialNumbers Added',
+      name: 'Add Inventory - SN Used',
       useSerialNumbers: true,
       serialNumbers: [`SN${uuidv4()}`, `SN${uuidv4()}`, `SN${uuidv4()}`]
     }

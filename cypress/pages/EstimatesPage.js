@@ -312,13 +312,15 @@ class EstimatesPage {
 
     }
 
-    addInvoiceDiscount = () => {
+    addRandomInvoiceDiscount = () => {
         const randomDiscount = this.getRandomInt(1, 10)
         this.elements.addInvoiceDiscountButton().click()
         this.elements.setInvoiceDiscountValueInput().type(randomDiscount.toString())
         this.elements.setInvoiceDiscountModalDropdown().select('%')
         this.elements.setInvoiceDiscountModalSaveButton().click()
     }
+
+   
 
     checkInvoiceSubtotal = () => {
         this.elements.rowTotal()

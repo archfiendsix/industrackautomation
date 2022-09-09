@@ -32,7 +32,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             partsSearch: () => cy.get('.editable input[aria-label="Parts & services search"]'),
             termSelect: ()=> cy.get('select#invoiceTermId'),
             taxTextbox: ()=> cy.get('app-tax-selector input'),
-            taxOption: ()=> cy.get('.mat-autocomplete-panel mat-option')
+            taxOption: ()=> cy.get('.mat-autocomplete-panel mat-option'),
+            addInvoiceDiscountButton: ()=>cy.get('.invoice-total a'),
+            actionsDropdown: {
+                button: ()=> cy.get('button[data-toggle="dropdown"]').contains('Actions'),
+                save:()=> cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').first().contains('Save'),
+            }
         },
         actionsDropdown: {
             button: () => cy.get('app-invoices-list .btn-group.actions button'),
@@ -56,6 +61,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             totalSort: () => cy.get('.mat-table thead button[aria-label="Change sorting for total"]'),
             totalSortArrow: () => cy.get('.mat-table thead button[aria-label="Change sorting for total"]+.mat-sort-header-arrow'),
             totalSortArrowHeader: () => cy.get('.mat-table thead th.mat-column-total'),
+        },
+        selectSerialNumberModal: {
+            serialNumberSelect: ()=> cy.get('app-serial-number-select mat-select'),
+            serialNumberOption: ()=> cy.get('.mat-select-1-panel mat-option'),
+            saveButton: ()=> cy.get('.mat-dialog-actions button').contains('Save')
+        },
+        setDiscountModal: {
+            valueTextbox: ()=> cy.get('#modalAddDiscount input[name="discountValue"]'),
+            saveButton:()=> cy.get('#modalAddDiscount button').contains('Save')
         }
 
     }
@@ -81,7 +95,25 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             this.elements.addingNewInvoiceModal.partsSearch().type(item.toString()).wait(2000).type('{downArrow}{enter}')
             cy.wait(2000)
         })
+        
 
+    }
+
+    addInvoiceDiscount = (discountValue) => {
+        this.elements.addingNewInvoiceModal.addInvoiceDiscountButton().click()
+        this.elements.setDiscountModal.valueTextbox().clear().type(discountValue)
+        this.elements.setDiscountModal.saveButton().click()
+    }
+
+    selectOneSerialNumber=()=> {
+        this.elements.selectSerialNumberModal.serialNumberSelect().type('{enter}')
+        cy.wait(2000)
+        this.elements.selectSerialNumberModal.saveButton().click()
+    }
+
+    saveInvoice=()=> {
+        this.elements.addingNewInvoiceModal.actionsDropdown.button().click()
+        this.elements.addingNewInvoiceModal.actionsDropdown.save().click()
     }
 
 }

@@ -222,7 +222,7 @@ describe('New Estimate module', () => {
         cy.wait(4000)
 
         EstimatesPage.changeTableValues()
-        EstimatesPage.addInvoiceDiscount()
+        EstimatesPage.addRandomInvoiceDiscount()
         EstimatesPage.checkInvoiceTotal()
         EstimatesPage.saveEstimate()
         EstimatesPage.checkRowsTotal()
