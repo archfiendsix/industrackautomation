@@ -5,9 +5,9 @@
     "passes": 0,
     "pending": 0,
     "failures": 1,
-    "start": "2022-09-09T09:26:05.035Z",
-    "end": "2022-09-09T09:26:28.728Z",
-    "duration": 23693,
+    "start": "2022-09-09T12:31:49.905Z",
+    "end": "2022-09-09T12:32:20.854Z",
+    "duration": 30949,
     "testsRegistered": 1,
     "passPercent": 0,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "092ff83b-7eb5-485f-9b88-946ceaabf645",
+      "uuid": "64c129bd-0ea5-4053-b028-8a4bf0ffc248",
       "title": "",
       "fullFile": "cypress\\e2e\\newPurchaseOrder.cy.js",
       "file": "cypress\\e2e\\newPurchaseOrder.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "f15b6a21-36a2-4443-a012-23025d00308f",
+          "uuid": "48a337be-0322-4af8-8e18-9d7ba0099fd8",
           "title": "New Purchase Order Module",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Basic new purchase order",
               "fullTitle": "New Purchase Order Module Basic new purchase order",
               "timedOut": null,
-              "duration": 23617,
+              "duration": 30830,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -51,8 +51,8 @@
                 "estack": "AssertionError: Timed out retrying after 8000ms: Expected to find element: `purchase-order-edit-dialog input#mat-input-3`, but never found it.\n    at Object.selectVendorField (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newPurchaseOrder.cy.js:322:37)\n    at Object.selectVendor (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newPurchaseOrder.cy.js:344:45)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newPurchaseOrder.cy.js:132:54)",
                 "diff": null
               },
-              "uuid": "e73e260c-321d-413c-bf5c-7ec9e3e715d4",
-              "parentUUID": "f15b6a21-36a2-4443-a012-23025d00308f",
+              "uuid": "8f67ea2e-660a-4156-b4ce-f6fe85e736d1",
+              "parentUUID": "48a337be-0322-4af8-8e18-9d7ba0099fd8",
               "isHook": false,
               "skipped": false
             }
@@ -60,11 +60,11 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "e73e260c-321d-413c-bf5c-7ec9e3e715d4"
+            "8f67ea2e-660a-4156-b4ce-f6fe85e736d1"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 23617,
+          "duration": 30830,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

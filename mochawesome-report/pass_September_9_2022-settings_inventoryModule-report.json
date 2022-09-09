@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2022-09-09T09:32:01.525Z",
-    "end": "2022-09-09T09:32:35.008Z",
-    "duration": 33483,
+    "start": "2022-09-09T12:39:11.109Z",
+    "end": "2022-09-09T12:39:59.253Z",
+    "duration": 48144,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "bc80de0c-0432-43bd-85f8-23c0e48f6b5c",
+      "uuid": "0759be92-e6cb-466d-a461-a4e396ffbb45",
       "title": "",
       "fullFile": "cypress\\e2e\\settings_inventoryModule.cy.js",
       "file": "cypress\\e2e\\settings_inventoryModule.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "e16cba72-06e6-4566-ae1a-0fde6cb608a3",
+          "uuid": "a29cfa5a-7d50-4dee-974c-159c73f0dee3",
           "title": "Add Inventory",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Add an inventory (taxable) - Use Serial #'s and serial numbers by batch to increase quantity on hand",
               "fullTitle": "Add Inventory Add an inventory (taxable) - Use Serial #'s and serial numbers by batch to increase quantity on hand",
               "timedOut": null,
-              "duration": 33395,
+              "duration": 47952,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  sku: `SKU${(0, _uuid.v4)()}`,\n  name: 'Add Inventory - SN Used',\n  useSerialNumbers: true,\n  serialNumbers: [`SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`]\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();",
               "err": {},
-              "uuid": "a574c7ba-3707-4f1b-9863-b0710d7eca1f",
-              "parentUUID": "e16cba72-06e6-4566-ae1a-0fde6cb608a3",
+              "uuid": "2b75ce4f-48ce-4560-87a7-883220ec2afa",
+              "parentUUID": "a29cfa5a-7d50-4dee-974c-159c73f0dee3",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "a574c7ba-3707-4f1b-9863-b0710d7eca1f"
+            "2b75ce4f-48ce-4560-87a7-883220ec2afa"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 33395,
+          "duration": 47952,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

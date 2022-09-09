@@ -5,9 +5,9 @@
     "passes": 0,
     "pending": 0,
     "failures": 1,
-    "start": "2022-09-09T09:26:36.844Z",
-    "end": "2022-09-09T09:27:04.583Z",
-    "duration": 27739,
+    "start": "2022-09-09T12:32:36.958Z",
+    "end": "2022-09-09T12:33:12.111Z",
+    "duration": 35153,
     "testsRegistered": 1,
     "passPercent": 0,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "9a71dee7-a07c-4343-97d4-0c594598aa79",
+      "uuid": "6bf25a9a-c305-4455-a3af-49124730eddc",
       "title": "",
       "fullFile": "cypress\\e2e\\newTimeSheet.cy.js",
       "file": "cypress\\e2e\\newTimeSheet.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "8f01dda2-11e2-4948-bb32-0b6cbcc4bfb9",
+          "uuid": "72bb58b2-a369-419d-b626-21787876558a",
           "title": "Timesheet module",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Basic saving function",
               "fullTitle": "Timesheet module Basic saving function",
               "timedOut": null,
-              "duration": 27618,
+              "duration": 34987,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -51,8 +51,8 @@
                 "estack": "CypressError: Timed out retrying after 5000ms: `cy.wait()` timed out waiting `5000ms` for the 1st request to the route: `update`. No request ever occurred.\n\nhttps://on.cypress.io/wait\n    at cypressErr (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:160545:18)\n    at Object.errByPath (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:160614:10)\n    at checkForXhr (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:145960:92)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:145983:28\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152467:65)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151921:14\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46\nFrom Your Spec Code:\n    at TimesheetPage.eval [as saveAddTimeSheet] (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newTimeSheet.cy.js:787:10)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newTimeSheet.cy.js:146:28)",
                 "diff": null
               },
-              "uuid": "f3fd86b7-dc89-4f35-b486-282790c5de65",
-              "parentUUID": "8f01dda2-11e2-4948-bb32-0b6cbcc4bfb9",
+              "uuid": "5f699cd0-e105-48a4-b726-f33a6280e2d2",
+              "parentUUID": "72bb58b2-a369-419d-b626-21787876558a",
               "isHook": false,
               "skipped": false
             }
@@ -60,11 +60,11 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "f3fd86b7-dc89-4f35-b486-282790c5de65"
+            "5f699cd0-e105-48a4-b726-f33a6280e2d2"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 27618,
+          "duration": 34987,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

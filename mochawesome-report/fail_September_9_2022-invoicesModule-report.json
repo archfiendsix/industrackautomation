@@ -5,9 +5,9 @@
     "passes": 0,
     "pending": 0,
     "failures": 1,
-    "start": "2022-09-09T09:17:26.999Z",
-    "end": "2022-09-09T09:18:12.278Z",
-    "duration": 45279,
+    "start": "2022-09-09T12:20:04.434Z",
+    "end": "2022-09-09T12:20:58.287Z",
+    "duration": 53853,
     "testsRegistered": 1,
     "passPercent": 0,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "8cb622e9-f94a-4103-85af-bc2c40f8213f",
+      "uuid": "b6f5ff93-bf9c-46f5-bb76-eb74dc8ad6d5",
       "title": "",
       "fullFile": "cypress\\e2e\\invoicesModule.cy.js",
       "file": "cypress\\e2e\\invoicesModule.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "a7f7259d-6757-4819-be5b-0634afebb4f0",
+          "uuid": "33fd8a82-8a9b-478a-86f6-88f907077d0c",
           "title": "Invoices Module",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Add an invoice - 1 Inventory Item(none Taxable with 1 Serial #) -  No Description - No Terms Selected - No Invoice Discount - No Tax",
               "fullTitle": "Invoices Module Add an invoice - 1 Inventory Item(none Taxable with 1 Serial #) -  No Description - No Terms Selected - No Invoice Discount - No Tax",
               "timedOut": null,
-              "duration": 44626,
+              "duration": 53676,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -51,8 +51,8 @@
                 "estack": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element:\n\n`<a style=\"cursor: pointer;\" class=\"ng-star-inserted\">$0</a>`\n\nis being covered by another element:\n\n`<div class=\"cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing\"></div>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:147488:78)\n    at ensureDescendents (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:132946:8)\n    at ensureDescendentsAndScroll (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:132953:14)\n    at ensureElIsNotCovered (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133085:5)\n    at runAllChecks (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133275:52)\n    at retryActionability (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133299:16)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152467:65)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151921:14\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46\nFrom Your Spec Code:\n    at InvoicesPage.eval [as addInvoiceDiscount] (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\invoicesModule.cy.js:446:70)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\invoicesModule.cy.js:192:27)",
                 "diff": null
               },
-              "uuid": "ee74e4cd-394d-4d47-a486-5379a02a9223",
-              "parentUUID": "a7f7259d-6757-4819-be5b-0634afebb4f0",
+              "uuid": "4bff87b9-bd99-4a9e-aefa-7ea8fbbc24bd",
+              "parentUUID": "33fd8a82-8a9b-478a-86f6-88f907077d0c",
               "isHook": false,
               "skipped": false
             }
@@ -60,11 +60,11 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "ee74e4cd-394d-4d47-a486-5379a02a9223"
+            "4bff87b9-bd99-4a9e-aefa-7ea8fbbc24bd"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 44626,
+          "duration": 53676,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
