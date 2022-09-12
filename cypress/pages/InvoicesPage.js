@@ -28,20 +28,23 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             searchField: () => cy.get('input.customersearchinput'),
             searchItem: () => cy.get('.ibox-content .customerList ul.list-group').first(),
             proceedButton: () => cy.get('button.btn.btn-primary').contains('Proceed'),
-            descriptionTextbox:()=> cy.get('input[name="invoiceDescription"]'),
+            descriptionTextbox: () => cy.get('input[name="invoiceDescription"]'),
             partsSearch: () => cy.get('.editable input[aria-label="Parts & services search"]'),
-            termSelect: ()=> cy.get('select#invoiceTermId'),
-            taxTextbox: ()=> cy.get('app-tax-selector input'),
-            taxOption: ()=> cy.get('.mat-autocomplete-panel mat-option'),
-            addInvoiceDiscountButton: ()=>cy.get('.invoice-total a'),
+            termSelect: () => cy.get('select#invoiceTermId'),
+            taxTextbox: () => cy.get('app-tax-selector input'),
+            taxOption: () => cy.get('.mat-autocomplete-panel mat-option'),
+            addInvoiceDiscountButton: () => cy.get('.invoice-total a'),
+            invoiceNumber:() => cy.get('input[name="invoiceNumber"]'),
             actionsDropdown: {
-                button: ()=> cy.get('button[data-toggle="dropdown"]').contains('Actions'),
-                save:()=> cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').first().contains('Save'),
+                button: () => cy.get('button[data-toggle="dropdown"]').contains('Actions'),
+                save: () => cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').first().contains('Save'),
+                preview: () => cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').contains('Preview'),
             }
         },
         actionsDropdown: {
             button: () => cy.get('app-invoices-list .btn-group.actions button'),
             viewPayments: () => cy.get('app-invoices-list .btn-group.actions button+.dropdown-menu li a').contains('View Payments'),
+            sendToEmail: () => cy.get('app-invoices-list .btn-group.actions button+.dropdown-menu li a').contains('Send to E-Mail'),
         },
 
         invoicesTable: {
@@ -63,13 +66,21 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             totalSortArrowHeader: () => cy.get('.mat-table thead th.mat-column-total'),
         },
         selectSerialNumberModal: {
-            serialNumberSelect: ()=> cy.get('app-serial-number-select mat-select'),
-            serialNumberOption: ()=> cy.get('.mat-select-1-panel mat-option'),
-            saveButton: ()=> cy.get('.mat-dialog-actions button').contains('Save')
+            serialNumberSelect: () => cy.get('app-serial-number-select mat-select'),
+            serialNumberOption: () => cy.get('.mat-select-1-panel mat-option'),
+            saveButton: () => cy.get('.mat-dialog-actions button').contains('Save')
         },
         setDiscountModal: {
-            valueTextbox: ()=> cy.get('#modalAddDiscount input[name="discountValue"]'),
-            saveButton:()=> cy.get('#modalAddDiscount button').contains('Save')
+            valueTextbox: () => cy.get('#modalAddDiscount input[name="discountValue"]'),
+            saveButton: () => cy.get('#modalAddDiscount button').contains('Save')
+        },
+        invoicePreviewModal: {
+            header: () => cy.get('app-report-preview-dialog .mat-dialog-title h4'),
+            saveAsPDFButton: () => cy.get('app-report-preview-dialog button').contains('Save As PDF').first(),
+        },
+        emailInvoiceModal: {
+            header: ()=> cy.get('app-invoice-send-mail-dialog .mat-dialog-title h4'),
+            sendButton: ()=> cy.get('app-invoice-send-mail-dialog .mat-dialog-title buton').contains('Send'),
         }
 
     }
@@ -89,13 +100,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.addingNewInvoiceModal.proceedButton().click()
         newInvoiceInfo.description && this.elements.addingNewInvoiceModal.descriptionTextbox().type(inputInvoiceInfo.description)
         this.elements.addingNewInvoiceModal.termSelect().select(inputInvoiceInfo.term)
-        this.elements.addingNewInvoiceModal.taxTextbox().dblclick({force:true})
+        this.elements.addingNewInvoiceModal.taxTextbox().dblclick({ force: true })
         this.elements.addingNewInvoiceModal.taxOption().first().contains(inputInvoiceInfo.tax).click()
         inputInvoiceInfo.inventoriesToAdd.forEach((item) => {
             this.elements.addingNewInvoiceModal.partsSearch().type(item.toString()).wait(2000).type('{downArrow}{enter}')
             cy.wait(2000)
         })
-        
+
 
     }
 
@@ -105,15 +116,47 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.setDiscountModal.saveButton().click()
     }
 
-    selectOneSerialNumber=()=> {
+    selectOneSerialNumber = () => {
         this.elements.selectSerialNumberModal.serialNumberSelect().type('{enter}')
         cy.wait(2000)
         this.elements.selectSerialNumberModal.saveButton().click()
     }
 
-    saveInvoice=()=> {
+    saveInvoice = () => {
         this.elements.addingNewInvoiceModal.actionsDropdown.button().click()
         this.elements.addingNewInvoiceModal.actionsDropdown.save().click()
+    }
+
+    previewInvoice = () => {
+        cy.wait(3000)
+        this.elements.addingNewInvoiceModal.actionsDropdown.button().click()
+        cy.wait(2000)
+        this.elements.addingNewInvoiceModal.actionsDropdown.preview().click({ force: true })
+    }
+
+    checkPreview = () => {
+        this.elements.invoicePreviewModal.header().then($el => {
+            const header = $el.text().toString()
+            expect(header).to.equal('Invoice Preview')
+        })
+    }
+
+    clickSaveAsPDFButton=()=> {
+        this.elements.invoicePreviewModal.saveAsPDFButton().click()
+    }
+    checkSavedPDF=()=> {
+        this.elements.addingNewInvoiceModal.invoiceNumber().then($el => {
+            const iNumber = $el.val().toString()
+            cy.readFile(`cypress/downloads/Invoice_${iNumber}.pdf`)
+        })
+    }
+    sendToEmail=()=> {
+        this.elements.actionsDropdown.sendToEmail().click()
+        this.elements.emailInvoiceModal.header().then($el=> {
+            const header = $el.text().toString()
+            expect(header).to.equal('Email Invoice')
+            this.elements.emailInvoiceModal.sendButton().click()
+        })
     }
 
 }

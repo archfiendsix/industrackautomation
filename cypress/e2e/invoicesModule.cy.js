@@ -106,8 +106,51 @@ describe('Invoices Module', () => {
     // })
 
     
+    it('Add Invoice and show the preview of the invoice', () => {
+        const invoiceInfo = {
+            customer: 'Ace Hardware',
+            inventoriesToAdd: ['Add Inventory - Taxable no SN'],
+            description: 'Test Description',
+            tax: 'None',
+            term: 'Not Selected'
+        }
+        InvoicesPage.addNewInvoice(invoiceInfo)
+        InvoicesPage.addInvoiceDiscount('0')
+        InvoicesPage.saveInvoice()
+        InvoicesPage.previewInvoice()
+        InvoicesPage.checkPreview()
+        
+    })
 
+    it.only('Add invoice and save invoice as PDF', () => {
+        const invoiceInfo = {
+            customer: 'Ace Hardware',
+            inventoriesToAdd: ['Add Inventory - Taxable no SN'],
+            description: 'Test Description',
+            tax: 'None',
+            term: 'Not Selected'
+        }
+        InvoicesPage.addNewInvoice(invoiceInfo)
+        InvoicesPage.addInvoiceDiscount('0')
+        InvoicesPage.saveInvoice()
+        InvoicesPage.previewInvoice()
+        InvoicesPage.clickSaveAsPDFButton()
+        InvoicesPage.checkSavedPDF()
+    })
 
+    it('Add invoice and save invoice as PDF', () => {
+        const invoiceInfo = {
+            customer: 'Ace Hardware',
+            inventoriesToAdd: ['Add Inventory - Taxable no SN'],
+            description: 'Test Description',
+            tax: 'None',
+            term: 'Not Selected'
+        }
+        InvoicesPage.addNewInvoice(invoiceInfo)
+        InvoicesPage.addInvoiceDiscount('0')
+        InvoicesPage.saveInvoice()
+        InvoicesPage.sendToEmail()
+    })
 
 
 })
