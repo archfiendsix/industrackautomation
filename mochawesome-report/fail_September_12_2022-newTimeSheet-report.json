@@ -1,0 +1,116 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2022-09-12T07:34:42.286Z",
+    "end": "2022-09-12T07:35:15.187Z",
+    "duration": 32901,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a717c024-cfd6-49b5-befd-8ece603196e6",
+      "title": "",
+      "fullFile": "cypress\\e2e\\newTimeSheet.cy.js",
+      "file": "cypress\\e2e\\newTimeSheet.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ccb06d51-aae1-4af8-b447-fff77891e79c",
+          "title": "Timesheet module",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Basic saving function",
+              "fullTitle": "Timesheet module Basic saving function",
+              "timedOut": null,
+              "duration": 32734,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "_TimesheetPage.default.addNewTimesheet();\n_TimesheetPage.default.selectFieldEmployee('Employee One');\n_TimesheetPage.default.addNewTimesheetForEmployee();\n_TimesheetPage.default.selectTimesheetType('Shift');\n_TimesheetPage.default.selectTimesheetCostCode('011');\n_TimesheetPage.default.saveAddTimeSheet();",
+              "err": {
+                "message": "CypressError: Timed out retrying after 5000ms: `cy.wait()` timed out waiting `5000ms` for the 1st request to the route: `update`. No request ever occurred.\n\nhttps://on.cypress.io/wait",
+                "estack": "CypressError: Timed out retrying after 5000ms: `cy.wait()` timed out waiting `5000ms` for the 1st request to the route: `update`. No request ever occurred.\n\nhttps://on.cypress.io/wait\n    at cypressErr (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:160545:18)\n    at Object.errByPath (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:160614:10)\n    at checkForXhr (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:145960:92)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:145983:28\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152467:65)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151921:14\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46\nFrom Your Spec Code:\n    at TimesheetPage.eval [as saveAddTimeSheet] (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newTimeSheet.cy.js:787:10)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newTimeSheet.cy.js:146:28)",
+                "diff": null
+              },
+              "uuid": "5901c542-e73a-444a-99b4-230735d57ff7",
+              "parentUUID": "ccb06d51-aae1-4af8-b447-fff77891e79c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "5901c542-e73a-444a-99b4-230735d57ff7"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 32734,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": true,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
