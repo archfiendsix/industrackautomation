@@ -1,0 +1,207 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-12T17:46:09.814Z",
+    "end": "2022-09-12T17:50:08.488Z",
+    "duration": 238674,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2ee933b0-2033-4909-b402-dca8c8a5290a",
+      "title": "",
+      "fullFile": "cypress\\e2e\\scheduleModule.cy.js",
+      "file": "cypress\\e2e\\scheduleModule.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c4383e41-11b3-40ef-9b23-cb2238f78629",
+          "title": "Schedule Module",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should be able to save a job (required fields filled)",
+              "fullTitle": "Schedule Module Should be able to save a job (required fields filled)",
+              "timedOut": null,
+              "duration": 24877,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\n_SchedulePage.default.fillData();\n_SchedulePage.default.saveJob();",
+              "err": {},
+              "uuid": "e2c751a0-dc62-44b7-a7d3-d35a45c86b12",
+              "parentUUID": "c4383e41-11b3-40ef-9b23-cb2238f78629",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with 1 employee added",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with 1 employee added",
+              "timedOut": null,
+              "duration": 25501,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
+              "err": {},
+              "uuid": "2fcffd6c-b425-424a-9638-6262e6db85f2",
+              "parentUUID": "c4383e41-11b3-40ef-9b23-cb2238f78629",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with employee added - 0hrs 0mins duration",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added - 0hrs 0mins duration",
+              "timedOut": null,
+              "duration": 26428,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
+              "err": {},
+              "uuid": "168e2fd5-3dde-408d-abcd-dd1c05e7454c",
+              "parentUUID": "c4383e41-11b3-40ef-9b23-cb2238f78629",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with employee added (with 8 hrs duration)",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added (with 8 hrs duration)",
+              "timedOut": null,
+              "duration": 25661,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 8,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
+              "err": {},
+              "uuid": "422afd8a-7260-4092-ac44-cdadaf3ba0a5",
+              "parentUUID": "c4383e41-11b3-40ef-9b23-cb2238f78629",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with Job Template added",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with Job Template added",
+              "timedOut": null,
+              "duration": 35004,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.log('Add template');\n_Dashboard.default.gotoJobTemplates();\n_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\nconst templateName = 'Snow blowing';\n_SchedulePage.default.addJobTemplate(templateName);\n_SchedulePage.default.dispatchJob();",
+              "err": {},
+              "uuid": "eaf2dd42-e34b-4343-9270-97bc093c9703",
+              "parentUUID": "c4383e41-11b3-40ef-9b23-cb2238f78629",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with employee added - with Task added (Task Name only)",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added - with Task added (Task Name only)",
+              "timedOut": null,
+              "duration": 28352,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.clickTasksTab();\nconst task = {\n  taskName: 'New Task'\n};\n_SchedulePage.default.createNewTask(task);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
+              "err": {},
+              "uuid": "5fe6a0bd-6333-467d-85bf-4009f6cdeae6",
+              "parentUUID": "c4383e41-11b3-40ef-9b23-cb2238f78629",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e2c751a0-dc62-44b7-a7d3-d35a45c86b12",
+            "2fcffd6c-b425-424a-9638-6262e6db85f2",
+            "168e2fd5-3dde-408d-abcd-dd1c05e7454c",
+            "422afd8a-7260-4092-ac44-cdadaf3ba0a5",
+            "eaf2dd42-e34b-4343-9270-97bc093c9703",
+            "5fe6a0bd-6333-467d-85bf-4009f6cdeae6"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 165823,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": true,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

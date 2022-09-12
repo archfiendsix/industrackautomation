@@ -1,15 +1,15 @@
 {
   "stats": {
     "suites": 1,
-    "tests": 4,
-    "passes": 2,
+    "tests": 1,
+    "passes": 0,
     "pending": 0,
-    "failures": 2,
-    "start": "2022-09-12T08:08:51.055Z",
-    "end": "2022-09-12T08:11:42.025Z",
-    "duration": 170970,
-    "testsRegistered": 4,
-    "passPercent": 50,
+    "failures": 1,
+    "start": "2022-09-12T17:34:55.894Z",
+    "end": "2022-09-12T17:35:45.519Z",
+    "duration": 49625,
+    "testsRegistered": 1,
+    "passPercent": 0,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "4b1f0035-4f82-460b-8141-fb5b62564a85",
+      "uuid": "c436d894-b059-4c08-8864-0ba455676ee5",
       "title": "",
       "fullFile": "cypress\\e2e\\invoicesModule.cy.js",
       "file": "cypress\\e2e\\invoicesModule.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "3cac9731-8cb5-452c-ae61-c9ea26d86b66",
+          "uuid": "83009b98-4ebb-4314-a047-d72165894651",
           "title": "Invoices Module",
           "fullFile": "",
           "file": "",
@@ -35,98 +35,36 @@
           "afterHooks": [],
           "tests": [
             {
-              "title": "Add an invoice - 1 Inventory Item(Taxable with no Serial #) -  No Description - No Terms Selected - No Invoice Discount - No Tax",
-              "fullTitle": "Invoices Module Add an invoice - 1 Inventory Item(Taxable with no Serial #) -  No Description - No Terms Selected - No Invoice Discount - No Tax",
+              "title": "Add invoice and save invoice as PDF",
+              "fullTitle": "Invoices Module Add invoice and save invoice as PDF",
               "timedOut": null,
-              "duration": 43665,
-              "state": "passed",
-              "speed": "slow",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "const invoiceInfo = {\n  customer: 'Ace Hardware',\n  inventoriesToAdd: ['Add Inventory - Taxable no SN'],\n  description: 'Test Description',\n  tax: 'None',\n  term: 'Not Selected'\n};\n_InvoicesPage.default.addNewInvoice(invoiceInfo);\n_InvoicesPage.default.addInvoiceDiscount('0');\n_InvoicesPage.default.saveInvoice();",
-              "err": {},
-              "uuid": "07bb21bd-aaf1-46dd-978d-05c58bef15e0",
-              "parentUUID": "3cac9731-8cb5-452c-ae61-c9ea26d86b66",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "Add an invoice - 1 Inventory Item(Taxable with no Serial #) -  No Description - 1 Term Selected - No Invoice Discount - No Tax",
-              "fullTitle": "Invoices Module Add an invoice - 1 Inventory Item(Taxable with no Serial #) -  No Description - 1 Term Selected - No Invoice Discount - No Tax",
-              "timedOut": null,
-              "duration": 39681,
+              "duration": 49429,
               "state": "failed",
               "speed": null,
               "pass": false,
               "fail": true,
               "pending": false,
               "context": null,
-              "code": "const invoiceInfo = {\n  customer: 'Ace Hardware',\n  inventoriesToAdd: ['Add Inventory - Taxable no SN'],\n  description: 'Test Description',\n  tax: 'None',\n  term: 'New Term'\n};\n_InvoicesPage.default.addNewInvoice(invoiceInfo);\n_InvoicesPage.default.addInvoiceDiscount('0');\n_InvoicesPage.default.saveInvoice();",
+              "code": "const invoiceInfo = {\n  customer: 'Ace Hardware',\n  inventoriesToAdd: ['Add Inventory - Taxable no SN'],\n  description: 'Test Description',\n  tax: 'None',\n  term: 'Not Selected'\n};\n_InvoicesPage.default.addNewInvoice(invoiceInfo);\n_InvoicesPage.default.addInvoiceDiscount('0');\n_InvoicesPage.default.saveInvoice();\n_InvoicesPage.default.previewInvoice();\n_InvoicesPage.default.clickSaveAsPDFButton();\n_InvoicesPage.default.checkSavedPDF();",
               "err": {
-                "message": "CypressError: Timed out retrying after 8000ms: `cy.select()` matched more than one `option` by value or text: `New Term`\n\nhttps://on.cypress.io/select",
-                "estack": "CypressError: Timed out retrying after 8000ms: `cy.select()` matched more than one `option` by value or text: `New Term`\n\nhttps://on.cypress.io/select\n    at getOptions (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:136365:80)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at retryOptions (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:136411:67)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152467:65)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151921:14\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46\nFrom Your Spec Code:\n    at InvoicesPage.eval [as addNewInvoice] (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\invoicesModule.cy.js:435:56)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\invoicesModule.cy.js:158:27)",
+                "message": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element is detached from the DOM.\n\n`<button data-toggle=\"dropdown\" class=\"btn btn-primary btn-sm dropdown-toggle\" aria-expanded=\"false\">...</button>`\n\nCypress requires elements be attached in the DOM to interact with them.\n\nThe previous command that ran was:\n\n  > `cy.contains()`\n\nThis DOM element likely became detached somewhere between the previous and current command.\n\nCommon situations why this happens:\n  - Your JS framework re-rendered asynchronously\n  - Your app code reacted to an event firing and removed the element\n\nYou typically need to re-query for the element or add 'guards' which delay Cypress from running new commands.\n\nhttps://on.cypress.io/element-has-detached-from-dom",
+                "estack": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element is detached from the DOM.\n\n`<button data-toggle=\"dropdown\" class=\"btn btn-primary btn-sm dropdown-toggle\" aria-expanded=\"false\">...</button>`\n\nCypress requires elements be attached in the DOM to interact with them.\n\nThe previous command that ran was:\n\n  > `cy.contains()`\n\nThis DOM element likely became detached somewhere between the previous and current command.\n\nCommon situations why this happens:\n  - Your JS framework re-rendered asynchronously\n  - Your app code reacted to an event firing and removed the element\n\nYou typically need to re-query for the element or add 'guards' which delay Cypress from running new commands.\n\nhttps://on.cypress.io/element-has-detached-from-dom\n    at $Cy.ensureAttached (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:147359:76)\n    at runAllChecks (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133219:12)\n    at retryActionability (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133299:16)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152467:65)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151921:14\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46\nFrom Your Spec Code:\n    at InvoicesPage.eval [as previewInvoice] (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\invoicesModule.cy.js:530:68)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\invoicesModule.cy.js:254:27)",
                 "diff": null
               },
-              "uuid": "83597cc7-79f2-4117-a323-84e8f1d61336",
-              "parentUUID": "3cac9731-8cb5-452c-ae61-c9ea26d86b66",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "Add an invoice - 1 Inventory Item(Taxable with no Serial #) -  No Description - No Term Selected - No Invoice Discount - 1 Tax Selected",
-              "fullTitle": "Invoices Module Add an invoice - 1 Inventory Item(Taxable with no Serial #) -  No Description - No Term Selected - No Invoice Discount - 1 Tax Selected",
-              "timedOut": null,
-              "duration": 43254,
-              "state": "failed",
-              "speed": null,
-              "pass": false,
-              "fail": true,
-              "pending": false,
-              "context": null,
-              "code": "const invoiceInfo = {\n  customer: 'Ace Hardware',\n  inventoriesToAdd: ['Add Inventory - Taxable no SN'],\n  description: 'Test Description',\n  tax: 'New Tax',\n  term: 'Not Selected'\n};\n_InvoicesPage.default.addNewInvoice(invoiceInfo);\n_InvoicesPage.default.addInvoiceDiscount('0');\n_InvoicesPage.default.saveInvoice();",
-              "err": {
-                "message": "AssertionError: Timed out retrying after 8000ms: Expected to find content: 'New Tax' within the element: <mat-option#mat-option-4.mat-option.mat-focus-indicator> but never did.",
-                "estack": "AssertionError: Timed out retrying after 8000ms: Expected to find content: 'New Tax' within the element: <mat-option#mat-option-4.mat-option.mat-focus-indicator> but never did.\n    at InvoicesPage.eval [as addNewInvoice] (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\invoicesModule.cy.js:439:63)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\invoicesModule.cy.js:173:27)",
-                "diff": null
-              },
-              "uuid": "5522eb52-4fdc-4639-9c5f-efe5089636b2",
-              "parentUUID": "3cac9731-8cb5-452c-ae61-c9ea26d86b66",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "Add an invoice - 1 Inventory Item(none Taxable with 1 Serial #) -  No Description - No Terms Selected - No Invoice Discount - No Tax",
-              "fullTitle": "Invoices Module Add an invoice - 1 Inventory Item(none Taxable with 1 Serial #) -  No Description - No Terms Selected - No Invoice Discount - No Tax",
-              "timedOut": null,
-              "duration": 44024,
-              "state": "passed",
-              "speed": "slow",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "const invoiceInfo = {\n  customer: 'Ace Hardware',\n  inventoriesToAdd: ['Add Inventory - SN used'],\n  description: 'Test Description',\n  tax: 'None',\n  term: 'Not Selected'\n};\n_InvoicesPage.default.addNewInvoice(invoiceInfo);\n_InvoicesPage.default.selectOneSerialNumber();\n_InvoicesPage.default.addInvoiceDiscount('0');\n_InvoicesPage.default.saveInvoice(); // cy.get('.topheader span').first().then($el=> {\n//     const status = $el.innerText\n//     expect(status).equal('Unpaid')\n// })",
-              "err": {},
-              "uuid": "2b7c39d9-a94f-4a0e-8e84-56d7f2f37083",
-              "parentUUID": "3cac9731-8cb5-452c-ae61-c9ea26d86b66",
+              "uuid": "94d8c7e8-3128-46d6-8a85-7054bd25ce9a",
+              "parentUUID": "83009b98-4ebb-4314-a047-d72165894651",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
-          "passes": [
-            "07bb21bd-aaf1-46dd-978d-05c58bef15e0",
-            "2b7c39d9-a94f-4a0e-8e84-56d7f2f37083"
-          ],
+          "passes": [],
           "failures": [
-            "83597cc7-79f2-4117-a323-84e8f1d61336",
-            "5522eb52-4fdc-4639-9c5f-efe5089636b2"
+            "94d8c7e8-3128-46d6-8a85-7054bd25ce9a"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 170624,
+          "duration": 49429,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

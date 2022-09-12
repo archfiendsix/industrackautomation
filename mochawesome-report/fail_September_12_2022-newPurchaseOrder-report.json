@@ -5,9 +5,9 @@
     "passes": 0,
     "pending": 0,
     "failures": 1,
-    "start": "2022-09-12T08:20:56.255Z",
-    "end": "2022-09-12T08:21:24.929Z",
-    "duration": 28674,
+    "start": "2022-09-12T17:44:54.188Z",
+    "end": "2022-09-12T17:45:19.032Z",
+    "duration": 24844,
     "testsRegistered": 1,
     "passPercent": 0,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "6044d47e-7249-499d-ab54-6140f05bece7",
+      "uuid": "4b402b60-f71e-4b00-a37d-8ba8c33cac29",
       "title": "",
       "fullFile": "cypress\\e2e\\newPurchaseOrder.cy.js",
       "file": "cypress\\e2e\\newPurchaseOrder.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "2e039596-2538-4930-9b86-2c9a900a1da5",
+          "uuid": "669a99c7-7b2b-4323-ac97-7877f7e61812",
           "title": "New Purchase Order Module",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Basic new purchase order",
               "fullTitle": "New Purchase Order Module Basic new purchase order",
               "timedOut": null,
-              "duration": 28554,
+              "duration": 24694,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -47,12 +47,12 @@
               "context": null,
               "code": "_PurchaseOrderPage.default.clickAddNewPurchaseOrder();\n_PurchaseOrderPage.default.addPurchaseOrderModal.selectVendor('GG');\n_PurchaseOrderPage.default.addPurchaseOrderModal.enterInvoiceNumber('1234567890');\n_PurchaseOrderPage.default.addPurchaseOrderModal.enterJobNumber('123456789');\n_PurchaseOrderPage.default.addPurchaseOrderModal.enterShippingAddress('Sample Shipping Address, 4400');\n_PurchaseOrderPage.default.addPurchaseOrderModal.selectShipVia('UPS');\n_PurchaseOrderPage.default.addPurchaseOrderModal.enterInventory();\n_PurchaseOrderPage.default.addPurchaseOrderModal.savePurchaseOrder();",
               "err": {
-                "message": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element:\n\n`<button _ngcontent-mwb-c508=\"\" type=\"button\" class=\"btn btn-sm btn-primary m-r-sm\">...</button>`\n\nis being covered by another element:\n\n`<a href=\"/reminderTab/list/3/6584/details\">...</a>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
-                "estack": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element:\n\n`<button _ngcontent-mwb-c508=\"\" type=\"button\" class=\"btn btn-sm btn-primary m-r-sm\">...</button>`\n\nis being covered by another element:\n\n`<a href=\"/reminderTab/list/3/6584/details\">...</a>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:147488:78)\n    at ensureDescendents (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:132946:8)\n    at ensureDescendentsAndScroll (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:132953:14)\n    at ensureElIsNotCovered (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133085:5)\n    at runAllChecks (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133275:52)\n    at retryActionability (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133299:16)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152467:65)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151921:14\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46\nFrom Your Spec Code:\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newPurchaseOrder.cy.js:252:18)",
+                "message": "AssertionError: Timed out retrying after 8000ms: Expected to find element: `purchase-order-edit-dialog input#mat-input-3`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 8000ms: Expected to find element: `purchase-order-edit-dialog input#mat-input-3`, but never found it.\n    at Object.selectVendorField (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newPurchaseOrder.cy.js:322:37)\n    at Object.selectVendor (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newPurchaseOrder.cy.js:344:45)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newPurchaseOrder.cy.js:132:54)",
                 "diff": null
               },
-              "uuid": "e27c67bc-76d6-43d2-b79c-18da6683d2e8",
-              "parentUUID": "2e039596-2538-4930-9b86-2c9a900a1da5",
+              "uuid": "e81d45a3-c192-4d04-9775-1a8bab856057",
+              "parentUUID": "669a99c7-7b2b-4323-ac97-7877f7e61812",
               "isHook": false,
               "skipped": false
             }
@@ -60,11 +60,11 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "e27c67bc-76d6-43d2-b79c-18da6683d2e8"
+            "e81d45a3-c192-4d04-9775-1a8bab856057"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 28554,
+          "duration": 24694,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
