@@ -120,7 +120,7 @@ describe('Schedule Module', () => {
         SchedulePage.dispatchJob()
     })
 
-    // it.only('Should be able to save a job - with employee added - with Task added (Task Name + Newly created Service type)', () => {
+    // it('Should be able to save a job - with employee added - with Task added (Task Name + Newly created Service type)', () => {
 
     //     Dashboard.clickSettings()
     //     Dashboard.clickSchedulingTab()

@@ -75,7 +75,7 @@ describe('Add Inventory', () => {
 
   it('Add an inventory that is set to non taxable - Use Serial #\'s and serial numbers by batch to increase quantity on hand', () => {
     InventoryListPage.gotoAddNewInventory()
-    // it.only('test', () => {
+    // it('test', () => {
     //     const uuid = () => Cypress._.random(0, 1e20)
     //     const id = uuid()
     // })
@@ -96,7 +96,7 @@ describe('Add Inventory', () => {
     AddNewInventoryPage.clickSaveButton()
   })
 
-  it.only('Add an inventory (taxable) - Use Serial #\'s and serial numbers by batch to increase quantity on hand', () => {
+  it('Add an inventory (taxable) - Use Serial #\'s and serial numbers by batch to increase quantity on hand', () => {
     InventoryListPage.gotoAddNewInventory()
     const inventoryInfo = {
       sku: `SKU${uuidv4()}`,

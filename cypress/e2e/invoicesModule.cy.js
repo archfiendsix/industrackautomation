@@ -62,7 +62,7 @@ describe('Invoices Module', () => {
         InvoicesPage.saveInvoice()
     })
 
-    it.only('Add an invoice - 1 Inventory Item(none Taxable with 1 Serial #) -  No Description - No Terms Selected - No Invoice Discount - No Tax', () => {
+    it('Add an invoice - 1 Inventory Item(none Taxable with 1 Serial #) -  No Description - No Terms Selected - No Invoice Discount - No Tax', () => {
         const invoiceInfo = {
             customer: 'Ace Hardware',
             inventoriesToAdd: ['Add Inventory - SN used'],
@@ -82,7 +82,7 @@ describe('Invoices Module', () => {
         
     })
 
-    // it.only('Add an invoice - Receive partial payment', () => {
+    // it('Add an invoice - Receive partial payment', () => {
     //     const invoiceInfo = {
     //         customer: 'Ace Hardware',
     //         inventoriesToAdd: ['Add Inventory - Taxable no SN'],

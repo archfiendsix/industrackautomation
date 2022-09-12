@@ -27,7 +27,7 @@ describe('Timesheet module', () => {
     // Add new Timesheet for 1 field employee, Shift timesheet type
     // No Cost Code, No vehicle, No job assigned, No Customer info, Time assigned is default
 
-    it.only('Basic saving function', () => {
+    it('Basic saving function', () => {
         TimesheetPage.addNewTimesheet()
         TimesheetPage.selectFieldEmployee('Employee One')
         TimesheetPage.addNewTimesheetForEmployee()
