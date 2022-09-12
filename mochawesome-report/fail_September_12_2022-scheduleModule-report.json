@@ -1,0 +1,212 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 5,
+    "pending": 0,
+    "failures": 1,
+    "start": "2022-09-12T05:17:25.665Z",
+    "end": "2022-09-12T05:21:24.750Z",
+    "duration": 239085,
+    "testsRegistered": 6,
+    "passPercent": 83.33333333333334,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2343ea17-2658-428e-8f02-a3c95dce958d",
+      "title": "",
+      "fullFile": "cypress\\e2e\\scheduleModule.cy.js",
+      "file": "cypress\\e2e\\scheduleModule.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d626377b-4055-4724-ba5a-225ac45f766c",
+          "title": "Schedule Module",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should be able to save a job (required fields filled)",
+              "fullTitle": "Schedule Module Should be able to save a job (required fields filled)",
+              "timedOut": null,
+              "duration": 29252,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\n_SchedulePage.default.fillData();\n_SchedulePage.default.saveJob();",
+              "err": {},
+              "uuid": "91798f23-5aa5-4527-b94e-57c69863f110",
+              "parentUUID": "d626377b-4055-4724-ba5a-225ac45f766c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with 1 employee added",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with 1 employee added",
+              "timedOut": null,
+              "duration": 26444,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
+              "err": {},
+              "uuid": "9a78a773-5048-4b1b-b389-29fa090fe032",
+              "parentUUID": "d626377b-4055-4724-ba5a-225ac45f766c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with employee added - 0hrs 0mins duration",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added - 0hrs 0mins duration",
+              "timedOut": null,
+              "duration": 27346,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
+              "err": {},
+              "uuid": "dd9e2321-3885-4466-9987-1d3d84358ea5",
+              "parentUUID": "d626377b-4055-4724-ba5a-225ac45f766c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with employee added (with 8 hrs duration)",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added (with 8 hrs duration)",
+              "timedOut": null,
+              "duration": 27214,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 8,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
+              "err": {},
+              "uuid": "0b6083cd-34ca-4664-bb09-628819b7aa38",
+              "parentUUID": "d626377b-4055-4724-ba5a-225ac45f766c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with Job Template added",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with Job Template added",
+              "timedOut": null,
+              "duration": 40640,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.log('Add template');\n_Dashboard.default.gotoJobTemplates();\n_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\nconst templateName = 'Snow blowing';\n_SchedulePage.default.addJobTemplate(templateName);\n_SchedulePage.default.dispatchJob();",
+              "err": {},
+              "uuid": "8a180166-3645-4df7-b4c2-5fdc102ea9fd",
+              "parentUUID": "d626377b-4055-4724-ba5a-225ac45f766c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should be able to dispatch a job - with employee added - with Task added (Task Name only)",
+              "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added - with Task added (Task Name only)",
+              "timedOut": null,
+              "duration": 59025,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.clickTasksTab();\nconst task = {\n  taskName: 'New Task'\n};\n_SchedulePage.default.createNewTask(task);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
+              "err": {
+                "message": "CypressError: Timed out retrying after 8050ms: `cy.dblclick()` failed because this element is detached from the DOM.\n\n`<div aria-label=\" Customer Name: Genius Game Inc. Number: 129 Description: dvssdsv Contact name: Francis White Phone number: 18317474895 Address: Cemetery Street, Salinas, CA, 93901 Start: 09-01-2022 12:00 AM End: 09-30-2022 12:00 AM Estimated duration: \" aria-selected=\"false\" event_id=\"1662960010834\" class=\"dhx_cal_event_line test_sc_class\" style=\"background:#008000;color:#FFFFFF;position:absolute; top:2px; height: 20px; left:1px; width:1031px;\">...</div>`\n\nCypress requires elements be attached in the DOM to interact with them.\n\nThe previous command that ran was:\n\n  > `cy.first()`\n\nThis DOM element likely became detached somewhere between the previous and current command.\n\nCommon situations why this happens:\n  - Your JS framework re-rendered asynchronously\n  - Your app code reacted to an event firing and removed the element\n\nYou typically need to re-query for the element or add 'guards' which delay Cypress from running new commands.\n\nhttps://on.cypress.io/element-has-detached-from-dom\n\nBecause this error occurred during a `after all` hook we are skipping the remaining tests in the current suite: `Schedule Module`",
+                "estack": "CypressError: Timed out retrying after 8050ms: `cy.dblclick()` failed because this element is detached from the DOM.\n\n`<div aria-label=\" Customer Name: Genius Game Inc. Number: 129 Description: dvssdsv Contact name: Francis White Phone number: 18317474895 Address: Cemetery Street, Salinas, CA, 93901 Start: 09-01-2022 12:00 AM End: 09-30-2022 12:00 AM Estimated duration: \" aria-selected=\"false\" event_id=\"1662960010834\" class=\"dhx_cal_event_line test_sc_class\" style=\"background:#008000;color:#FFFFFF;position:absolute; top:2px; height: 20px; left:1px; width:1031px;\">...</div>`\n\nCypress requires elements be attached in the DOM to interact with them.\n\nThe previous command that ran was:\n\n  > `cy.first()`\n\nThis DOM element likely became detached somewhere between the previous and current command.\n\nCommon situations why this happens:\n  - Your JS framework re-rendered asynchronously\n  - Your app code reacted to an event firing and removed the element\n\nYou typically need to re-query for the element or add 'guards' which delay Cypress from running new commands.\n\nhttps://on.cypress.io/element-has-detached-from-dom\n\nBecause this error occurred during a `after all` hook we are skipping the remaining tests in the current suite: `Schedule Module`\n    at $Cy.ensureAttached (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:147359:76)\n    at runAllChecks (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133219:12)\n    at retryActionability (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133299:16)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152467:65)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151921:14\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46\nFrom Your Spec Code:\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\scheduleModule.cy.js:260:61)",
+                "diff": null
+              },
+              "uuid": "6526e20f-eab7-43c4-ac79-ad1b4312e0a4",
+              "parentUUID": "d626377b-4055-4724-ba5a-225ac45f766c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "91798f23-5aa5-4527-b94e-57c69863f110",
+            "9a78a773-5048-4b1b-b389-29fa090fe032",
+            "dd9e2321-3885-4466-9987-1d3d84358ea5",
+            "0b6083cd-34ca-4664-bb09-628819b7aa38",
+            "8a180166-3645-4df7-b4c2-5fdc102ea9fd"
+          ],
+          "failures": [
+            "6526e20f-eab7-43c4-ac79-ad1b4312e0a4"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 209921,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": false,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

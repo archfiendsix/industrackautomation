@@ -1,0 +1,277 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 9,
+    "passes": 6,
+    "pending": 0,
+    "failures": 3,
+    "start": "2022-09-12T05:06:23.367Z",
+    "end": "2022-09-12T05:14:07.476Z",
+    "duration": 464109,
+    "testsRegistered": 9,
+    "passPercent": 66.66666666666666,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "bddbf7fe-8b3c-4be4-a8bb-fced86bf5632",
+      "title": "",
+      "fullFile": "cypress\\e2e\\newEstimate.cy.js",
+      "file": "cypress\\e2e\\newEstimate.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+          "title": "New Estimate module",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "New customer, New Inventory, New Estimate e2e",
+              "fullTitle": "New Estimate module New customer, New Inventory, New Estimate e2e",
+              "timedOut": null,
+              "duration": 14160,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*new customer */\n// Dashboard.clickCustomerTab()\ncy.visit('/estimatesTab/list');\n_Dashboard.default.clickAddCustomerButton();\n_AddCustomerPage.default.fillData();\ncy.wait(2500);\n_AddCustomerPage.default.elements.saveButton().should('not.be.disabled');\n_AddCustomerPage.default.elements.saveButton().click();\n_AddCustomerPage.default.confirmValidityYes();\n/*new inventory */\n\ncy.wait(3500);\n_inventory.InventoryListPage.gotoAddNewInventory();\n_AddNewInventoryPage.default.fillData();\n_AddNewInventoryPage.default.clickSaveButton();\n_AddNewInventoryPage.default.checkSaveSuccess();\n/*newEstimate*/\n// Dashboard.clickEstimatesTab()\n\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Inc.');\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\n_EstimatesPage.default.saveAndCloseEstimate();",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'customerNumber')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'customerNumber')\n    at AddCustomerPage.eval [as fillData] (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newEstimate.cy.js:483:41)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newEstimate.cy.js:141:30)",
+                "diff": null
+              },
+              "uuid": "0e1cb49b-a126-4879-9fbd-fd9240481815",
+              "parentUUID": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should have status Won",
+              "fullTitle": "New Estimate module Should have status Won",
+              "timedOut": null,
+              "duration": 37490,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Inc.');\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\n_EstimatesPage.default.saveEstimate();\ncy.wait(3000);\n_EstimatesPage.default.markAsWon();\ncy.wait(3000);\n_EstimatesPage.default.confirmYes();\n_EstimatesPage.default.checkEstimateStatus('Won');",
+              "err": {},
+              "uuid": "c2b91592-998e-4aa9-b433-807197fd742d",
+              "parentUUID": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should have status Lost",
+              "fullTitle": "New Estimate module Should have status Lost",
+              "timedOut": null,
+              "duration": 35389,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Inc.');\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\n_EstimatesPage.default.saveEstimate();\ncy.wait(3000);\n_EstimatesPage.default.markAslost();\ncy.wait(3000);\n_EstimatesPage.default.confirmYes();\n_EstimatesPage.default.checkEstimateStatus('Lost');",
+              "err": {},
+              "uuid": "c117230d-01c2-4811-8429-ec56e2434d22",
+              "parentUUID": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should proceed to Add New Job Screen after converting to Job",
+              "fullTitle": "New Estimate module Should proceed to Add New Job Screen after converting to Job",
+              "timedOut": null,
+              "duration": 40889,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\n_EstimatesPage.default.saveEstimate();\ncy.wait(3000);\n_EstimatesPage.default.convertToJob();\ncy.wait(3000);\n_EstimatesPage.default.confirmYes();\ncy.wait(5500);\n_EstimatesPage.default.checkAddNewJobModalTitle();",
+              "err": {},
+              "uuid": "a669bde0-e96d-4041-a5e9-26cd51fa2973",
+              "parentUUID": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should successfully convert estimate to invoice",
+              "fullTitle": "New Estimate module Should successfully convert estimate to invoice",
+              "timedOut": null,
+              "duration": 38602,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\n_EstimatesPage.default.saveEstimate();\ncy.wait(3000);\n_EstimatesPage.default.convertToInvoice();\ncy.wait(3000);\n_EstimatesPage.default.confirmYes();\n_EstimatesPage.default.checkConvertedToInvoiceSuccess();\ncy.wait(1500);\n_InvoiceOverviewPage.default.checkInvoiceStatus();",
+              "err": {},
+              "uuid": "cfa6039f-a591-4d7c-941e-809a37c37a58",
+              "parentUUID": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should change Customer",
+              "fullTitle": "New Estimate module Should change Customer",
+              "timedOut": null,
+              "duration": 42809,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\n_EstimatesPage.default.saveEstimate();\ncy.wait(4000);\n_EstimatesPage.default.changeCustomer('Change to this customer');\ncy.wait(4000);\n_EstimatesPage.default.saveEstimate();\ncy.wait(2500);\n_EstimatesPage.default.checkBillToCustomerName('Change to this customer');",
+              "err": {},
+              "uuid": "b00bbf8d-0717-4564-970d-6114c4327e27",
+              "parentUUID": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should send estimate as email",
+              "fullTitle": "New Estimate module Should send estimate as email",
+              "timedOut": null,
+              "duration": 38440,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\n_EstimatesPage.default.saveEstimate();\ncy.wait(4000);\n_EstimatesPage.default.sendToEmail();",
+              "err": {},
+              "uuid": "998cdcb3-7521-4d1d-8a4f-f3da30445938",
+              "parentUUID": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should have correct Row total upon adding discount",
+              "fullTitle": "New Estimate module Should have correct Row total upon adding discount",
+              "timedOut": null,
+              "duration": 98328,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Air Filter');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Gaming Chair');\ncy.wait(4000);\n_EstimatesPage.default.addDiscountInRow(0, 30, '%', 3);\n_EstimatesPage.default.checkInvoiceSubtotal();\n_EstimatesPage.default.addDiscountInRow(0, 25, '$', 3);\n_EstimatesPage.default.checkInvoiceSubtotal();\n_EstimatesPage.default.saveEstimate();\ncy.wait(4000);\n_EstimatesPage.default.checkRowsTotal();",
+              "err": {
+                "message": "AssertionError: 000004 - Air filter: Unit Cost($150) + Profit(0.6667000000000001): expected '250.01' to equal '250.00'",
+                "estack": "AssertionError: 000004 - Air filter: Unit Cost($150) + Profit(0.6667000000000001): expected '250.01' to equal '250.00'\n    at Context.checkCalc (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newEstimate.cy.js:902:9)",
+                "diff": "- '250.01'\n+ '250.00'\n"
+              },
+              "uuid": "ed684484-e5c5-45db-ab44-cd615f32580b",
+              "parentUUID": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should change input values and have correct calculations after save",
+              "fullTitle": "New Estimate module Should change input values and have correct calculations after save",
+              "timedOut": null,
+              "duration": 116863,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Air Filter');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Gaming Chair');\ncy.wait(4000);\n_EstimatesPage.default.addDiscountInRow(0, 30, '%', 3);\n_EstimatesPage.default.addDiscountInRow(0, 25, '$', 3);\ncy.wait(4000);\n_EstimatesPage.default.changeTableValues();\n_EstimatesPage.default.addRandomInvoiceDiscount();\n_EstimatesPage.default.checkInvoiceTotal();\n_EstimatesPage.default.saveEstimate();\n_EstimatesPage.default.checkRowsTotal();",
+              "err": {
+                "message": "AssertionError: Invoice Subtotal($4573.04) less invoice discount($46.19): expected 4573.04 to equal 4887.67",
+                "estack": "AssertionError: Invoice Subtotal($4573.04) less invoice discount($46.19): expected 4573.04 to equal 4887.67\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\newEstimate.cy.js:956:9)",
+                "diff": "- 4573.04\n+ 4887.67\n"
+              },
+              "uuid": "7b1046d1-7be4-4f22-aa2a-fe19d5db3aeb",
+              "parentUUID": "63f31a4d-ae0c-4c05-b1b0-9645e20d4f96",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c2b91592-998e-4aa9-b433-807197fd742d",
+            "c117230d-01c2-4811-8429-ec56e2434d22",
+            "a669bde0-e96d-4041-a5e9-26cd51fa2973",
+            "cfa6039f-a591-4d7c-941e-809a37c37a58",
+            "b00bbf8d-0717-4564-970d-6114c4327e27",
+            "998cdcb3-7521-4d1d-8a4f-f3da30445938"
+          ],
+          "failures": [
+            "0e1cb49b-a126-4879-9fbd-fd9240481815",
+            "ed684484-e5c5-45db-ab44-cd615f32580b",
+            "7b1046d1-7be4-4f22-aa2a-fe19d5db3aeb"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 462970,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": false,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
