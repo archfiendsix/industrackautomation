@@ -9,7 +9,7 @@
 //             "cypress",
 //             "node"
 //         ]
-//     },
+//     },,
 //     "include": [
 //         "./node_modules/cypress",
 //         "cypress/**/*.js",
