@@ -1,0 +1,212 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 5,
+    "pending": 0,
+    "failures": 1,
+    "start": "2022-09-13T14:52:53.294Z",
+    "end": "2022-09-13T14:56:53.122Z",
+    "duration": 239828,
+    "testsRegistered": 6,
+    "passPercent": 83.33333333333334,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1da867b5-8754-418d-b67c-cf249c2866ca",
+      "title": "",
+      "fullFile": "cypress\\e2e\\customerModule.cy.js",
+      "file": "cypress\\e2e\\customerModule.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "aaddb5c2-d00e-49b2-a8ae-3d78c09476b3",
+          "title": "Add Customer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Successfully create a customer",
+              "fullTitle": "Add Customer Successfully create a customer",
+              "timedOut": null,
+              "duration": 41416,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const customerInfo = {};\n_AddCustomerPage.default.fillData(customerInfo);\ncy.wait(2500);\n_AddCustomerPage.default.elements.saveButton().should('not.be.disabled');\n_AddCustomerPage.default.elements.saveButton().click();",
+              "err": {},
+              "uuid": "9da7428d-3e7f-4488-bbb2-2a1caa9bdf3b",
+              "parentUUID": "aaddb5c2-d00e-49b2-a8ae-3d78c09476b3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should disable save if required fields are not filled",
+              "fullTitle": "Add Customer Should disable save if required fields are not filled",
+              "timedOut": null,
+              "duration": 21045,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "_AddCustomerPage.default.fillData();\n_AddCustomerPage.default.elements.streetAddressTextBox().clear();\n_AddCustomerPage.default.elements.cityTextBox().clear();\n_AddCustomerPage.default.elements.stateTextBox().clear();\n_AddCustomerPage.default.elements.postCodeTextBox().clear();\ncy.wait(3000);\n_AddCustomerPage.default.elements.sameAsCompanyCheckbox().click();\n_AddCustomerPage.default.elements.saveButton().click({\n  force: true\n}).should('be.disabled');\n/* Check textboxes to be in red(invalid entries) */\n\n_AddCustomerPage.default.elements.streetAddressTextBox().should('have.class', 'ng-invalid');\n_AddCustomerPage.default.elements.cityTextBox().should('have.class', 'ng-invalid');\n_AddCustomerPage.default.elements.stateTextBox().should('have.class', 'ng-invalid');\n_AddCustomerPage.default.elements.postCodeTextBox().should('have.class', 'ng-invalid'); // AddCustomerPage.elements.billingStreetAddressTextbox().should('have.class', 'ng-invalid')\n// AddCustomerPage.elements.billingCityTextbox().should('have.class', 'ng-invalid')\n// AddCustomerPage.elements.billingStateProvinceTextbox().should('have.class', 'ng-invalid')\n// AddCustomerPage.elements.billingPostCodeTextBox().should('have.class', 'ng-invalid')",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'customerNumber')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'customerNumber')\n    at AddCustomerPage.eval [as fillData] (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\customerModule.cy.js:318:41)\n    at Context.eval (https://onetrack.industrack.com/__cypress/tests?p=cypress\\e2e\\customerModule.cy.js:150:30)",
+                "diff": null
+              },
+              "uuid": "796dc8f8-bb02-4227-8b70-8e3a428cf812",
+              "parentUUID": "aaddb5c2-d00e-49b2-a8ae-3d78c09476b3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Shows warning when saving unvalidated address",
+              "fullTitle": "Add Customer Shows warning when saving unvalidated address",
+              "timedOut": null,
+              "duration": 35978,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const customerInfo = {};\n_AddCustomerPage.default.fillData(customerInfo);\ncy.wait(2500);\n_AddCustomerPage.default.elements.saveButton().should('not.be.disabled');\n_AddCustomerPage.default.elements.saveButton().click();\n_AddCustomerPage.default.checkWarningDialog('This address book doesn\\'t have valid coordinates and may not be visible in the mobile app. Do you want to save without validating the address?');",
+              "err": {},
+              "uuid": "8720e143-6324-4bfe-b05b-a1eb6289392a",
+              "parentUUID": "aaddb5c2-d00e-49b2-a8ae-3d78c09476b3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable save if email is invalid",
+              "fullTitle": "Add Customer Disable save if email is invalid",
+              "timedOut": null,
+              "duration": 34384,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const customerInfo = {\n  email: 'dina.schill@'\n};\n_AddCustomerPage.default.fillData(customerInfo);\n_AddCustomerPage.default.checkEmailErrorMessage('Incorrect email'); // AddCustomerPage.clickSaveButton()\n\n_AddCustomerPage.default.checkSaveButtonDisabled();",
+              "err": {},
+              "uuid": "d0bf39ff-bce9-48e2-9cf3-dfe8ec06715c",
+              "parentUUID": "aaddb5c2-d00e-49b2-a8ae-3d78c09476b3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add Service Location to a newly created Customer - Added Location has no selected tax rate",
+              "fullTitle": "Add Customer Add Service Location to a newly created Customer - Added Location has no selected tax rate",
+              "timedOut": null,
+              "duration": 56179,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const customerInfo = {\n  customerNumber: '192379182739812',\n  companyName: 'Add service location to this customer'\n};\n_AddCustomerPage.default.fillData(customerInfo);\n_AddCustomerPage.default.clickSaveButton();\n_AddCustomerPage.default.confirmValidityYes();\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo = {};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton(); // cy.wait(5000)\n// Dashboard.clickCustomerTab()\n// CustomerPage.searchCustomer(customerInfo.companyName)",
+              "err": {},
+              "uuid": "6d2de4a6-0c1f-45e7-b493-4dda30507f40",
+              "parentUUID": "aaddb5c2-d00e-49b2-a8ae-3d78c09476b3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add Service Location to a newly created Customer - Tax Rate Added to Added Location",
+              "fullTitle": "Add Customer Add Service Location to a newly created Customer - Tax Rate Added to Added Location",
+              "timedOut": null,
+              "duration": 50346,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const customerInfo = {\n  customerNumber: '192379182739812',\n  companyName: 'Add service location to this customer'\n};\n_AddCustomerPage.default.fillData(customerInfo);\n_AddCustomerPage.default.clickSaveButton();\n_AddCustomerPage.default.confirmValidityYes();\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo = {\n  selectATaxRate: 'New Tax'\n};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton(); // cy.wait(5000)\n// Dashboard.clickCustomerTab()\n// CustomerPage.searchCustomer(customerInfo.companyName)",
+              "err": {},
+              "uuid": "59405e79-804b-4ae6-96b6-018d8a82de53",
+              "parentUUID": "aaddb5c2-d00e-49b2-a8ae-3d78c09476b3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9da7428d-3e7f-4488-bbb2-2a1caa9bdf3b",
+            "8720e143-6324-4bfe-b05b-a1eb6289392a",
+            "d0bf39ff-bce9-48e2-9cf3-dfe8ec06715c",
+            "6d2de4a6-0c1f-45e7-b493-4dda30507f40",
+            "59405e79-804b-4ae6-96b6-018d8a82de53"
+          ],
+          "failures": [
+            "796dc8f8-bb02-4227-8b70-8e3a428cf812"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 239348,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": true,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-13T15:15:30.231Z",
+    "end": "2022-09-13T15:19:19.915Z",
+    "duration": 229684,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fffefdf0-2641-400f-b58d-36ebe7be7223",
+      "title": "",
+      "fullFile": "cypress\\e2e\\settings_inventoryModule.cy.js",
+      "file": "cypress\\e2e\\settings_inventoryModule.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d9160f5f-4983-481d-8f44-1766ab72489a",
+          "title": "Add Inventory",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Successfully add an Inventory - Not using serial #s, None Taxable",
+              "fullTitle": "Add Inventory Successfully add an Inventory - Not using serial #s, None Taxable",
+              "timedOut": null,
+              "duration": 36972,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  name: 'Add Inventory - Taxable no SN',\n  useSerialNumbers: false,\n  nonTaxable: true\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();\n_AddNewInventoryPage.default.checkSaveSuccess();",
+              "err": {},
+              "uuid": "15df4efd-9fe3-4770-bdbc-7a0b140fe86d",
+              "parentUUID": "d9160f5f-4983-481d-8f44-1766ab72489a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Successfully add an Inventory - Not using serial #s, Taxable",
+              "fullTitle": "Add Inventory Successfully add an Inventory - Not using serial #s, Taxable",
+              "timedOut": null,
+              "duration": 36083,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  name: 'Add Inventory - Taxable no SN',\n  useSerialNumbers: false,\n  nonTaxable: false\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();\n_AddNewInventoryPage.default.checkSaveSuccess();",
+              "err": {},
+              "uuid": "1e171959-51de-4243-9a7c-c8a73b04b9b2",
+              "parentUUID": "d9160f5f-4983-481d-8f44-1766ab72489a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "(Negative) Save unsuccessful when you click save after leaving required fields blank",
+              "fullTitle": "Add Inventory (Negative) Save unsuccessful when you click save after leaving required fields blank",
+              "timedOut": null,
+              "duration": 37892,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  name: ''\n};\n_AddNewInventoryPage.default.elements.nameTextBox().click().clear().type('{backspace}');\n_AddNewInventoryPage.default.fillData(inventoryInfo); // AddNewInventoryPage.clickSaveButton()\n// AddNewInventoryPage.checkNameError()",
+              "err": {},
+              "uuid": "1af5a2aa-e090-4bd2-b15c-a2b606b8527b",
+              "parentUUID": "d9160f5f-4983-481d-8f44-1766ab72489a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add an inventory that is set to non taxable - quantity on hand: 1, Reorder Point: 1",
+              "fullTitle": "Add Inventory Add an inventory that is set to non taxable - quantity on hand: 1, Reorder Point: 1",
+              "timedOut": null,
+              "duration": 34576,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  name: 'NonTaxable',\n  nonTaxable: true\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();",
+              "err": {},
+              "uuid": "842ad3dc-c0b2-4754-88c8-2edb6541373b",
+              "parentUUID": "d9160f5f-4983-481d-8f44-1766ab72489a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add an inventory that is set to non taxable - Use Serial #'s and serial numbers by batch to increase quantity on hand",
+              "fullTitle": "Add Inventory Add an inventory that is set to non taxable - Use Serial #'s and serial numbers by batch to increase quantity on hand",
+              "timedOut": null,
+              "duration": 41990,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_inventory.InventoryListPage.gotoAddNewInventory(); // it('test', () => {\n//     const uuid = () => Cypress._.random(0, 1e20)\n//     const id = uuid()\n// })\n// let randomId = () => {\n//   const uuid = () => Cypress._.random(0, 500)\n//   const id = uuid()\n//   return id.toString()\n// }\n\nconst inventoryInfo = {\n  sku: `SKU${(0, _uuid.v4)()}`,\n  name: 'serialNumbers Added',\n  nonTaxable: true,\n  useSerialNumbers: true,\n  serialNumbers: [`SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`]\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();",
+              "err": {},
+              "uuid": "42e70314-9fa1-4d41-800c-46e971780113",
+              "parentUUID": "d9160f5f-4983-481d-8f44-1766ab72489a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add an inventory (taxable) - Use Serial #'s and serial numbers by batch to increase quantity on hand",
+              "fullTitle": "Add Inventory Add an inventory (taxable) - Use Serial #'s and serial numbers by batch to increase quantity on hand",
+              "timedOut": null,
+              "duration": 41753,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  sku: `SKU${(0, _uuid.v4)()}`,\n  name: 'Add Inventory - SN Used',\n  useSerialNumbers: true,\n  serialNumbers: [`SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`]\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();",
+              "err": {},
+              "uuid": "ca618f2f-0762-4c19-87a3-b6b939300913",
+              "parentUUID": "d9160f5f-4983-481d-8f44-1766ab72489a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "15df4efd-9fe3-4770-bdbc-7a0b140fe86d",
+            "1e171959-51de-4243-9a7c-c8a73b04b9b2",
+            "1af5a2aa-e090-4bd2-b15c-a2b606b8527b",
+            "842ad3dc-c0b2-4754-88c8-2edb6541373b",
+            "42e70314-9fa1-4d41-800c-46e971780113",
+            "ca618f2f-0762-4c19-87a3-b6b939300913"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 229266,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": true,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
