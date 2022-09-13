@@ -126,27 +126,27 @@ describe('Schedule Module', () => {
     //     Dashboard.clickSchedulingTab()
     //     Dashboard.clickTaskTemplatesTab()
     // })
-    after(() => {
+    // after(() => {
 
-        Dashboard.clickScheduleTab()
-        cy.get('.dhx_cal_event_line.test_sc_class').then($btn => {
-            cy.log($btn.length)
-            for (let i = 1; i <= $btn.length; i++) {
-                cy.wait(2000)
-                // cy.wrap($btn).should('have.class','dhx_cal_event_line')
-                cy.get('.dhx_cal_event_line.test_sc_class').first().dblclick()
-                cy.wait(2000)
-                cy.get('.modal-footer button.btn-danger').contains('Delete job').click()
-                cy.wait(2000)
-                cy.get('button.btn-primary').contains('Confirm').click()
-                cy.wait(2000)
-                cy.get('[mat-dialog-content=""] > .warning > .ibox > .ibox-content > .text-center > :nth-child(2)').first().click()
-                cy.wait(2000)
-            }
+    //     Dashboard.clickScheduleTab()
+    //     cy.get('.dhx_cal_event_line.test_sc_class').then($btn => {
+    //         cy.log($btn.length)
+    //         for (let i = 1; i <= $btn.length; i++) {
+    //             cy.wait(2000)
+    //             // cy.wrap($btn).should('have.class','dhx_cal_event_line')
+    //             cy.get('.dhx_cal_event_line.test_sc_class').first().dblclick()
+    //             cy.wait(2000)
+    //             cy.get('.modal-footer button.btn-danger').contains('Delete job').click()
+    //             cy.wait(2000)
+    //             cy.get('button.btn-primary').contains('Confirm').click()
+    //             cy.wait(2000)
+    //             cy.get('[mat-dialog-content=""] > .warning > .ibox > .ibox-content > .text-center > :nth-child(2)').first().click()
+    //             cy.wait(2000)
+    //         }
 
 
-            // cy.reload()
-        })
+    //         // cy.reload()
+    //     })
     })
 
 

@@ -108,6 +108,18 @@ describe('Add Inventory', () => {
     AddNewInventoryPage.clickSaveButton()
   })
 
+  // it('Add None inventory type', () => {
+  //   InventoryListPage.gotoAddNewInventory()
+  //   const inventoryInfo = {
+  //     sku: `SKU${uuidv4()}`,
+  //     name: 'Add Inventory - SN Used',
+  //     useSerialNumbers: true,
+  //     serialNumbers: [`SN${uuidv4()}`, `SN${uuidv4()}`, `SN${uuidv4()}`]
+  //   }
+  //   AddNewInventoryPage.fillData(inventoryInfo)
+  //   AddNewInventoryPage.clickSaveButton()
+  // })
+
 
 
 

@@ -79,7 +79,7 @@ describe('Invoices Module', () => {
         //     expect(status).equal('Unpaid')
         // })
 
-        
+
     })
 
     // it('Add an invoice - Receive partial payment', () => {
@@ -93,7 +93,7 @@ describe('Invoices Module', () => {
     //     InvoicesPage.addNewInvoice(invoiceInfo)
     //     InvoicesPage.addInvoiceDiscount('0')
     //     InvoicesPage.saveInvoice()
-        
+
     //     //InvoicePage.gotoReceivePayment()
     //     // const paymentInfo = {
     //     //     paymentMethod: 'Cash',
@@ -102,10 +102,10 @@ describe('Invoices Module', () => {
     //     // }
     //     //InvoicePage.setPayment(paymentInfo)
     //     //InvoicePage.savePayment(paymentInfo)
-        
+
     // })
 
-    
+
     it('Add Invoice and show the preview of the invoice', () => {
         const invoiceInfo = {
             customer: 'Ace Hardware',
@@ -119,7 +119,7 @@ describe('Invoices Module', () => {
         InvoicesPage.saveInvoice()
         InvoicesPage.previewInvoice()
         InvoicesPage.checkPreview()
-        
+
     })
 
     it.only('Add invoice and save invoice as PDF', () => {
@@ -151,6 +151,20 @@ describe('Invoices Module', () => {
         InvoicesPage.saveInvoice()
         InvoicesPage.sendToEmail()
     })
+
+    // it('Add invoice with 1 NON-INVENTORY type, with description, with terms selected, with discount and with tax and save  the invoice with the correct total due', () => {
+    //     const invoiceInfo = {
+    //         customer: 'Ace Hardware',
+    //         inventoriesToAdd: ['Add Inventory - Taxable no SN'],
+    //         description: 'Test Description',
+    //         tax: 'None',
+    //         term: 'Not Selected'
+    //     }
+    //     InvoicesPage.addNewInvoice(invoiceInfo)
+    //     InvoicesPage.addInvoiceDiscount('0')
+    //     InvoicesPage.saveInvoice()
+    //     InvoicesPage.sendToEmail()
+    // })
 
 
 })
