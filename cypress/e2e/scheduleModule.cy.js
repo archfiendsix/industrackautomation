@@ -147,7 +147,7 @@ describe('Schedule Module', () => {
 
     //         // cy.reload()
     //     })
-    })
+    // })
 
 
 
