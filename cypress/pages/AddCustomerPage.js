@@ -26,6 +26,17 @@ class AddCustomerPage {
         billingCityTextbox: () => cy.get('input#billingCity'),
         billingStateProvinceTextbox: () => cy.get('input#billingStateProvince'),
         billingPostCodeTextBox: () => cy.get('input#billingPostCode'),
+        validateAddress: () => cy.get('.form-group a').contains('Validate address'),
+        latitudeField: () => cy.get('input#lat'),
+        longitudeField: () => cy.get('input#lng'),
+        validateAddressModal: {
+            OKButton: () => cy.get('validate-coordinates-modal button').contains('Ok')
+        },
+        customerOverviewModal: {
+            tagsField: () => cy.get('app-customers-overview .mat-chip-list-wrapper input[placeholder="Assign"]'),
+            tagsFieldOption: () => cy.get('mat-option'),
+            backButton:()=> cy.get('app-customers-overview a[routerlink="/crmTab/list"]').contains('Back')
+        }
     }
 
     checkSaveButtonDisabled = () => {
@@ -94,7 +105,39 @@ class AddCustomerPage {
     confirmValidityYes = () => {
         this.elements.addressValidityWarningModalConfirm().click()
     }
+    clickValidateAddress = () => {
+        this.elements.validateAddress().click()
+    }
 
+    validateAddress = () => {
+        this.clickValidateAddress()
+        this.elements.validateAddressModal.OKButton().click()
+        this.checkLongitudeAndLatitude()
+    }
+
+    checkLongitudeAndLatitude = () => {
+        this.elements.latitudeField().should('not.be', 'empty')
+        this.elements.longitudeField().should('not.be', 'empty')
+    }
+
+    getCustomerNumber = () => {
+        this.elements.customerNumberTextBox().then($el => {
+            const cn = $el.text().toString()
+
+        })
+    }
+
+    addTags = (tags) => {
+        cy.wait(2500)
+        tags.forEach(i => {
+            this.elements.customerOverviewModal.tagsField().click()
+            this.elements.customerOverviewModal.tagsFieldOption().contains(i).first().click()
+        })
+    }
+
+    clickBackButton=()=> {
+        this.elements.customerOverviewModal.backButton().click()
+    }
 
 }
 

@@ -10,7 +10,8 @@ class EstimatesPage {
         actionsDropdown: () => cy.get('estimate-edit .btn-group.actions'),
         dropDownItems: () => cy.get('li a'),
         changeCustomerButton: () => cy.get('button#changeCustomerBtn'),
-        tableRowEllipse: () => cy.get('.dataTable tbody tr td').last().get('.button'),
+        tableRowEllipse: () => cy.get('.dataTable tbody tr td:last-child() button'),
+        tableRowEllipseItem: () => cy.get('.dropdown-menu li a'),
         statusLabel: () => cy.get('.form-inline span.status'),
         confirmYesButton: () => cy.get('.btn.btn-primary').contains('Yes'),
         addNewJobModalTitle: () => cy.get('app-job-edit-form h4.modal-title').contains('Add New Job'),
@@ -20,7 +21,8 @@ class EstimatesPage {
         customerSearchItems: () => cy.get('.ibox-content .customerList b'),
         billToCustomerName: () => cy.get('._header-preview.topsummary .customerName a'),
         previewiFrame: {
-            custName: () => cy.get('#contentHolder').its('0.contentDocument.body').then(cy.wrap).find('.customerInfo .custName')
+            custName: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').then(cy.wrap).find('#reportContent .customerInfo .custName'),
+            note: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('#reportContent h3+p'),
         },
         addDiscountRowElement: () => cy.get('a[data-target="#modalAddDiscountPartLine"]'),
 
@@ -44,6 +46,7 @@ class EstimatesPage {
         setInvoiceDiscountValueInput: () => cy.get('input[name="discountValue"]'),
         setInvoiceDiscountModalDropdown: () => cy.get('select[name="discountKind"]'),
         setInvoiceDiscountModalSaveButton: () => cy.get('#modalAddDiscount .btn.btn-primary'),
+        notesForCustomerField: () => cy.get('textarea[name="notes"]')
     }
 
     clickAddNew = () => {
@@ -89,7 +92,7 @@ class EstimatesPage {
     }
 
     previewEstimate() {
-        this.elements.actionsDropdown().click()
+        this.elements.actionsDropdown().first().click()
         this.elements.dropDownItems().contains('Preview').click()
     }
 
@@ -177,6 +180,32 @@ class EstimatesPage {
         }
         cy.wait(3000)
         this.elements.previewiFrame.custName().contains(verifyThis.customername)
+    }
+
+    setRowsToHiddenPrice = (hiddenOrder) => {
+        hiddenOrder.forEach((i,index) => {
+            if (i === true) {
+                this.elements.tableRowEllipse().eq(index).click()
+                this.elements.tableRowEllipseItem().contains('Hide price').click({ force: true })
+            }
+        })
+
+    }
+
+    setRowsToHiddenLine = (hiddenOrder) => {
+        hiddenOrder.forEach((i,index) => {
+            if (i === true) {
+                this.elements.tableRowEllipse().eq(index).click()
+                this.elements.tableRowEllipseItem().contains('Hide line').click({ force: true })
+            }
+        })
+
+    }
+
+    checkEstimatePreviewValues = (customerInfo) => {
+        // this.elements.previewiFrame.note().should('have.value', customerInfo.note.toString())
+        cy.frameLoaded('#contentHolder')
+        cy.iframe('#contentHolder').find('p')
     }
 
     calcGrandTotal = (subTotal, discount) => {
@@ -320,7 +349,7 @@ class EstimatesPage {
         this.elements.setInvoiceDiscountModalSaveButton().click()
     }
 
-   
+
 
     checkInvoiceSubtotal = () => {
         this.elements.rowTotal()
@@ -338,6 +367,11 @@ class EstimatesPage {
                 this.elements.invoiceSubTotal().contains(`$${sum}`).log(`Row total of $${sum} is equal to invoice subtotal element: ${subTotal} `)
             })
 
+
+    }
+
+    addNote = (note) => {
+        this.elements.notesForCustomerField().type(`${note}{home}`)
 
     }
 

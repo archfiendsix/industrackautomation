@@ -13,7 +13,7 @@ describe('New Estimate module', () => {
     })
 
     beforeEach(() => {
-        cy.viewport(1280, 768)
+        cy.viewport(1560, 1560)
         cy.visit('/login')
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
         // cy.get('ul.dropdown-menu.dropdown-reminders').invoke('hide')
@@ -32,8 +32,10 @@ describe('New Estimate module', () => {
         // Dashboard.clickCustomerTab()
         cy.visit('/estimatesTab/list')
         Dashboard.clickAddCustomerButton()
+        const customerInfo = {
 
-        AddCustomerPage.fillData()
+        }
+        AddCustomerPage.fillData(customerInfo)
 
 
 
@@ -50,15 +52,19 @@ describe('New Estimate module', () => {
 
 
         InventoryListPage.gotoAddNewInventory()
-
-        AddNewInventoryPage.fillData()
+        const inventoryInfo = {
+            name: 'Add Inventory',
+            useSerialNumbers: false,
+            nonTaxable: true
+        }
+        AddNewInventoryPage.fillData(inventoryInfo)
         AddNewInventoryPage.clickSaveButton()
         AddNewInventoryPage.checkSaveSuccess()
 
         /*newEstimate*/
         // Dashboard.clickEstimatesTab()
         cy.visit('/estimatesTab/list')
-        
+
         EstimatesPage.clickAddNew()
         cy.wait(4000)
         EstimatesPage.selectCustomer('Genius Giant Inc.')
@@ -239,6 +245,77 @@ describe('New Estimate module', () => {
         EstimatesPage.checkRowsTotal()
 
 
+    })
+
+    // it.only('Create estimate with notes and description added and check on preview.', () => {
+    //     // Dashboard.clickEstimatesTab()
+    //     cy.visit('/estimatesTab/list')
+    //     EstimatesPage.clickAddNew()
+    //     cy.wait(4000)
+    //     EstimatesPage.selectCustomer('Genius Giant Game Inc.')
+    //     EstimatesPage.inventorySelect('Air Filter')
+    //     cy.wait(4000)
+
+    //     const note = 'This is a test note'
+    //     EstimatesPage.addNote(note)
+    //     EstimatesPage.previewEstimate()
+    //     const customerInfoToCheck= {
+    //         note: note,
+    //     }
+    //     EstimatesPage.checkEstimatePreviewValues(customerInfoToCheck) // Can't find element
+    // })
+
+    it('Test estimate per line "hidden" function - 1 inventory added w/ hide price', () => {
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
+        EstimatesPage.clickAddNew()
+        cy.wait(4000)
+        EstimatesPage.selectCustomer('Genius Giant Game Inc.')
+        EstimatesPage.inventorySelect('Air Filter')
+        cy.wait(4000)
+        
+        const hiddenOrder = [true]
+        EstimatesPage.setRowsToHiddenPrice(hiddenOrder)
+
+
+        // EstimatesPage.previewEstimate() // Can't find element
+    })
+
+    it('Test estimate per line "hidden" function - 1 inventory added w/ hide line', () => {
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
+        EstimatesPage.clickAddNew()
+        cy.wait(4000)
+        EstimatesPage.selectCustomer('Genius Giant Game Inc.')
+        EstimatesPage.inventorySelect('Air Filter')
+        cy.wait(4000)
+        
+        const hiddenOrder = [true]
+        EstimatesPage.setRowsToHiddenLine(hiddenOrder)
+
+
+        // EstimatesPage.previewEstimate() // Can't find element
+    })
+
+    it.only('Test estimate per line "hidden" function - 3 inventory added w/ 1 visible, 1 hidden line, 1 hidden price', () => {
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
+        EstimatesPage.clickAddNew()
+        cy.wait(4000)
+        EstimatesPage.selectCustomer('Genius Giant Game Inc.')
+        EstimatesPage.inventorySelect('Air Filter')
+        cy.wait(4000)
+        EstimatesPage.inventorySelect('Inventory Item 1')
+        cy.wait(4000)
+        EstimatesPage.inventorySelect('Gaming Chair')
+        cy.wait(4000)
+        
+        const hiddenOrderPrice = [false, false, true]
+        EstimatesPage.setRowsToHiddenPrice(hiddenOrderPrice)
+
+        const hiddenOrderLine = [false, false, true]
+        EstimatesPage.setRowsToHiddenLine(hiddenOrderLine)
+        // EstimatesPage.previewEstimate() // Can't find element
     })
 
 })

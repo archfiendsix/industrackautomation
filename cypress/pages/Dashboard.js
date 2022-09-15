@@ -96,7 +96,7 @@ class Dashboard {
                     }
                 });
             } else {
-                assert.isOk('everything', 'everything is OK');
+                // assert.isOk('everything', 'everything is OK');
             }
         });
     }

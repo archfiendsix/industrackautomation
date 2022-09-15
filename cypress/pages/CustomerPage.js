@@ -5,7 +5,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     */
     elements = {
         searchBox: {
-            input: () => cy.get('.singlesearchbox input[name="searchText"]'),
+            input: () => cy.get('.topsearchbox input[name="searchText"]'),
             searchIcon: () => cy.get('.singlesearchbox button[title="Search"]'),
         },
 
@@ -29,10 +29,18 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             lastNameSort: () => cy.get('.mat-table thead button[aria-label="Change sorting for lastName"]'),
             lastNameSortArrow: () => cy.get('.mat-table thead button[aria-label="Change sorting for lastName"]+.mat-sort-header-arrow'),
             lastNameSortHeader: () => cy.get('.mat-table thead th.mat-column-lastName'),
-
+            numberCell: () => cy.get('.mat-table tbody tr td:first-child()'),
+            tagscell: () => cy.get('.mat-table tbody tr td:last-child()'),
+            tagsRow: () => cy.get('.mat-table tbody tr td'),
+            paginationDropdown: () => cy.get('.mat-paginator-page-size-label+mat-form-field'),
+            paginationDropdownOptions: () => cy.get('.mat-select-panel-wrap .mat-select-panel mat-option')
         },
         customerOverview: {
             addNewButton: () => cy.get('app-service-locations button').contains('Add New'),
+            estimatesTab: {
+                button: () => cy.get('.tabs-container.customerdetail li a').contains('Estimates'),
+                addNewButton: () => cy.get('.wrapper.wrapper-content button').contains('Add New')
+            }
         },
         addNewServiceLocationModal: {
             firstNameTextBox: () => cy.get('input#firstName'),
@@ -66,6 +74,38 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     clickAddNewServiceLocation = () => {
         this.elements.customerOverview.addNewButton().click()
+    }
+
+    gotoAddNewEstimate = () => {
+        cy.wait(1000)
+        this.elements.customerOverview.estimatesTab.button().click()
+        cy.wait(5000)
+        this.elements.customerOverview.estimatesTab.addNewButton().should('be.visible').click()
+    }
+
+    searchAndVerifyTags = (tags) => {
+        // this.setItemsPerPage()
+        tags.forEach(i => {
+            cy.log(i)
+            this.elements.searchBox.input().clear().type(i)
+            this.elements.searchBox.searchIcon().click()
+            var searchTrue = false
+            this.elements.customerTable.tagscell().each(($el) => {
+                if (cy.wrap($el).contains(i)) {
+                    searchTrue = true
+                }
+                else {
+                    searchTrue = searchTrue
+                }
+                cy.log(searchTrue)
+            })
+        })
+
+    }
+
+    setItemsPerPage = () => {
+        this.elements.customerTable.paginationDropdown().first().click()
+        this.elements.customerTable.paginationDropdownOptions().contains('100')
     }
 
 

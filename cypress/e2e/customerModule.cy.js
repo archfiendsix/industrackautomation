@@ -2,6 +2,7 @@ import LoginPage from "../pages/LoginPage";
 import Dashboard from "../pages/Dashboard"
 import AddCustomerPage from "../pages/AddCustomerPage";
 import CustomerPage from "../pages/CustomerPage";
+import { v4 as uuidv4 } from 'uuid';
 
 require('cypress-plugin-tab');
 
@@ -50,8 +51,9 @@ describe('Add Customer', () => {
   })
 
   it('Should disable save if required fields are not filled', () => {
-
-    AddCustomerPage.fillData()
+    const customerInfo = {
+    }
+    AddCustomerPage.fillData(customerInfo)
 
 
     AddCustomerPage.elements.streetAddressTextBox().clear()
@@ -68,10 +70,7 @@ describe('Add Customer', () => {
     AddCustomerPage.elements.cityTextBox().should('have.class', 'ng-invalid')
     AddCustomerPage.elements.stateTextBox().should('have.class', 'ng-invalid')
     AddCustomerPage.elements.postCodeTextBox().should('have.class', 'ng-invalid')
-    // AddCustomerPage.elements.billingStreetAddressTextbox().should('have.class', 'ng-invalid')
-    // AddCustomerPage.elements.billingCityTextbox().should('have.class', 'ng-invalid')
-    // AddCustomerPage.elements.billingStateProvinceTextbox().should('have.class', 'ng-invalid')
-    // AddCustomerPage.elements.billingPostCodeTextBox().should('have.class', 'ng-invalid')
+
   })
 
   it('Shows warning when saving unvalidated address', () => {
@@ -107,7 +106,7 @@ describe('Add Customer', () => {
 
   it('Add Service Location to a newly created Customer - Added Location has no selected tax rate', () => {
     const customerInfo = {
-      customerNumber: '192379182739812',
+      customerNumber: `CN-${uuidv4()}`,
       companyName: 'Add service location to this customer'
     }
     AddCustomerPage.fillData(customerInfo)
@@ -126,7 +125,7 @@ describe('Add Customer', () => {
 
   it('Add Service Location to a newly created Customer - Tax Rate Added to Added Location', () => {
     const customerInfo = {
-      customerNumber: '192379182739812',
+      customerNumber: `CN-${uuidv4()}`,
       companyName: 'Add service location to this customer',
 
     }
@@ -139,10 +138,51 @@ describe('Add Customer', () => {
     }
     CustomerPage.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo)
     CustomerPage.addNewServiceLocationModal.clickSaveButton()
-    // cy.wait(5000)
-    // Dashboard.clickCustomerTab()
-    // CustomerPage.searchCustomer(customerInfo.companyName)
+
   })
+
+  it('Test with one tag and verify that tags are assigned to customer', () => {
+    Dashboard.preventNotificationCard()
+    const customerInfo = {
+      customerNumber: `CN-${uuidv4()}`,
+      companyName: 'Add Tag to this customer',
+    }
+    AddCustomerPage.fillData(customerInfo)
+    Dashboard.preventNotificationCard()
+    AddCustomerPage.validateAddress()
+
+
+    // AddCustomerPage.elements.customerNumberTextBox().then($el => {
+    //   cn = $el.text().toString()
+    // })
+    // AddCustomerPage.elements.customerNumberTextBox().invoke('val').as('cn')
+
+    AddCustomerPage.clickSaveButton()
+    const tags = ['Tag 1', 'Tag 2', 'Tag 3']
+    AddCustomerPage.addTags(tags)
+    AddCustomerPage.clickBackButton()
+
+    // CustomerPage.searchAndVerifyTags(tags) -> modify this
+
+
+  })
+
+  // it.only('Create estimate with notes and description added and check on preview.', () => { ==> modify this
+  //   Dashboard.preventNotificationCard()
+  //   const customerInfo = {
+  //     customerNumber: `CN-${uuidv4()}`,
+  //     companyName: 'Add Note to this customer and check',
+  //   }
+  //   AddCustomerPage.fillData(customerInfo)
+  //   Dashboard.preventNotificationCard()
+  //   AddCustomerPage.validateAddress()
+
+  //   AddCustomerPage.clickSaveButton()
+
+  //   // CustomerPage.searchAndVerifyTags(tags) -> modify this
+  //   CustomerPage.gotoAddNewEstimate()
+
+  // })
 
 
 })
