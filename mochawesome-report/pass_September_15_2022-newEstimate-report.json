@@ -1,0 +1,112 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-15T15:48:05.160Z",
+    "end": "2022-09-15T15:48:50.023Z",
+    "duration": 44863,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8ee6d745-a882-4b81-95e3-06815d90f6d2",
+      "title": "",
+      "fullFile": "cypress\\e2e\\newEstimate.cy.js",
+      "file": "cypress\\e2e\\newEstimate.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "30ca7a2a-f492-4cae-8f6e-04b323b696a9",
+          "title": "New Estimate module",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test estimate per line \"hidden\" function - 3 inventory added w/ 1 visible, 1 hidden line, 1 hidden price",
+              "fullTitle": "New Estimate module Test estimate per line \"hidden\" function - 3 inventory added w/ 1 visible, 1 hidden line, 1 hidden price",
+              "timedOut": null,
+              "duration": 44665,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Air Filter');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Gaming Chair');\ncy.wait(4000);\nconst hiddenOrderPrice = [false, false, true];\n_EstimatesPage.default.setRowsToHiddenPrice(hiddenOrderPrice);\nconst hiddenOrderLine = [false, false, true];\n_EstimatesPage.default.setRowsToHiddenLine(hiddenOrderLine); // EstimatesPage.previewEstimate() // Can't find element",
+              "err": {},
+              "uuid": "09c61473-aee8-4a2c-8068-f14e93626a62",
+              "parentUUID": "30ca7a2a-f492-4cae-8f6e-04b323b696a9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "09c61473-aee8-4a2c-8068-f14e93626a62"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 44665,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": true,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

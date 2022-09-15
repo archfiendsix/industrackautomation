@@ -1,0 +1,116 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2022-09-15T15:47:06.344Z",
+    "end": "2022-09-15T15:47:52.544Z",
+    "duration": 46200,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "289070ac-4141-415b-8505-97a7eeaed62d",
+      "title": "",
+      "fullFile": "cypress\\e2e\\invoicesModule.cy.js",
+      "file": "cypress\\e2e\\invoicesModule.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "525d5c9c-3c9f-429f-91cb-2c475f02baa7",
+          "title": "Invoices Module",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Add invoice and save invoice as PDF",
+              "fullTitle": "Invoices Module Add invoice and save invoice as PDF",
+              "timedOut": null,
+              "duration": 46118,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const invoiceInfo = {\n  customer: 'Ace Hardware',\n  inventoriesToAdd: ['Add Inventory - Taxable no SN'],\n  description: 'Test Description',\n  tax: 'None',\n  term: 'Not Selected'\n};\n_InvoicesPage.default.addNewInvoice(invoiceInfo);\n_InvoicesPage.default.addInvoiceDiscount('0');\n_InvoicesPage.default.saveInvoice();\n_InvoicesPage.default.previewInvoice();\n_InvoicesPage.default.clickSaveAsPDFButton();\n_InvoicesPage.default.checkSavedPDF();",
+              "err": {
+                "message": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element is detached from the DOM.\n\n`<button data-toggle=\"dropdown\" class=\"btn btn-primary btn-sm dropdown-toggle\" aria-expanded=\"false\">...</button>`\n\nCypress requires elements be attached in the DOM to interact with them.\n\nThe previous command that ran was:\n\n  > `cy.contains()`\n\nThis DOM element likely became detached somewhere between the previous and current command.\n\nCommon situations why this happens:\n  - Your JS framework re-rendered asynchronously\n  - Your app code reacted to an event firing and removed the element\n\nYou typically need to re-query for the element or add 'guards' which delay Cypress from running new commands.\n\nhttps://on.cypress.io/element-has-detached-from-dom",
+                "estack": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element is detached from the DOM.\n\n`<button data-toggle=\"dropdown\" class=\"btn btn-primary btn-sm dropdown-toggle\" aria-expanded=\"false\">...</button>`\n\nCypress requires elements be attached in the DOM to interact with them.\n\nThe previous command that ran was:\n\n  > `cy.contains()`\n\nThis DOM element likely became detached somewhere between the previous and current command.\n\nCommon situations why this happens:\n  - Your JS framework re-rendered asynchronously\n  - Your app code reacted to an event firing and removed the element\n\nYou typically need to re-query for the element or add 'guards' which delay Cypress from running new commands.\n\nhttps://on.cypress.io/element-has-detached-from-dom\n    at $Cy.ensureAttached (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:147383:76)\n    at runAllChecks (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133235:12)\n    at retryActionability (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133315:16)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152495:65)\n    at <unknown> (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151949:14)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at <unknown> (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46)\nFrom Your Spec Code:\n    at InvoicesPage.eval [as previewInvoice] (webpack:///./cypress/pages/InvoicesPage.js:132:69)\n    at Context.eval (webpack:///./cypress/e2e/invoicesModule.cy.js:136:21)",
+                "diff": null
+              },
+              "uuid": "c7968477-dd9e-458a-94fd-eaecc49e0213",
+              "parentUUID": "525d5c9c-3c9f-429f-91cb-2c475f02baa7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "c7968477-dd9e-458a-94fd-eaecc49e0213"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 46118,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": true,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
