@@ -1,0 +1,112 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-16T15:57:25.068Z",
+    "end": "2022-09-16T15:58:28.633Z",
+    "duration": 63565,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6bbadeb6-0758-418a-a341-854bc9a2bfdc",
+      "title": "",
+      "fullFile": "cypress\\e2e\\newEstimate.cy.js",
+      "file": "cypress\\e2e\\newEstimate.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "67b1d14d-75d4-4f80-aadd-8d07fc5ffa5d",
+          "title": "New Estimate module",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "New Estimate - Arrange items - Check if items are applied/arranged correctly",
+              "fullTitle": "New Estimate module New Estimate - Arrange items - Check if items are applied/arranged correctly",
+              "timedOut": null,
+              "duration": 63467,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_Dashboard.default.preventNotificationCard();\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Air Filter');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Gaming Chair');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Add Inventory - Taxable no SN');\ncy.wait(4000);",
+              "err": {},
+              "uuid": "b9c41ec5-3ff4-4b19-977d-4e9572653e17",
+              "parentUUID": "67b1d14d-75d4-4f80-aadd-8d07fc5ffa5d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b9c41ec5-3ff4-4b19-977d-4e9572653e17"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 63467,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": true,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
