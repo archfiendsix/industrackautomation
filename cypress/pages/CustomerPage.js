@@ -1,3 +1,5 @@
+const AddCustomerPage = require("./AddCustomerPage")
+
 class CustomerPage {
 
     /*
@@ -8,6 +10,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             input: () => cy.get('.topsearchbox input[name="searchText"]'),
             searchIcon: () => cy.get('.singlesearchbox button[title="Search"]'),
         },
+        validateAddress: () => cy.get('a').contains('Validate address'),
 
         addNewButton: () => cy.get('button[data-target="#modalAddNewCustomer"]'),
         moreActionsDropdown: {
@@ -15,6 +18,22 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             addNewCustomert: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Add New Customer'),
             manageCustomerGroups: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Manage Customer Groups'),
             showInactiveCustomers: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Show Inactive Customers'),
+            showActiveCustomers: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Show Active Customers'),
+            manageCustomerGroups: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Manage Customer Groups'),
+        },
+
+        manageCustomerGroupsModal: {
+            addNewButton: () => cy.get('app-address-group button').contains('Add New'),
+            groupNameCell:()=> cy.get('app-address-group table tbody tr td'),
+            filterTexbox: ()=>cy.get('app-address-group label[for="search"]+input'),
+            edit:()=> cy.get('.dropdown-menu a').contains('Edit').first()
+        },
+        addEditAddressGroupModal: {
+            groupNameTextbox: ()=> cy.get('app-address-group input#txtGroupName'),
+            filterTexbox: ()=>cy.get('app-address-group label[for="search"]+input'),
+            saveButton: ()=> cy.get('app-address-group .modal-footer button').contains('Save'),
+            companyNameCell: ()=> cy.get('app-edit-address-group table tbody tr'),
+            rowCheckbox:()=> cy.get('app-address-group table tbody tr'),
         },
         customerTable: {
             numberSort: () => cy.get('.mat-table thead button[aria-label="Change sorting for customerNumber"]'),
@@ -37,10 +56,28 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         },
         customerOverview: {
             addNewButton: () => cy.get('app-service-locations button').contains('Add New'),
+            editContactButton: () => cy.get('button[data-target="#modalCustomerEdit"]'),
             estimatesTab: {
                 button: () => cy.get('.tabs-container.customerdetail li a').contains('Estimates'),
                 addNewButton: () => cy.get('.wrapper.wrapper-content button').contains('Add New')
+            },
+            notesTab: {
+                button:()=> cy.get('a[href="#tab-7"]'),
+                AddOfficeNotesButton:()=> cy.get('button').contains('Add Office Notes ')
             }
+        },
+        addNewNoteModal: {
+            noteTextTextarea: ()=> cy.get('app-note-edit-form textarea#note'),
+            siteNoteCheckbox:()=> cy.get('app-note-edit-form input#isSiteMap'),
+            assignNoteToaServiceLocationField: ()=> cy.get('app-note-edit-form mat-select#serviceLocationId'),
+            assignNoteToaServiceLocationFieldOption:()=> cy.get('app-note-edit-form #serviceLocationId-panel mat-option'),
+        },
+
+        editCustomerModal: {
+            makeInactiveButton: () => cy.get('app-customers-edit-form .modal-footer button').contains('Make Inactive'),
+            makeActiveButton: () => cy.get('app-customers-edit-form .modal-footer button').contains('Make Active'),
+            saveButton: () => cy.get('app-customers-edit-form .modal-footer button').contains('Save'),
+            closeButton: () => cy.get('app-customers-edit-form .modal-footer button').contains('Close'),
         },
         addNewServiceLocationModal: {
             firstNameTextBox: () => cy.get('input#firstName'),
@@ -59,6 +96,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             selectATaxRateField: () => cy.get('mat-select#taxRateID'),
             selectATaxRateFieldOption: () => cy.get('mat-option'),
             saveButton: () => cy.get('app-location-edit-form .modal-footer button').contains('Save')
+        },
+
+        validateAddressModal: {
+            okButton: () => cy.get('validate-coordinates-modal button').contains('Ok')
         }
 
     }
@@ -67,10 +108,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.addNewButton().click()
     }
 
-    searchCustomer = (text) => {
-        this.elements.searchBox.input().type(text)
-        this.elements.searchBox.searchIcon().click()
-    }
+    // searchCustomer = (text) => {
+    //     this.elements.searchBox.input().clear().type(text)
+    //     this.elements.searchBox.searchIcon().click()
+    // }
 
     clickAddNewServiceLocation = () => {
         this.elements.customerOverview.addNewButton().click()
@@ -81,6 +122,39 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.customerOverview.estimatesTab.button().click()
         cy.wait(5000)
         this.elements.customerOverview.estimatesTab.addNewButton().should('be.visible').click()
+    }
+
+    gotoManageCustomerGroups = () => {
+        this.elements.moreActionsDropdown.button().click()
+        this.elements.moreActionsDropdown.manageCustomerGroups().click()
+        this.elements.manageCustomerGroupsModal.addNewButton().click()
+    }
+
+    gotoNotesTab = ()=> {
+        this.elements.customerOverview.notesTab.button().click()
+    }
+
+    clickAddOfficeNotesButton=()=> {
+        this.elements.customerOverview.notesTab.AddOfficeNotesButton().click()
+    }
+
+    addAddressGroup=(addressGroupInfo)=> {
+        this.elements.addEditAddressGroupModal.groupNameTextbox().clear().type(addressGroupInfo.groupName)
+        cy.wait(1500)
+        this.elements.addEditAddressGroupModal.filterTexbox().last().clear().type(addressGroupInfo.companyName)
+        cy.wait(1000)
+        this.elements.addEditAddressGroupModal.companyNameCell().contains(addressGroupInfo.companyName).parent().find('input[type="checkbox"]').click()
+        this.elements.addEditAddressGroupModal.saveButton().click()
+    }
+
+    filterGroupTable=(groupName)=> {
+        this.elements.manageCustomerGroupsModal.filterTexbox().first().clear().type(groupName).type('{enter}')
+        
+    }
+
+    searchAndEditGroup=(groupName)=> {
+        this.elements.manageCustomerGroupsModal.groupNameCell().contains(groupName).parent().find('.btn-group.actions button').click()
+        this.elements.manageCustomerGroupsModal.edit().click()
     }
 
     searchAndVerifyTags = (tags) => {
@@ -108,6 +182,74 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.customerTable.paginationDropdownOptions().contains('100')
     }
 
+    makeNewCustomerInactive = () => {
+        this.elements.customerOverview.editContactButton().click()
+        this.elements.editCustomerModal.makeInactiveButton().should('be.visible').click()
+        cy.get('dialog-overview-modal button').contains('Yes').click()
+        this.elements.editCustomerModal.closeButton().click()
+
+    }
+
+    uploadAnotherAttachment= (filename)=> {
+        this.elements.customerOverview.editContactButton().click()
+        AddCustomerPage.elements.chooseFileButton().last().attachFile(filename)
+        AddCustomerPage.elements.chooseFileButton().last().click()
+        this.elements.editCustomerModal.saveButton().click()
+    }
+
+    checkAddCompanyOnAddressGroupTable=(addressGroupInfo)=> {
+        this.elements.addEditAddressGroupModal.companyNameCell().first().should('contain',addressGroupInfo.companyName)
+    }
+    makeNewCustomerActive = () => {
+        this.elements.customerOverview.editContactButton().click()
+        this.elements.editCustomerModal.makeActiveButton().should('be.visible').click()
+        cy.get('dialog-overview-modal button').contains('Yes').click()
+        this.elements.editCustomerModal.closeButton().click()
+
+    }
+
+    searchCustomer = (text) => {
+        this.elements.searchBox.input().clear().type(`${text}{enter}`)
+    }
+
+    confirmUnsearchability = (item) => {
+        this.elements.customerTable.numberCell().each($el => {
+            cy.wrap($el).should('not.contain', item.toString())
+        })
+    }
+
+    confirmSearchability = (item) => {
+        this.elements.customerTable.numberCell().each($el => {
+            cy.wrap($el).should('contain', item.toString())
+        })
+    }
+
+    searchAndClickCustomer = (customerNumber) => {
+        this.elements.customerTable.numberCell().should('contain', customerNumber).parent().click()
+
+    }
+
+
+    showInactiveCustomers = () => {
+        this.elements.moreActionsDropdown.button().click()
+        this.elements.moreActionsDropdown.showInactiveCustomers().click()
+    }
+    showActiveCustomers = () => {
+        this.elements.moreActionsDropdown.button().click()
+        this.elements.moreActionsDropdown.showActiveCustomers().click()
+    }
+
+    makeCustomerActive = (customerNumber) => {
+        // this.elements.searchBox.input().clear().type(customerNumber)
+        this.elements.customerTable.numberCell().should('contain', customerNumber).first().parent().click()
+        this.makeNewCustomerActive()
+    }
+
+    validateAddress = () => {
+        this.elements.validateAddress().click()
+        cy.wait(4000)
+        this.elements.validateAddressModal.okButton().click({ force: true })
+    }
 
     customerTable = {
         sortByNumber: (ascDesc) => {
@@ -182,18 +324,18 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
                 country: newCustomerInfo.country || 'United States of America',
                 selectATaxRate: newCustomerInfo.selectATaxRate || 'Not Selected'
             }
-            this.elements.addNewServiceLocationModal.firstNameTextBox().type(inputCustomerInfo.firstName)
-            this.elements.addNewServiceLocationModal.lastNameTextBox().type(inputCustomerInfo.lastName)
-            this.elements.addNewServiceLocationModal.phoneNumberTextBox().type(inputCustomerInfo.phone)
-            this.elements.addNewServiceLocationModal.phoneNumberTextBox().type(inputCustomerInfo.phone)
-            this.elements.addNewServiceLocationModal.emailAddressTextBox().type(inputCustomerInfo.email)
-            this.elements.addNewServiceLocationModal.locationNameTextBox().type(inputCustomerInfo.locationName)
-            this.elements.addNewServiceLocationModal.streetAddressTextBox().type(inputCustomerInfo.street)
-            this.elements.addNewServiceLocationModal.unitNumberTextBox().type(inputCustomerInfo.unitNumber)
-            this.elements.addNewServiceLocationModal.cityTextBox().type(inputCustomerInfo.city)
-            this.elements.addNewServiceLocationModal.stateTextBox().type(inputCustomerInfo.state)
-            this.elements.addNewServiceLocationModal.postCodeTextBox().type(inputCustomerInfo.zip)
-            this.elements.addNewServiceLocationModal.countryTextBox().type(inputCustomerInfo.country)
+            this.elements.addNewServiceLocationModal.firstNameTextBox().clear().type(inputCustomerInfo.firstName)
+            this.elements.addNewServiceLocationModal.lastNameTextBox().clear().type(inputCustomerInfo.lastName)
+            this.elements.addNewServiceLocationModal.phoneNumberTextBox().clear().type(inputCustomerInfo.phone)
+            this.elements.addNewServiceLocationModal.phoneNumberTextBox().clear().type(inputCustomerInfo.phone)
+            this.elements.addNewServiceLocationModal.emailAddressTextBox().clear().type(inputCustomerInfo.email)
+            this.elements.addNewServiceLocationModal.locationNameTextBox().clear().type(inputCustomerInfo.locationName)
+            this.elements.addNewServiceLocationModal.streetAddressTextBox().clear().type(inputCustomerInfo.street)
+            this.elements.addNewServiceLocationModal.unitNumberTextBox().clear().type(inputCustomerInfo.unitNumber)
+            this.elements.addNewServiceLocationModal.cityTextBox().clear().type(inputCustomerInfo.city)
+            this.elements.addNewServiceLocationModal.stateTextBox().clear().type(inputCustomerInfo.state)
+            this.elements.addNewServiceLocationModal.postCodeTextBox().clear().type(inputCustomerInfo.zip)
+            this.elements.addNewServiceLocationModal.countryTextBox().clear().type(inputCustomerInfo.country)
             this.elements.addNewServiceLocationModal.selectATaxRateField().click()
             this.elements.addNewServiceLocationModal.selectATaxRateFieldOption().contains(inputCustomerInfo.selectATaxRate).first().click()
         },

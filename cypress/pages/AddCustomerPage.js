@@ -20,7 +20,8 @@ class AddCustomerPage {
         countryTextBox: () => cy.get('input#country'),
         emailErrror: () => cy.get('input#emailAddress+.alert'),
         warningModal: () => cy.get('.cdk-overlay-pane.warningModal .mat-dialog-content p'),
-        addressValidityWarningModalConfirm: () => cy.get('.cdk-overlay-pane.warningModal .mat-dialog-actions .btn.btn-primary.mat-button.mat-button-base'),
+        addressValidityWarningModalConfirm: () => cy.get('buton').contains('Yes'),
+        chooseFileButton:()=> cy.get('input#inputDocument'),
         sameAsCompanyCheckbox: () => cy.get('input#billingAddressEquals'),
         billingStreetAddressTextbox: () => cy.get('input#billingStreetAddress'),
         billingCityTextbox: () => cy.get('input#billingCity'),
@@ -81,25 +82,29 @@ class AddCustomerPage {
             state: newCustomerInfo.state || 'CA',
             zip: newCustomerInfo.zip || '93901',
             country: newCustomerInfo.country || 'United States of America',
-
+            uploadDocument: newCustomerInfo.uploadDocument|| 'img.jpg'
 
         }
-        this.elements.customerNumberTextBox().type(inputCustomerInfo.customerNumber)
-        this.elements.companyNameTextBox().type(inputCustomerInfo.companyName)
-        this.elements.firstNameTextBox().type(inputCustomerInfo.firstName)
-        this.elements.lastNameTextBox().type(inputCustomerInfo.lastName)
-        this.elements.websiteAddressTextBox().type(inputCustomerInfo.companyWebsite)
-        this.elements.phoneNumberTextBox().type(inputCustomerInfo.phone)
-        this.elements.phoneNumberTextBox().type(inputCustomerInfo.phone)
-        this.elements.emailAddressTextBox().type(inputCustomerInfo.email)
-        this.elements.faxNumberTextBox().type(inputCustomerInfo.mobile)
-        this.elements.locationNameTextBox().type(inputCustomerInfo.locationName)
-        this.elements.streetAddressTextBox().type(inputCustomerInfo.street)
-        this.elements.unitNumberTextBox().type(inputCustomerInfo.unitNumber)
-        this.elements.cityTextBox().type(inputCustomerInfo.city)
-        this.elements.stateTextBox().type(inputCustomerInfo.state)
-        this.elements.postCodeTextBox().type(inputCustomerInfo.zip)
-        this.elements.countryTextBox().type(inputCustomerInfo.country)
+        this.elements.customerNumberTextBox().clear().type(inputCustomerInfo.customerNumber)
+        this.elements.companyNameTextBox().clear().type(inputCustomerInfo.companyName)
+        this.elements.firstNameTextBox().clear().type(inputCustomerInfo.firstName)
+        this.elements.lastNameTextBox().clear().type(inputCustomerInfo.lastName)
+        this.elements.websiteAddressTextBox().clear().type(inputCustomerInfo.companyWebsite)
+        this.elements.phoneNumberTextBox().clear().type(inputCustomerInfo.phone)
+        this.elements.phoneNumberTextBox().clear().type(inputCustomerInfo.phone)
+        this.elements.emailAddressTextBox().clear().type(inputCustomerInfo.email)
+        this.elements.faxNumberTextBox().clear().type(inputCustomerInfo.mobile)
+        this.elements.locationNameTextBox().clear().type(inputCustomerInfo.locationName)
+        this.elements.streetAddressTextBox().clear().type(inputCustomerInfo.street)
+        this.elements.unitNumberTextBox().clear().type(inputCustomerInfo.unitNumber)
+        this.elements.cityTextBox().clear().type(inputCustomerInfo.city)
+        this.elements.stateTextBox().clear().type(inputCustomerInfo.state)
+        this.elements.postCodeTextBox().clear().type(inputCustomerInfo.zip)
+        this.elements.countryTextBox().clear().type(inputCustomerInfo.country)
+        this.elements.chooseFileButton().attachFile(inputCustomerInfo.uploadDocument)
+
+        this.elements.validateAddress().click()
+        cy.get('button').contains('Ok').last().click()
     }
 
     confirmValidityYes = () => {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress run --config-file=cypress.config.js --browser chrome --reporter mochawesome",
-    "test-per-spec": "npx cypress run --browser chrome --reporter mochawesome --spec \"cypress/e2e/newTaxAndTerms.cy.js\"",
+    "test-per-spec": "npx cypress run --browser chrome --reporter mochawesome --spec \"cypress/e2e/customerModule.cy.js\"",
     "merge-report": "mochawesome-merge cypress/report/mochawesome-report/*.json > cypress/report/index.json && marge cypress/report/index.json --reportDir ./cypress/report/ --inline",
     "allure-test": "npx cypress run --browser chrome --spec \"cypress/e2e/newTaxAndTerms.cy.js\" --reporter mocha-allure-reporter",
     "allure-report": "npx allure generate allure-results --clean allure-report"
@@ -16,6 +16,8 @@
     "@shelex/cypress-allure-plugin": "^2.30.2",
     "allure-commandline": "^2.18.1",
     "cypress": "^10.3.1",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-iframe": "^1.0.1",
     "cypress-plugin-tab": "^1.0.5",
     "junit-report-merger": "^4.0.0",
     "mocha-allure-reporter": "^1.4.0",
@@ -27,6 +29,7 @@
     "@shelex/cypress-allure-plugin": "^2.30.2",
     "allure-commandline": "^2.18.1",
     "cypress": "^10.3.1",
+    "cypress-file-upload": "^5.0.8",
     "cypress-iframe": "^1.0.1",
     "cypress-plugin-tab": "^1.0.5",
     "junit-report-merger": "^4.0.0",

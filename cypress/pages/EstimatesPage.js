@@ -11,7 +11,7 @@ class EstimatesPage {
         dropDownItems: () => cy.get('li a'),
         changeCustomerButton: () => cy.get('button#changeCustomerBtn'),
         tableRowEllipse: () => cy.get('.dataTable tbody tr td:last-child() button'),
-        tableRowEllipseItem: () => cy.get('.dropdown-menu li a'),
+        tableRowEllipseItem: () => cy.get('button[aria-expanded="false"]+.dropdown-menu li a'),
         statusLabel: () => cy.get('.form-inline span.status'),
         confirmYesButton: () => cy.get('.btn.btn-primary').contains('Yes'),
         addNewJobModalTitle: () => cy.get('app-job-edit-form h4.modal-title').contains('Add New Job'),
@@ -183,21 +183,40 @@ class EstimatesPage {
     }
 
     setRowsToHiddenPrice = (hiddenOrder) => {
-        hiddenOrder.forEach((i,index) => {
-            if (i === true) {
-                this.elements.tableRowEllipse().eq(index).click()
-                this.elements.tableRowEllipseItem().contains('Hide price').click({ force: true })
-            }
+        hiddenOrder.forEach((i, index) => {
+
+
+            this.elements.tableRowEllipse().eq(index).click().then($el => {
+                cy.log(`value:${i} index: ${index}`)
+                cy.wait(1800)
+                if (i == true) {
+                    this.elements.tableRowEllipseItem().contains('Hide price').last().click({force:true})
+                }
+                else {
+                    this.elements.tableRowEllipse().eq(index).click()
+                }
+            })
         })
+
 
     }
 
     setRowsToHiddenLine = (hiddenOrder) => {
-        hiddenOrder.forEach((i,index) => {
-            if (i === true) {
-                this.elements.tableRowEllipse().eq(index).click()
-                this.elements.tableRowEllipseItem().contains('Hide line').click({ force: true })
-            }
+        hiddenOrder.forEach((i, index) => {
+
+
+            this.elements.tableRowEllipse().eq(index).click().then($el => {
+                cy.log(`value:${i} index: ${index}`)
+                cy.wait(1800)
+                if (i == true) {
+
+                    this.elements.tableRowEllipseItem().contains('Hide line').last().click({force:true})
+                }
+                else {
+                    this.elements.tableRowEllipse().eq(index).click()
+                }
+            })
+
         })
 
     }
@@ -281,26 +300,9 @@ class EstimatesPage {
     }
 
     checkRowsTotal = () => {
-        // this.elements.tableRows().should('not.have.attr', 'class', 'editable').each(
-        //     // should('not.have.class', 'editable').should('not.have.class', 'subtotal')
-        //     $row => {
-        //         const total = $row.find('td').eq(11).text().replace('$', '').replace(',', '').parseFloat
-        //         // checkRowTotal=()=> {
-
-        //         // }
-        //         if (!$row.hasClass('editable')) {
-        //             cy.log(total + total)
-        //             expect()
-        //         }
-        //         else {
-        //             return
-        //         }
-        //     }
-        // )
 
 
         function checkCalc(moveEl, skuEl, nameEl, descEl, qtyEl, unitCostEl, profitEl, unitPriceEl, totalCostEl, priceEl, discountEl, totalEl) {
-            // const name = nameEl.innerText
             function currencyRoundOff(num) {
                 return (Math.round(num * 100) / 100).toFixed(2)
             }
