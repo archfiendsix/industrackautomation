@@ -5,9 +5,9 @@
     "passes": 16,
     "pending": 0,
     "failures": 0,
-    "start": "2022-09-16T15:56:12.923Z",
-    "end": "2022-09-16T16:05:49.986Z",
-    "duration": 479218,
+    "start": "2022-09-20T13:09:40.657Z",
+    "end": "2022-09-20T13:26:26.238Z",
+    "duration": 753017,
     "testsRegistered": 16,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "fbf17e7f-af9a-4c23-bc06-c1eccb2fb969",
+      "uuid": "16a0947f-20a2-473c-87b9-045ee6059d0c",
       "title": "",
       "fullFile": "cypress\\e2e\\customerModule.cy.js",
       "file": "cypress\\e2e\\customerModule.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "87be786e-7109-476f-84be-42f13306f0cb",
+          "uuid": "fea8c355-ba57-4748-a35f-0c4a7ae5f9b0",
           "title": "Add Customer",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Create new Customer - Add 2 service locations",
               "fullTitle": "Add Customer Create new Customer - Add 2 service locations",
               "timedOut": null,
-              "duration": 56904,
+              "duration": 96867,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "const rand = (0, _uuid.v4)().substring(0, 5);\nconst customerInfo = {\n  customerNumber: `Cust-${rand}`,\n  companyName: `${(0, _uuid.v4)().substring(0, 5)}-Add 2 service location to this customer`\n};\n_AddCustomerPage.default.fillData(customerInfo);\n_AddCustomerPage.default.clickSaveButton(); // AddCustomerPage.confirmValidityYes()\n\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo = {\n  firstName: 'Jennifer',\n  lastName: 'McClure',\n  phone: '3233245240',\n  email: 'edgar1996@yahoo.com',\n  locationName: 'Genius Building',\n  street: 'Par Dr',\n  unitNumber: '1926',\n  city: 'Naples',\n  state: 'FL',\n  zip: '34120',\n  country: 'United States of America',\n  selectATaxRate: 'Not Selected'\n};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton();\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo2 = {\n  firstName: 'Abdul',\n  lastName: 'Dauphin',\n  phone: '209988909',\n  email: 'jarrell.pag@hotmail.com',\n  locationName: 'Genius Building',\n  street: 'Mercer Street',\n  unitNumber: '2541',\n  city: 'Jump River',\n  state: 'WI',\n  zip: '54434',\n  country: 'United States of America',\n  selectATaxRate: 'Not Selected'\n};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo2);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton();\n_CustomerPage.default.gotoNotesTab();\n_CustomerPage.default.clickAddOfficeNotesButton();",
               "err": {},
-              "uuid": "01fc1e58-cb1b-4a58-ab75-b0e2f497eecd",
-              "parentUUID": "87be786e-7109-476f-84be-42f13306f0cb",
+              "uuid": "9f19bd25-5192-403e-87cb-cd18a3780398",
+              "parentUUID": "fea8c355-ba57-4748-a35f-0c4a7ae5f9b0",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "01fc1e58-cb1b-4a58-ab75-b0e2f497eecd"
+            "9f19bd25-5192-403e-87cb-cd18a3780398"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 56904,
+          "duration": 96867,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -76,7 +76,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "6bbadeb6-0758-418a-a341-854bc9a2bfdc",
+      "uuid": "aac94c00-3909-4d64-b135-0c4f389ed3ae",
       "title": "",
       "fullFile": "cypress\\e2e\\newEstimate.cy.js",
       "file": "cypress\\e2e\\newEstimate.cy.js",
@@ -85,7 +85,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "67b1d14d-75d4-4f80-aadd-8d07fc5ffa5d",
+          "uuid": "9f8d60bf-0e11-4a58-9f51-80eeb8855ba1",
           "title": "New Estimate module",
           "fullFile": "",
           "file": "",
@@ -96,7 +96,7 @@
               "title": "New Estimate - Arrange items - Check if items are applied/arranged correctly",
               "fullTitle": "New Estimate module New Estimate - Arrange items - Check if items are applied/arranged correctly",
               "timedOut": null,
-              "duration": 63467,
+              "duration": 79412,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -105,20 +105,20 @@
               "context": null,
               "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_Dashboard.default.preventNotificationCard();\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Air Filter');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Gaming Chair');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Add Inventory - Taxable no SN');\ncy.wait(4000);",
               "err": {},
-              "uuid": "b9c41ec5-3ff4-4b19-977d-4e9572653e17",
-              "parentUUID": "67b1d14d-75d4-4f80-aadd-8d07fc5ffa5d",
+              "uuid": "e4f30bce-d6ce-47db-8345-38ea880bebb4",
+              "parentUUID": "9f8d60bf-0e11-4a58-9f51-80eeb8855ba1",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "b9c41ec5-3ff4-4b19-977d-4e9572653e17"
+            "e4f30bce-d6ce-47db-8345-38ea880bebb4"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 63467,
+          "duration": 79412,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -134,7 +134,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "5833ada7-adb9-4d85-9950-fbaca6a4b2c7",
+      "uuid": "6cfc1088-1f47-4dcd-b579-0af3ef971918",
       "title": "",
       "fullFile": "cypress\\e2e\\scheduleModule.cy.js",
       "file": "cypress\\e2e\\scheduleModule.cy.js",
@@ -143,7 +143,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "7349e380-059f-4952-a061-4b8c7140027e",
+          "uuid": "133ad462-bca2-4e77-a258-ef6e876c1470",
           "title": "Schedule Module",
           "fullFile": "",
           "file": "",
@@ -154,7 +154,7 @@
               "title": "Should be able to save a job (required fields filled)",
               "fullTitle": "Schedule Module Should be able to save a job (required fields filled)",
               "timedOut": null,
-              "duration": 21527,
+              "duration": 37768,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -163,8 +163,8 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\n_SchedulePage.default.fillData();\n_SchedulePage.default.saveJob();",
               "err": {},
-              "uuid": "af4d1bd5-8d58-4a8c-94ee-726be0ded6fd",
-              "parentUUID": "7349e380-059f-4952-a061-4b8c7140027e",
+              "uuid": "6b4f0ad5-2e4f-4680-8e9e-1280b2c3525b",
+              "parentUUID": "133ad462-bca2-4e77-a258-ef6e876c1470",
               "isHook": false,
               "skipped": false
             },
@@ -172,7 +172,7 @@
               "title": "Should be able to dispatch a job - with 1 employee added",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with 1 employee added",
               "timedOut": null,
-              "duration": 21564,
+              "duration": 41861,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -181,8 +181,8 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "09598066-80d5-46d8-bd67-fa101d8b72a5",
-              "parentUUID": "7349e380-059f-4952-a061-4b8c7140027e",
+              "uuid": "0c63ef40-4944-4eba-89c6-577743ee4c7d",
+              "parentUUID": "133ad462-bca2-4e77-a258-ef6e876c1470",
               "isHook": false,
               "skipped": false
             },
@@ -190,7 +190,7 @@
               "title": "Should be able to dispatch a job - with employee added - 0hrs 0mins duration",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added - 0hrs 0mins duration",
               "timedOut": null,
-              "duration": 20874,
+              "duration": 41097,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -199,8 +199,8 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "ff6feca2-33c2-45f6-b076-6db836405d69",
-              "parentUUID": "7349e380-059f-4952-a061-4b8c7140027e",
+              "uuid": "eec6a31b-2612-4d0c-83bc-e12faee87a21",
+              "parentUUID": "133ad462-bca2-4e77-a258-ef6e876c1470",
               "isHook": false,
               "skipped": false
             },
@@ -208,7 +208,7 @@
               "title": "Should be able to dispatch a job - with employee added (with 8 hrs duration)",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added (with 8 hrs duration)",
               "timedOut": null,
-              "duration": 21269,
+              "duration": 40238,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -217,8 +217,8 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 8,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "70b1329b-8baa-4f56-93a9-a0c7283101d2",
-              "parentUUID": "7349e380-059f-4952-a061-4b8c7140027e",
+              "uuid": "819d6db9-3ed1-420a-9ad9-d18ac3cbbea7",
+              "parentUUID": "133ad462-bca2-4e77-a258-ef6e876c1470",
               "isHook": false,
               "skipped": false
             },
@@ -226,7 +226,7 @@
               "title": "Should be able to dispatch a job - with Job Template added",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with Job Template added",
               "timedOut": null,
-              "duration": 31229,
+              "duration": 59692,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -235,8 +235,8 @@
               "context": null,
               "code": "cy.log('Add template');\n_Dashboard.default.gotoJobTemplates();\n_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\nconst templateName = 'Snow blowing';\n_SchedulePage.default.addJobTemplate(templateName);\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "f3d28f56-3e55-45a5-8819-1690eb15a8b5",
-              "parentUUID": "7349e380-059f-4952-a061-4b8c7140027e",
+              "uuid": "5d68de9c-3a75-484a-8f8f-1f5969b7de83",
+              "parentUUID": "133ad462-bca2-4e77-a258-ef6e876c1470",
               "isHook": false,
               "skipped": false
             },
@@ -244,7 +244,7 @@
               "title": "Should be able to dispatch a job - with employee added - with Task added (Task Name only)",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added - with Task added (Task Name only)",
               "timedOut": null,
-              "duration": 23658,
+              "duration": 42043,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -253,25 +253,25 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.clickTasksTab();\nconst task = {\n  taskName: 'New Task'\n};\n_SchedulePage.default.createNewTask(task);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "b146c769-0555-4cc2-a216-8d01b24063d0",
-              "parentUUID": "7349e380-059f-4952-a061-4b8c7140027e",
+              "uuid": "8c8aeee3-760d-4822-bf23-bc7ba5393437",
+              "parentUUID": "133ad462-bca2-4e77-a258-ef6e876c1470",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "af4d1bd5-8d58-4a8c-94ee-726be0ded6fd",
-            "09598066-80d5-46d8-bd67-fa101d8b72a5",
-            "ff6feca2-33c2-45f6-b076-6db836405d69",
-            "70b1329b-8baa-4f56-93a9-a0c7283101d2",
-            "f3d28f56-3e55-45a5-8819-1690eb15a8b5",
-            "b146c769-0555-4cc2-a216-8d01b24063d0"
+            "6b4f0ad5-2e4f-4680-8e9e-1280b2c3525b",
+            "0c63ef40-4944-4eba-89c6-577743ee4c7d",
+            "eec6a31b-2612-4d0c-83bc-e12faee87a21",
+            "819d6db9-3ed1-420a-9ad9-d18ac3cbbea7",
+            "5d68de9c-3a75-484a-8f8f-1f5969b7de83",
+            "8c8aeee3-760d-4822-bf23-bc7ba5393437"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 140121,
+          "duration": 262699,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -287,7 +287,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "dfa2de1a-a803-455e-b22f-96879edb511f",
+      "uuid": "a0ce4e68-609c-4a99-9f9c-6d41cc9512c4",
       "title": "",
       "fullFile": "cypress\\e2e\\settings_inventoryModule.cy.js",
       "file": "cypress\\e2e\\settings_inventoryModule.cy.js",
@@ -296,7 +296,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "9c441222-fde8-43e5-8b35-373725777219",
+          "uuid": "edd3e58a-56ad-4303-a0bd-c562722263e3",
           "title": "Add Inventory",
           "fullFile": "",
           "file": "",
@@ -307,7 +307,7 @@
               "title": "Successfully add an Inventory - Not using serial #s, None Taxable",
               "fullTitle": "Add Inventory Successfully add an Inventory - Not using serial #s, None Taxable",
               "timedOut": null,
-              "duration": 30562,
+              "duration": 42684,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -316,8 +316,8 @@
               "context": null,
               "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  name: 'Add Inventory - Taxable no SN',\n  useSerialNumbers: false,\n  nonTaxable: true\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();\n_AddNewInventoryPage.default.checkSaveSuccess();",
               "err": {},
-              "uuid": "f482613f-be33-4230-b496-68ec7efde30e",
-              "parentUUID": "9c441222-fde8-43e5-8b35-373725777219",
+              "uuid": "2d816209-b048-4bc9-a41b-f491ad3ac668",
+              "parentUUID": "edd3e58a-56ad-4303-a0bd-c562722263e3",
               "isHook": false,
               "skipped": false
             },
@@ -325,7 +325,7 @@
               "title": "Successfully add an Inventory - Not using serial #s, Taxable",
               "fullTitle": "Add Inventory Successfully add an Inventory - Not using serial #s, Taxable",
               "timedOut": null,
-              "duration": 30189,
+              "duration": 39439,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -334,8 +334,8 @@
               "context": null,
               "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  name: 'Add Inventory - Taxable no SN',\n  useSerialNumbers: false,\n  nonTaxable: false\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();\n_AddNewInventoryPage.default.checkSaveSuccess();",
               "err": {},
-              "uuid": "d1e5c51a-c146-4104-b640-ccb9eb4f2a2b",
-              "parentUUID": "9c441222-fde8-43e5-8b35-373725777219",
+              "uuid": "dc8646a9-e6cf-4116-90d5-26ae98087b55",
+              "parentUUID": "edd3e58a-56ad-4303-a0bd-c562722263e3",
               "isHook": false,
               "skipped": false
             },
@@ -343,7 +343,7 @@
               "title": "(Negative) Save unsuccessful when you click save after leaving required fields blank",
               "fullTitle": "Add Inventory (Negative) Save unsuccessful when you click save after leaving required fields blank",
               "timedOut": null,
-              "duration": 29456,
+              "duration": 40709,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -352,8 +352,8 @@
               "context": null,
               "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  name: ''\n};\n_AddNewInventoryPage.default.elements.nameTextBox().click().clear().type('{backspace}');\n_AddNewInventoryPage.default.fillData(inventoryInfo); // AddNewInventoryPage.clickSaveButton()\n// AddNewInventoryPage.checkNameError()",
               "err": {},
-              "uuid": "e16cfe5d-e186-4377-b8c6-75f5420e2f76",
-              "parentUUID": "9c441222-fde8-43e5-8b35-373725777219",
+              "uuid": "7f5a6a54-6777-4e18-b7df-fb048e7b722d",
+              "parentUUID": "edd3e58a-56ad-4303-a0bd-c562722263e3",
               "isHook": false,
               "skipped": false
             },
@@ -361,7 +361,7 @@
               "title": "Add an inventory that is set to non taxable - quantity on hand: 1, Reorder Point: 1",
               "fullTitle": "Add Inventory Add an inventory that is set to non taxable - quantity on hand: 1, Reorder Point: 1",
               "timedOut": null,
-              "duration": 28704,
+              "duration": 41664,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -370,8 +370,8 @@
               "context": null,
               "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  name: 'NonTaxable',\n  nonTaxable: true\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();",
               "err": {},
-              "uuid": "7e901ae9-3a25-4d1a-ad38-caba3799f81e",
-              "parentUUID": "9c441222-fde8-43e5-8b35-373725777219",
+              "uuid": "7158027e-4eb9-4454-8ffe-498055e8165c",
+              "parentUUID": "edd3e58a-56ad-4303-a0bd-c562722263e3",
               "isHook": false,
               "skipped": false
             },
@@ -379,7 +379,7 @@
               "title": "Add an inventory that is set to non taxable - Use Serial #'s and serial numbers by batch to increase quantity on hand",
               "fullTitle": "Add Inventory Add an inventory that is set to non taxable - Use Serial #'s and serial numbers by batch to increase quantity on hand",
               "timedOut": null,
-              "duration": 33524,
+              "duration": 50433,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -388,8 +388,8 @@
               "context": null,
               "code": "_inventory.InventoryListPage.gotoAddNewInventory(); // it('test', () => {\n//     const uuid = () => Cypress._.random(0, 1e20)\n//     const id = uuid()\n// })\n// let randomId = () => {\n//   const uuid = () => Cypress._.random(0, 500)\n//   const id = uuid()\n//   return id.toString()\n// }\n\nconst inventoryInfo = {\n  sku: `SKU${(0, _uuid.v4)()}`,\n  name: 'serialNumbers Added',\n  nonTaxable: true,\n  useSerialNumbers: true,\n  serialNumbers: [`SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`]\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();",
               "err": {},
-              "uuid": "febc68b6-914b-4bc7-b217-b7d2b46bb9b0",
-              "parentUUID": "9c441222-fde8-43e5-8b35-373725777219",
+              "uuid": "82efdf1b-d276-458a-8e67-023f9d0f1a59",
+              "parentUUID": "edd3e58a-56ad-4303-a0bd-c562722263e3",
               "isHook": false,
               "skipped": false
             },
@@ -397,7 +397,7 @@
               "title": "Add an inventory (taxable) - Use Serial #'s and serial numbers by batch to increase quantity on hand",
               "fullTitle": "Add Inventory Add an inventory (taxable) - Use Serial #'s and serial numbers by batch to increase quantity on hand",
               "timedOut": null,
-              "duration": 32852,
+              "duration": 46560,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -406,25 +406,25 @@
               "context": null,
               "code": "_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  sku: `SKU${(0, _uuid.v4)()}`,\n  name: 'Add Inventory - SN Used',\n  useSerialNumbers: true,\n  serialNumbers: [`SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`, `SN${(0, _uuid.v4)()}`]\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton();",
               "err": {},
-              "uuid": "acb0e744-2b24-49a4-a558-3ca4f3ec683a",
-              "parentUUID": "9c441222-fde8-43e5-8b35-373725777219",
+              "uuid": "9034e2fa-508e-451f-8111-8a52ea39d1ba",
+              "parentUUID": "edd3e58a-56ad-4303-a0bd-c562722263e3",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "f482613f-be33-4230-b496-68ec7efde30e",
-            "d1e5c51a-c146-4104-b640-ccb9eb4f2a2b",
-            "e16cfe5d-e186-4377-b8c6-75f5420e2f76",
-            "7e901ae9-3a25-4d1a-ad38-caba3799f81e",
-            "febc68b6-914b-4bc7-b217-b7d2b46bb9b0",
-            "acb0e744-2b24-49a4-a558-3ca4f3ec683a"
+            "2d816209-b048-4bc9-a41b-f491ad3ac668",
+            "dc8646a9-e6cf-4116-90d5-26ae98087b55",
+            "7f5a6a54-6777-4e18-b7df-fb048e7b722d",
+            "7158027e-4eb9-4454-8ffe-498055e8165c",
+            "82efdf1b-d276-458a-8e67-023f9d0f1a59",
+            "9034e2fa-508e-451f-8111-8a52ea39d1ba"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 185287,
+          "duration": 261489,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -440,7 +440,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "a077caf9-99ed-4028-94d7-6a9483f9f2ed",
+      "uuid": "a89f9eff-bdfe-4db4-8297-da15e9bf2876",
       "title": "",
       "fullFile": "cypress\\e2e\\settings_newTaxAndTerms.cy.js",
       "file": "cypress\\e2e\\settings_newTaxAndTerms.cy.js",
@@ -449,7 +449,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "98e72d18-9dfc-4446-926a-a1df7d3c3ebc",
+          "uuid": "f3fd6d6f-ff4e-48bf-884e-fa1853eb575f",
           "title": "New Tax and Terms Module",
           "fullFile": "",
           "file": "",
@@ -460,7 +460,7 @@
               "title": "Basic Add new tax function",
               "fullTitle": "New Tax and Terms Module Basic Add new tax function",
               "timedOut": null,
-              "duration": 18038,
+              "duration": 28998,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -469,8 +469,8 @@
               "context": null,
               "code": "_company_settings.TaxAndTermsPage.addNewTax();\n_company_settings.TaxAndTermsPage.fillAddNewTaxForm('New Tax', 3);\n_company_settings.TaxAndTermsPage.saveAddNewTaxForm();",
               "err": {},
-              "uuid": "915c70c1-c5dd-4d80-9c00-7dfa5b409af0",
-              "parentUUID": "98e72d18-9dfc-4446-926a-a1df7d3c3ebc",
+              "uuid": "49127424-291e-43f8-95f1-3a87095b5029",
+              "parentUUID": "f3fd6d6f-ff4e-48bf-884e-fa1853eb575f",
               "isHook": false,
               "skipped": false
             },
@@ -478,7 +478,7 @@
               "title": "Basic Add new term function",
               "fullTitle": "New Tax and Terms Module Basic Add new term function",
               "timedOut": null,
-              "duration": 15401,
+              "duration": 23552,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -487,21 +487,21 @@
               "context": null,
               "code": "_company_settings.TaxAndTermsPage.gotoTermsTab();\n_company_settings.TaxAndTermsPage.addNewTerm();\n_company_settings.TaxAndTermsPage.fillAddNewTermForm('New Term');\n_company_settings.TaxAndTermsPage.saveAddNewTermForm();",
               "err": {},
-              "uuid": "687c1168-7f0e-414d-8438-b3bad7c4e107",
-              "parentUUID": "98e72d18-9dfc-4446-926a-a1df7d3c3ebc",
+              "uuid": "3e7a7d86-c8cc-414f-9aef-06042cbc346e",
+              "parentUUID": "f3fd6d6f-ff4e-48bf-884e-fa1853eb575f",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "915c70c1-c5dd-4d80-9c00-7dfa5b409af0",
-            "687c1168-7f0e-414d-8438-b3bad7c4e107"
+            "49127424-291e-43f8-95f1-3a87095b5029",
+            "3e7a7d86-c8cc-414f-9aef-06042cbc346e"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 33439,
+          "duration": 52550,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
