@@ -5,9 +5,9 @@
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2022-09-20T13:25:33.344Z",
-    "end": "2022-09-20T13:26:26.238Z",
-    "duration": 52894,
+    "start": "2022-09-20T15:41:49.985Z",
+    "end": "2022-09-20T15:42:31.149Z",
+    "duration": 41164,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "a89f9eff-bdfe-4db4-8297-da15e9bf2876",
+      "uuid": "4e24e706-5640-4c8b-bff1-48a6ef73e743",
       "title": "",
       "fullFile": "cypress\\e2e\\settings_newTaxAndTerms.cy.js",
       "file": "cypress\\e2e\\settings_newTaxAndTerms.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "f3fd6d6f-ff4e-48bf-884e-fa1853eb575f",
+          "uuid": "f5356aa0-f4de-43f7-ab93-e505ff8e1f59",
           "title": "New Tax and Terms Module",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Basic Add new tax function",
               "fullTitle": "New Tax and Terms Module Basic Add new tax function",
               "timedOut": null,
-              "duration": 28998,
+              "duration": 21821,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,8 +47,8 @@
               "context": null,
               "code": "_company_settings.TaxAndTermsPage.addNewTax();\n_company_settings.TaxAndTermsPage.fillAddNewTaxForm('New Tax', 3);\n_company_settings.TaxAndTermsPage.saveAddNewTaxForm();",
               "err": {},
-              "uuid": "49127424-291e-43f8-95f1-3a87095b5029",
-              "parentUUID": "f3fd6d6f-ff4e-48bf-884e-fa1853eb575f",
+              "uuid": "a8ef3390-9238-4207-8748-a35f06734117",
+              "parentUUID": "f5356aa0-f4de-43f7-ab93-e505ff8e1f59",
               "isHook": false,
               "skipped": false
             },
@@ -56,7 +56,7 @@
               "title": "Basic Add new term function",
               "fullTitle": "New Tax and Terms Module Basic Add new term function",
               "timedOut": null,
-              "duration": 23552,
+              "duration": 19202,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -65,21 +65,21 @@
               "context": null,
               "code": "_company_settings.TaxAndTermsPage.gotoTermsTab();\n_company_settings.TaxAndTermsPage.addNewTerm();\n_company_settings.TaxAndTermsPage.fillAddNewTermForm('New Term');\n_company_settings.TaxAndTermsPage.saveAddNewTermForm();",
               "err": {},
-              "uuid": "3e7a7d86-c8cc-414f-9aef-06042cbc346e",
-              "parentUUID": "f3fd6d6f-ff4e-48bf-884e-fa1853eb575f",
+              "uuid": "70387db1-88a7-4eaa-87fb-69a1a1f95df2",
+              "parentUUID": "f5356aa0-f4de-43f7-ab93-e505ff8e1f59",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "49127424-291e-43f8-95f1-3a87095b5029",
-            "3e7a7d86-c8cc-414f-9aef-06042cbc346e"
+            "a8ef3390-9238-4207-8748-a35f06734117",
+            "70387db1-88a7-4eaa-87fb-69a1a1f95df2"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 52550,
+          "duration": 41023,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

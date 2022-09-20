@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2022-09-20T13:09:40.657Z",
-    "end": "2022-09-20T13:11:18.033Z",
-    "duration": 97376,
+    "start": "2022-09-20T15:31:31.812Z",
+    "end": "2022-09-20T15:32:46.930Z",
+    "duration": 75118,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "16a0947f-20a2-473c-87b9-045ee6059d0c",
+      "uuid": "e4942b66-f51a-4104-b4f0-9d6961c3b159",
       "title": "",
       "fullFile": "cypress\\e2e\\customerModule.cy.js",
       "file": "cypress\\e2e\\customerModule.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "fea8c355-ba57-4748-a35f-0c4a7ae5f9b0",
+          "uuid": "8412703a-89c2-4b0b-b8a4-67a6d298fd74",
           "title": "Add Customer",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Create new Customer - Add 2 service locations",
               "fullTitle": "Add Customer Create new Customer - Add 2 service locations",
               "timedOut": null,
-              "duration": 96867,
+              "duration": 74987,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "const rand = (0, _uuid.v4)().substring(0, 5);\nconst customerInfo = {\n  customerNumber: `Cust-${rand}`,\n  companyName: `${(0, _uuid.v4)().substring(0, 5)}-Add 2 service location to this customer`\n};\n_AddCustomerPage.default.fillData(customerInfo);\n_AddCustomerPage.default.clickSaveButton(); // AddCustomerPage.confirmValidityYes()\n\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo = {\n  firstName: 'Jennifer',\n  lastName: 'McClure',\n  phone: '3233245240',\n  email: 'edgar1996@yahoo.com',\n  locationName: 'Genius Building',\n  street: 'Par Dr',\n  unitNumber: '1926',\n  city: 'Naples',\n  state: 'FL',\n  zip: '34120',\n  country: 'United States of America',\n  selectATaxRate: 'Not Selected'\n};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton();\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo2 = {\n  firstName: 'Abdul',\n  lastName: 'Dauphin',\n  phone: '209988909',\n  email: 'jarrell.pag@hotmail.com',\n  locationName: 'Genius Building',\n  street: 'Mercer Street',\n  unitNumber: '2541',\n  city: 'Jump River',\n  state: 'WI',\n  zip: '54434',\n  country: 'United States of America',\n  selectATaxRate: 'Not Selected'\n};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo2);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton();\n_CustomerPage.default.gotoNotesTab();\n_CustomerPage.default.clickAddOfficeNotesButton();",
               "err": {},
-              "uuid": "9f19bd25-5192-403e-87cb-cd18a3780398",
-              "parentUUID": "fea8c355-ba57-4748-a35f-0c4a7ae5f9b0",
+              "uuid": "512e79de-1900-4c90-8068-63166f33de27",
+              "parentUUID": "8412703a-89c2-4b0b-b8a4-67a6d298fd74",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "9f19bd25-5192-403e-87cb-cd18a3780398"
+            "512e79de-1900-4c90-8068-63166f33de27"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 96867,
+          "duration": 74987,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

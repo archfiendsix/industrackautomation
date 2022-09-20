@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2022-09-20T13:12:04.572Z",
-    "end": "2022-09-20T13:13:24.240Z",
-    "duration": 79668,
+    "start": "2022-09-20T15:33:08.560Z",
+    "end": "2022-09-20T15:34:14.867Z",
+    "duration": 66307,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "aac94c00-3909-4d64-b135-0c4f389ed3ae",
+      "uuid": "271410e5-79a1-4164-9c27-80301292e760",
       "title": "",
       "fullFile": "cypress\\e2e\\newEstimate.cy.js",
       "file": "cypress\\e2e\\newEstimate.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "9f8d60bf-0e11-4a58-9f51-80eeb8855ba1",
+          "uuid": "661ff391-4bee-4c74-9d83-f4c6e0b1e6a9",
           "title": "New Estimate module",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "New Estimate - Arrange items - Check if items are applied/arranged correctly",
               "fullTitle": "New Estimate module New Estimate - Arrange items - Check if items are applied/arranged correctly",
               "timedOut": null,
-              "duration": 79412,
+              "duration": 66154,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "// Dashboard.clickEstimatesTab()\ncy.visit('/estimatesTab/list');\n_Dashboard.default.preventNotificationCard();\n_EstimatesPage.default.clickAddNew();\ncy.wait(4000);\n_EstimatesPage.default.selectCustomer('Genius Giant Game Inc.');\n_EstimatesPage.default.inventorySelect('Air Filter');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Inventory Item 1');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Gaming Chair');\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect('Add Inventory - Taxable no SN');\ncy.wait(4000);",
               "err": {},
-              "uuid": "e4f30bce-d6ce-47db-8345-38ea880bebb4",
-              "parentUUID": "9f8d60bf-0e11-4a58-9f51-80eeb8855ba1",
+              "uuid": "9c6b1fb4-7fe7-459d-910a-082888392cec",
+              "parentUUID": "661ff391-4bee-4c74-9d83-f4c6e0b1e6a9",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "e4f30bce-d6ce-47db-8345-38ea880bebb4"
+            "9c6b1fb4-7fe7-459d-910a-082888392cec"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 79412,
+          "duration": 66154,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
