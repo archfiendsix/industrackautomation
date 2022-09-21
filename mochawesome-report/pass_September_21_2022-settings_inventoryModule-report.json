@@ -1,0 +1,112 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-21T12:32:00.018Z",
+    "end": "2022-09-21T12:33:14.966Z",
+    "duration": 74948,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5d20d6a0-a527-4317-b45e-f33b292c1b7a",
+      "title": "",
+      "fullFile": "cypress\\e2e\\settings_inventoryModule.cy.js",
+      "file": "cypress\\e2e\\settings_inventoryModule.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "acfc31c7-abd6-41bf-b2c0-5b2895f711fa",
+          "title": "Add Inventory",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Add Inventory - Add Non-inventory - Add Service - Add Assembly",
+              "fullTitle": "Add Inventory Add Inventory - Add Non-inventory - Add Service - Add Assembly",
+              "timedOut": null,
+              "duration": 74740,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Add Inventory\n_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  sku: `SKU${(0, _uuid.v4)()}`,\n  name: `Inventory-${(0, _uuid.v4)().substring(0, 5)}`,\n  useSerialNumbers: false\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton(); // Add Non Inventory\n\n_inventory.InventoryListPage.gotoAddNewNonInventoryModal();\nlet randName = (0, _uuid.v4)().substring(0, 5);\nlet randSKU = (0, _uuid.v4)().substring(0, 5);\nconst nonInventoryInfo = {\n  name: `${randName}-NonInventory`,\n  sku: `${randSKU}-SKU`,\n  vendor: 'Genius Vendor',\n  nonTaxable: false,\n  salesPriceRate: '150',\n  salesDescription: 'This is a test description',\n  cost: '100',\n  mainWarehouseQuantityOnHand: '1'\n};\n_inventory.InventoryListPage.addNewNonInventory(nonInventoryInfo); //Add new service\n\n_inventory.InventoryListPage.gotoAddNewServiceModal();\nlet serviceRandName = (0, _uuid.v4)().substring(0, 5);\nlet serviceRandSKU = (0, _uuid.v4)().substring(0, 5);\nconst serviceInfo = {\n  name: `${serviceRandName}-Service`,\n  sku: `${serviceRandSKU}-SKU`,\n  nonTaxable: false,\n  salesPriceRate: '150',\n  salesDescription: 'This is a test description - Service',\n  cost: '200'\n};\n_inventory.InventoryListPage.addNewService(serviceInfo); //Add new Assembly\n\n_inventory.InventoryListPage.gotoAddNewAssemblyModal();\nlet assemblyRandName = (0, _uuid.v4)().substring(0, 5);\nlet assemblyRandSKU = (0, _uuid.v4)().substring(0, 5);\nconst assemblyInfo = {\n  name: `${assemblyRandName}-Assembly`,\n  sku: `${assemblyRandSKU}-SKU-Assembly`,\n  nonTaxable: false,\n  configurable: true,\n  parts: [{\n    name: inventoryInfo.name,\n    qty: '1'\n  }, {\n    name: inventoryInfo.name,\n    qty: '1'\n  }],\n  services: [{\n    name: serviceInfo.name,\n    qty: '1'\n  }],\n  salesDescription: 'This is a test Assembly description'\n};\n_inventory.InventoryListPage.addNewAssembly(assemblyInfo);",
+              "err": {},
+              "uuid": "fc22451b-a663-44b0-8bd0-e29895063afa",
+              "parentUUID": "acfc31c7-abd6-41bf-b2c0-5b2895f711fa",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fc22451b-a663-44b0-8bd0-e29895063afa"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 74740,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": true,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
