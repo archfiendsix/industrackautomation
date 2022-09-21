@@ -245,6 +245,9 @@ describe('Add Customer', () => {
   })
 
   it.only('Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)', () => {
+    Dashboard.preventNotificationCard()
+    CustomerPage.clickAddCustomerButton()
+    
     const rand = uuidv4().substring(0, 5)
     const customerInfo = {
       customerNumber: `Cust-${rand}`,
@@ -253,7 +256,6 @@ describe('Add Customer', () => {
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
-    // AddCustomerPage.confirmValidityYes()
     CustomerPage.clickAddNewServiceLocation()
     const serviceLocationInfo = {
       firstName: 'Jennifer',

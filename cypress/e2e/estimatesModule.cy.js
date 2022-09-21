@@ -1,6 +1,7 @@
 import LoginPage from "../pages/LoginPage";
 import Dashboard from "../pages/Dashboard"
 import AddCustomerPage from "../pages/AddCustomerPage";
+import CustomerPage from "../pages/CustomerPage";
 import { InventoryListPage } from "../pages/settings/inventory";
 import AddNewInventoryPage from "../pages/AddNewInventoryPage";
 import EstimatesPage from "../pages/EstimatesPage";
@@ -354,13 +355,51 @@ describe('New Estimate module', () => {
 
     })
 
-    it.only('Add Inventory - Add Non-inventory - Add Service - Add Assembly', () => {
+    it.only('Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items', () => {
+        cy.visit('/crmTab/list')
+        Dashboard.preventNotificationCard()
+        CustomerPage.clickAddCustomerButton()
+        // Add new Customer
+        const rand = uuidv4().substring(0, 5)
+        const customerInfo = {
+            customerNumber: `Cust-${rand}`,
+            companyName: `Company-${uuidv4().substring(0, 5)}`,
+            street: 'Cemetery Street'
+        }
+        AddCustomerPage.fillData(customerInfo)
+        AddCustomerPage.clickSaveButton()
+
+        
+
+
+        //Add Service Location
+        
+        CustomerPage.clickAddNewServiceLocation()
+        const serviceLocationInfo = {
+            firstName: 'Jennifer',
+            lastName: 'McClure',
+            phone: '3233245240',
+            email: 'edgar1996@yahoo.com',
+            locationName: 'Genius Building',
+            street: 'Par Dr',
+            unitNumber: '1926',
+            city: 'Naples',
+            state: 'FL',
+            zip: '34120',
+            country: 'United States of America',
+            selectATaxRate: 'Not Selected'
+
+        }
+        CustomerPage.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo)
+        CustomerPage.addNewServiceLocationModal.clickSaveButton()
+
+        
+        //Add Inventory
         Dashboard.clickSettings()
         Dashboard.elements.settingsButton().click()
-        //Add Inventory
         InventoryListPage.gotoAddNewInventory()
         const inventoryInfo = {
-            sku: `SKU${uuidv4()}`,
+            sku: `SKU-${uuidv4().substring(0, 5)}`,
             name: `Inventory-${uuidv4().substring(0, 5)}`,
             useSerialNumbers: false,
         }
@@ -372,8 +411,8 @@ describe('New Estimate module', () => {
         let randName = uuidv4().substring(0, 5)
         let randSKU = uuidv4().substring(0, 5)
         const nonInventoryInfo = {
-            name: `${randName}-NonInventory`,
-            sku: `${randSKU}-SKU`,
+            name: `NonInventory-${randName}`,
+            sku: `SKU-${randSKU}`,
             vendor: 'Genius Vendor',
             nonTaxable: false,
             salesPriceRate: '150',
@@ -389,8 +428,8 @@ describe('New Estimate module', () => {
         let serviceRandName = uuidv4().substring(0, 5)
         let serviceRandSKU = uuidv4().substring(0, 5)
         const serviceInfo = {
-            name: `${serviceRandName}-Service`,
-            sku: `${serviceRandSKU}-SKU`,
+            name: `Service-${serviceRandName}`,
+            sku: `SKU-${serviceRandSKU}`,
             nonTaxable: false,
             salesPriceRate: '150',
             salesDescription: 'This is a test description - Service',
@@ -403,8 +442,8 @@ describe('New Estimate module', () => {
         let assemblyRandName = uuidv4().substring(0, 5)
         let assemblyRandSKU = uuidv4().substring(0, 5)
         const assemblyInfo = {
-            name: `${assemblyRandName}-Assembly`,
-            sku: `${assemblyRandSKU}-SKU-Assembly`,
+            name: `Assembly-${assemblyRandName}`,
+            sku: `SKU-${assemblyRandSKU}`,
             nonTaxable: false,
             configurable: true,
             parts: [
@@ -426,6 +465,21 @@ describe('New Estimate module', () => {
             salesDescription: 'This is a test Assembly description',
         }
         InventoryListPage.addNewAssembly(assemblyInfo)
+
+
+        // Add New Estimate
+        cy.visit('/estimatesTab/list')
+        Dashboard.preventNotificationCard()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.selectCustomer(customerInfo.companyName)
+        EstimatesPage.inventorySelect(inventoryInfo.name)
+        cy.wait(4000)
+        EstimatesPage.inventorySelect(nonInventoryInfo.name)
+        cy.wait(4000)
+        EstimatesPage.inventorySelect(serviceInfo.name)
+        cy.wait(4000)
+        EstimatesPage.inventorySelect(assemblyInfo.name)
+        
     })
 
 })

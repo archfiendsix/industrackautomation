@@ -62,8 +62,11 @@ class EstimatesPage {
     }
     selectCustomer(customer_name) {
         this.typeSearchInput(customer_name)
+        cy.wait(1000)
         this.clickSearch()
+        cy.wait(1000)
         this.elements.searchItem().click()
+        cy.wait(1000)
         this.elements.proceedButton().click()
     }
 

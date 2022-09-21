@@ -38,8 +38,9 @@ class Dashboard {
     }
 
     clickSettings = () => {
-        this.elements.settingsButton().click({ force: true })
-        this.elements.settingsButton().click({ force: true })
+        // this.elements.settingsButton().first().click({ force: true })
+        // this.elements.settingsButton().first().click({ force: true })
+        cy.visit('/settingsTab')
         cy.wait(6000)
     }
 
