@@ -75,16 +75,6 @@ describe('Add Inventory', () => {
 
   it('Add an inventory that is set to non taxable - Use Serial #\'s and serial numbers by batch to increase quantity on hand', () => {
     InventoryListPage.gotoAddNewInventory()
-    // it('test', () => {
-    //     const uuid = () => Cypress._.random(0, 1e20)
-    //     const id = uuid()
-    // })
-
-    // let randomId = () => {
-    //   const uuid = () => Cypress._.random(0, 500)
-    //   const id = uuid()
-    //   return id.toString()
-    // }
     const inventoryInfo = {
       sku: `SKU${uuidv4()}`,
       name: 'serialNumbers Added',
@@ -107,6 +97,80 @@ describe('Add Inventory', () => {
     AddNewInventoryPage.fillData(inventoryInfo)
     AddNewInventoryPage.clickSaveButton()
   })
+
+  it.only('Add Inventory - Add Non-inventory - Add Service - Add Assembly', () => {
+
+    //Add Inventory
+    InventoryListPage.gotoAddNewInventory()
+    const inventoryInfo = {
+      sku: `SKU${uuidv4()}`,
+      name: `Inventory-${uuidv4().substring(0, 5)}`,
+      useSerialNumbers: false,
+    }
+    AddNewInventoryPage.fillData(inventoryInfo)
+    AddNewInventoryPage.clickSaveButton()
+
+    // Add Non Inventory
+    InventoryListPage.gotoAddNewNonInventoryModal()
+    let randName = uuidv4().substring(0, 5)
+    let randSKU = uuidv4().substring(0, 5)
+    const nonInventoryInfo = {
+      name: `${randName}-NonInventory`,
+      sku: `${randSKU}-SKU`,
+      vendor: 'Genius Vendor',
+      nonTaxable: false,
+      salesPriceRate: '150',
+      salesDescription: 'This is a test description',
+      cost: '100',
+      mainWarehouseQuantityOnHand: '1'
+    }
+    InventoryListPage.addNewNonInventory(nonInventoryInfo)
+
+
+    //Add new service
+    InventoryListPage.gotoAddNewServiceModal()
+    let serviceRandName = uuidv4().substring(0, 5)
+    let serviceRandSKU = uuidv4().substring(0, 5)
+    const serviceInfo = {
+      name: `${serviceRandName}-Service`,
+      sku: `${serviceRandSKU}-SKU`,
+      nonTaxable: false,
+      salesPriceRate: '150',
+      salesDescription: 'This is a test description - Service',
+      cost: '200',
+    }
+    InventoryListPage.addNewService(serviceInfo)
+
+    //Add new Assembly
+    InventoryListPage.gotoAddNewAssemblyModal()
+    let assemblyRandName = uuidv4().substring(0, 5)
+    let assemblyRandSKU = uuidv4().substring(0, 5)
+    const assemblyInfo = {
+      name: `${assemblyRandName}-Assembly`,
+      sku: `${assemblyRandSKU}-SKU-Assembly`,
+      nonTaxable: false,
+      configurable: true,
+      parts: [
+        {
+          name: inventoryInfo.name,
+          qty: '1'
+        },
+        {
+          name: inventoryInfo.name,
+          qty: '1'
+        }
+      ],
+      services : [
+        {
+          name: serviceInfo.name,
+          qty: '1'
+        }
+      ],
+      salesDescription: 'This is a test Assembly description',
+    }
+    InventoryListPage.addNewAssembly(assemblyInfo)
+  })
+
 
   // it('Add None inventory type', () => {
   //   InventoryListPage.gotoAddNewInventory()

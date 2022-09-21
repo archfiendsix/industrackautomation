@@ -85,7 +85,9 @@ class AddCustomerPage {
             uploadDocument: newCustomerInfo.uploadDocument|| 'img.jpg'
 
         }
+        cy.wait(1000)
         this.elements.customerNumberTextBox().clear().type(inputCustomerInfo.customerNumber)
+        cy.wait(1000)
         this.elements.companyNameTextBox().clear().type(inputCustomerInfo.companyName)
         this.elements.firstNameTextBox().clear().type(inputCustomerInfo.firstName)
         this.elements.lastNameTextBox().clear().type(inputCustomerInfo.lastName)

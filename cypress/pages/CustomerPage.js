@@ -15,7 +15,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         addNewButton: () => cy.get('button[data-target="#modalAddNewCustomer"]'),
         moreActionsDropdown: {
             button: () => cy.get('app-customers-list .btn-group.actions'),
-            addNewCustomert: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Add New Customer'),
+            addNewCustomer: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Add New Customer'),
             manageCustomerGroups: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Manage Customer Groups'),
             showInactiveCustomers: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Show Inactive Customers'),
             showActiveCustomers: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Show Active Customers'),
@@ -24,16 +24,16 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
         manageCustomerGroupsModal: {
             addNewButton: () => cy.get('app-address-group button').contains('Add New'),
-            groupNameCell:()=> cy.get('app-address-group table tbody tr td'),
-            filterTexbox: ()=>cy.get('app-address-group label[for="search"]+input'),
-            edit:()=> cy.get('.dropdown-menu a').contains('Edit').first()
+            groupNameCell: () => cy.get('app-address-group table tbody tr td'),
+            filterTexbox: () => cy.get('app-address-group label[for="search"]+input'),
+            edit: () => cy.get('.dropdown-menu a').contains('Edit').first()
         },
         addEditAddressGroupModal: {
-            groupNameTextbox: ()=> cy.get('app-address-group input#txtGroupName'),
-            filterTexbox: ()=>cy.get('app-address-group label[for="search"]+input'),
-            saveButton: ()=> cy.get('app-address-group .modal-footer button').contains('Save'),
-            companyNameCell: ()=> cy.get('app-edit-address-group table tbody tr'),
-            rowCheckbox:()=> cy.get('app-address-group table tbody tr'),
+            groupNameTextbox: () => cy.get('app-address-group input#txtGroupName'),
+            filterTexbox: () => cy.get('app-address-group label[for="search"]+input'),
+            saveButton: () => cy.get('app-address-group .modal-footer button').contains('Save'),
+            companyNameCell: () => cy.get('app-edit-address-group table tbody tr'),
+            rowCheckbox: () => cy.get('app-address-group table tbody tr'),
         },
         customerTable: {
             numberSort: () => cy.get('.mat-table thead button[aria-label="Change sorting for customerNumber"]'),
@@ -51,8 +51,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             numberCell: () => cy.get('.mat-table tbody tr td:first-child()'),
             tagscell: () => cy.get('.mat-table tbody tr td:last-child()'),
             tagsRow: () => cy.get('.mat-table tbody tr td'),
+
             paginationDropdown: () => cy.get('.mat-paginator-page-size-label+mat-form-field'),
             paginationDropdownOptions: () => cy.get('.mat-select-panel-wrap .mat-select-panel mat-option')
+        },
+        notesTable: {
+            notesCell: () => cy.get('app-address-book-notes table tbody tr td').eq(2)
         },
         customerOverview: {
             addNewButton: () => cy.get('app-service-locations button').contains('Add New'),
@@ -62,15 +66,16 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
                 addNewButton: () => cy.get('.wrapper.wrapper-content button').contains('Add New')
             },
             notesTab: {
-                button:()=> cy.get('a[href="#tab-7"]'),
-                AddOfficeNotesButton:()=> cy.get('button').contains('Add Office Notes ')
+                button: () => cy.get('a[href="#tab-7"]'),
+                AddOfficeNotesButton: () => cy.get('button').contains('Add Office Notes ')
             }
         },
         addNewNoteModal: {
-            noteTextTextarea: ()=> cy.get('app-note-edit-form textarea#note'),
-            siteNoteCheckbox:()=> cy.get('app-note-edit-form input#isSiteMap'),
-            assignNoteToaServiceLocationField: ()=> cy.get('app-note-edit-form mat-select#serviceLocationId'),
-            assignNoteToaServiceLocationFieldOption:()=> cy.get('app-note-edit-form #serviceLocationId-panel mat-option'),
+            noteTextTextarea: () => cy.get('app-note-edit-form textarea#note'),
+            siteNoteCheckbox: () => cy.get('app-note-edit-form input#isSiteMap'),
+            assignNoteToaServiceLocationField: () => cy.get('app-note-edit-form mat-select#serviceLocationId'),
+            assignNoteToaServiceLocationFieldOption: () => cy.get('#serviceLocationId-panel mat-option'),
+            saveButton: () => cy.get('app-note-edit-form button').contains('Save')
         },
 
         editCustomerModal: {
@@ -130,15 +135,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.manageCustomerGroupsModal.addNewButton().click()
     }
 
-    gotoNotesTab = ()=> {
+    gotoNotesTab = () => {
         this.elements.customerOverview.notesTab.button().click()
     }
 
-    clickAddOfficeNotesButton=()=> {
+    clickAddOfficeNotesButton = () => {
         this.elements.customerOverview.notesTab.AddOfficeNotesButton().click()
     }
 
-    addAddressGroup=(addressGroupInfo)=> {
+    addAddressGroup = (addressGroupInfo) => {
         this.elements.addEditAddressGroupModal.groupNameTextbox().clear().type(addressGroupInfo.groupName)
         cy.wait(1500)
         this.elements.addEditAddressGroupModal.filterTexbox().last().clear().type(addressGroupInfo.companyName)
@@ -147,12 +152,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.addEditAddressGroupModal.saveButton().click()
     }
 
-    filterGroupTable=(groupName)=> {
+    filterGroupTable = (groupName) => {
         this.elements.manageCustomerGroupsModal.filterTexbox().first().clear().type(groupName).type('{enter}')
-        
+
     }
 
-    searchAndEditGroup=(groupName)=> {
+    searchAndEditGroup = (groupName) => {
         this.elements.manageCustomerGroupsModal.groupNameCell().contains(groupName).parent().find('.btn-group.actions button').click()
         this.elements.manageCustomerGroupsModal.edit().click()
     }
@@ -190,15 +195,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     }
 
-    uploadAnotherAttachment= (filename)=> {
+    uploadAnotherAttachment = (filename) => {
         this.elements.customerOverview.editContactButton().click()
         AddCustomerPage.elements.chooseFileButton().last().attachFile(filename)
         AddCustomerPage.elements.chooseFileButton().last().click()
         this.elements.editCustomerModal.saveButton().click()
     }
 
-    checkAddCompanyOnAddressGroupTable=(addressGroupInfo)=> {
-        this.elements.addEditAddressGroupModal.companyNameCell().first().should('contain',addressGroupInfo.companyName)
+    checkAddCompanyOnAddressGroupTable = (addressGroupInfo) => {
+        this.elements.addEditAddressGroupModal.companyNameCell().first().should('contain', addressGroupInfo.companyName)
     }
     makeNewCustomerActive = () => {
         this.elements.customerOverview.editContactButton().click()
@@ -249,6 +254,30 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.validateAddress().click()
         cy.wait(4000)
         this.elements.validateAddressModal.okButton().click({ force: true })
+    }
+
+    checkAssignedNotes = (asssignedNotesInfo) => {
+        asssignedNotesInfo.forEach((i) => {
+            i.assignNoteToAServiceLocation && this.elements.notesTable.notesCell().should('contain', 'Site Note')
+            cy.wait(1000)
+            this.elements.notesTable.notesCell().should('contain', i.noteText).parent().find('td').eq(1).then($el => {
+
+                cy.wrap($el).contains(i.street.toString())
+
+            })
+
+        })
+    }
+
+    fillOfficeNoteForm = (officeNoteInfo) => {
+        cy.wait(1000)
+        this.elements.addNewNoteModal.noteTextTextarea().clear().type(officeNoteInfo.noteText)
+        cy.wait(1000)
+        officeNoteInfo.siteNote && this.elements.addNewNoteModal.siteNoteCheckbox().check()
+        this.elements.addNewNoteModal.assignNoteToaServiceLocationField().click()
+        this.elements.addNewNoteModal.assignNoteToaServiceLocationFieldOption().eq(officeNoteInfo.assignNoteToAServiceLocation).click()
+        this.elements.addNewNoteModal.saveButton().click()
+
     }
 
     customerTable = {

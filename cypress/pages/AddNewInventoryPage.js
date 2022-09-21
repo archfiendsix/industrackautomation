@@ -56,8 +56,11 @@ class AddNewInventoryPage {
         inputInventoryInfo.useSerialNumbers ? this.elements.useSerialNumbersCheckbox().click() : this.elements.useSerialNumbersCheckbox().dblclick()
 
         inputInventoryInfo.useSerialNumbers && this.elements.addInventoryModal.enterSerialBatchButton().click({ force: true })
+        cy.wait(1000)
         this.elements.nameTextBox().clear().type(inputInventoryInfo.name)
+        cy.wait(1000)
         this.elements.skuTextBox().clear().type(inputInventoryInfo.sku)
+        cy.wait(1000)
         this.elements.vendorTextBox().clear().type(inputInventoryInfo.vendor)
         this.elements.salesPriceTextBox().clear().type(inputInventoryInfo.salesPriceRate)
         this.elements.salesDescriptionTextArea().clear().type(inputInventoryInfo.salesDescription)
