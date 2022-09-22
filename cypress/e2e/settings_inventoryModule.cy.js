@@ -98,7 +98,7 @@ describe('Add Inventory', () => {
     AddNewInventoryPage.clickSaveButton()
   })
 
-  it.only('Add Inventory - Add Non-inventory - Add Service - Add Assembly', () => {
+  it('Add Inventory - Add Non-inventory - Add Service - Add Assembly', () => {
 
     //Add Inventory
     InventoryListPage.gotoAddNewInventory()

@@ -355,7 +355,7 @@ describe('New Estimate module', () => {
 
     })
 
-    it.only('Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items', () => {
+    it('Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items', () => {
         cy.visit('/crmTab/list')
         Dashboard.preventNotificationCard()
         CustomerPage.clickAddCustomerButton()
@@ -369,11 +369,11 @@ describe('New Estimate module', () => {
         AddCustomerPage.fillData(customerInfo)
         AddCustomerPage.clickSaveButton()
 
-        
+
 
 
         //Add Service Location
-        
+
         CustomerPage.clickAddNewServiceLocation()
         const serviceLocationInfo = {
             firstName: 'Jennifer',
@@ -393,7 +393,7 @@ describe('New Estimate module', () => {
         CustomerPage.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo)
         CustomerPage.addNewServiceLocationModal.clickSaveButton()
 
-        
+
         //Add Inventory
         Dashboard.clickSettings()
         Dashboard.elements.settingsButton().click()
@@ -423,7 +423,7 @@ describe('New Estimate module', () => {
         InventoryListPage.addNewNonInventory(nonInventoryInfo)
 
 
-        //Add new service
+        // Add new service
         InventoryListPage.gotoAddNewServiceModal()
         let serviceRandName = uuidv4().substring(0, 5)
         let serviceRandSKU = uuidv4().substring(0, 5)
@@ -437,7 +437,7 @@ describe('New Estimate module', () => {
         }
         InventoryListPage.addNewService(serviceInfo)
 
-        //Add new Assembly
+        // Add new Assembly
         InventoryListPage.gotoAddNewAssemblyModal()
         let assemblyRandName = uuidv4().substring(0, 5)
         let assemblyRandSKU = uuidv4().substring(0, 5)
@@ -479,7 +479,22 @@ describe('New Estimate module', () => {
         EstimatesPage.inventorySelect(serviceInfo.name)
         cy.wait(4000)
         EstimatesPage.inventorySelect(assemblyInfo.name)
-        
+
+        // Assign discounts on rows
+        EstimatesPage.addDiscountInRow(0, 30, '%', 3)
+        EstimatesPage.addDiscountInRow(0, 25, '$', 3)
+        cy.wait(4000)
+
+        // Add random discounts
+        EstimatesPage.addRandomInvoiceDiscount()
+
+        //Check invoice total
+        EstimatesPage.checkInvoiceTotal()
+        EstimatesPage.saveEstimate()
+
+        //Check row totals
+        EstimatesPage.checkRowsTotal()
+
     })
 
 })
