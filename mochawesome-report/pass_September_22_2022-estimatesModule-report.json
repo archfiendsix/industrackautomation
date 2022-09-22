@@ -1,0 +1,112 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-22T08:21:37.446Z",
+    "end": "2022-09-22T08:24:22.315Z",
+    "duration": 164869,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a56e720a-6eb2-4b87-b9ef-7a224b4d7e3f",
+      "title": "",
+      "fullFile": "cypress\\e2e\\estimatesModule.cy.js",
+      "file": "cypress\\e2e\\estimatesModule.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "688901c2-b989-45cc-87f6-c06d66c8adfe",
+          "title": "New Estimate module",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items",
+              "fullTitle": "New Estimate module Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items",
+              "timedOut": null,
+              "duration": 164508,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/crmTab/list');\n_Dashboard.default.preventNotificationCard();\n_CustomerPage.default.clickAddCustomerButton(); // Add new Customer\n\nconst rand = (0, _uuid.v4)().substring(0, 5);\nconst customerInfo = {\n  customerNumber: `Cust-${rand}`,\n  companyName: `Company-${(0, _uuid.v4)().substring(0, 5)}`,\n  street: 'Cemetery Street'\n};\n_AddCustomerPage.default.fillData(customerInfo);\n_AddCustomerPage.default.clickSaveButton(); //Add Service Location\n\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo = {\n  firstName: 'Jennifer',\n  lastName: 'McClure',\n  phone: '3233245240',\n  email: 'edgar1996@yahoo.com',\n  locationName: 'Genius Building',\n  street: 'Par Dr',\n  unitNumber: '1926',\n  city: 'Naples',\n  state: 'FL',\n  zip: '34120',\n  country: 'United States of America',\n  selectATaxRate: 'Not Selected'\n};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton(); //Add Inventory\n\n_Dashboard.default.clickSettings();\n_Dashboard.default.elements.settingsButton().click();\n_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  sku: `SKU-${(0, _uuid.v4)().substring(0, 5)}`,\n  name: `Inventory-${(0, _uuid.v4)().substring(0, 5)}`,\n  useSerialNumbers: false\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton(); // Add Non Inventory\n\n_inventory.InventoryListPage.gotoAddNewNonInventoryModal();\nlet randName = (0, _uuid.v4)().substring(0, 5);\nlet randSKU = (0, _uuid.v4)().substring(0, 5);\nconst nonInventoryInfo = {\n  name: `NonInventory-${randName}`,\n  sku: `SKU-${randSKU}`,\n  vendor: 'Genius Vendor',\n  nonTaxable: false,\n  salesPriceRate: '150',\n  salesDescription: 'This is a test description',\n  cost: '100',\n  mainWarehouseQuantityOnHand: '1'\n};\n_inventory.InventoryListPage.addNewNonInventory(nonInventoryInfo); //Add new service\n\n_inventory.InventoryListPage.gotoAddNewServiceModal();\nlet serviceRandName = (0, _uuid.v4)().substring(0, 5);\nlet serviceRandSKU = (0, _uuid.v4)().substring(0, 5);\nconst serviceInfo = {\n  name: `Service-${serviceRandName}`,\n  sku: `SKU-${serviceRandSKU}`,\n  nonTaxable: false,\n  salesPriceRate: '150',\n  salesDescription: 'This is a test description - Service',\n  cost: '200'\n};\n_inventory.InventoryListPage.addNewService(serviceInfo); //Add new Assembly\n\n_inventory.InventoryListPage.gotoAddNewAssemblyModal();\nlet assemblyRandName = (0, _uuid.v4)().substring(0, 5);\nlet assemblyRandSKU = (0, _uuid.v4)().substring(0, 5);\nconst assemblyInfo = {\n  name: `Assembly-${assemblyRandName}`,\n  sku: `SKU-${assemblyRandSKU}`,\n  nonTaxable: false,\n  configurable: true,\n  parts: [{\n    name: inventoryInfo.name,\n    qty: '1'\n  }, {\n    name: inventoryInfo.name,\n    qty: '1'\n  }],\n  services: [{\n    name: serviceInfo.name,\n    qty: '1'\n  }],\n  salesDescription: 'This is a test Assembly description'\n};\n_inventory.InventoryListPage.addNewAssembly(assemblyInfo); // Add New Estimate\n\ncy.visit('/estimatesTab/list');\n_Dashboard.default.preventNotificationCard();\n_EstimatesPage.default.clickAddNew();\n_EstimatesPage.default.selectCustomer(customerInfo.companyName);\n_EstimatesPage.default.inventorySelect(inventoryInfo.name);\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect(nonInventoryInfo.name);\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect(serviceInfo.name);\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect(assemblyInfo.name);",
+              "err": {},
+              "uuid": "b5977c26-04fc-42a7-8e87-7f733c4b1463",
+              "parentUUID": "688901c2-b989-45cc-87f6-c06d66c8adfe",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b5977c26-04fc-42a7-8e87-7f733c4b1463"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 164508,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/report/mochawesome-report",
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "title": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "charts": true,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "overwrite": true,
+        "inlineAssets": true,
+        "enableCharts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

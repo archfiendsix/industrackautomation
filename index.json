@@ -5,9 +5,9 @@
     "passes": 10,
     "pending": 0,
     "failures": 1,
-    "start": "2022-09-21T12:24:20.340Z",
-    "end": "2022-09-21T12:34:07.185Z",
-    "duration": 482463,
+    "start": "2022-09-22T08:20:47.424Z",
+    "end": "2022-09-22T08:29:53.047Z",
+    "duration": 451713,
     "testsRegistered": 11,
     "passPercent": 90.9090909090909,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "d1e862e1-b544-48ac-a8d3-30c0dbcfa775",
+      "uuid": "e928bc55-4f92-4209-9113-b4edbacbd1ab",
       "title": "",
       "fullFile": "cypress\\e2e\\customerModule.cy.js",
       "file": "cypress\\e2e\\customerModule.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "9fc9a36a-f299-46f4-8d1f-35a64d775847",
+          "uuid": "253d172f-0e09-4c8b-a10f-04c8cb3b2985",
           "title": "Add Customer",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)",
               "fullTitle": "Add Customer Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)",
               "timedOut": null,
-              "duration": 38219,
+              "duration": 38005,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -47,12 +47,12 @@
               "context": null,
               "code": "_Dashboard.default.preventNotificationCard();\n_CustomerPage.default.clickAddCustomerButton();\nconst rand = (0, _uuid.v4)().substring(0, 5);\nconst customerInfo = {\n  customerNumber: `Cust-${rand}`,\n  companyName: `${(0, _uuid.v4)().substring(0, 5)}-Add 2 service location to this customer`,\n  street: 'Cemetery Street'\n};\n_AddCustomerPage.default.fillData(customerInfo);\n_AddCustomerPage.default.clickSaveButton();\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo = {\n  firstName: 'Jennifer',\n  lastName: 'McClure',\n  phone: '3233245240',\n  email: 'edgar1996@yahoo.com',\n  locationName: 'Genius Building',\n  street: 'Par Dr',\n  unitNumber: '1926',\n  city: 'Naples',\n  state: 'FL',\n  zip: '34120',\n  country: 'United States of America',\n  selectATaxRate: 'Not Selected'\n};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton();\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo1 = {\n  firstName: 'Abdul',\n  lastName: 'Dauphin',\n  phone: '209988909',\n  email: 'jarrell.pag@hotmail.com',\n  locationName: 'Genius Building',\n  street: 'Mercer Street',\n  unitNumber: '2541',\n  city: 'Jump River',\n  state: 'WI',\n  zip: '54434',\n  country: 'United States of America',\n  selectATaxRate: 'Not Selected'\n};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo1);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton();\n_CustomerPage.default.gotoNotesTab();\n_CustomerPage.default.clickAddOfficeNotesButton();\nconst rand3 = (0, _uuid.v4)().substring(0, 5);\nconst officeNoteInfo = {\n  noteText: `${rand3}Note`,\n  siteNote: false,\n  assignNoteToAServiceLocation: 0\n};\n_CustomerPage.default.fillOfficeNoteForm(officeNoteInfo);\n_CustomerPage.default.gotoNotesTab();\n_CustomerPage.default.clickAddOfficeNotesButton();\nconst rand4 = (0, _uuid.v4)().substring(0, 5);\nconst officeNoteInfo1 = {\n  noteText: `${rand4}Note`,\n  siteNote: false,\n  assignNoteToAServiceLocation: 1\n};\n_CustomerPage.default.fillOfficeNoteForm(officeNoteInfo1);\n_CustomerPage.default.gotoNotesTab();\n_CustomerPage.default.clickAddOfficeNotesButton();\nconst rand5 = (0, _uuid.v4)().substring(0, 5);\nconst officeNoteInfo2 = {\n  noteText: `${rand5}Note`,\n  siteNote: false,\n  assignNoteToAServiceLocation: 2\n};\n_CustomerPage.default.fillOfficeNoteForm(officeNoteInfo2);\n_CustomerPage.default.gotoNotesTab();\n_CustomerPage.default.clickAddOfficeNotesButton();\nconst rand6 = (0, _uuid.v4)().substring(0, 5);\nconst officeNoteInfo3 = {\n  noteText: `${rand6}Note`,\n  siteNote: true,\n  assignNoteToAServiceLocation: 0\n};\n_CustomerPage.default.fillOfficeNoteForm(officeNoteInfo3);\n_CustomerPage.default.gotoNotesTab();\n_CustomerPage.default.clickAddOfficeNotesButton();\nconst rand7 = (0, _uuid.v4)().substring(0, 5);\nconst officeNoteInfo4 = {\n  noteText: `${rand7}Note`,\n  siteNote: true,\n  assignNoteToAServiceLocation: 1\n};\n_CustomerPage.default.fillOfficeNoteForm(officeNoteInfo4);\n_CustomerPage.default.gotoNotesTab();\n_CustomerPage.default.clickAddOfficeNotesButton();\nconst rand8 = (0, _uuid.v4)().substring(0, 5);\nconst officeNoteInfo5 = {\n  noteText: `${rand8}Note`,\n  siteNote: true,\n  assignNoteToAServiceLocation: 2\n};\n_CustomerPage.default.fillOfficeNoteForm(officeNoteInfo5);\nconst asssignedNotesInfo = [{\n  street: customerInfo.street,\n  noteText: officeNoteInfo.noteText,\n  assignNoteToAServiceLocation: officeNoteInfo.assignNoteToAServiceLocation\n}, {\n  street: serviceLocationInfo.street,\n  noteText: officeNoteInfo1.noteText,\n  assignNoteToAServiceLocation: officeNoteInfo1.assignNoteToAServiceLocation\n}, {\n  street: serviceLocationInfo1.street,\n  noteText: officeNoteInfo2.noteText,\n  assignNoteToAServiceLocation: officeNoteInfo2.assignNoteToAServiceLocation\n}, {\n  street: customerInfo.street,\n  noteText: officeNoteInfo3.noteText,\n  assignNoteToAServiceLocation: officeNoteInfo3.assignNoteToAServiceLocation\n}, {\n  street: serviceLocationInfo.street,\n  noteText: officeNoteInfo4.noteText,\n  assignNoteToAServiceLocation: officeNoteInfo4.assignNoteToAServiceLocation\n}, {\n  street: serviceLocationInfo1.street,\n  noteText: officeNoteInfo5.noteText,\n  assignNoteToAServiceLocation: officeNoteInfo5.assignNoteToAServiceLocation\n}];\n_CustomerPage.default.checkAssignedNotes(asssignedNotesInfo);",
               "err": {
-                "message": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element:\n\n`<button _ngcontent-gih-c205=\"\" data-toggle=\"modal\" data-target=\"#modalAddNewCustomer\" type=\"button\" class=\"btn btn-primary btn-sm m-r-sm\">...</button>`\n\nis being covered by another element:\n\n`<div class=\"modal-body\">...</div>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
-                "estack": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element:\n\n`<button _ngcontent-gih-c205=\"\" data-toggle=\"modal\" data-target=\"#modalAddNewCustomer\" type=\"button\" class=\"btn btn-primary btn-sm m-r-sm\">...</button>`\n\nis being covered by another element:\n\n`<div class=\"modal-body\">...</div>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:147512:78)\n    at ensureDescendents (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:132962:8)\n    at ensureDescendentsAndScroll (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:132969:14)\n    at ensureElIsNotCovered (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133101:5)\n    at runAllChecks (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133291:52)\n    at retryActionability (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133315:16)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152495:65)\n    at <unknown> (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151949:14)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at <unknown> (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46)\nFrom Your Spec Code:\n    at CustomerPage.eval [as clickAddCustomerButton] (webpack:///./cypress/pages/CustomerPage.js:113:37)\n    at Context.eval (webpack:///./cypress/e2e/customerModule.cy.js:249:17)",
+                "message": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element:\n\n`<button _ngcontent-qhk-c205=\"\" data-toggle=\"modal\" data-target=\"#modalAddNewCustomer\" type=\"button\" class=\"btn btn-primary btn-sm m-r-sm\">...</button>`\n\nis being covered by another element:\n\n`<div class=\"modal-body\">...</div>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element:\n\n`<button _ngcontent-qhk-c205=\"\" data-toggle=\"modal\" data-target=\"#modalAddNewCustomer\" type=\"button\" class=\"btn btn-primary btn-sm m-r-sm\">...</button>`\n\nis being covered by another element:\n\n`<div class=\"modal-body\">...</div>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at $Cy.ensureDescendents (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:147512:78)\n    at ensureDescendents (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:132962:8)\n    at ensureDescendentsAndScroll (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:132969:14)\n    at ensureElIsNotCovered (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133101:5)\n    at runAllChecks (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133291:52)\n    at retryActionability (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:133315:16)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise.attempt.Promise.try (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:8592:29)\n    at whenStable (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:152495:65)\n    at <unknown> (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:151949:14)\n    at tryCatcher (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:11318:23)\n    at Promise._settlePromiseFromHandler (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9253:31)\n    at Promise._settlePromise (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9310:18)\n    at Promise._settlePromise0 (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9355:10)\n    at Promise._settlePromises (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9435:18)\n    at Promise._fulfill (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:9379:18)\n    at <unknown> (https://onetrack.industrack.com/__cypress/runner/cypress_runner.js:10993:46)\nFrom Your Spec Code:\n    at CustomerPage.eval [as clickAddCustomerButton] (webpack:///./cypress/pages/CustomerPage.js:113:37)\n    at Context.eval (webpack:///./cypress/e2e/customerModule.cy.js:249:17)",
                 "diff": null
               },
-              "uuid": "8043a757-890c-4d22-b88c-2d2086d887c9",
-              "parentUUID": "9fc9a36a-f299-46f4-8d1f-35a64d775847",
+              "uuid": "c166ccb5-f8d9-41c2-8d42-5882ebf33d34",
+              "parentUUID": "253d172f-0e09-4c8b-a10f-04c8cb3b2985",
               "isHook": false,
               "skipped": false
             }
@@ -60,11 +60,11 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "8043a757-890c-4d22-b88c-2d2086d887c9"
+            "c166ccb5-f8d9-41c2-8d42-5882ebf33d34"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 38219,
+          "duration": 38005,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -80,7 +80,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "5db2a13d-f2bc-4f6b-b29f-bb4c4251521d",
+      "uuid": "a56e720a-6eb2-4b87-b9ef-7a224b4d7e3f",
       "title": "",
       "fullFile": "cypress\\e2e\\estimatesModule.cy.js",
       "file": "cypress\\e2e\\estimatesModule.cy.js",
@@ -89,7 +89,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "0bf000a2-6e30-490b-a95c-acfb27062cd7",
+          "uuid": "688901c2-b989-45cc-87f6-c06d66c8adfe",
           "title": "New Estimate module",
           "fullFile": "",
           "file": "",
@@ -100,7 +100,7 @@
               "title": "Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items",
               "fullTitle": "New Estimate module Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items",
               "timedOut": null,
-              "duration": 175896,
+              "duration": 164508,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -109,20 +109,20 @@
               "context": null,
               "code": "cy.visit('/crmTab/list');\n_Dashboard.default.preventNotificationCard();\n_CustomerPage.default.clickAddCustomerButton(); // Add new Customer\n\nconst rand = (0, _uuid.v4)().substring(0, 5);\nconst customerInfo = {\n  customerNumber: `Cust-${rand}`,\n  companyName: `Company-${(0, _uuid.v4)().substring(0, 5)}`,\n  street: 'Cemetery Street'\n};\n_AddCustomerPage.default.fillData(customerInfo);\n_AddCustomerPage.default.clickSaveButton(); //Add Service Location\n\n_CustomerPage.default.clickAddNewServiceLocation();\nconst serviceLocationInfo = {\n  firstName: 'Jennifer',\n  lastName: 'McClure',\n  phone: '3233245240',\n  email: 'edgar1996@yahoo.com',\n  locationName: 'Genius Building',\n  street: 'Par Dr',\n  unitNumber: '1926',\n  city: 'Naples',\n  state: 'FL',\n  zip: '34120',\n  country: 'United States of America',\n  selectATaxRate: 'Not Selected'\n};\n_CustomerPage.default.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo);\n_CustomerPage.default.addNewServiceLocationModal.clickSaveButton(); //Add Inventory\n\n_Dashboard.default.clickSettings();\n_Dashboard.default.elements.settingsButton().click();\n_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  sku: `SKU-${(0, _uuid.v4)().substring(0, 5)}`,\n  name: `Inventory-${(0, _uuid.v4)().substring(0, 5)}`,\n  useSerialNumbers: false\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton(); // Add Non Inventory\n\n_inventory.InventoryListPage.gotoAddNewNonInventoryModal();\nlet randName = (0, _uuid.v4)().substring(0, 5);\nlet randSKU = (0, _uuid.v4)().substring(0, 5);\nconst nonInventoryInfo = {\n  name: `NonInventory-${randName}`,\n  sku: `SKU-${randSKU}`,\n  vendor: 'Genius Vendor',\n  nonTaxable: false,\n  salesPriceRate: '150',\n  salesDescription: 'This is a test description',\n  cost: '100',\n  mainWarehouseQuantityOnHand: '1'\n};\n_inventory.InventoryListPage.addNewNonInventory(nonInventoryInfo); //Add new service\n\n_inventory.InventoryListPage.gotoAddNewServiceModal();\nlet serviceRandName = (0, _uuid.v4)().substring(0, 5);\nlet serviceRandSKU = (0, _uuid.v4)().substring(0, 5);\nconst serviceInfo = {\n  name: `Service-${serviceRandName}`,\n  sku: `SKU-${serviceRandSKU}`,\n  nonTaxable: false,\n  salesPriceRate: '150',\n  salesDescription: 'This is a test description - Service',\n  cost: '200'\n};\n_inventory.InventoryListPage.addNewService(serviceInfo); //Add new Assembly\n\n_inventory.InventoryListPage.gotoAddNewAssemblyModal();\nlet assemblyRandName = (0, _uuid.v4)().substring(0, 5);\nlet assemblyRandSKU = (0, _uuid.v4)().substring(0, 5);\nconst assemblyInfo = {\n  name: `Assembly-${assemblyRandName}`,\n  sku: `SKU-${assemblyRandSKU}`,\n  nonTaxable: false,\n  configurable: true,\n  parts: [{\n    name: inventoryInfo.name,\n    qty: '1'\n  }, {\n    name: inventoryInfo.name,\n    qty: '1'\n  }],\n  services: [{\n    name: serviceInfo.name,\n    qty: '1'\n  }],\n  salesDescription: 'This is a test Assembly description'\n};\n_inventory.InventoryListPage.addNewAssembly(assemblyInfo); // Add New Estimate\n\ncy.visit('/estimatesTab/list');\n_Dashboard.default.preventNotificationCard();\n_EstimatesPage.default.clickAddNew();\n_EstimatesPage.default.selectCustomer(customerInfo.companyName);\n_EstimatesPage.default.inventorySelect(inventoryInfo.name);\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect(nonInventoryInfo.name);\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect(serviceInfo.name);\ncy.wait(4000);\n_EstimatesPage.default.inventorySelect(assemblyInfo.name);",
               "err": {},
-              "uuid": "d294fc06-96b0-4452-84fa-798911852a89",
-              "parentUUID": "0bf000a2-6e30-490b-a95c-acfb27062cd7",
+              "uuid": "b5977c26-04fc-42a7-8e87-7f733c4b1463",
+              "parentUUID": "688901c2-b989-45cc-87f6-c06d66c8adfe",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "d294fc06-96b0-4452-84fa-798911852a89"
+            "b5977c26-04fc-42a7-8e87-7f733c4b1463"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 175896,
+          "duration": 164508,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -138,7 +138,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "5d8f10a4-4490-472a-aeca-6e66ea1ef6b2",
+      "uuid": "57c4ee67-5ab4-4335-8116-f3802c5c2022",
       "title": "",
       "fullFile": "cypress\\e2e\\scheduleModule.cy.js",
       "file": "cypress\\e2e\\scheduleModule.cy.js",
@@ -147,7 +147,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "5aa210b3-6f1e-4d75-a5a2-4c6dc950371c",
+          "uuid": "5d520f7e-fbb1-4b5a-b277-5722870e7a0f",
           "title": "Schedule Module",
           "fullFile": "",
           "file": "",
@@ -158,7 +158,7 @@
               "title": "Should be able to save a job (required fields filled)",
               "fullTitle": "Schedule Module Should be able to save a job (required fields filled)",
               "timedOut": null,
-              "duration": 24006,
+              "duration": 21994,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -167,8 +167,8 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\n_SchedulePage.default.fillData();\n_SchedulePage.default.saveJob();",
               "err": {},
-              "uuid": "397dc911-f591-454c-9475-7e239922696d",
-              "parentUUID": "5aa210b3-6f1e-4d75-a5a2-4c6dc950371c",
+              "uuid": "dbe143a0-4ef6-4919-8f12-dd6ccf693961",
+              "parentUUID": "5d520f7e-fbb1-4b5a-b277-5722870e7a0f",
               "isHook": false,
               "skipped": false
             },
@@ -176,7 +176,7 @@
               "title": "Should be able to dispatch a job - with 1 employee added",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with 1 employee added",
               "timedOut": null,
-              "duration": 24588,
+              "duration": 21907,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -185,8 +185,8 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "937b8144-0068-4dfc-b977-ef47f4be3190",
-              "parentUUID": "5aa210b3-6f1e-4d75-a5a2-4c6dc950371c",
+              "uuid": "1e6e788e-87ed-4587-999a-3cbe866b0558",
+              "parentUUID": "5d520f7e-fbb1-4b5a-b277-5722870e7a0f",
               "isHook": false,
               "skipped": false
             },
@@ -194,7 +194,7 @@
               "title": "Should be able to dispatch a job - with employee added - 0hrs 0mins duration",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added - 0hrs 0mins duration",
               "timedOut": null,
-              "duration": 26610,
+              "duration": 20647,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -203,8 +203,8 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "7ffd1ffb-72b9-4a0d-95d6-8c83a398d3f0",
-              "parentUUID": "5aa210b3-6f1e-4d75-a5a2-4c6dc950371c",
+              "uuid": "a8be9f0b-594b-42a8-8ab7-4661b616a3ae",
+              "parentUUID": "5d520f7e-fbb1-4b5a-b277-5722870e7a0f",
               "isHook": false,
               "skipped": false
             },
@@ -212,7 +212,7 @@
               "title": "Should be able to dispatch a job - with employee added (with 8 hrs duration)",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added (with 8 hrs duration)",
               "timedOut": null,
-              "duration": 26275,
+              "duration": 21735,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -221,8 +221,8 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 8,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "1105dfdc-2905-4982-9f99-6ee03b2f5386",
-              "parentUUID": "5aa210b3-6f1e-4d75-a5a2-4c6dc950371c",
+              "uuid": "be43d570-78ca-4458-9f27-a1ae78bdd4ac",
+              "parentUUID": "5d520f7e-fbb1-4b5a-b277-5722870e7a0f",
               "isHook": false,
               "skipped": false
             },
@@ -230,7 +230,7 @@
               "title": "Should be able to dispatch a job - with Job Template added",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with Job Template added",
               "timedOut": null,
-              "duration": 34522,
+              "duration": 31564,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -239,8 +239,8 @@
               "context": null,
               "code": "cy.log('Add template');\n_Dashboard.default.gotoJobTemplates();\n_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\nconst templateName = 'Snow blowing';\n_SchedulePage.default.addJobTemplate(templateName);\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "c6a6ca21-fefa-46e0-bc21-df23cf900ea4",
-              "parentUUID": "5aa210b3-6f1e-4d75-a5a2-4c6dc950371c",
+              "uuid": "14517502-7a59-43f4-abaf-539e55066697",
+              "parentUUID": "5d520f7e-fbb1-4b5a-b277-5722870e7a0f",
               "isHook": false,
               "skipped": false
             },
@@ -248,7 +248,7 @@
               "title": "Should be able to dispatch a job - with employee added - with Task added (Task Name only)",
               "fullTitle": "Schedule Module Should be able to dispatch a job - with employee added - with Task added (Task Name only)",
               "timedOut": null,
-              "duration": 23984,
+              "duration": 22995,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -257,25 +257,25 @@
               "context": null,
               "code": "_SchedulePage.default.gotoAddNewJob();\nconst employee = {\n  employeeName: 'Employee One',\n  duration: {\n    hrs: 0,\n    min: 0\n  }\n};\n_SchedulePage.default.addJobEmployee(employee);\n_SchedulePage.default.clickTasksTab();\nconst task = {\n  taskName: 'New Task'\n};\n_SchedulePage.default.createNewTask(task);\n_SchedulePage.default.elements.addNewJobModal.jobsInfoTabButton().click();\n_SchedulePage.default.fillData();\n_SchedulePage.default.dispatchJob();",
               "err": {},
-              "uuid": "fc8aae90-e850-4817-9749-0ae495817596",
-              "parentUUID": "5aa210b3-6f1e-4d75-a5a2-4c6dc950371c",
+              "uuid": "03e3b7e8-cc33-4f10-89ea-db8051e2e9d3",
+              "parentUUID": "5d520f7e-fbb1-4b5a-b277-5722870e7a0f",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "397dc911-f591-454c-9475-7e239922696d",
-            "937b8144-0068-4dfc-b977-ef47f4be3190",
-            "7ffd1ffb-72b9-4a0d-95d6-8c83a398d3f0",
-            "1105dfdc-2905-4982-9f99-6ee03b2f5386",
-            "c6a6ca21-fefa-46e0-bc21-df23cf900ea4",
-            "fc8aae90-e850-4817-9749-0ae495817596"
+            "dbe143a0-4ef6-4919-8f12-dd6ccf693961",
+            "1e6e788e-87ed-4587-999a-3cbe866b0558",
+            "a8be9f0b-594b-42a8-8ab7-4661b616a3ae",
+            "be43d570-78ca-4458-9f27-a1ae78bdd4ac",
+            "14517502-7a59-43f4-abaf-539e55066697",
+            "03e3b7e8-cc33-4f10-89ea-db8051e2e9d3"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 159985,
+          "duration": 140842,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -291,7 +291,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "5d20d6a0-a527-4317-b45e-f33b292c1b7a",
+      "uuid": "3dcd6320-9c78-4d0f-84d7-fe940d26e97c",
       "title": "",
       "fullFile": "cypress\\e2e\\settings_inventoryModule.cy.js",
       "file": "cypress\\e2e\\settings_inventoryModule.cy.js",
@@ -300,7 +300,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "acfc31c7-abd6-41bf-b2c0-5b2895f711fa",
+          "uuid": "3a2a3d46-2e74-4052-a610-bd5e6dd3297e",
           "title": "Add Inventory",
           "fullFile": "",
           "file": "",
@@ -311,7 +311,7 @@
               "title": "Add Inventory - Add Non-inventory - Add Service - Add Assembly",
               "fullTitle": "Add Inventory Add Inventory - Add Non-inventory - Add Service - Add Assembly",
               "timedOut": null,
-              "duration": 74740,
+              "duration": 73413,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -320,20 +320,20 @@
               "context": null,
               "code": "//Add Inventory\n_inventory.InventoryListPage.gotoAddNewInventory();\nconst inventoryInfo = {\n  sku: `SKU${(0, _uuid.v4)()}`,\n  name: `Inventory-${(0, _uuid.v4)().substring(0, 5)}`,\n  useSerialNumbers: false\n};\n_AddNewInventoryPage.default.fillData(inventoryInfo);\n_AddNewInventoryPage.default.clickSaveButton(); // Add Non Inventory\n\n_inventory.InventoryListPage.gotoAddNewNonInventoryModal();\nlet randName = (0, _uuid.v4)().substring(0, 5);\nlet randSKU = (0, _uuid.v4)().substring(0, 5);\nconst nonInventoryInfo = {\n  name: `${randName}-NonInventory`,\n  sku: `${randSKU}-SKU`,\n  vendor: 'Genius Vendor',\n  nonTaxable: false,\n  salesPriceRate: '150',\n  salesDescription: 'This is a test description',\n  cost: '100',\n  mainWarehouseQuantityOnHand: '1'\n};\n_inventory.InventoryListPage.addNewNonInventory(nonInventoryInfo); //Add new service\n\n_inventory.InventoryListPage.gotoAddNewServiceModal();\nlet serviceRandName = (0, _uuid.v4)().substring(0, 5);\nlet serviceRandSKU = (0, _uuid.v4)().substring(0, 5);\nconst serviceInfo = {\n  name: `${serviceRandName}-Service`,\n  sku: `${serviceRandSKU}-SKU`,\n  nonTaxable: false,\n  salesPriceRate: '150',\n  salesDescription: 'This is a test description - Service',\n  cost: '200'\n};\n_inventory.InventoryListPage.addNewService(serviceInfo); //Add new Assembly\n\n_inventory.InventoryListPage.gotoAddNewAssemblyModal();\nlet assemblyRandName = (0, _uuid.v4)().substring(0, 5);\nlet assemblyRandSKU = (0, _uuid.v4)().substring(0, 5);\nconst assemblyInfo = {\n  name: `${assemblyRandName}-Assembly`,\n  sku: `${assemblyRandSKU}-SKU-Assembly`,\n  nonTaxable: false,\n  configurable: true,\n  parts: [{\n    name: inventoryInfo.name,\n    qty: '1'\n  }, {\n    name: inventoryInfo.name,\n    qty: '1'\n  }],\n  services: [{\n    name: serviceInfo.name,\n    qty: '1'\n  }],\n  salesDescription: 'This is a test Assembly description'\n};\n_inventory.InventoryListPage.addNewAssembly(assemblyInfo);",
               "err": {},
-              "uuid": "fc22451b-a663-44b0-8bd0-e29895063afa",
-              "parentUUID": "acfc31c7-abd6-41bf-b2c0-5b2895f711fa",
+              "uuid": "254ff3e7-e93f-4a10-b154-e0da13c750f3",
+              "parentUUID": "3a2a3d46-2e74-4052-a610-bd5e6dd3297e",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "fc22451b-a663-44b0-8bd0-e29895063afa"
+            "254ff3e7-e93f-4a10-b154-e0da13c750f3"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 74740,
+          "duration": 73413,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -349,7 +349,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "44625aff-7120-409e-9751-318316178cba",
+      "uuid": "bcfdcaea-bf3e-4e74-99f2-aadbca310ed9",
       "title": "",
       "fullFile": "cypress\\e2e\\settings_newTaxAndTerms.cy.js",
       "file": "cypress\\e2e\\settings_newTaxAndTerms.cy.js",
@@ -358,7 +358,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "79a06195-0f6a-4d2a-8498-87cdc8ae2d47",
+          "uuid": "fecac2d5-647e-4df8-894b-e2107e29b557",
           "title": "New Tax and Terms Module",
           "fullFile": "",
           "file": "",
@@ -369,7 +369,7 @@
               "title": "Basic Add new tax function",
               "fullTitle": "New Tax and Terms Module Basic Add new tax function",
               "timedOut": null,
-              "duration": 18569,
+              "duration": 18289,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -378,8 +378,8 @@
               "context": null,
               "code": "_company_settings.TaxAndTermsPage.addNewTax();\n_company_settings.TaxAndTermsPage.fillAddNewTaxForm('New Tax', 3);\n_company_settings.TaxAndTermsPage.saveAddNewTaxForm();",
               "err": {},
-              "uuid": "021ece51-c623-44c0-b3fe-0d1f7e181af0",
-              "parentUUID": "79a06195-0f6a-4d2a-8498-87cdc8ae2d47",
+              "uuid": "89c25784-e8a9-4caf-9d67-60cfbaf9b5e0",
+              "parentUUID": "fecac2d5-647e-4df8-894b-e2107e29b557",
               "isHook": false,
               "skipped": false
             },
@@ -387,7 +387,7 @@
               "title": "Basic Add new term function",
               "fullTitle": "New Tax and Terms Module Basic Add new term function",
               "timedOut": null,
-              "duration": 15054,
+              "duration": 16656,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -396,21 +396,21 @@
               "context": null,
               "code": "_company_settings.TaxAndTermsPage.gotoTermsTab();\n_company_settings.TaxAndTermsPage.addNewTerm();\n_company_settings.TaxAndTermsPage.fillAddNewTermForm('New Term');\n_company_settings.TaxAndTermsPage.saveAddNewTermForm();",
               "err": {},
-              "uuid": "2c78a4b9-ae3d-41f6-b97b-935681639997",
-              "parentUUID": "79a06195-0f6a-4d2a-8498-87cdc8ae2d47",
+              "uuid": "524f772e-2ef2-4cd1-80a3-b85ba365c9f2",
+              "parentUUID": "fecac2d5-647e-4df8-894b-e2107e29b557",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "021ece51-c623-44c0-b3fe-0d1f7e181af0",
-            "2c78a4b9-ae3d-41f6-b97b-935681639997"
+            "89c25784-e8a9-4caf-9d67-60cfbaf9b5e0",
+            "524f772e-2ef2-4cd1-80a3-b85ba365c9f2"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 33623,
+          "duration": 34945,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
