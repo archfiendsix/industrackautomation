@@ -171,7 +171,7 @@ describe('Add Customer', () => {
 
   })
 
-  // it.only('Create estimate with notes and description added and check on preview.', () => { ==> modify this
+  // it('Create estimate with notes and description added and check on preview.', () => { ==> modify this
   //   Dashboard.preventNotificationCard()
   //   const customerInfo = {
   //     customerNumber: `CN-${uuidv4()}`,

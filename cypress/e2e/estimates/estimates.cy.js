@@ -96,19 +96,19 @@ describe('New Estimate module', () => {
         InventoryListPage.addNewNonInventory(nonInventoryInfo)
 
 
-        // // Add new service
-        // InventoryListPage.gotoAddNewServiceModal()
-        // let serviceRandName = uuidv4().substring(0, 5)
-        // let serviceRandSKU = uuidv4().substring(0, 5)
-        // const serviceInfo = {
-        //     name: `Service-${serviceRandName}`,
-        //     sku: `SKU-${serviceRandSKU}`,
-        //     nonTaxable: false,
-        //     salesPriceRate: '150',
-        //     salesDescription: 'This is a test description - Service',
-        //     cost: '200',
-        // }
-        // InventoryListPage.addNewService(serviceInfo)
+        // Add new service
+        InventoryListPage.gotoAddNewServiceModal()
+        let serviceRandName = uuidv4().substring(0, 5)
+        let serviceRandSKU = uuidv4().substring(0, 5)
+        const serviceInfo = {
+            name: `Service-${serviceRandName}`,
+            sku: `SKU-${serviceRandSKU}`,
+            nonTaxable: false,
+            salesPriceRate: '150',
+            salesDescription: 'This is a test description - Service',
+            cost: '200',
+        }
+        InventoryListPage.addNewService(serviceInfo)
 
         // // Add new Assembly
         // InventoryListPage.gotoAddNewAssemblyModal()
@@ -140,34 +140,34 @@ describe('New Estimate module', () => {
         // InventoryListPage.addNewAssembly(assemblyInfo)
 
 
-        // // Add New Estimate
-        // Dashboard.clickEstimatesTab()
-        // // cy.visit('/estimatesTab/list')
-        // Dashboard.preventNotificationCard()
-        // EstimatesPage.clickAddNew()
-        // EstimatesPage.selectCustomer(customerInfo.companyName)
-        // EstimatesPage.inventorySelect(inventoryInfo.name)
-        // cy.wait(4000)
-        // EstimatesPage.inventorySelect(nonInventoryInfo.name)
-        // cy.wait(4000)
-        // EstimatesPage.inventorySelect(serviceInfo.name)
-        // cy.wait(4000)
-        // EstimatesPage.inventorySelect(assemblyInfo.name)
+        // Add New Estimate
+        Dashboard.clickEstimatesTab()
+        // cy.visit('/estimatesTab/list')
+        Dashboard.preventNotificationCard()
+        EstimatesPage.clickAddNew()
+        EstimatesPage.selectCustomer(customerInfo.companyName)
+        EstimatesPage.inventorySelect(inventoryInfo.name)
+        cy.wait(4000)
+        EstimatesPage.inventorySelect(nonInventoryInfo.name)
+        cy.wait(4000)
+        EstimatesPage.inventorySelect(serviceInfo.name)
+        cy.wait(4000)
+        EstimatesPage.inventorySelect(assemblyInfo.name)
 
-        // // Assign discounts on rows
-        // EstimatesPage.addDiscountInRow(0, 30, '%', 3)
-        // EstimatesPage.addDiscountInRow(0, 25, '$', 3)
-        // cy.wait(4000)
+        // Assign discounts on rows
+        EstimatesPage.addDiscountInRow(0, 30, '%', 3)
+        EstimatesPage.addDiscountInRow(0, 25, '$', 3)
+        cy.wait(4000)
 
-        // // Add random discounts
-        // EstimatesPage.addRandomInvoiceDiscount()
+        // Add random discounts
+        EstimatesPage.addRandomInvoiceDiscount()
 
-        // //Check invoice total
-        // EstimatesPage.checkInvoiceTotal()
-        // EstimatesPage.saveEstimate()
+        //Check invoice total
+        EstimatesPage.checkInvoiceTotal()
+        EstimatesPage.saveEstimate()
 
-        // //Check row totals
-        // EstimatesPage.checkRowsTotal()
+        //Check row totals
+        EstimatesPage.checkRowsTotal()
 
     })
 
