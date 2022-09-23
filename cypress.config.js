@@ -1,7 +1,8 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  projectId: "txtefo",
+  // projectId: "15zbgq", // Key for test dashboard runs
+  projectId: "vsg82k", // Key for Industrack 
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
@@ -11,6 +12,7 @@ module.exports = defineConfig({
   integration: {
     baseUrl: "https://onetrack.industrack.com"
   },
+  // "numTestsKeptInMemory": 0,
   "reporter": "mochawesome",
   "reporterOptions": {
     "reportDir": "cypress/report/mochawesome-report",
@@ -34,5 +36,6 @@ module.exports = defineConfig({
   defaultCommandTimeout: 8000,
   pageLoadTimeout: 30000,
   chromeWebSecurity: false,
-  screenshotOnRunFailure: true
+  screenshotOnRunFailure: true,
+  
 });
