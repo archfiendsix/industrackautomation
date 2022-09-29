@@ -49,7 +49,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             lastNameSortArrow: () => cy.get('.mat-table thead button[aria-label="Change sorting for lastName"]+.mat-sort-header-arrow'),
             lastNameSortHeader: () => cy.get('.mat-table thead th.mat-column-lastName'),
             numberCell: () => cy.get('.mat-table tbody tr td:first-child()'),
-            tagscell: () => cy.get('.mat-table tbody tr td:last-child()'),
+            tagscell: () => cy.get('.mat-table tbody tr td.mat-column-tags'),
             tagsRow: () => cy.get('.mat-table tbody tr td'),
 
             paginationDropdown: () => cy.get('.mat-paginator-page-size-label+mat-form-field'),
@@ -162,22 +162,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.manageCustomerGroupsModal.edit().click()
     }
 
-    searchAndVerifyTags = (tags) => {
+    searchAndVerifyTags = (tags,customerNumber) => {
         // this.setItemsPerPage()
         tags.forEach(i => {
             cy.log(i)
+            const custNumber = customerNumber.toString()
             this.elements.searchBox.input().clear().type(i)
             this.elements.searchBox.searchIcon().click()
             var searchTrue = false
-            this.elements.customerTable.tagscell().each(($el) => {
-                if (cy.wrap($el).contains(i)) {
-                    searchTrue = true
-                }
-                else {
-                    searchTrue = searchTrue
-                }
-                cy.log(searchTrue)
-            })
+            this.elements.customerTable.tagscell().contains(i.toString()).parent().find('td').eq(0).contains(custNumber)
         })
 
     }

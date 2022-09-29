@@ -41,7 +41,6 @@ describe('New Estimate module', () => {
         AddCustomerPage.fillData(customerInfo)
 
 
-
         cy.wait(2500)
         AddCustomerPage.elements.saveButton().should('not.be.disabled')
         AddCustomerPage.elements.saveButton().click()
@@ -49,8 +48,6 @@ describe('New Estimate module', () => {
         AddCustomerPage.confirmValidityYes()
 
         /*new inventory */
-
-
         cy.wait(3500)
 
 
@@ -66,7 +63,6 @@ describe('New Estimate module', () => {
 
         /*newEstimate*/
         Dashboard.clickEstimatesTab()
-        // cy.visit('/estimatesTab/list')
 
         Dashboard.preventNotificationCard()
         EstimatesPage.clickAddNew()
@@ -77,23 +73,9 @@ describe('New Estimate module', () => {
     })
 
 
-    // it('test', () => {
-    //     /*newEstimate*/
-    //     Dashboard.clickEstimatesTab()
-    //     Dashboard.preventNotificationCard()
-    // EstimatesPage.clickAddNew()
-    //     EstimatesPage.typeSearchInput('Genius Giant Inc.')
-    //     EstimatesPage.clickSearch()
-    //     cy.wait(4000)
-    //     EstimatesPage.selectCustomer()
-    //     EstimatesPage.inventorySelect('Inventory Item 1')
-    //     EstimatesPage.saveAndCloseEstimate()
-    // })
-
     it('Should have status Won', () => {
 
         Dashboard.clickEstimatesTab()
-        // cy.visit('/estimatesTab/list')
         Dashboard.preventNotificationCard()
         EstimatesPage.clickAddNew()
         cy.wait(4000)
@@ -110,7 +92,6 @@ describe('New Estimate module', () => {
     it('Should have status Lost', () => {
 
         Dashboard.clickEstimatesTab()
-        // cy.visit('/estimatesTab/list')
         Dashboard.preventNotificationCard()
         EstimatesPage.clickAddNew()
         cy.wait(4000)
@@ -127,7 +108,6 @@ describe('New Estimate module', () => {
     it('Should proceed to Add New Job Screen after converting to Job', () => {
 
         Dashboard.clickEstimatesTab()
-        // cy.visit('/estimatesTab/list')
         Dashboard.preventNotificationCard()
         EstimatesPage.clickAddNew()
         cy.wait(4000)
@@ -145,7 +125,6 @@ describe('New Estimate module', () => {
     it('Should successfully convert estimate to invoice', () => {
 
         Dashboard.clickEstimatesTab()
-        // cy.visit('/estimatesTab/list')
         Dashboard.preventNotificationCard()
         EstimatesPage.clickAddNew()
         cy.wait(4000)
@@ -164,7 +143,6 @@ describe('New Estimate module', () => {
     it('Should change Customer', () => {
 
         Dashboard.clickEstimatesTab()
-        // cy.visit('/estimatesTab/list')
         Dashboard.preventNotificationCard()
         EstimatesPage.clickAddNew()
         cy.wait(4000)
@@ -180,25 +158,25 @@ describe('New Estimate module', () => {
 
     })
 
-    // it('Should proceed to Estimate preview', () => {
+    /* Skipped because of error in iframe */
+    it.only('Should proceed to Estimate preview', () => {
 
-    //     Dashboard.clickEstimatesTab()
-    //     Dashboard.preventNotificationCard()
-    // EstimatesPage.clickAddNew()
-    //     cy.wait(4000)
-    //     EstimatesPage.selectCustomer('Genius Giant Game Inc.')
-    //     EstimatesPage.inventorySelect('Inventory Item 1')
-    //     EstimatesPage.saveEstimate()
-    //     cy.wait(4000)
-    //     EstimatesPage.previewEstimate()
-    //     EstimatesPage.checkEstimatePreview() /* Add more Preview verifications in this method */
+        Dashboard.clickEstimatesTab()
+        Dashboard.preventNotificationCard()
+        EstimatesPage.clickAddNew()
+        cy.wait(4000)
+        EstimatesPage.selectCustomer('Genius Giant Game Inc.')
+        EstimatesPage.inventorySelect('Inventory Item 1')
+        EstimatesPage.saveEstimate()
+        cy.wait(4000)
+        EstimatesPage.previewEstimate()
+        EstimatesPage.checkEstimatePreview() /* Add more Preview verifications in this method */
 
 
-    // })
+    })
 
     it('Should send estimate as email', () => {
         Dashboard.clickEstimatesTab()
-        // cy.visit('/estimatesTab/list')
         Dashboard.preventNotificationCard()
         EstimatesPage.clickAddNew()
         cy.wait(4000)
@@ -211,7 +189,6 @@ describe('New Estimate module', () => {
 
     it('Should have correct Row total upon adding discount', () => {
         Dashboard.clickEstimatesTab()
-        // cy.visit('/estimatesTab/list')
         Dashboard.preventNotificationCard()
         EstimatesPage.clickAddNew()
         cy.wait(4000)
@@ -261,24 +238,25 @@ describe('New Estimate module', () => {
 
     })
 
-    // it.only('Create estimate with notes and description added and check on preview.', () => {
-    //     // Dashboard.clickEstimatesTab()
-    //     cy.visit('/estimatesTab/list')
-    //     Dashboard.preventNotificationCard()
-    // EstimatesPage.clickAddNew()
-    //     cy.wait(4000)
-    //     EstimatesPage.selectCustomer('Genius Giant Game Inc.')
-    //     EstimatesPage.inventorySelect('Air Filter')
-    //     cy.wait(4000)
+    /* Skipped becaus ef error in reading iframe */
+    it.skip('Create estimate with notes and description added and check on preview.', () => {
+        // Dashboard.clickEstimatesTab()
+        cy.visit('/estimatesTab/list')
+        Dashboard.preventNotificationCard()
+        EstimatesPage.clickAddNew()
+        cy.wait(4000)
+        EstimatesPage.selectCustomer('Genius Giant Game Inc.')
+        EstimatesPage.inventorySelect('Air Filter')
+        cy.wait(4000)
 
-    //     const note = 'This is a test note'
-    //     EstimatesPage.addNote(note)
-    //     EstimatesPage.previewEstimate()
-    //     const customerInfoToCheck= {
-    //         note: note,
-    //     }
-    //     EstimatesPage.checkEstimatePreviewValues(customerInfoToCheck) // Can't find element
-    // })
+        const note = 'This is a test note'
+        EstimatesPage.addNote(note)
+        EstimatesPage.previewEstimate()
+        const customerInfoToCheck = {
+            note: note,
+        }
+        EstimatesPage.checkEstimatePreviewValues(customerInfoToCheck) // Can't find element
+    })
 
     it('Test estimate per line "hidden" function - 1 inventory added w/ hide price', () => {
         Dashboard.clickEstimatesTab()
@@ -355,6 +333,6 @@ describe('New Estimate module', () => {
 
     })
 
-    
+
 
 })

@@ -18,7 +18,6 @@ describe('New Estimate module', () => {
         cy.viewport(1560, 992)
         cy.visit('/login')
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
-        // cy.get('ul.dropdown-menu.dropdown-reminders').invoke('hide')
         cy.wait(4250)
 
         /* Prevent the notification card from interfering */
@@ -41,12 +40,8 @@ describe('New Estimate module', () => {
         }
         AddCustomerPage.fillData(customerInfo)
         AddCustomerPage.clickSaveButton()
-
-
-
-
+        
         //Add Service Location
-
         CustomerPage.clickAddNewServiceLocation()
         const serviceLocationInfo = {
             firstName: 'Jennifer',

@@ -21,7 +21,7 @@ class EstimatesPage {
         customerSearchItems: () => cy.get('.ibox-content .customerList b'),
         billToCustomerName: () => cy.get('._header-preview.topsummary .customerName a'),
         previewiFrame: {
-            custName: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').then(cy.wrap).find('#reportContent .customerInfo .custName'),
+            custName: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').then(cy.wrap).find('.custName'),
             note: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('#reportContent h3+p'),
         },
         addDiscountRowElement: () => cy.get('a[data-target="#modalAddDiscountPartLine"]'),
@@ -35,6 +35,13 @@ class EstimatesPage {
         invoiceTax: () => cy.get('.table.invoice-total tr:nth-child(3) td:nth-child(2)'),
         invoiceTotal: () => cy.get('.table.invoice-total tr.total td:nth-child(2)'),
         invoiceTotals: () => cy.get('.table.invoice-total tbody tr:first-child() td:nth-child(2), .table.invoice-total tr.total td:nth-child(2)'),
+        invoiceTaxButton:()=>cy.get('input#mat-input-11'),
+        createNewTaxButton: ()=>cy.get('button').contains('Create new'),
+        setTaxModal: {
+            taxNameTextbox:()=> cy.get('app-tax-selector-dialog input#mat-input-16'),
+            taxValueTextbox:()=>cy.get('app-tax-selector-dialog input#mat-input-17'),
+            saveButton:()=>cy.get('app-tax-selector-dialog button').contains('Save'),
+        },
         sendToEmailModal: {
             recipientChipRemoveIcon: () => cy.get('mat-chip-list .mat-chip-remove '),
             recipientsInputBox: () => cy.get('#mat-chip-list-input-0'),
@@ -378,6 +385,14 @@ class EstimatesPage {
     addNote = (note) => {
         this.elements.notesForCustomerField().type(`${note}{home}`)
 
+    }
+
+    addInvoiceTax=(taxInfo)=> {
+        this.elements.invoiceTaxButton().click()
+        this.elements.createNewTaxButton().click()
+        this.elements.setTaxModal.taxNameTextbox().clear().type(taxInfo.taxName)
+        this.elements.setTaxModal.taxValueTextbox().clear().type(taxInfo.taxValue)
+        this.elements.setTaxModal.saveButton().click()
     }
 
     checkInvoiceTotal = () => {

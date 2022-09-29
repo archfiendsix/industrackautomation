@@ -14,14 +14,15 @@ describe('Add Customer', () => {
 
   beforeEach(() => {
     cy.viewport(1560, 992)
-    cy.visit('/login')
-    LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
-    cy.wait(4250)
-    Dashboard.preventNotificationCard()
-    // Dashboard.clickCustomerTab()
-    cy.visit('/crmTab/list')
-    Dashboard.preventNotificationCard()
-    CustomerPage.clickAddCustomerButton()
+    // cy.visit('/login')
+    // LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
+    // cy.wait(4250)
+    // Dashboard.preventNotificationCard()
+    // // Dashboard.clickCustomerTab()
+    // cy.visit('/crmTab/list')
+    // cy.wait(4250)
+    // Dashboard.preventNotificationCard()
+    // CustomerPage.clickAddCustomerButton()
 
   })
 
@@ -149,44 +150,41 @@ describe('Add Customer', () => {
     const rand = uuidv4().substring(0, 5)
     const customerInfo = {
       customerNumber: `CN-${rand}`,
-      companyName: 'Add Tag to this customer',
+      companyName: `${uuidv4().substring(0, 5)} - Add Tag to this customer`,
     }
     AddCustomerPage.fillData(customerInfo)
     Dashboard.preventNotificationCard()
     AddCustomerPage.validateAddress()
 
 
-    // AddCustomerPage.elements.customerNumberTextBox().then($el => {
-    //   cn = $el.text().toString()
-    // })
-    // AddCustomerPage.elements.customerNumberTextBox().invoke('val').as('cn')
 
     AddCustomerPage.clickSaveButton()
-    const tags = ['Tag 1', 'Tag 2', 'Tag 3']
+    const tags = [`${uuidv4().substring(0, 5)}-Tag`, `${uuidv4().substring(0, 5)}-Tag`, `${uuidv4().substring(0, 5)}-Tag`]
     AddCustomerPage.addTags(tags)
     AddCustomerPage.clickBackButton()
 
-    // CustomerPage.searchAndVerifyTags(tags) -> modify this
+    CustomerPage.searchAndVerifyTags(tags, customerInfo.customerNumber) // -> modify this
 
 
   })
 
-  // it('Create estimate with notes and description added and check on preview.', () => { ==> modify this
-  //   Dashboard.preventNotificationCard()
-  //   const customerInfo = {
-  //     customerNumber: `CN-${uuidv4()}`,
-  //     companyName: 'Add Note to this customer and check',
-  //   }
-  //   AddCustomerPage.fillData(customerInfo)
-  //   Dashboard.preventNotificationCard()
-  //   AddCustomerPage.validateAddress()
+  /* Skipped because of iframe problem */
+  it.skip('Create estimate with notes and description added and check on preview.', () => {
+    Dashboard.preventNotificationCard()
+    const customerInfo = {
+      customerNumber: `CN-${uuidv4()}`,
+      companyName: 'Add Note to this customer and check',
+    }
+    AddCustomerPage.fillData(customerInfo)
+    Dashboard.preventNotificationCard()
+    AddCustomerPage.validateAddress()
 
-  //   AddCustomerPage.clickSaveButton()
+    AddCustomerPage.clickSaveButton()
 
-  //   // CustomerPage.searchAndVerifyTags(tags) -> modify this
-  //   CustomerPage.gotoAddNewEstimate()
+    CustomerPage.searchAndVerifyTags(tags, customerInfo.customerNumber) // -> modify this
+    CustomerPage.gotoAddNewEstimate()
 
-  // })
+  })
   it('Make customer inactive - Check unsearchability - Make Customer active again - Check searchability', () => {
     const cn = `CN-${uuidv4().substring(0, 5)}`
     const customerInfo = {
@@ -270,26 +268,26 @@ describe('Add Customer', () => {
 
     const rand = uuidv4().substring(0, 5)
     const customerInfo = {
-        customerNumber: `Cust-${rand}`,
-        companyName: `${uuidv4().substring(0, 5)}-Add 2 service location to this customer`,
-        street: 'Cemetery Street'
+      customerNumber: `Cust-${rand}`,
+      companyName: `${uuidv4().substring(0, 5)}-Add 2 service location to this customer`,
+      street: 'Cemetery Street'
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
     CustomerPage.clickAddNewServiceLocation()
     const serviceLocationInfo = {
-        firstName: 'Jennifer',
-        lastName: 'McClure',
-        phone: '3233245240',
-        email: 'edgar1996@yahoo.com',
-        locationName: 'Genius Building',
-        street: 'Par Dr',
-        unitNumber: '1926',
-        city: 'Naples',
-        state: 'FL',
-        zip: '34120',
-        country: 'United States of America',
-        selectATaxRate: 'Not Selected'
+      firstName: 'Jennifer',
+      lastName: 'McClure',
+      phone: '3233245240',
+      email: 'edgar1996@yahoo.com',
+      locationName: 'Genius Building',
+      street: 'Par Dr',
+      unitNumber: '1926',
+      city: 'Naples',
+      state: 'FL',
+      zip: '34120',
+      country: 'United States of America',
+      selectATaxRate: 'Not Selected'
 
     }
     CustomerPage.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo)
@@ -298,18 +296,18 @@ describe('Add Customer', () => {
 
     CustomerPage.clickAddNewServiceLocation()
     const serviceLocationInfo1 = {
-        firstName: 'Abdul',
-        lastName: 'Dauphin',
-        phone: '209988909',
-        email: 'jarrell.pag@hotmail.com',
-        locationName: 'Genius Building',
-        street: 'Mercer Street',
-        unitNumber: '2541',
-        city: 'Jump River',
-        state: 'WI',
-        zip: '54434',
-        country: 'United States of America',
-        selectATaxRate: 'Not Selected'
+      firstName: 'Abdul',
+      lastName: 'Dauphin',
+      phone: '209988909',
+      email: 'jarrell.pag@hotmail.com',
+      locationName: 'Genius Building',
+      street: 'Mercer Street',
+      unitNumber: '2541',
+      city: 'Jump River',
+      state: 'WI',
+      zip: '54434',
+      country: 'United States of America',
+      selectATaxRate: 'Not Selected'
 
     }
     CustomerPage.addNewServiceLocationModal.fillServiceLocationData(serviceLocationInfo1)
@@ -320,9 +318,9 @@ describe('Add Customer', () => {
     CustomerPage.clickAddOfficeNotesButton()
     const rand3 = uuidv4().substring(0, 5)
     const officeNoteInfo = {
-        noteText: `${rand3}Note`,
-        siteNote: false,
-        assignNoteToAServiceLocation: 0,
+      noteText: `${rand3}Note`,
+      siteNote: false,
+      assignNoteToAServiceLocation: 0,
     }
     CustomerPage.fillOfficeNoteForm(officeNoteInfo)
 
@@ -330,9 +328,9 @@ describe('Add Customer', () => {
     CustomerPage.clickAddOfficeNotesButton()
     const rand4 = uuidv4().substring(0, 5)
     const officeNoteInfo1 = {
-        noteText: `${rand4}Note`,
-        siteNote: false,
-        assignNoteToAServiceLocation: 1,
+      noteText: `${rand4}Note`,
+      siteNote: false,
+      assignNoteToAServiceLocation: 1,
     }
     CustomerPage.fillOfficeNoteForm(officeNoteInfo1)
 
@@ -340,9 +338,9 @@ describe('Add Customer', () => {
     CustomerPage.clickAddOfficeNotesButton()
     const rand5 = uuidv4().substring(0, 5)
     const officeNoteInfo2 = {
-        noteText: `${rand5}Note`,
-        siteNote: false,
-        assignNoteToAServiceLocation: 2,
+      noteText: `${rand5}Note`,
+      siteNote: false,
+      assignNoteToAServiceLocation: 2,
     }
     CustomerPage.fillOfficeNoteForm(officeNoteInfo2)
 
@@ -351,9 +349,9 @@ describe('Add Customer', () => {
     CustomerPage.clickAddOfficeNotesButton()
     const rand6 = uuidv4().substring(0, 5)
     const officeNoteInfo3 = {
-        noteText: `${rand6}Note`,
-        siteNote: true,
-        assignNoteToAServiceLocation: 0,
+      noteText: `${rand6}Note`,
+      siteNote: true,
+      assignNoteToAServiceLocation: 0,
     }
     CustomerPage.fillOfficeNoteForm(officeNoteInfo3)
 
@@ -361,9 +359,9 @@ describe('Add Customer', () => {
     CustomerPage.clickAddOfficeNotesButton()
     const rand7 = uuidv4().substring(0, 5)
     const officeNoteInfo4 = {
-        noteText: `${rand7}Note`,
-        siteNote: true,
-        assignNoteToAServiceLocation: 1,
+      noteText: `${rand7}Note`,
+      siteNote: true,
+      assignNoteToAServiceLocation: 1,
     }
     CustomerPage.fillOfficeNoteForm(officeNoteInfo4)
 
@@ -372,48 +370,54 @@ describe('Add Customer', () => {
     CustomerPage.clickAddOfficeNotesButton()
     const rand8 = uuidv4().substring(0, 5)
     const officeNoteInfo5 = {
-        noteText: `${rand8}Note`,
-        siteNote: true,
-        assignNoteToAServiceLocation: 2,
+      noteText: `${rand8}Note`,
+      siteNote: true,
+      assignNoteToAServiceLocation: 2,
     }
     CustomerPage.fillOfficeNoteForm(officeNoteInfo5)
 
     const asssignedNotesInfo = [
-        {
-            street: customerInfo.street,
-            noteText: officeNoteInfo.noteText,
-            assignNoteToAServiceLocation: officeNoteInfo.assignNoteToAServiceLocation
-        }, {
-            street: serviceLocationInfo.street,
-            noteText: officeNoteInfo1.noteText,
-            assignNoteToAServiceLocation: officeNoteInfo1.assignNoteToAServiceLocation
-        }, {
-            street: serviceLocationInfo1.street,
-            noteText: officeNoteInfo2.noteText,
-            assignNoteToAServiceLocation: officeNoteInfo2.assignNoteToAServiceLocation
-        },
-        {
-            street: customerInfo.street,
-            noteText: officeNoteInfo3.noteText,
-            assignNoteToAServiceLocation: officeNoteInfo3.assignNoteToAServiceLocation
-        },
-        {
-            street: serviceLocationInfo.street,
-            noteText: officeNoteInfo4.noteText,
-            assignNoteToAServiceLocation: officeNoteInfo4.assignNoteToAServiceLocation
-        },
-        {
-            street: serviceLocationInfo1.street,
-            noteText: officeNoteInfo5.noteText,
-            assignNoteToAServiceLocation: officeNoteInfo5.assignNoteToAServiceLocation
-        }
+      {
+        street: customerInfo.street,
+        noteText: officeNoteInfo.noteText,
+        assignNoteToAServiceLocation: officeNoteInfo.assignNoteToAServiceLocation
+      }, {
+        street: serviceLocationInfo.street,
+        noteText: officeNoteInfo1.noteText,
+        assignNoteToAServiceLocation: officeNoteInfo1.assignNoteToAServiceLocation
+      }, {
+        street: serviceLocationInfo1.street,
+        noteText: officeNoteInfo2.noteText,
+        assignNoteToAServiceLocation: officeNoteInfo2.assignNoteToAServiceLocation
+      },
+      {
+        street: customerInfo.street,
+        noteText: officeNoteInfo3.noteText,
+        assignNoteToAServiceLocation: officeNoteInfo3.assignNoteToAServiceLocation
+      },
+      {
+        street: serviceLocationInfo.street,
+        noteText: officeNoteInfo4.noteText,
+        assignNoteToAServiceLocation: officeNoteInfo4.assignNoteToAServiceLocation
+      },
+      {
+        street: serviceLocationInfo1.street,
+        noteText: officeNoteInfo5.noteText,
+        assignNoteToAServiceLocation: officeNoteInfo5.assignNoteToAServiceLocation
+      }
     ]
 
 
 
     CustomerPage.checkAssignedNotes(asssignedNotesInfo)
 
-})
+  })
+
+  it.only('',()=> {
+    cy.visit('https://employer-test.fastjobs.sg/site/login/')
+    // rc-anchor-content
+
+  })
 
 
 })
