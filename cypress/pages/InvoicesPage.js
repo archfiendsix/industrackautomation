@@ -34,19 +34,38 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             taxTextbox: () => cy.get('app-tax-selector input'),
             taxOption: () => cy.get('.mat-autocomplete-panel mat-option'),
             addInvoiceDiscountButton: () => cy.get('.invoice-total a'),
-            invoiceNumber:() => cy.get('input[name="invoiceNumber"]'),
+            invoiceNumber: () => cy.get('input[name="invoiceNumber"]'),
+            billingAddress: () => cy.get('.customername+p'),
             actionsDropdown: {
                 button: () => cy.get('button[data-toggle="dropdown"]').contains('Actions'),
                 save: () => cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').first().contains('Save'),
                 preview: () => cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').contains('Preview'),
+                changeServiceLocation: () => cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').contains('Change Bill To Service Location'),
             }
         },
         actionsDropdown: {
-            button: () => cy.get('app-invoices-list .btn-group.actions button'),
+            button: () => cy.get('.topheader button').contains('Actions'),
             viewPayments: () => cy.get('app-invoices-list .btn-group.actions button+.dropdown-menu li a').contains('View Payments'),
             sendToEmail: () => cy.get('app-invoices-list .btn-group.actions button+.dropdown-menu li a').contains('Send to E-Mail'),
+            changeServiceLocation: () => cy.get('.topheader button+.dropdown-menu li a').contains('Change Service Location'),
+            changeBillToServiceLocation: () => cy.get('.topheader button+.dropdown-menu li a').contains('Change Bill To Service Location'),
+            changeCustomer: () => cy.get('.topheader button+.dropdown-menu li a').contains('Change Customer'),
         },
-
+        changeServiceLocation: {
+            serviceLocations: () => cy.get('app-customer-selector .list-group-item'),
+            proceedButton: () => cy.get('app-customer-selector button').contains('Proceed'),
+        },
+        changeBillToServiceLocation: {
+            serviceLocations: () => cy.get('app-customer-selector .list-group-item'),
+            proceedButton: () => cy.get('app-customer-selector button').contains('Proceed'),
+        },
+        changeCustomer: {
+            selectCustomerTextbox: () => cy.get('app-customer-selector input.customersearchinput'),
+            customerListItems: () => cy.get('app-customer-selector .list-group-item'),
+            proceedButton: () => cy.get('app-customer-selector button').contains('Proceed'),
+        },
+        // this.elements.changeServiceLocation.serviceLocations().contains(serviceLocation).click()
+        // this.elements.changeServiceLocation.proceedButton().click()
         invoicesTable: {
             selectAll: () => cy.get('.mat-table thead tr th mat-checkbox'),
             dateSort: () => cy.get('.mat-table thead button[aria-label="Change sorting for date"]'),
@@ -77,10 +96,19 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         invoicePreviewModal: {
             header: () => cy.get('app-report-preview-dialog .mat-dialog-title h4'),
             saveAsPDFButton: () => cy.get('app-report-preview-dialog button').contains('Save As PDF').first(),
+            closeButton: () => cy.get('app-report-preview-dialog button').contains('Close')
+
+        },
+        previewiFrame: {
+            custName: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').then(cy.wrap).find('.custName'),
+            note: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('#reportContent h3+p'),
+            description: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('#reportContent .col-lg-4.col-md-4:nth-child(3) h3+span'),
+            invoiceNumber: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('#reportContent .proposalInfo tr:first-child() td:last-child()'),
+            customerInfo: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('.customerInfo')
         },
         emailInvoiceModal: {
-            header: ()=> cy.get('app-invoice-send-mail-dialog .mat-dialog-title h4'),
-            sendButton: ()=> cy.get('app-invoice-send-mail-dialog .mat-dialog-title buton').contains('Send'),
+            header: () => cy.get('app-invoice-send-mail-dialog .mat-dialog-title h4'),
+            sendButton: () => cy.get('app-invoice-send-mail-dialog .mat-dialog-title buton').contains('Send'),
         }
 
     }
@@ -123,40 +151,111 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 
     saveInvoice = () => {
+        cy.wait(4000)
         this.elements.addingNewInvoiceModal.actionsDropdown.button().click()
         this.elements.addingNewInvoiceModal.actionsDropdown.save().click()
     }
 
     previewInvoice = () => {
-        cy.wait(3000)
+        cy.wait(4000)
         this.elements.addingNewInvoiceModal.actionsDropdown.button().click()
         cy.wait(2000)
         this.elements.addingNewInvoiceModal.actionsDropdown.preview().click({ force: true })
     }
 
-    checkPreview = () => {
+    checkPreview = (whatToCheck) => {
+        cy.wait(4000)
+
+        // Check if the preview modal is displayed
         this.elements.invoicePreviewModal.header().then($el => {
             const header = $el.text().toString()
             expect(header).to.equal('Invoice Preview')
+            cy.wait(4000)
         })
+
+        // Check invoice note
+        whatToCheck.note && this.elements.previewiFrame.note().then($el => {
+            expect($el.text()).to.equal(whatToCheck.note.toString())
+        })
+
+        // Check Description
+        whatToCheck.description && whatToCheck.description.invoke('val').then($el => {
+            cy.log($el)
+            this.elements.previewiFrame.description().invoke('text').then($el2 => {
+                expect($el2.toString()).to.equal($el.toString())
+            })
+        })
+
+        // Check invoice number
+        whatToCheck.invoiceNumber && whatToCheck.invoiceNumber.invoke('val').then($el => {
+            cy.log($el)
+            this.elements.previewiFrame.invoiceNumber().invoke('text').then($el2 => {
+                expect($el2.toString()).to.equal($el.toString())
+            })
+        })
+
+        // whatToCheck.billingAddress && whatToCheck.billingAddress.invoke('text').then($el2 => {
+        //     // this.elements.previewiFrame.customerInfo().invoke('text').then($el => {
+        //         expect($el2).to.contain('Cemetery Street, 4955')
+        //     // })
+        // })
     }
 
-    clickSaveAsPDFButton=()=> {
+    closePreview = () => {
+        this.elements.invoicePreviewModal.closeButton().last().click()
+    }
+
+    clickSaveAsPDFButton = () => {
         this.elements.invoicePreviewModal.saveAsPDFButton().click()
     }
-    checkSavedPDF=()=> {
+    checkSavedPDF = () => {
         this.elements.addingNewInvoiceModal.invoiceNumber().then($el => {
             const iNumber = $el.val().toString()
             cy.readFile(`cypress/downloads/Invoice_${iNumber}.pdf`)
         })
     }
-    sendToEmail=()=> {
+    sendToEmail = () => {
         this.elements.actionsDropdown.sendToEmail().click()
-        this.elements.emailInvoiceModal.header().then($el=> {
+        this.elements.emailInvoiceModal.header().then($el => {
             const header = $el.text().toString()
             expect(header).to.equal('Email Invoice')
             this.elements.emailInvoiceModal.sendButton().click()
         })
+    }
+
+    changeServiceLocation = (serviceLocation) => {
+        cy.wait(4500)
+        this.elements.actionsDropdown.button().last().click()
+        cy.wait(4000)
+        this.elements.actionsDropdown.changeServiceLocation().last().click()
+        cy.wait(4000)
+        this.elements.changeServiceLocation.serviceLocations().contains(serviceLocation).click()
+        cy.wait(4000)
+        this.elements.changeServiceLocation.proceedButton().last().click()
+    }
+
+    changeBillToServiceLocation = (serviceLocation) => {
+        cy.wait(4000)
+        this.elements.actionsDropdown.button().last().click()
+        cy.wait(4000)
+        this.elements.actionsDropdown.changeBillToServiceLocation().last().click()
+        cy.wait(4000)
+        this.elements.changeBillToServiceLocation.serviceLocations().contains(serviceLocation).last().click()
+        cy.wait(4000)
+        this.elements.changeBillToServiceLocation.proceedButton().last().click()
+    }
+
+    changeCustomer = (customerName) => {
+        cy.wait(4000)
+        this.elements.actionsDropdown.button().last().click()
+        cy.wait(4000)
+        this.elements.actionsDropdown.changeCustomer().last().click()
+        cy.wait(4000)
+        this.elements.changeCustomer.selectCustomerTextbox().last().type(`${customerName}{enter}`)
+        cy.wait(4000)
+        this.elements.changeCustomer.customerListItems().contains(customerName).last().click()
+        cy.wait(4000)
+        this.elements.changeCustomer.proceedButton().last().click()
     }
 
 }

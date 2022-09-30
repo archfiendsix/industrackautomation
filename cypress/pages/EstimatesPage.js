@@ -20,6 +20,10 @@ class EstimatesPage {
         selectCustomerTextBox: () => cy.get('.customerselect input[name="search"]'),
         customerSearchItems: () => cy.get('.ibox-content .customerList b'),
         billToCustomerName: () => cy.get('._header-preview.topsummary .customerName a'),
+        upDownButtons: {
+            moveUp: ()=> cy.get('table i[title="Move Up"]'),
+            moveDown:()=>cy.get('table i[title="Move Down"]'),
+        },
         previewiFrame: {
             custName: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').then(cy.wrap).find('.custName'),
             note: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('#reportContent h3+p'),
@@ -478,7 +482,20 @@ class EstimatesPage {
     //     })
 
     // contains('#total', '$' + sum)
+    randomLineMove=()=> {
+        this.elements.upDownButtons.moveDown().then($el=> {
+            
+            const count = $el.length
+            const randomRow= this.getRandomInt(0, count)
+            this.elements.upDownButtons.moveDown().eq(randomRow).should('be.visible').click()
+        })
 
+        this.elements.upDownButtons.moveUp().then($el=> {
+            const count = $el.length
+            const randomRow= this.getRandomInt(0, count)
+            this.elements.upDownButtons.moveUp().eq(randomRow).should('be.visible').click()
+        })
+    }
 
 }
 

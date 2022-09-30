@@ -176,22 +176,23 @@ describe('Invoices Module', () => {
     it('1. Make sure that the correct info is shown in preview from invoice (estimate converted to invoice).', () => {
         Dashboard.clickEstimatesTab()
         Dashboard.preventNotificationCard()
-        
+
         EstimatesPage.clickAddNew()
         cy.wait(4000)
-        EstimatesPage.selectCustomer('01223-Add 2 service location to this customer')
+        EstimatesPage.selectCustomer('01223') //01223-Add 2 service location to this customer
         EstimatesPage.inventorySelect('Inventory Item 1')
         cy.wait(4000)
         EstimatesPage.inventorySelect('Gaming Chair')
         cy.wait(4000)
         EstimatesPage.inventorySelect('Add Inventory - Taxable no SN')
+        EstimatesPage.randomLineMove()
         const noteText = "This is a sample Note"
         EstimatesPage.addNote(noteText)
         EstimatesPage.addRandomInvoiceDiscount()
         EstimatesPage.addDiscountInRow(0, 30, '%', 3)
         EstimatesPage.saveEstimate()
-        
-        
+
+
         cy.wait(4000)
         EstimatesPage.convertToInvoice()
         cy.wait(3000)
@@ -204,7 +205,102 @@ describe('Invoices Module', () => {
         }
         EstimatesPage.addInvoiceTax(taxInfo)
         InvoiceOverviewPage.checkInvoiceStatus()
+
+        InvoicesPage.previewInvoice()
+        const overviewValues = {
+            note: noteText,
+            description: InvoicesPage.elements.addingNewInvoiceModal.descriptionTextbox(),
+            invoiceNumber: InvoicesPage.elements.addingNewInvoiceModal.invoiceNumber(),
+        }
+        InvoicesPage.checkPreview(overviewValues) // Checks for invoice preview values vs invoice overview
+    })
+    it('For unpaid invoices, test the following: Change invoice Bill to any service location, Change invoice to any service location, Change invoice customer', () => {
+        const invoiceInfo = {
+            customer: '01223',
+            inventoriesToAdd: ['Add Inventory - Taxable no SN'],
+            description: 'Test Description',
+            tax: 'None',
+            term: 'Not Selected'
+        }
+        InvoicesPage.addNewInvoice(invoiceInfo)
+        InvoicesPage.addInvoiceDiscount('0')
+        // InvoicesPage.saveInvoice()
+        // InvoicesPage.previewInvoice()
+        // const overviewValues = {
+        //     description: InvoicesPage.elements.addingNewInvoiceModal.descriptionTextbox(),
+        //     invoiceNumber: InvoicesPage.elements.addingNewInvoiceModal.invoiceNumber(),
+        // }
+
+        // InvoicesPage.checkPreview(overviewValues) // Checks for invoice preview values vs invoice overview
+        // InvoicesPage.closePreview()
+
+        //Change Service Location
+        const serviceLocation = 'Abdul Dauphin'
+        InvoicesPage.changeServiceLocation(serviceLocation)
+        
+
+        //Change Bill to Service Location
+        const billtoserviceLocation = 'Jennifer McClure'
+        InvoicesPage.changeBillToServiceLocation(billtoserviceLocation)
+        InvoicesPage.saveInvoice()
+        InvoicesPage.previewInvoice()
+        const overviewValues1 = {
+            description: InvoicesPage.elements.addingNewInvoiceModal.descriptionTextbox(),
+            invoiceNumber: InvoicesPage.elements.addingNewInvoiceModal.invoiceNumber(),
+        }
+
+        InvoicesPage.checkPreview(overviewValues1) // Checks for invoice preview values vs invoice overview
+        InvoicesPage.closePreview()
+
+        // Change Customer
+        const customerName = 'Abdul Dauphin'
+        InvoicesPage.changeCustomer(customerName)
+
+        InvoicesPage.saveInvoice()
+        InvoicesPage.previewInvoice()
+        const overviewValues2 = {
+            description: InvoicesPage.elements.addingNewInvoiceModal.descriptionTextbox(),
+            invoiceNumber: InvoicesPage.elements.addingNewInvoiceModal.invoiceNumber(),
+        }
+
+        InvoicesPage.checkPreview(overviewValues2) // Checks for invoice preview values vs invoice overview
     })
 
 
+    it('Generate overdue invoice then check.', () => {
+        Dashboard.preventNotificationCard()
+        
+        const invoiceInfo = {
+            customer: '01223',
+            inventoriesToAdd: ['Add Inventory - Taxable no SN'],
+            description: 'Test Description',
+            tax: 'None',
+            term: 'AutoOverdue'
+        }
+        InvoicesPage.addNewInvoice(invoiceInfo)
+
+
+        InvoicesPage.previewInvoice()
+        const overviewValues = {
+            description: InvoicesPage.elements.addingNewInvoiceModal.descriptionTextbox(),
+            invoiceNumber: InvoicesPage.elements.addingNewInvoiceModal.invoiceNumber(),
+            // billingAddress: InvoicesPage.elements.addingNewInvoiceModal.billingAddress()
+        }
+        InvoicesPage.checkPreview(overviewValues) // Checks for invoice preview values vs invoice overview
+    })
+
+    it('For Unpaid and Overdue invoices - test out receive payment.', () => {
+        const invoiceInfo = {
+            customer: 'Ace Hardware',
+            inventoriesToAdd: ['Add Inventory - Taxable no SN'],
+            description: 'Test Description',
+            tax: 'None',
+            term: 'Not Selected'
+        }
+        InvoicesPage.addNewInvoice(invoiceInfo)
+        InvoicesPage.addInvoiceDiscount('0')
+        InvoicesPage.saveInvoice()
+
+
+    })
 })
