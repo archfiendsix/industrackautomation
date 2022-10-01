@@ -39,7 +39,6 @@ class AddCustomerPage {
             backButton:()=> cy.get('app-customers-overview a[routerlink="/crmTab/list"]').contains('Back')
         }
     }
-
     checkSaveButtonDisabled = () => {
         // this.elements.saveButton().should('be.disabled')
         this.elements.saveButton().then(el => {

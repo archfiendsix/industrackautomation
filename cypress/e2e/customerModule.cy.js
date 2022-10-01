@@ -413,12 +413,6 @@ describe('Add Customer', () => {
 
   })
 
-  it.only('',()=> {
-    cy.visit('https://employer-test.fastjobs.sg/site/login/')
-    // rc-anchor-content
-
-  })
-
 
 })
 
