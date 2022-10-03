@@ -17,7 +17,7 @@ class SchedulePage {
         actionsDropdown: {
             button: () => cy.get('scheduling .btn-group.actions'),
             addNewJob: () => cy.get('scheduling .btn-group.actions button+.dropdown-menu li a').contains('Add new Job'),
-            jobsQueue: () => cy.get('scheduling .btn-group.actions button+.dropdown-menu li a').contains('jobs Queue'),
+            jobsQueue: () => cy.get('scheduling .btn-group.actions button+.dropdown-menu li a').contains('Jobs Queue').last(),
             print: () => cy.get('scheduling .btn-group.actions button+.dropdown-menu li a').contains('Print'),
         },
         addNewJobModal: {
@@ -28,13 +28,16 @@ class SchedulePage {
             dispatchNowButton: () => cy.get('app-job-edit-form .modal-footer button').contains('Dispatch Now'),
             jobsInfoTab: {
                 selectCustomerField: () => cy.get('app-job-edit-form form input#partservsearch'),
+                selectServiceLocation: () => cy.get('app-job-edit-form form div.selectservicelocation'),
                 jobDescriptionTexbox: () => cy.get('app-job-edit-form form input#jobName '),
                 jobStatusField: () => cy.get('app-job-edit-form form select#jobState'),
                 notesTextarea: () => cy.get('app-job-edit-form form textarea#customerSiteNote'),
                 jobPriorityField: () => cy.get('app-job-edit-form form select#jobPriority'),
                 startDate: () => cy.get('#editJobFormStartDate mat-form-field input').first(),
                 endDate: () => cy.get('#editJobFormEndDate mat-form-field input ').first(),
-                jobTemplateButton: ()=> cy.get('app-job-edit-form button').contains('Job Template')
+                jobTemplateButton: () => cy.get('app-job-edit-form button').contains('Job Template'),
+                serviceTypeSelect: () => cy.get('app-job-edit-form mat-select#classificaitonId'),
+                jobColor: () => cy.get('app-job-edit-form mat-select[name="jobColorId"]')
             },
             employeeTab: {
                 addCrewField: () => cy.get('crew-select .dropdown'),
@@ -47,16 +50,21 @@ class SchedulePage {
                 addNewButton: () => cy.get('job-task-form button').contains('New Task'),
                 taskNameTextbox: () => cy.get('#taskslist #task1 .form-group input').first()
             },
-            selectJobTemplateModal : {
-                jobTemplateField: ()=> cy.get('app-common-selector-dialog mat-select'),
-                jobTemplateFieldOptions: ()=> cy.get('.cdk-overlay-pane mat-option'),
-                selectButton: ()=> cy.get('.cdk-overlay-pane button').contains('Select')
+            selectJobTemplateModal: {
+                jobTemplateField: () => cy.get('app-common-selector-dialog mat-select'),
+                jobTemplateFieldOptions: () => cy.get('.cdk-overlay-pane mat-option'),
+                selectButton: () => cy.get('.cdk-overlay-pane button').contains('Select')
             },
             confirmTamplateModal: {
-                yesButton: ()=>cy.get('.mat-dialog-actions button').contains('Yes')
+                yesButton: () => cy.get('.mat-dialog-actions button').contains('Yes')
+            }
+        },
+        // jobsQueueEye: cy.get('#iBoxJobs .ibox-tools a[title="Expand"]'),
+        jobsQueueModal: {
+            unassignedJobsTab: {
+                tableFirstRow: () => cy.get('app-jobs-unassigned table tbody tr').first()
             }
         }
-        // jobsQueueEye: cy.get('#iBoxJobs .ibox-tools a[title="Expand"]'),
     }
 
     gotoAddNewJob = () => {
@@ -77,6 +85,84 @@ class SchedulePage {
         this.elements.addNewJobModal.jobsInfoTab.endDate().type('09/30/2022')
     }
 
+    addNewJob = (jobInformation) => {
+        jobInformation.selectCustomer && this.elements.addNewJobModal.jobsInfoTab.selectCustomerField().clear().type(jobInformation.selectCustomer).then(() => {
+            cy.wait(2000)
+            cy.get('mat-option').contains(jobInformation.selectCustomer).click()
+        })
+        jobInformation.serviceLocation && this.elements.addNewJobModal.jobsInfoTab.selectServiceLocation().click().then(() => {
+            cy.wait(4000)
+            cy.get('.viewport-list-item').contains(jobInformation.serviceLocation).click()
+        })
+        jobInformation.jobDescription && this.elements.addNewJobModal.jobsInfoTab.jobDescriptionTexbox().clear().type(jobInformation.jobDescription.toString())
+        jobInformation.jobStatus && this.elements.addNewJobModal.jobsInfoTab.jobStatusField().select(jobInformation.jobStatus)
+        jobInformation.notes && this.elements.addNewJobModal.jobsInfoTab.notesTextarea().clear().type(jobInformation.notes)
+        jobInformation.serviceType && this.elements.addNewJobModal.jobsInfoTab.serviceTypeSelect().click().then(() => {
+            cy.get('mat-option').contains(jobInformation.serviceType).click()
+        })
+
+        jobInformation.jobPriority && this.elements.addNewJobModal.jobsInfoTab.jobPriorityField().select(jobInformation.jobPriority)
+        jobInformation.jobColor && this.elements.addNewJobModal.jobsInfoTab.jobColor().click().then(() => {
+            cy.get('mat-option').contains(jobInformation.jobColor).click()
+        })
+
+
+    }
+
+    saveJob = () => {
+        this.elements.addNewJobModal.saveJobButton().click()
+    }
+
+
+    verifyCustomerInformation = (jobInformation) => {
+
+
+        // Check Job Description
+        jobInformation.jobDescription && this.elements.addNewJobModal.jobsInfoTab.jobDescriptionTexbox().invoke('val').then(text => {
+            expect(text).to.equal(jobInformation.jobDescription)
+        })
+
+        // Check Job Status
+        jobInformation.jobStatus && this.elements.addNewJobModal.jobsInfoTab.jobStatusField().invoke('val').then(val => {
+            // cy.log($el.text().toString())
+            this.elements.addNewJobModal.jobsInfoTab.jobStatusField().contains(jobInformation.jobStatus).invoke('attr', 'value').then((value) => {
+                expect(val).to.equal(value)
+            })
+
+        })
+
+        // Check Notes
+        jobInformation.notes && this.elements.addNewJobModal.jobsInfoTab.notesTextarea().invoke('val').then(val => {
+            expect(val).to.equal(jobInformation.notes)
+        })
+
+        // Check Service Type
+        jobInformation.serviceType && this.elements.addNewJobModal.jobsInfoTab.serviceTypeSelect().invoke('text').then(text => {
+            expect(text).to.equal(jobInformation.serviceType)
+        })
+
+        // Check Job Priority
+        jobInformation.jobPriority && this.elements.addNewJobModal.jobsInfoTab.jobPriorityField().invoke('val').then(val => {
+            // cy.log($el.text().toString())
+            this.elements.addNewJobModal.jobsInfoTab.jobPriorityField().contains(jobInformation.jobPriority).invoke('attr', 'value').then((value) => {
+                expect(val).to.equal(value)
+            })
+
+        })
+
+        //Check Job Color
+        jobInformation.jobColor && this.elements.addNewJobModal.jobsInfoTab.jobColor().invoke('text').then(text => {
+            expect(text).to.equal(jobInformation.jobColor)
+        })
+
+        // Still to fix address checking:
+        // jobInformation.address && jobInformation.address.invoke('text').then((text) => {
+        //     cy.log(text)
+        // })
+
+
+    }
+
     saveJob = () => {
         this.elements.addNewJobModal.saveJobButton().click()
     }
@@ -92,10 +178,11 @@ class SchedulePage {
         this.elements.addNewJobModal.employeeTab.addCrewListItem().find('label').contains(employee.employeeName).click()
         this.elements.addNewJobModal.employeeTab.durationHrs().type(employee.duration.hrs)
         this.elements.addNewJobModal.employeeTab.durationMin().type(employee.duration.min)
-        
+
     }
 
-    addJobTemplate = (jobTemplateName)=> {
+
+    addJobTemplate = (jobTemplateName) => {
         this.elements.addNewJobModal.jobsInfoTab.jobTemplateButton().click()
         this.elements.addNewJobModal.selectJobTemplateModal.jobTemplateField().click()
         this.selectJobTemplateOption(jobTemplateName)
@@ -113,10 +200,19 @@ class SchedulePage {
         this.elements.addNewJobModal.tasksTab.taskNameTextbox().type(task.taskName)
     }
 
-   
+
 
     clickTasksTab = () => {
         this.elements.addNewJobModal.tasksTabButton().click()
+    }
+
+    gotoJobsQueue = () => {
+        this.elements.actionsDropdown.button().click()
+        this.elements.actionsDropdown.jobsQueue().click()
+    }
+    clickFirstUnassignedJob = () => {
+        cy.wait(3500)
+        this.elements.jobsQueueModal.unassignedJobsTab.tableFirstRow().dblclick()
     }
 
 }
