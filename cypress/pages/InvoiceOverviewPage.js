@@ -4,8 +4,8 @@ class InvoiceOverviewPage {
         statusLabel: () => cy.get('.topheader span.status'),
     }
 
-    checkInvoiceStatus = () => {
-        this.elements.statusLabel().contains('Unpaid')
+    checkInvoiceStatus = (statusToCheck) => {
+        this.elements.statusLabel().contains(statusToCheck)
     }
 }
 

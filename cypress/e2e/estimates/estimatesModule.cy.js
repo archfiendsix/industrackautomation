@@ -159,7 +159,7 @@ describe('New Estimate module', () => {
     })
 
     /* Skipped because of error in iframe */
-    it.only('Should proceed to Estimate preview', () => {
+    it('Should proceed to Estimate preview', () => {
 
         Dashboard.clickEstimatesTab()
         Dashboard.preventNotificationCard()
