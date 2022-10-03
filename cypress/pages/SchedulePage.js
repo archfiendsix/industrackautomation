@@ -119,40 +119,40 @@ class SchedulePage {
 
         // Check Job Description
         jobInformation.jobDescription && this.elements.addNewJobModal.jobsInfoTab.jobDescriptionTexbox().invoke('val').then(text => {
-            expect(text).to.equal(jobInformation.jobDescription)
+            expect(text,'Checking Job Description...').to.equal(jobInformation.jobDescription)
         })
 
         // Check Job Status
         jobInformation.jobStatus && this.elements.addNewJobModal.jobsInfoTab.jobStatusField().invoke('val').then(val => {
             // cy.log($el.text().toString())
             this.elements.addNewJobModal.jobsInfoTab.jobStatusField().contains(jobInformation.jobStatus).invoke('attr', 'value').then((value) => {
-                expect(val).to.equal(value)
+                expect(val,'Checking Job Status...').to.equal(value)
             })
 
         })
 
         // Check Notes
         jobInformation.notes && this.elements.addNewJobModal.jobsInfoTab.notesTextarea().invoke('val').then(val => {
-            expect(val).to.equal(jobInformation.notes)
+            expect(val, 'Checking Notes Value...').to.equal(jobInformation.notes)
         })
 
         // Check Service Type
         jobInformation.serviceType && this.elements.addNewJobModal.jobsInfoTab.serviceTypeSelect().invoke('text').then(text => {
-            expect(text).to.equal(jobInformation.serviceType)
+            expect(text, 'Checking Service Type... ').to.equal(jobInformation.serviceType)
         })
 
         // Check Job Priority
         jobInformation.jobPriority && this.elements.addNewJobModal.jobsInfoTab.jobPriorityField().invoke('val').then(val => {
             // cy.log($el.text().toString())
             this.elements.addNewJobModal.jobsInfoTab.jobPriorityField().contains(jobInformation.jobPriority).invoke('attr', 'value').then((value) => {
-                expect(val).to.equal(value)
+                expect(val, 'Checking Job Priority...').to.equal(value)
             })
 
         })
 
         //Check Job Color
         jobInformation.jobColor && this.elements.addNewJobModal.jobsInfoTab.jobColor().invoke('text').then(text => {
-            expect(text).to.equal(jobInformation.jobColor)
+            expect(text,'Checking Job Color...').to.equal(jobInformation.jobColor)
         })
 
         // Still to fix address checking:
