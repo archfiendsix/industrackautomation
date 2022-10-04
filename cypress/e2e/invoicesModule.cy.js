@@ -27,7 +27,7 @@ describe('Invoices Module', () => {
 
 
     
-    it.only('Add an invoice - Receive partial payment', () => {
+    it('Add an invoice - Receive partial payment', () => {
         const invoiceInfo = {
             customer: 'Ace Hardware',
             inventoriesToAdd: ['Add Inventory - Taxable no SN'],
