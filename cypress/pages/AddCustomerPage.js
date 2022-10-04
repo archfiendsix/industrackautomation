@@ -20,7 +20,7 @@ class AddCustomerPage {
         countryTextBox: () => cy.get('input#country'),
         emailErrror: () => cy.get('input#emailAddress+.alert'),
         warningModal: () => cy.get('.cdk-overlay-pane.warningModal .mat-dialog-content p'),
-        addressValidityWarningModalConfirm: () => cy.get('buton').contains('Yes'),
+        addressValidityWarningModalConfirm: () => cy.get('button').contains('Yes'),
         chooseFileButton:()=> cy.get('input#inputDocument'),
         sameAsCompanyCheckbox: () => cy.get('input#billingAddressEquals'),
         billingStreetAddressTextbox: () => cy.get('input#billingStreetAddress'),

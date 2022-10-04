@@ -35,8 +35,8 @@ describe('Schedule Module', () => {
         SchedulePage.gotoAddNewJob()
         let jobInformation = {
             selectCustomer: '01223',
-            serviceLocation:'Mercer Street',
-            jobDescription:`Description-${uuidv4().substring(0, 5)}`,
+            serviceLocation: 'Mercer Street',
+            jobDescription: `Description-${uuidv4().substring(0, 5)}`,
             jobStatus: 'Not Started',
             notes: `Note-${uuidv4().substring(0, 5)}`,
             serviceType: 'Maintenance',
@@ -47,40 +47,50 @@ describe('Schedule Module', () => {
         const address = {
             address: cy.get('.col-md-12').contains(jobInformation.serviceLocation)
         }
-        jobInformation = {...jobInformation,...address}
+        jobInformation = { ...jobInformation, ...address }
         SchedulePage.saveJob()
-        
-        
+
+
         SchedulePage.gotoJobsQueue()
         SchedulePage.clickFirstUnassignedJob()
-        
-        
+
+
         SchedulePage.verifyCustomerInformation(jobInformation)
     })
 
-    // it.only('Add default Job -  -Assert: customer details, service location - assert info after creation', () => {
+    it.only('Add default Job - Customer with 1 equipment -Assert: customer details, service location - assert info after creation', () => {
 
-    //     SchedulePage.gotoAddNewJob()
-    //     let jobInformation = {
-    //         selectCustomer: 'Customer Eqp-f1439',
-    //         jobDescription:`Description-${uuidv4().substring(0, 5)}`,
-    //         jobStatus: 'Not Started',
-    //         notes: `Note-${uuidv4().substring(0, 5)}`,
-    //         serviceType: 'Maintenance',
-    //         jobPriority: 'Low',
-    //         jobColor: 'Maintenance'
-    //     }
-    //     SchedulePage.addNewJob(jobInformation)
-        
-    //     SchedulePage.saveJob()
-        
-        
-    //     SchedulePage.gotoJobsQueue()
-    //     SchedulePage.clickFirstUnassignedJob()
-        
-        
-    //     SchedulePage.verifyCustomerInformation(jobInformation)
-    // })
+        SchedulePage.gotoAddNewJob()
+        let jobInformation = {
+            selectCustomer: 'Customer Eqp-f1439',
+            jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+            jobStatus: 'Not Started',
+            notes: `Note-${uuidv4().substring(0, 5)}`,
+            serviceType: 'Maintenance',
+            jobPriority: 'Low',
+            jobColor: 'Maintenance',
+            partsServiceEquipment: [{
+                name: 'Add Inventory - Taxable no SN',
+                qty: '1'
+            }],
+            attachments: [
+                {
+                    url: 'https://cloudinary.hbs.edu/hbsit/image/upload/s--Fm3oHP0m--/f_auto,c_fill,h_375,w_750,/v20200101/79015AB87FD6D3284472876E1ACC3428.jpg',
+                    addAFile: 'doc.doc'
+                }
+            ]
+        }
+        SchedulePage.addNewJob(jobInformation)
+
+        SchedulePage.saveJob()
+
+
+        SchedulePage.gotoJobsQueue()
+        SchedulePage.clickFirstUnassignedJob()
+
+
+        SchedulePage.verifyCustomerInformation(jobInformation)
+    })
 
 
 

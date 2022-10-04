@@ -121,7 +121,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         },
         emailInvoiceModal: {
             header: () => cy.get('app-invoice-send-mail-dialog .mat-dialog-title h4'),
-            sendButton: () => cy.get('app-invoice-send-mail-dialog .mat-dialog-title buton').contains('Send'),
+            sendButton: () => cy.get('app-invoice-send-mail-dialog .mat-dialog-title button').contains('Send'),
         },
         sendInvoiceModal: {
             sendButton: () => cy.get('mat-dialog-container button').contains('Send').last()

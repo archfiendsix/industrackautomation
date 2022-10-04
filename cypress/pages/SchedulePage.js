@@ -57,6 +57,20 @@ class SchedulePage {
             },
             confirmTamplateModal: {
                 yesButton: () => cy.get('.mat-dialog-actions button').contains('Yes')
+            },
+            partsServiceEquipment: {
+                accordion: () => cy.get('app-task-editor .panel-heading').contains('Parts/Services/Equipment'),
+                textbox: () => cy.get('app-task-editor .panel:nth-child(1)').find('input[aria-label="Parts & services & equipment search"]'),
+                qtyTextbox: () => cy.get('app-task-editor .panel:nth-child(1)').find('input[type="number"]'),
+                addButton: () => cy.get('app-task-editor .panel:nth-child(1)').find('button').contains('Add'),
+                listItems: () => cy.get('app-task-editor .panel:nth-child(1) .list-group-item').not('.addNewItem'),
+            },
+            attachments: {
+                accordion: () => cy.get('app-task-editor .panel-heading').contains('Attachments'),
+                urlTextbox: () => cy.get('app-task-editor .panel:nth-child(3)').find('input[type="text"]').eq(0),
+                addUrlButton: () => cy.get('app-task-editor .panel:nth-child(3) button').contains('Add').eq(0),
+                addAfileInput: () => cy.get('app-task-editor .panel:nth-child(3) input[type="file"]'),
+                listItems: () => cy.get('app-task-editor .panel:nth-child(3) .list-group-item').not('.addNewItem'),
             }
         },
         // jobsQueueEye: cy.get('#iBoxJobs .ibox-tools a[title="Expand"]'),
@@ -105,6 +119,31 @@ class SchedulePage {
         jobInformation.jobColor && this.elements.addNewJobModal.jobsInfoTab.jobColor().click().then(() => {
             cy.get('mat-option').contains(jobInformation.jobColor).click()
         })
+        this.elements.addNewJobModal.partsServiceEquipment.accordion().click().then(() => {
+            jobInformation.partsServiceEquipment && jobInformation.partsServiceEquipment.forEach(item => {
+                this.elements.addNewJobModal.partsServiceEquipment.textbox().clear().type(item.name).then(() => {
+                    cy.wait(3000)
+                    cy.get('mat-option').contains(item.name).first().click().then(() => {
+                        this.elements.addNewJobModal.partsServiceEquipment.qtyTextbox().clear().type(item.qty)
+                    })
+                    cy.wait(2000)
+
+                })
+
+                this.elements.addNewJobModal.partsServiceEquipment.addButton().click()
+                cy.wait(1500)
+            })
+        })
+        this.elements.addNewJobModal.attachments.accordion().click().then(() => {
+            jobInformation.attachments && jobInformation.attachments.forEach(item => {
+                this.elements.addNewJobModal.attachments.urlTextbox().clear().type(item.url)
+                cy.wait(4000)
+                this.elements.addNewJobModal.attachments.addUrlButton().click()
+                this.elements.addNewJobModal.attachments.addAfileInput().click()
+                this.elements.addNewJobModal.attachments.addAfileInput().attachFile(item.addAFile)
+                
+            })
+        })
 
 
     }
@@ -119,14 +158,14 @@ class SchedulePage {
 
         // Check Job Description
         jobInformation.jobDescription && this.elements.addNewJobModal.jobsInfoTab.jobDescriptionTexbox().invoke('val').then(text => {
-            expect(text,'Checking Job Description...').to.equal(jobInformation.jobDescription)
+            expect(text, 'Checking Job Description...').to.equal(jobInformation.jobDescription)
         })
 
         // Check Job Status
         jobInformation.jobStatus && this.elements.addNewJobModal.jobsInfoTab.jobStatusField().invoke('val').then(val => {
             // cy.log($el.text().toString())
             this.elements.addNewJobModal.jobsInfoTab.jobStatusField().contains(jobInformation.jobStatus).invoke('attr', 'value').then((value) => {
-                expect(val,'Checking Job Status...').to.equal(value)
+                expect(val, 'Checking Job Status...').to.equal(value)
             })
 
         })
@@ -152,7 +191,7 @@ class SchedulePage {
 
         //Check Job Color
         jobInformation.jobColor && this.elements.addNewJobModal.jobsInfoTab.jobColor().invoke('text').then(text => {
-            expect(text,'Checking Job Color...').to.equal(jobInformation.jobColor)
+            expect(text, 'Checking Job Color...').to.equal(jobInformation.jobColor)
         })
 
         // Still to fix address checking:
@@ -160,6 +199,23 @@ class SchedulePage {
         //     cy.log(text)
         // })
 
+        // Check Parts/Services/Equipment
+        this.elements.addNewJobModal.partsServiceEquipment.accordion().click().then(() => {
+            jobInformation.partsServiceEquipment && jobInformation.partsServiceEquipment.forEach(item => {
+                this.elements.addNewJobModal.partsServiceEquipment.listItems().contains(item.name).invoke('text').then(text=> {
+                    expect(text, 'Found on the Parts/Services/Equipment list:')
+                })
+            })
+        })
+
+        // Check attachments
+        this.elements.addNewJobModal.attachments.accordion().click().then(() => {
+            jobInformation.attachments && jobInformation.attachments.forEach(item => {
+                this.elements.addNewJobModal.attachments.listItems().contains(item.url).invoke('text').then(text=> {
+                    expect(text, 'Found on the url list:')
+                })
+            })
+        })
 
     }
 

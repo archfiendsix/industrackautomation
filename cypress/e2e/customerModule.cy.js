@@ -114,7 +114,7 @@ describe('Add Customer', () => {
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
-    AddCustomerPage.confirmValidityYes()
+    // AddCustomerPage.confirmValidityYes()
     CustomerPage.clickAddNewServiceLocation()
     const serviceLocationInfo = {
 
@@ -135,7 +135,7 @@ describe('Add Customer', () => {
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
-    AddCustomerPage.confirmValidityYes()
+    // AddCustomerPage.confirmValidityYes()
     CustomerPage.clickAddNewServiceLocation()
     const serviceLocationInfo = {
       selectATaxRate: 'New Tax'
@@ -168,23 +168,23 @@ describe('Add Customer', () => {
 
   })
 
-  /* Skipped because of iframe problem */
-  it.skip('Create estimate with notes and description added and check on preview.', () => {
-    Dashboard.preventNotificationCard()
-    const customerInfo = {
-      customerNumber: `CN-${uuidv4()}`,
-      companyName: 'Add Note to this customer and check',
-    }
-    AddCustomerPage.fillData(customerInfo)
-    Dashboard.preventNotificationCard()
-    AddCustomerPage.validateAddress()
+  // /* Skipped because of iframe problem */
+  // it.skip('Create estimate with notes and description added and check on preview.', () => {
+  //   Dashboard.preventNotificationCard()
+  //   const customerInfo = {
+  //     customerNumber: `CN-${uuidv4()}`,
+  //     companyName: 'Add Note to this customer and check',
+  //   }
+  //   AddCustomerPage.fillData(customerInfo)
+  //   Dashboard.preventNotificationCard()
+  //   AddCustomerPage.validateAddress()
 
-    AddCustomerPage.clickSaveButton()
+  //   AddCustomerPage.clickSaveButton()
 
-    CustomerPage.searchAndVerifyTags(tags, customerInfo.customerNumber) // -> modify this
-    CustomerPage.gotoAddNewEstimate()
+  //   CustomerPage.searchAndVerifyTags(tags, customerInfo.customerNumber) // -> modify this
+  //   CustomerPage.gotoAddNewEstimate()
 
-  })
+  // })
   it('Make customer inactive - Check unsearchability - Make Customer active again - Check searchability', () => {
     const cn = `CN-${uuidv4().substring(0, 5)}`
     const customerInfo = {
@@ -194,7 +194,7 @@ describe('Add Customer', () => {
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
-    AddCustomerPage.confirmValidityYes()
+    // AddCustomerPage.confirmValidityYes()
     CustomerPage.makeNewCustomerInactive()
     AddCustomerPage.clickBackButton()
 
@@ -223,7 +223,7 @@ describe('Add Customer', () => {
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
-    AddCustomerPage.confirmValidityYes()
+    // AddCustomerPage.confirmValidityYes()
 
     AddCustomerPage.clickBackButton()
     CustomerPage.gotoManageCustomerGroups()
