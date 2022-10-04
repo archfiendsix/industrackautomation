@@ -22,10 +22,10 @@ module.exports = defineConfig({
     "charts": true,
     "html": false,
     "json": true,
-    "embeddedScreenshots":true,
-    "overwrite":true,
+    "embeddedScreenshots": true,
+    "overwrite": true,
     "inlineAssets": true,
-    "enableCharts":true,
+    "enableCharts": true,
   },
   // reporterOptions: {
   //   mochaFile: `result/results-[hash].xml`
@@ -33,9 +33,11 @@ module.exports = defineConfig({
   "compilerOptions": {
     "types": ["jest", "node"]
   },
-  defaultCommandTimeout: 4000,
-  pageLoadTimeout: 30000,
+  requestTimeout: 30000,
+  numTestsKeptInMemory: 0,
+  responseTimeout: 50000,
+  pageLoadTimeout: 100000,
   chromeWebSecurity: false,
   screenshotOnRunFailure: true,
-  
+
 });
