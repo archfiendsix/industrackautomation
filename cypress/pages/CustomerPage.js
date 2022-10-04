@@ -68,8 +68,19 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             notesTab: {
                 button: () => cy.get('a[href="#tab-7"]'),
                 AddOfficeNotesButton: () => cy.get('button').contains('Add Office Notes ')
+            },
+            equipmentTab: {
+                button:()=> cy.get('a[data-toggle="tab"]').contains('Equipment'),
+                addNewEquipmentButton: () => cy.get('button').contains('Add New Equipment')
             }
         },
+        addNewEquipmentModal: {
+            upuodFromInventoryTextbox:  ()=> cy.get('app-equipment-edit-form input[name="selectInventory"]'),
+            loadButton:  ()=> cy.get('app-equipment-edit-form button').contains('Load').last(),
+            saveButton: ()=> cy.get('app-equipment-edit-form button').contains('Save').last(),
+            
+        },
+
         addNewNoteModal: {
             noteTextTextarea: () => cy.get('app-note-edit-form textarea#note'),
             siteNoteCheckbox: () => cy.get('app-note-edit-form input#isSiteMap'),
@@ -77,6 +88,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             assignNoteToaServiceLocationFieldOption: () => cy.get('#serviceLocationId-panel mat-option'),
             saveButton: () => cy.get('app-note-edit-form button').contains('Save')
         },
+
+        
 
         editCustomerModal: {
             makeInactiveButton: () => cy.get('app-customers-edit-form .modal-footer button').contains('Make Inactive'),
@@ -107,6 +120,17 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             okButton: () => cy.get('validate-coordinates-modal button').contains('Ok')
         }
 
+    }
+
+    addEquipment = (equipmentInformation) => {
+        this.elements.customerOverview.equipmentTab.button().click()
+        this.elements.customerOverview.equipmentTab.addNewEquipmentButton().click()
+        equipmentInformation.upuodFromInventory && this.elements.addNewEquipmentModal.upuodFromInventoryTextbox().clear().type(equipmentInformation.upuodFromInventory).then(()=> {
+            cy.get('mat-option').contains(equipmentInformation.upuodFromInventory).first().click()
+        })
+        cy.wait(3000)
+        this.elements.addNewEquipmentModal.loadButton().click()
+        this.elements.addNewEquipmentModal.saveButton().click()
     }
 
     clickAddCustomerButton = () => {
@@ -162,7 +186,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.manageCustomerGroupsModal.edit().click()
     }
 
-    searchAndVerifyTags = (tags,customerNumber) => {
+    searchAndVerifyTags = (tags, customerNumber) => {
         // this.setItemsPerPage()
         tags.forEach(i => {
             cy.log(i)
@@ -327,6 +351,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             this.elements.customerTable.lastNameSortHeader().should('have.attr', 'aria-sort', ascDesc)
         }
     }
+
+
 
 
 

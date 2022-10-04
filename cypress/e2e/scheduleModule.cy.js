@@ -30,7 +30,7 @@ describe('Schedule Module', () => {
     })
 
 
-    it.only('Add default Job - Assert: customer details, service location - assert info after creation', () => {
+    it('Add default Job - Assert: customer details, service location - assert info after creation', () => {
 
         SchedulePage.gotoAddNewJob()
         let jobInformation = {
@@ -57,6 +57,30 @@ describe('Schedule Module', () => {
         
         SchedulePage.verifyCustomerInformation(jobInformation)
     })
+
+    // it.only('Add default Job -  -Assert: customer details, service location - assert info after creation', () => {
+
+    //     SchedulePage.gotoAddNewJob()
+    //     let jobInformation = {
+    //         selectCustomer: 'Customer Eqp-f1439',
+    //         jobDescription:`Description-${uuidv4().substring(0, 5)}`,
+    //         jobStatus: 'Not Started',
+    //         notes: `Note-${uuidv4().substring(0, 5)}`,
+    //         serviceType: 'Maintenance',
+    //         jobPriority: 'Low',
+    //         jobColor: 'Maintenance'
+    //     }
+    //     SchedulePage.addNewJob(jobInformation)
+        
+    //     SchedulePage.saveJob()
+        
+        
+    //     SchedulePage.gotoJobsQueue()
+    //     SchedulePage.clickFirstUnassignedJob()
+        
+        
+    //     SchedulePage.verifyCustomerInformation(jobInformation)
+    // })
 
 
 

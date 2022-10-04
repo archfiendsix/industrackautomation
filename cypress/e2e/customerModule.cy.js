@@ -413,6 +413,24 @@ describe('Add Customer', () => {
 
   })
 
+  it.only('Add Customer w/ 1 equipment', () => {
+    const rand = uuidv4().substring(0, 5)
+    const custrand = uuidv4().substring(0, 5)
+    const customerInfo = {
+      customerNumber: `CN-${rand}`,
+      companyName: `Customer Eqp-${custrand}`,
+
+    }
+    AddCustomerPage.fillData(customerInfo)
+    AddCustomerPage.clickSaveButton()
+
+    const equipmentInformation = {
+      upuodFromInventory: 'Cement Nail GUN'
+    }
+
+    CustomerPage.addEquipment(equipmentInformation)
+  })
+
 
 })
 

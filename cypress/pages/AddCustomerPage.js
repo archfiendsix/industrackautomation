@@ -36,8 +36,12 @@ class AddCustomerPage {
         customerOverviewModal: {
             tagsField: () => cy.get('app-customers-overview .mat-chip-list-wrapper input[placeholder="Assign"]'),
             tagsFieldOption: () => cy.get('mat-option'),
-            backButton:()=> cy.get('app-customers-overview a[routerlink="/crmTab/list"]').contains('Back')
+            backButton:()=> cy.get('app-customers-overview a[routerlink="/crmTab/list"]').contains('Back'),
+            equipmentTab: () => cy.get('app-customers-overview .tabs-container a').contains('Equipment'),
         }
+
+
+        
     }
     checkSaveButtonDisabled = () => {
         // this.elements.saveButton().should('be.disabled')
@@ -144,6 +148,8 @@ class AddCustomerPage {
     clickBackButton=()=> {
         this.elements.customerOverviewModal.backButton().click()
     }
+
+    
 
 }
 

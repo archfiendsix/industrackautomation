@@ -26,8 +26,8 @@ describe('Invoices Module', () => {
 
 
 
-    /* Skipped because it's not working yet */
-    it.skip('Add an invoice - Receive partial payment', () => {
+    
+    it.only('Add an invoice - Receive partial payment', () => {
         const invoiceInfo = {
             customer: 'Ace Hardware',
             inventoriesToAdd: ['Add Inventory - Taxable no SN'],
@@ -39,15 +39,21 @@ describe('Invoices Module', () => {
         InvoicesPage.addInvoiceDiscount('0')
         InvoicesPage.saveInvoice()
 
-        //InvoicePage.gotoReceivePayment()
-        // const paymentInfo = {
-        //     paymentMethod: 'Cash',
-        //     referenceNumber: '000000',
-        //     payment: '1000'
-        // }
-        //InvoicePage.setPayment(paymentInfo)
-        //InvoicePage.savePayment(paymentInfo)
-
+        // Test out Payment 
+        let paymentDetails = {
+            paymentMethod: 'Cash',
+            referenceNumber: `${uuidv4().substring(0, 5)}`,
+            amountReceived: '500'
+        }
+        const perInvoicePayment = {
+            invoices: [{
+                payment: '500'
+            }]
+        }
+        paymentDetails = {...paymentDetails, ...perInvoicePayment}
+        InvoicesPage.receiveInvoicePayment(paymentDetails)
+        cy.wait(2500)
+        InvoiceOverviewPage.checkInvoiceStatus('Partially Paid')
     })
 
 

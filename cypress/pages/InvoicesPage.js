@@ -50,7 +50,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             paymentMethodField: () => cy.get('app-payment-editor-dialog .mat-dialog-content form .row .col-lg-4.col-md-6:nth-child(2) mat-select'),
             referenceNumberTextbox: () => cy.get('input[formcontrolname="refNum"]'),
             amountReceivedTextbox: () => cy.get('input[formcontrolname="amount"]').first(),
-            saveButton: () => cy.get('app-payment-editor-dialog .mat-dialog-actions button').contains('Save').last()
+            saveButton: () => cy.get('app-payment-editor-dialog .mat-dialog-actions button').contains('Save').last(),
+            invoiceDescriptionCell: () => cy.get('app-payment-editor-dialog tbody td')
         },
         actionsDropdown: {
             button: () => cy.get('.topheader button').contains('Actions'),
@@ -297,6 +298,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 
     receiveInvoicePayment = (paymentDetails) => {
+        cy.wait(4000)
         this.elements.actionsDropdown.button().last().click()
         this.elements.actionsDropdown.receivePayment().click()
         paymentDetails.paymentMethod && this.elements.receivePaymentModal.paymentMethodField().click().then(() => {
@@ -304,6 +306,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         })
         paymentDetails.referenceNumber && this.elements.receivePaymentModal.referenceNumberTextbox().clear().type(paymentDetails.referenceNumber)
         paymentDetails.amountReceived && this.elements.receivePaymentModal.amountReceivedTextbox().clear().type(paymentDetails.amountReceived)
+        paymentDetails.invoices && paymentDetails.invoices.forEach(
+            invoiceInfo => {
+                invoiceInfo.description ? this.elements.receivePaymentModal.invoiceDescriptionCell().contains(invoiceInfo.description).parent().find('input[formcontrolname="amount"]').clear().type(invoiceInfo.payment) :
+                    this.elements.receivePaymentModal.invoiceDescriptionCell().eq(0).parent().find('input[formcontrolname="amount"]').clear().type(invoiceInfo.payment)
+            }
+        )
+
         this.elements.receivePaymentModal.saveButton().last().click()
     }
 
