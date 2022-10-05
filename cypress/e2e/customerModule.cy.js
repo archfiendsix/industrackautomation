@@ -22,7 +22,7 @@ describe('Add Customer', () => {
     cy.visit('/crmTab/list')
     cy.wait(4250)
     Dashboard.preventNotificationCard()
-    CustomerPage.clickAddCustomerButton()
+    CustomerPage.gotoAddCustomerModal()
 
   })
 
@@ -38,6 +38,7 @@ describe('Add Customer', () => {
 
 
     const customerInfo = {
+      validateAddress: true
     }
     AddCustomerPage.fillData(customerInfo)
 
@@ -53,6 +54,7 @@ describe('Add Customer', () => {
 
   it('Should disable save if required fields are not filled', () => {
     const customerInfo = {
+      validateAddress: true
     }
     AddCustomerPage.fillData(customerInfo)
 
@@ -79,6 +81,7 @@ describe('Add Customer', () => {
 
 
     const customerInfo = {
+      validateAddress: false
     }
     AddCustomerPage.fillData(customerInfo)
 
@@ -96,7 +99,8 @@ describe('Add Customer', () => {
   it('Disable save if email is invalid', () => {
 
     const customerInfo = {
-      email: 'dina.schill@'
+      email: 'dina.schill@',
+      validateAddress: true
     }
     AddCustomerPage.fillData(customerInfo)
 
@@ -110,7 +114,8 @@ describe('Add Customer', () => {
     const rand = uuidv4().substring(0, 5)
     const customerInfo = {
       customerNumber: `CN-${rand}`,
-      companyName: 'Add service location to this customer'
+      companyName: 'Add service location to this customer',
+      validateAddress: true
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
@@ -123,7 +128,7 @@ describe('Add Customer', () => {
     CustomerPage.addNewServiceLocationModal.clickSaveButton()
     // cy.wait(5000)
     // Dashboard.clickCustomerTab()
-    // CustomerPage.searchCustomer(customerInfo.companyName)
+    // CustomerPage.searchCustomer(customerInfo.companyName) //--> Have to refine this script
   })
 
   it('Add Service Location to a newly created Customer - Tax Rate Added to Added Location', () => {
@@ -131,11 +136,11 @@ describe('Add Customer', () => {
     const customerInfo = {
       customerNumber: `CN-${rand}`,
       companyName: 'Add service location to this customer',
+      validateAddress: true
 
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
-    // AddCustomerPage.confirmValidityYes()
     CustomerPage.clickAddNewServiceLocation()
     const serviceLocationInfo = {
       selectATaxRate: 'New Tax'
@@ -151,6 +156,7 @@ describe('Add Customer', () => {
     const customerInfo = {
       customerNumber: `CN-${rand}`,
       companyName: `${uuidv4().substring(0, 5)} - Add Tag to this customer`,
+      validateAddress: true
     }
     AddCustomerPage.fillData(customerInfo)
     Dashboard.preventNotificationCard()
@@ -159,7 +165,8 @@ describe('Add Customer', () => {
 
 
     AddCustomerPage.clickSaveButton()
-    const tags = [`${uuidv4().substring(0, 5)}-Tag`, `${uuidv4().substring(0, 5)}-Tag`, `${uuidv4().substring(0, 5)}-Tag`]
+    // const tags = [`${uuidv4().substring(0, 5)}-Tag`, `${uuidv4().substring(0, 5)}-Tag`, `${uuidv4().substring(0, 5)}-Tag`]
+    const tags = ['Tag 1', 'Tag 2', 'Tag 3']
     AddCustomerPage.addTags(tags)
     AddCustomerPage.clickBackButton()
 
@@ -174,6 +181,7 @@ describe('Add Customer', () => {
   //   const customerInfo = {
   //     customerNumber: `CN-${uuidv4()}`,
   //     companyName: 'Add Note to this customer and check',
+  //      validateAddress: true
   //   }
   //   AddCustomerPage.fillData(customerInfo)
   //   Dashboard.preventNotificationCard()
@@ -190,11 +198,11 @@ describe('Add Customer', () => {
     const customerInfo = {
       customerNumber: cn,
       companyName: 'Make this Customer Inactive - then Active again',
+      validateAddress: true
 
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
-    // AddCustomerPage.confirmValidityYes()
     CustomerPage.makeNewCustomerInactive()
     AddCustomerPage.clickBackButton()
 
@@ -219,6 +227,7 @@ describe('Add Customer', () => {
     const customerInfo = {
       customerNumber: cn,
       companyName: companyname,
+      validateAddress: true
 
     }
     AddCustomerPage.fillData(customerInfo)
@@ -232,7 +241,8 @@ describe('Add Customer', () => {
     const addressGroupInfo = {
       groupName: gn,
       customerNumber: customerInfo.customerNumber,
-      companyName: customerInfo.companyName
+      companyName: customerInfo.companyName,
+      validateAddress: true
     }
     CustomerPage.addAddressGroup(addressGroupInfo)
     // CustomerPage.gotoManageCustomerGroups()
@@ -242,14 +252,18 @@ describe('Add Customer', () => {
     CustomerPage.checkAddCompanyOnAddressGroupTable(addressGroupInfo)
   })
 
-  it('Create customer w/ attachment ', () => {
+
+
+  /* skipped because of incomplete script */
+  it.skip('Create customer w/ attachment ', () => {
     const rand = uuidv4().substring(0, 5)
     const cn = `${rand}-CN`
     const companyname = `${uuidv4().substring(0, 5)}-Customer with Attachment`
     const customerInfo = {
       customerNumber: cn,
       companyName: companyname,
-      uploadDocument: 'img.jpg'
+      uploadDocument: 'img.jpg',
+      validateAddress: true
     }
     cy.wait(1000)
     AddCustomerPage.fillData(customerInfo)
@@ -262,15 +276,15 @@ describe('Add Customer', () => {
 
   })
 
-  it('Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)', () => {
+  it.only('Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)', () => {
     Dashboard.preventNotificationCard()
-    CustomerPage.clickAddCustomerButton()
 
     const rand = uuidv4().substring(0, 5)
     const customerInfo = {
       customerNumber: `Cust-${rand}`,
       companyName: `${uuidv4().substring(0, 5)}-Add 2 service location to this customer`,
-      street: 'Cemetery Street'
+      street: 'Cemetery Street',
+      validateAddress: true
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
@@ -413,13 +427,13 @@ describe('Add Customer', () => {
 
   })
 
-  it.only('Add Customer w/ 1 equipment', () => {
+  it('Add Customer w/ 1 equipment', () => {
     const rand = uuidv4().substring(0, 5)
     const custrand = uuidv4().substring(0, 5)
     const customerInfo = {
       customerNumber: `CN-${rand}`,
       companyName: `Customer Eqp-${custrand}`,
-
+      validateAddress: true
     }
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()

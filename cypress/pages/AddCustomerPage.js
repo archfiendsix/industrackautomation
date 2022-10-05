@@ -21,7 +21,7 @@ class AddCustomerPage {
         emailErrror: () => cy.get('input#emailAddress+.alert'),
         warningModal: () => cy.get('.cdk-overlay-pane.warningModal .mat-dialog-content p'),
         addressValidityWarningModalConfirm: () => cy.get('button').contains('Yes'),
-        chooseFileButton:()=> cy.get('input#inputDocument'),
+        chooseFileButton: () => cy.get('input#inputDocument'),
         sameAsCompanyCheckbox: () => cy.get('input#billingAddressEquals'),
         billingStreetAddressTextbox: () => cy.get('input#billingStreetAddress'),
         billingCityTextbox: () => cy.get('input#billingCity'),
@@ -36,12 +36,12 @@ class AddCustomerPage {
         customerOverviewModal: {
             tagsField: () => cy.get('app-customers-overview .mat-chip-list-wrapper input[placeholder="Assign"]'),
             tagsFieldOption: () => cy.get('mat-option'),
-            backButton:()=> cy.get('app-customers-overview a[routerlink="/crmTab/list"]').contains('Back'),
+            backButton: () => cy.get('app-customers-overview a[routerlink="/crmTab/list"]').contains('Back'),
             equipmentTab: () => cy.get('app-customers-overview .tabs-container a').contains('Equipment'),
         }
 
 
-        
+
     }
     checkSaveButtonDisabled = () => {
         // this.elements.saveButton().should('be.disabled')
@@ -85,8 +85,8 @@ class AddCustomerPage {
             state: newCustomerInfo.state || 'CA',
             zip: newCustomerInfo.zip || '93901',
             country: newCustomerInfo.country || 'United States of America',
-            uploadDocument: newCustomerInfo.uploadDocument|| 'img.jpg'
-
+            uploadDocument: newCustomerInfo.uploadDocument || 'img.jpg',
+            validateAddress: newCustomerInfo.validateAddress
         }
         cy.wait(1000)
         this.elements.customerNumberTextBox().clear().type(inputCustomerInfo.customerNumber)
@@ -109,7 +109,7 @@ class AddCustomerPage {
         this.elements.chooseFileButton().attachFile(inputCustomerInfo.uploadDocument)
 
         this.elements.validateAddress().click()
-        cy.get('button').contains('Ok').last().click()
+        inputCustomerInfo.validateAddress ? cy.get('button').contains('Ok').last().click() : cy.get('button').contains('Cancel').last().click()
     }
 
     confirmValidityYes = () => {
@@ -140,16 +140,19 @@ class AddCustomerPage {
     addTags = (tags) => {
         cy.wait(2500)
         tags.forEach(i => {
-            this.elements.customerOverviewModal.tagsField().click()
-            this.elements.customerOverviewModal.tagsFieldOption().contains(i).first().click()
+            cy.wait(2500)
+            this.elements.customerOverviewModal.tagsField().last().clear().type(i).then(() => {
+                cy.get('mat-option').contains(i).first().click()
+            })
+            // this.elements.customerOverviewModal.tagsFieldOption().contains(i).first().click()
         })
     }
 
-    clickBackButton=()=> {
+    clickBackButton = () => {
         this.elements.customerOverviewModal.backButton().click()
     }
 
-    
+
 
 }
 

@@ -36,7 +36,8 @@ describe('New Estimate module', () => {
         const customerInfo = {
             customerNumber: `Cust-${rand}`,
             companyName: `Company-${uuidv4().substring(0, 5)}`,
-            street: 'Cemetery Street'
+            street: 'Cemetery Street',
+            validateAddress: true
         }
         AddCustomerPage.fillData(customerInfo)
         AddCustomerPage.clickSaveButton()
@@ -105,34 +106,34 @@ describe('New Estimate module', () => {
         }
         InventoryListPage.addNewService(serviceInfo)
 
-        // // Add new Assembly
-        // InventoryListPage.gotoAddNewAssemblyModal()
-        // let assemblyRandName = uuidv4().substring(0, 5)
-        // let assemblyRandSKU = uuidv4().substring(0, 5)
-        // const assemblyInfo = {
-        //     name: `Assembly-${assemblyRandName}`,
-        //     sku: `SKU-${assemblyRandSKU}`,
-        //     nonTaxable: false,
-        //     configurable: true,
-        //     parts: [
-        //         {
-        //             name: inventoryInfo.name,
-        //             qty: '1'
-        //         },
-        //         {
-        //             name: inventoryInfo.name,
-        //             qty: '1'
-        //         }
-        //     ],
-        //     services: [
-        //         {
-        //             name: serviceInfo.name,
-        //             qty: '1'
-        //         }
-        //     ],
-        //     salesDescription: 'This is a test Assembly description',
-        // }
-        // InventoryListPage.addNewAssembly(assemblyInfo)
+        // Add new Assembly
+        InventoryListPage.gotoAddNewAssemblyModal()
+        let assemblyRandName = uuidv4().substring(0, 5)
+        let assemblyRandSKU = uuidv4().substring(0, 5)
+        const assemblyInfo = {
+            name: `Assembly-${assemblyRandName}`,
+            sku: `SKU-${assemblyRandSKU}`,
+            nonTaxable: false,
+            configurable: true,
+            parts: [
+                {
+                    name: inventoryInfo.name,
+                    qty: '1'
+                },
+                {
+                    name: inventoryInfo.name,
+                    qty: '1'
+                }
+            ],
+            services: [
+                {
+                    name: serviceInfo.name,
+                    qty: '1'
+                }
+            ],
+            salesDescription: 'This is a test Assembly description',
+        }
+        InventoryListPage.addNewAssembly(assemblyInfo)
 
 
         // Add New Estimate

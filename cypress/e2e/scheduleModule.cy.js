@@ -58,7 +58,7 @@ describe('Schedule Module', () => {
         SchedulePage.verifyCustomerInformation(jobInformation)
     })
 
-    it.only('Add default Job - Customer with 1 equipment -Assert: customer details, service location - assert info after creation', () => {
+    it('Add default Job - Customer with 1 equipment -Assert: customer details, service location - assert info after creation', () => {
 
         SchedulePage.gotoAddNewJob()
         let jobInformation = {

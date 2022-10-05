@@ -7,7 +7,9 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl: "https://onetrack.industrack.com"
+    baseUrl: "https://onetrack.industrack.com",
+    numTestsKeptInMemory: 0,
+    "numTestsKeptInMemory": 0,
   },
   integration: {
     baseUrl: "https://onetrack.industrack.com"
@@ -35,6 +37,7 @@ module.exports = defineConfig({
   },
   requestTimeout: 30000,
   numTestsKeptInMemory: 0,
+  "numTestsKeptInMemory": 0,
   responseTimeout: 50000,
   pageLoadTimeout: 100000,
   chromeWebSecurity: false,

@@ -36,7 +36,7 @@ describe('New Estimate module', () => {
         // cy.visit('/estimatesTab/list')
         Dashboard.clickAddCustomerButton()
         const customerInfo = {
-
+            validateAddress: true
         }
         AddCustomerPage.fillData(customerInfo)
 
@@ -57,7 +57,7 @@ describe('New Estimate module', () => {
             useSerialNumbers: false,
             nonTaxable: true
         }
-        AddNewInventoryPage.fillData(inventoryInfo)
+        AddNewInventoryPage.fillData(inventoryInfo)         
         AddNewInventoryPage.clickSaveButton()
         AddNewInventoryPage.checkSaveSuccess()
 

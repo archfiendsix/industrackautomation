@@ -53,10 +53,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             tagsRow: () => cy.get('.mat-table tbody tr td'),
 
             paginationDropdown: () => cy.get('.mat-paginator-page-size-label+mat-form-field'),
-            paginationDropdownOptions: () => cy.get('.mat-select-panel-wrap .mat-select-panel mat-option')
+            paginationDropdownOptions: () => cy.get('.mat-select-panel-wrap .mat-select-panel mat-option'),
+            itemsPerPageDropdown: () => cy.get('mat-select[aria-label="Items per page:"]'),
+            paginationRightArrow: () => cy.get('.mat-paginator-range-actions button[aria-label="Next page"]'),
+            paginationRange: () => cy.get('.mat-paginator-range-actions .mat-paginator-range-label'),
         },
         notesTable: {
-            notesCell: () => cy.get('app-address-book-notes table tbody tr td').eq(2)
+            notesCell: () => cy.get('#notesGrid tbody tr td')
         },
         customerOverview: {
             addNewButton: () => cy.get('app-service-locations button').contains('Add New'),
@@ -70,15 +73,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
                 AddOfficeNotesButton: () => cy.get('button').contains('Add Office Notes ')
             },
             equipmentTab: {
-                button:()=> cy.get('a[data-toggle="tab"]').contains('Equipment'),
+                button: () => cy.get('a[data-toggle="tab"]').contains('Equipment'),
                 addNewEquipmentButton: () => cy.get('button').contains('Add New Equipment')
             }
         },
         addNewEquipmentModal: {
-            upuodFromInventoryTextbox:  ()=> cy.get('app-equipment-edit-form input[name="selectInventory"]'),
-            loadButton:  ()=> cy.get('app-equipment-edit-form button').contains('Load').last(),
-            saveButton: ()=> cy.get('app-equipment-edit-form button').contains('Save').last(),
-            
+            upuodFromInventoryTextbox: () => cy.get('app-equipment-edit-form input[name="selectInventory"]'),
+            loadButton: () => cy.get('app-equipment-edit-form button').contains('Load').last(),
+            saveButton: () => cy.get('app-equipment-edit-form button').contains('Save').last(),
+
         },
 
         addNewNoteModal: {
@@ -89,7 +92,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             saveButton: () => cy.get('app-note-edit-form button').contains('Save')
         },
 
-        
+
 
         editCustomerModal: {
             makeInactiveButton: () => cy.get('app-customers-edit-form .modal-footer button').contains('Make Inactive'),
@@ -125,7 +128,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     addEquipment = (equipmentInformation) => {
         this.elements.customerOverview.equipmentTab.button().click()
         this.elements.customerOverview.equipmentTab.addNewEquipmentButton().click()
-        equipmentInformation.upuodFromInventory && this.elements.addNewEquipmentModal.upuodFromInventoryTextbox().clear().type(equipmentInformation.upuodFromInventory).then(()=> {
+        equipmentInformation.upuodFromInventory && this.elements.addNewEquipmentModal.upuodFromInventoryTextbox().clear().type(equipmentInformation.upuodFromInventory).then(() => {
             cy.get('mat-option').contains(equipmentInformation.upuodFromInventory).first().click()
         })
         cy.wait(3000)
@@ -159,6 +162,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.manageCustomerGroupsModal.addNewButton().click()
     }
 
+    gotoAddCustomerModal = () => {
+        this.elements.moreActionsDropdown.button().click().then(() => {
+            this.elements.moreActionsDropdown.addNewCustomer().click()
+        })
+    }
+
     gotoNotesTab = () => {
         this.elements.customerOverview.notesTab.button().click()
     }
@@ -186,15 +195,22 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.manageCustomerGroupsModal.edit().click()
     }
 
+
     searchAndVerifyTags = (tags, customerNumber) => {
         // this.setItemsPerPage()
-        tags.forEach(i => {
-            cy.log(i)
+        tags.forEach(tag => {
+            cy.log(tag)
             const custNumber = customerNumber.toString()
-            this.elements.searchBox.input().clear().type(i)
+            cy.get('body').scrollTo('bottom')
+            this.elements.customerTable.itemsPerPageDropdown().last().click().then(() => {
+                cy.wait(500)
+                cy.get('mat-option').contains('100').click()
+            })
+            cy.get('body').scrollTo('top')
+            this.elements.searchBox.input().clear().type(tag)
             this.elements.searchBox.searchIcon().click()
             var searchTrue = false
-            this.elements.customerTable.tagscell().contains(i.toString()).parent().find('td').eq(0).contains(custNumber)
+            this.elements.customerTable.tagscell().contains(tag.toString()).parent().find('td').eq(0).contains(custNumber)
         })
 
     }
@@ -277,11 +293,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         asssignedNotesInfo.forEach((i) => {
             i.assignNoteToAServiceLocation && this.elements.notesTable.notesCell().should('contain', 'Site Note')
             cy.wait(1000)
-            this.elements.notesTable.notesCell().should('contain', i.noteText).parent().find('td').eq(1).then($el => {
+            expect(i.noteText)
+            this.elements.notesTable.notesCell().contains(i.noteText)
+                .parent().find('td').eq(1).invoke('text').then(text => {
 
-                cy.wrap($el).contains(i.street.toString())
+                    expect(text).to.include(i.street)
 
-            })
+                })
 
         })
     }
@@ -372,6 +390,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
                 country: newCustomerInfo.country || 'United States of America',
                 selectATaxRate: newCustomerInfo.selectATaxRate || 'Not Selected'
             }
+            cy.wait(2500)
             this.elements.addNewServiceLocationModal.firstNameTextBox().clear().type(inputCustomerInfo.firstName)
             this.elements.addNewServiceLocationModal.lastNameTextBox().clear().type(inputCustomerInfo.lastName)
             this.elements.addNewServiceLocationModal.phoneNumberTextBox().clear().type(inputCustomerInfo.phone)
