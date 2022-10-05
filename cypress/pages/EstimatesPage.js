@@ -21,8 +21,8 @@ class EstimatesPage {
         customerSearchItems: () => cy.get('.ibox-content .customerList b'),
         billToCustomerName: () => cy.get('._header-preview.topsummary .customerName a'),
         upDownButtons: {
-            moveUp: ()=> cy.get('table i[title="Move Up"]'),
-            moveDown:()=>cy.get('table i[title="Move Down"]'),
+            moveUp: () => cy.get('table i[title="Move Up"]'),
+            moveDown: () => cy.get('table i[title="Move Down"]'),
         },
         previewiFrame: {
             custName: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').then(cy.wrap).find('.custName'),
@@ -39,12 +39,12 @@ class EstimatesPage {
         invoiceTax: () => cy.get('.table.invoice-total tr:nth-child(3) td:nth-child(2)'),
         invoiceTotal: () => cy.get('.table.invoice-total tr.total td:nth-child(2)'),
         invoiceTotals: () => cy.get('.table.invoice-total tbody tr:first-child() td:nth-child(2), .table.invoice-total tr.total td:nth-child(2)'),
-        invoiceTaxButton:()=>cy.get('input#mat-input-11'),
-        createNewTaxButton: ()=>cy.get('button').contains('Create new'),
+        invoiceTaxButton: () => cy.get('input#mat-input-11'),
+        createNewTaxButton: () => cy.get('button').contains('Create new'),
         setTaxModal: {
-            taxNameTextbox:()=> cy.get('app-tax-selector-dialog input#mat-input-16'),
-            taxValueTextbox:()=>cy.get('app-tax-selector-dialog input#mat-input-17'),
-            saveButton:()=>cy.get('app-tax-selector-dialog button').contains('Save'),
+            taxNameTextbox: () => cy.get('app-tax-selector-dialog input#mat-input-16'),
+            taxValueTextbox: () => cy.get('app-tax-selector-dialog input#mat-input-17'),
+            saveButton: () => cy.get('app-tax-selector-dialog button').contains('Save'),
         },
         sendToEmailModal: {
             recipientChipRemoveIcon: () => cy.get('mat-chip-list .mat-chip-remove '),
@@ -204,7 +204,7 @@ class EstimatesPage {
                 cy.log(`value:${i} index: ${index}`)
                 cy.wait(1800)
                 if (i == true) {
-                    this.elements.tableRowEllipseItem().contains('Hide price').last().click({force:true})
+                    this.elements.tableRowEllipseItem().contains('Hide price').last().click({ force: true })
                 }
                 else {
                     this.elements.tableRowEllipse().eq(index).click()
@@ -224,7 +224,7 @@ class EstimatesPage {
                 cy.wait(1800)
                 if (i == true) {
 
-                    this.elements.tableRowEllipseItem().contains('Hide line').last().click({force:true})
+                    this.elements.tableRowEllipseItem().contains('Hide line').last().click({ force: true })
                 }
                 else {
                     this.elements.tableRowEllipse().eq(index).click()
@@ -328,7 +328,15 @@ class EstimatesPage {
             let discount = parseFloat(discountEl.innerText.replace('$', '').replace(' ', ''))
             const total = parseFloat(totalEl.innerText.replace('$', '').replace(' ', ''))
             const profit = parseFloat(profitEl.innerText.replace('%', '').replace(' ', ''))
-            const profitPercent = profit / 100
+            var profitPercent = profit / 100
+            profitPercent === NaN ? profitPercent = 0.00 : profitPercent = profitPercent
+
+            if (isNaN(profitPercent)) {
+                profitPercent = 0.00
+            }
+            else {
+                profitPercent = profitPercent
+            }
             const unitPrice = parseFloat(unitPriceEl.innerText.replace('$', '').replace(' ', ''))
 
             if (isNaN(discount)) {
@@ -340,8 +348,9 @@ class EstimatesPage {
 
             const calcTotalCost = currencyRoundOff(qty * unitCost)
             const calcPrice = currencyRoundOff(qty * unitPrice)
-            const calcUnitPrice = currencyRoundOff(unitCost * profitPercent + unitCost)
+            let calcUnitPrice = currencyRoundOff(unitCost * profitPercent + unitCost)
             const calcTotal = currencyRoundOff(price - discount)
+            calcUnitPrice === NaN ? calcUnitPrice = 0.00 : calcUnitPrice = calcUnitPrice
             expect(calcTotalCost, `${item}: Quantity(${qty}) * Unit Cost($${unitCost})`).to.equal(currencyRoundOff(totalCost))
             expect(calcPrice, `${item}: Quantity(${qty}) * Unit Cost($${unitPrice})`).to.equal(currencyRoundOff(price))
             expect(calcUnitPrice, `${item}: Unit Cost($${unitCost}) + Profit(${profitPercent})`).to.equal(currencyRoundOff(unitPrice))
@@ -391,7 +400,7 @@ class EstimatesPage {
 
     }
 
-    addInvoiceTax=(taxInfo)=> {
+    addInvoiceTax = (taxInfo) => {
         this.elements.invoiceTaxButton().click()
         this.elements.createNewTaxButton().click()
         this.elements.setTaxModal.taxNameTextbox().clear().type(taxInfo.taxName)
@@ -482,17 +491,17 @@ class EstimatesPage {
     //     })
 
     // contains('#total', '$' + sum)
-    randomLineMove=()=> {
-        this.elements.upDownButtons.moveDown().then($el=> {
-            
+    randomLineMove = () => {
+        this.elements.upDownButtons.moveDown().then($el => {
+
             const count = $el.length
-            const randomRow= this.getRandomInt(0, count)
+            const randomRow = this.getRandomInt(0, count)
             this.elements.upDownButtons.moveDown().eq(randomRow).should('be.visible').click()
         })
 
-        this.elements.upDownButtons.moveUp().then($el=> {
+        this.elements.upDownButtons.moveUp().then($el => {
             const count = $el.length
-            const randomRow= this.getRandomInt(0, count)
+            const randomRow = this.getRandomInt(0, count)
             this.elements.upDownButtons.moveUp().eq(randomRow).should('be.visible').click()
         })
     }

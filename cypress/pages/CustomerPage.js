@@ -140,12 +140,19 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.addNewButton().click()
     }
 
+    gotoAddNewCustomer = () => {
+        this.elements.moreActionsDropdown.button().click().then(()=> {
+            cy.get('.dropdown-menu a').contains('Add New Customer').last().click()
+        })
+        
+    }
     // searchCustomer = (text) => {
     //     this.elements.searchBox.input().clear().type(text)
     //     this.elements.searchBox.searchIcon().click()
     // }
 
     clickAddNewServiceLocation = () => {
+        cy.wait(2500)
         this.elements.customerOverview.addNewButton().click()
     }
 

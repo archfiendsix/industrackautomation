@@ -7,7 +7,7 @@ class Dashboard {
         customerTab: () => cy.get('.navbar-nav > :nth-child(2) > a[href="/crmTab"]'),
         addCustomerButton: () => cy.get('button[data-target="#modalAddNewCustomer"]'),
         settingsButton: () => cy.get('a[href="/settingsTab"]'),
-        estimatesTab: () => cy.get('.nav.navbar-nav a[href="/estimatesTab"]'),
+        estimatesTab: () => cy.get('.nav.navbar-nav a[href="/estimatesTab"]').first(),
         timesheetTab: () => cy.get('.nav.navbar-nav a[href="/timesheetTab"]'),
         scheduleTab: () => cy.get('.nav.navbar-nav a[href="/schedulingTab"]'),
         invoicesTab: () => cy.get('.nav.navbar-nav a[href="/invoicesTab"]'),

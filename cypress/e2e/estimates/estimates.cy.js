@@ -26,11 +26,12 @@ describe('New Estimate module', () => {
         Dashboard.preventNotificationCard()
     })
 
-    it('Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items', () => {
+    it.only('Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items', () => {
         Dashboard.clickCustomerTab()
         // cy.visit('/crmTab/list')
         Dashboard.preventNotificationCard()
-        CustomerPage.clickAddCustomerButton()
+        // CustomerPage.clickAddCustomerButton()
+        CustomerPage.gotoAddNewCustomer()
         // Add new Customer
         const rand = uuidv4().substring(0, 5)
         const customerInfo = {
@@ -64,23 +65,26 @@ describe('New Estimate module', () => {
 
 
         //Add Inventory
-        Dashboard.clickSettings()
-        Dashboard.elements.settingsButton().click()
-        InventoryListPage.gotoAddNewInventory()
+        // Dashboard.clickSettings()
+        // Dashboard.elements.settingsButton().click()
+        // InventoryListPage.gotoAddNewInventory()
         const inventoryInfo = {
             sku: `SKU-${uuidv4().substring(0, 5)}`,
-            name: `Inventory-${uuidv4().substring(0, 5)}`,
+            // sku: `SKU-${uuidv4().substring(0, 5)}`,
+            name: `Inventory-`,
+            // name: `Inventory-${uuidv4().substring(0, 5)}`,
             useSerialNumbers: false,
         }
-        AddNewInventoryPage.fillData(inventoryInfo)
-        AddNewInventoryPage.clickSaveButton()
+        // AddNewInventoryPage.fillData(inventoryInfo)
+        // AddNewInventoryPage.clickSaveButton()
 
         // Add Non Inventory
-        InventoryListPage.gotoAddNewNonInventoryModal()
-        let randName = uuidv4().substring(0, 5)
+        // InventoryListPage.gotoAddNewNonInventoryModal()
+        // let randName = uuidv4().substring(0, 5)
         let randSKU = uuidv4().substring(0, 5)
         const nonInventoryInfo = {
-            name: `NonInventory-${randName}`,
+            name: `NonInventory-`,
+            // name: `NonInventory-${randName}
             sku: `SKU-${randSKU}`,
             vendor: 'Genius Vendor',
             nonTaxable: false,
@@ -89,29 +93,31 @@ describe('New Estimate module', () => {
             cost: '100',
             mainWarehouseQuantityOnHand: '1'
         }
-        InventoryListPage.addNewNonInventory(nonInventoryInfo)
+        // InventoryListPage.addNewNonInventory(nonInventoryInfo)
 
 
         // Add new service
-        InventoryListPage.gotoAddNewServiceModal()
-        let serviceRandName = uuidv4().substring(0, 5)
+        // InventoryListPage.gotoAddNewServiceModal()
+        // let serviceRandName = uuidv4().substring(0, 5)
         let serviceRandSKU = uuidv4().substring(0, 5)
         const serviceInfo = {
-            name: `Service-${serviceRandName}`,
+            name: `Service-`,
+            // name: `Service-${serviceRandName}`,
             sku: `SKU-${serviceRandSKU}`,
             nonTaxable: false,
             salesPriceRate: '150',
             salesDescription: 'This is a test description - Service',
             cost: '200',
         }
-        InventoryListPage.addNewService(serviceInfo)
+        // InventoryListPage.addNewService(serviceInfo)
 
         // Add new Assembly
-        InventoryListPage.gotoAddNewAssemblyModal()
-        let assemblyRandName = uuidv4().substring(0, 5)
+        // InventoryListPage.gotoAddNewAssemblyModal()
+        // let assemblyRandName = uuidv4().substring(0, 5)
         let assemblyRandSKU = uuidv4().substring(0, 5)
         const assemblyInfo = {
-            name: `Assembly-${assemblyRandName}`,
+            name: `Assembly-`,
+            // name: `Assembly-${assemblyRandName}`,
             sku: `SKU-${assemblyRandSKU}`,
             nonTaxable: false,
             configurable: true,
@@ -133,7 +139,7 @@ describe('New Estimate module', () => {
             ],
             salesDescription: 'This is a test Assembly description',
         }
-        InventoryListPage.addNewAssembly(assemblyInfo)
+        // InventoryListPage.addNewAssembly(assemblyInfo)
 
 
         // Add New Estimate
