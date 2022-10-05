@@ -276,7 +276,7 @@ describe('Add Customer', () => {
 
   })
 
-  it.only('Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)', () => {
+  it('Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)', () => {
     Dashboard.preventNotificationCard()
 
     const rand = uuidv4().substring(0, 5)

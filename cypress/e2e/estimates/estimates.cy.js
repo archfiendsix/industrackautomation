@@ -26,7 +26,7 @@ describe('New Estimate module', () => {
         Dashboard.preventNotificationCard()
     })
 
-    it.only('Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items', () => {
+    it('Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items', () => {
         Dashboard.clickCustomerTab()
         // cy.visit('/crmTab/list')
         Dashboard.preventNotificationCard()

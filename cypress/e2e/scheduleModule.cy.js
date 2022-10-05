@@ -93,5 +93,40 @@ describe('Schedule Module', () => {
     })
 
 
+    it('Add default Job - Customer with 1 equipment -Assert: customer details, service location - assert info after creation', () => {
+
+        SchedulePage.gotoAddNewJob()
+        let jobInformation = {
+            selectCustomer: 'Customer Eqp-f1439',
+            jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+            jobStatus: 'Not Started',
+            notes: `Note-${uuidv4().substring(0, 5)}`,
+            serviceType: 'Maintenance',
+            jobPriority: 'Low',
+            jobColor: 'Maintenance',
+            partsServiceEquipment: [{
+                name: '0e835-Service',
+                qty: '1'
+            }],
+            attachments: [
+                {
+                    url: 'https://cloudinary.hbs.edu/hbsit/image/upload/s--Fm3oHP0m--/f_auto,c_fill,h_375,w_750,/v20200101/79015AB87FD6D3284472876E1ACC3428.jpg',
+                    addAFile: 'doc.doc'
+                }
+            ]
+        }
+        SchedulePage.addNewJob(jobInformation)
+
+        SchedulePage.saveJob()
+
+
+        SchedulePage.gotoJobsQueue()
+        SchedulePage.clickFirstUnassignedJob()
+
+
+        SchedulePage.verifyCustomerInformation(jobInformation)
+    })
+
+
 
 })
