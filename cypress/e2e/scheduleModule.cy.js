@@ -58,7 +58,7 @@ describe('Schedule Module', () => {
         SchedulePage.verifyCustomerInformation(jobInformation)
     })
 
-    it('Add default Job - Customer with 1 equipment -Assert: customer details, service location - assert info after creation', () => {
+    it('Add default Job - Customer with 1 equipment - Add an inventory - Add attachments - Assert: customer details, service location - assert info after creation', () => {
 
         SchedulePage.gotoAddNewJob()
         let jobInformation = {
@@ -73,6 +73,7 @@ describe('Schedule Module', () => {
                 name: 'Add Inventory - Taxable no SN',
                 qty: '1'
             }],
+            existingCustomerEquiipment: 'Cement Nail GUN (Equipment) Tagas Hardware 045586000',
             attachments: [
                 {
                     url: 'https://cloudinary.hbs.edu/hbsit/image/upload/s--Fm3oHP0m--/f_auto,c_fill,h_375,w_750,/v20200101/79015AB87FD6D3284472876E1ACC3428.jpg',
@@ -93,7 +94,7 @@ describe('Schedule Module', () => {
     })
 
 
-    it('Add default Job - Customer with 1 equipment -Assert: customer details, service location - assert info after creation', () => {
+    it('Add default Job - Customer with 1 equipment - Add a service - Add attachments - Assert: customer details, service location - assert info after creation', () => {
 
         SchedulePage.gotoAddNewJob()
         let jobInformation = {
@@ -108,6 +109,7 @@ describe('Schedule Module', () => {
                 name: '0e835-Service',
                 qty: '1'
             }],
+            existingCustomerEquipment: ['Cement Nail GUN (Equipment) Tagas Hardware 045586000'],
             attachments: [
                 {
                     url: 'https://cloudinary.hbs.edu/hbsit/image/upload/s--Fm3oHP0m--/f_auto,c_fill,h_375,w_750,/v20200101/79015AB87FD6D3284472876E1ACC3428.jpg',

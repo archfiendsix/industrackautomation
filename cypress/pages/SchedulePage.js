@@ -65,6 +65,13 @@ class SchedulePage {
                 addButton: () => cy.get('app-task-editor .panel:nth-child(1)').find('button').contains('Add'),
                 listItems: () => cy.get('app-task-editor .panel:nth-child(1) .list-group-item').not('.addNewItem'),
             },
+
+            existingCustomerEquipment: {
+                accordion: () => cy.get('app-task-editor .panel-heading').contains('Existing Customer Equipment'),
+                dropdown: () => cy.get('app-task-editor .panel:nth-child(2)').find('mat-select[name="selectedEquipmentId"]'),
+                addButton: () => cy.get('app-task-editor .panel:nth-child(2)').find('button').contains('Add'),
+                listItems: () => cy.get('app-task-editor .panel:nth-child(2) .list-group-item').not('.addNewItem'),
+            },
             attachments: {
                 accordion: () => cy.get('app-task-editor .panel-heading').contains('Attachments'),
                 urlTextbox: () => cy.get('app-task-editor .panel:nth-child(3)').find('input[type="text"]').eq(0),
@@ -108,6 +115,7 @@ class SchedulePage {
             cy.wait(4000)
             cy.get('.viewport-list-item').contains(jobInformation.serviceLocation).click()
         })
+        cy.wait(2000)
         jobInformation.jobDescription && this.elements.addNewJobModal.jobsInfoTab.jobDescriptionTexbox().clear().type(jobInformation.jobDescription.toString())
         jobInformation.jobStatus && this.elements.addNewJobModal.jobsInfoTab.jobStatusField().select(jobInformation.jobStatus)
         jobInformation.notes && this.elements.addNewJobModal.jobsInfoTab.notesTextarea().clear().type(jobInformation.notes)
@@ -139,9 +147,22 @@ class SchedulePage {
                 this.elements.addNewJobModal.attachments.urlTextbox().clear().type(item.url)
                 cy.wait(4000)
                 this.elements.addNewJobModal.attachments.addUrlButton().click()
+                cy.wait(1000)
                 this.elements.addNewJobModal.attachments.addAfileInput().click()
+                cy.wait(1000)
                 this.elements.addNewJobModal.attachments.addAfileInput().attachFile(item.addAFile)
-                
+                cy.wait(2000)
+            })
+        })
+
+        this.elements.addNewJobModal.existingCustomerEquipment.accordion().click().then(() => {
+            jobInformation.existingCustomerEquipment && jobInformation.existingCustomerEquipment.forEach(item => {
+                this.elements.addNewJobModal.existingCustomerEquipment.dropdown().click().then(() => {
+                    cy.get('mat-option').contains(item).click()
+                    this.elements.addNewJobModal.existingCustomerEquipment.addButton().click()
+                    cy.wait(2500)
+
+                })
             })
         })
 
@@ -202,7 +223,7 @@ class SchedulePage {
         // Check Parts/Services/Equipment
         this.elements.addNewJobModal.partsServiceEquipment.accordion().click().then(() => {
             jobInformation.partsServiceEquipment && jobInformation.partsServiceEquipment.forEach(item => {
-                this.elements.addNewJobModal.partsServiceEquipment.listItems().contains(item.name).invoke('text').then(text=> {
+                this.elements.addNewJobModal.partsServiceEquipment.listItems().contains(item.name).invoke('text').then(text => {
                     expect(text, 'Found on the Parts/Services/Equipment list:')
                 })
             })
@@ -211,8 +232,17 @@ class SchedulePage {
         // Check attachments
         this.elements.addNewJobModal.attachments.accordion().click().then(() => {
             jobInformation.attachments && jobInformation.attachments.forEach(item => {
-                this.elements.addNewJobModal.attachments.listItems().contains(item.url).invoke('text').then(text=> {
+                this.elements.addNewJobModal.attachments.listItems().contains(item.url).invoke('text').then(text => {
                     expect(text, 'Found on the url list:')
+                })
+            })
+        })
+
+        // Check Existing Customer Equipment
+        this.elements.addNewJobModal.existingCustomerEquipment.accordion().click().then(() => {
+            jobInformation.existingCustomerEquipment && jobInformation.existingCustomerEquipment.forEach(item => {
+                this.elements.addNewJobModal.existingCustomerEquipment.listItems().contains(item).invoke('text').then(text => {
+                    expect(text, 'Found on the Existing Customer Equipment list:')
                 })
             })
         })
@@ -263,6 +293,7 @@ class SchedulePage {
     }
 
     gotoJobsQueue = () => {
+        cy.wait(2500)
         this.elements.actionsDropdown.button().click()
         this.elements.actionsDropdown.jobsQueue().click()
     }
