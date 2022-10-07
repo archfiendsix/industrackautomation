@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress run --spec \"cypress/e2e/estimates/estimatesModule.cy.js\", \"cypress/e2e/estimates/estimates.cy.js\" --record --key 4dda6a64-230e-4fe5-8d0a-8e3a3c0d3b36 --config-file=cypress.config.js --browser chrome",
+    "test": "npx cypress run --spec \"cypress/e2e/estimates/estimatesModule.cy.js\" --record --key 4dda6a64-230e-4fe5-8d0a-8e3a3c0d3b36 --config-file=cypress.config.js --browser chrome",
     "test-per-spec": "npx cypress run --browser chrome --reporter mochawesome --spec \"cypress/e2e/scheduleModule.cy.js\"",
     "merge-report": "mochawesome-merge cypress/report/mochawesome-report/*.json > cypress/report/index.json && marge cypress/report/index.json --reportDir ./cypress/report/ --inline",
     "allure-test": "npx cypress run --browser chrome --spec \"cypress/e2e/newTaxAndTerms.cy.js\" --reporter mocha-allure-reporter",
