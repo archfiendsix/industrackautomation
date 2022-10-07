@@ -45,7 +45,7 @@ class SchedulePage {
                 addCrewListItem: () => cy.get('crew-select .crewlist .list li'),
                 durationHrs: () => cy.get('.cDuration .form-group .form-inline input').first(),
                 durationMin: () => cy.get('.cDuration .form-group .form-inline input').last(),
-                employeeTableRow: () => cy.get('table#DataTables_Table_0 tbody tr')
+                employeeTableRow: () => cy.get('table#DataTables_Table_0 tbody td .cName')
             },
             tasksTab: {
                 addNewButton: () => cy.get('job-task-form button').contains('New Task'),
@@ -85,8 +85,16 @@ class SchedulePage {
         jobsQueueModal: {
             unassignedJobsTab: {
                 tableFirstRow: () => cy.get('app-jobs-unassigned table tbody tr').first()
+            },
+            assignedJobsTab: {
+                button: () => cy.get('div[role="tab"]').contains('Assigned Jobs'),
+                searchTextbox: () => cy.get('input[name="searchText"]'),
+                jobRowCell: () => cy.get('app-jobs-assigned table tbody tr td'),
+
             }
         }
+
+
     }
 
     gotoAddNewJob = () => {
@@ -180,8 +188,9 @@ class SchedulePage {
                     this.elements.addNewJobModal.employeeTab.addCrewListItem().contains(employee.addCrew).click()
                     cy.wait(2000)
                     this.elements.addNewJobModal.employeesTabButton().click()
-                    this.elements.addNewJobModal.employeeTab.employeeTableRow().contains(employee.addCrew).find('.cDuration .ShortTimeInput').eq(0).clear().type(employee.duration.h)
-                    this.elements.addNewJobModal.employeeTab.employeeTableRow().contains(employee.addCrew).find('.cDuration .ShortTimeInput').eq(1).clear().type(employee.duration.m)
+                    cy.wait(2000)
+                    this.elements.addNewJobModal.employeeTab.employeeTableRow().contains(employee.addCrew).parent().find('.form-inline input').eq(0).clear().type(employee.duration.h)
+                    this.elements.addNewJobModal.employeeTab.employeeTableRow().contains(employee.addCrew).parent().find('.form-inline input').eq(1).clear().type(employee.duration.m)
                 })
             })
         })
@@ -320,6 +329,19 @@ class SchedulePage {
     clickFirstUnassignedJob = () => {
         cy.wait(3500)
         this.elements.jobsQueueModal.unassignedJobsTab.tableFirstRow().dblclick()
+    }
+
+    gotoAssignedJobsTab = () => {
+        this.elements.jobsQueueModal.assignedJobsTab.button().click()
+    }
+
+    searchJobAndClickOnJobRow = (jobDescription) => {
+        cy.wait(10000)
+        this.elements.jobsQueueModal.assignedJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el=> {
+            cy.wrap($el).type('{enter}')
+        })
+        cy.wait(3500)
+        this.elements.jobsQueueModal.assignedJobsTab.jobRowCell().contains(jobDescription).first().parent().dblclick()
     }
 
 }

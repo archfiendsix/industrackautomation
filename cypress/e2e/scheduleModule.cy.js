@@ -285,11 +285,11 @@ describe('Schedule Module', () => {
     })
 
     /* Skipped, still refining code */
-    it.skip('Add default Job - Customer with 1 equipment - Add an Equipment - Add 1 Employee -Add attachments - Assert: customer details, service location - assert info after creation', () => {
+    it('Add default Job - Customer with 1 equipment - Add an Equipment - Add 1 Employee -Add attachments - Assert: customer details, service location - assert info after creation', () => {
 
         SchedulePage.gotoAddNewJob()
         let jobInformation = {
-            selectCustomer: 'Customer Eqp-f1439',
+            selectCustomer: 'Eqp-f1439',
             jobDescription: `Description-${uuidv4().substring(0, 5)}`,
             jobStatus: 'Started',
             notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -337,7 +337,8 @@ describe('Schedule Module', () => {
 
 
         SchedulePage.gotoJobsQueue()
-        SchedulePage.clickFirstUnassignedJob()
+        SchedulePage.gotoAssignedJobsTab()
+        SchedulePage.searchJobAndClickOnJobRow(jobInformation.jobDescription)
 
 
         SchedulePage.verifyCustomerInformation(jobInformation)
