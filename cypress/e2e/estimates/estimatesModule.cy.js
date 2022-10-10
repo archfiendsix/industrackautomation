@@ -29,7 +29,7 @@ describe('New Estimate module', () => {
 
     // Script that creates 1 new customer, 1 new inventory, then creates an estimate that contains the new inventory and customer
     // New customer, with 1 service location, address is being validated, no tags, no discounts or taxes, no service agreements or subscriptions, no equipment, notes, geofences, reminders. 
-    it.only('New customer, New Inventory, New Estimate e2e', () => {
+    it('New customer, New Inventory, New Estimate e2e', () => {
 
         /*new customer */
         Dashboard.clickCustomerTab()

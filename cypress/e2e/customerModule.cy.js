@@ -255,7 +255,7 @@ describe('Add Customer', () => {
 
 
   /* skipped because of incomplete script */
-  it.only('Create customer w/ attachment ', () => {
+  it('Create customer w/ attachment ', () => {
     const rand = uuidv4().substring(0, 5)
     const cn = `${rand}-CN`
     const companyname = `${uuidv4().substring(0, 5)}-Customer with Attachment`
