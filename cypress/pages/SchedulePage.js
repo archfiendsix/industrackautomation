@@ -23,7 +23,7 @@ class SchedulePage {
         addNewJobModal: {
             jobsInfoTabButton: () => cy.get('app-job-edit-form ul.nav-tabs li a').contains('Job Info'),
             employeesTabButton: () => cy.get('app-job-edit-form ul.nav-tabs li a').contains('Employee'),
-            tasksTabButton: () => cy.get('app-job-edit-form ul.nav-tabs li a').contains('Task'),
+            tasksTabButton: () => cy.get('app-job-edit-form ul.nav-tabs li a').contains('Tasks'),
             saveJobButton: () => cy.get('app-job-edit-form .modal-footer button').contains('Save Job'),
             dispatchNowButton: () => cy.get('app-job-edit-form .modal-footer button').contains('Dispatch Now'),
             jobsInfoTab: {
@@ -49,7 +49,10 @@ class SchedulePage {
             },
             tasksTab: {
                 addNewButton: () => cy.get('job-task-form button').contains('New Task'),
-                taskNameTextbox: () => cy.get('#taskslist #task1 .form-group input').first()
+                taskNameTextbox: () => cy.get('#taskslist #task1 .form-group input').first(),
+                serviceTypeField: ()=> cy.get('#taskslist #task1 .form-group select').first(),
+                taskListItem: ()=> cy.get('#taskslist .panel.taskbox'),
+
             },
             selectJobTemplateModal: {
                 jobTemplateField: () => cy.get('app-common-selector-dialog mat-select'),
@@ -194,7 +197,13 @@ class SchedulePage {
                 })
             })
         })
-
+        /* Tasks Tab */
+        jobInformation.tasks && jobInformation.tasks.forEach(task => {
+            this.elements.addNewJobModal.tasksTabButton().click()
+            this.elements.addNewJobModal.tasksTab.addNewButton().click()
+            this.elements.addNewJobModal.tasksTab.taskNameTextbox().clear().type(task.taskName)
+            this.elements.addNewJobModal.tasksTab.serviceTypeField().select(task.serviceType)
+        })
 
     }
 
@@ -274,6 +283,23 @@ class SchedulePage {
                     expect(text, 'Found on the Existing Customer Equipment list:')
                 })
             })
+        })
+
+        // Check added tasks
+        this.elements.addNewJobModal.tasksTabButton().click().then(()=> {
+            jobInformation.tasks.forEach(task=> {
+                this.elements.addNewJobModal.tasksTab.taskListItem().contains(task.taskName).then(($el)=> {
+                    cy.wrap($el).invoke('text').then(text=> {
+                        expect(text.trim()).to.equal(task.taskName.trim())
+                    })
+                    cy.wrap($el).click()
+                    cy.wait(2500)
+                    cy.wrap($el).find('input').invoke('val').then(val=> {
+                        expect(val.trim()).to.equal(task.taskName.trim())
+                    })
+                })  
+            })
+            
         })
 
     }
