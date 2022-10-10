@@ -255,7 +255,7 @@ describe('Add Customer', () => {
 
 
   /* skipped because of incomplete script */
-  it.skip('Create customer w/ attachment ', () => {
+  it.only('Create customer w/ attachment ', () => {
     const rand = uuidv4().substring(0, 5)
     const cn = `${rand}-CN`
     const companyname = `${uuidv4().substring(0, 5)}-Customer with Attachment`
@@ -269,9 +269,29 @@ describe('Add Customer', () => {
     AddCustomerPage.fillData(customerInfo)
     AddCustomerPage.clickSaveButton()
     // AddCustomerPage.confirmValidityYes()
-    CustomerPage.uploadAnotherAttachment('doc.doc')
-    CustomerPage.uploadAnotherAttachment('sitemap.xml')
+    // CustomerPage.uploadAnotherAttachment('doc.doc')
+    // CustomerPage.uploadAnotherAttachment('sitemap.xml')
     // AddCustomerPage.clickBackButton()
+    const attachmentInfo = [
+      {
+        attachment: 'img.jpg',
+        note: `Note-${uuidv4().substring(0, 5)}`,
+        siteMap: false
+      },
+      {
+        attachment: 'doc.doc',
+        note: `Note-${uuidv4().substring(0, 5)}`,
+        siteMap: true
+      }
+    ]
+
+    attachmentInfo.forEach(info => {
+      CustomerPage.gotoAddNewAttachmentModal()
+      CustomerPage.addNewAttachment(info)
+    })
+
+
+
 
 
   })

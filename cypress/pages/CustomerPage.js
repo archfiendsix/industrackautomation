@@ -75,6 +75,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             equipmentTab: {
                 button: () => cy.get('a[data-toggle="tab"]').contains('Equipment'),
                 addNewEquipmentButton: () => cy.get('button').contains('Add New Equipment')
+            },
+            attachmentsTab: {
+                button: () => cy.get('a[data-toggle="tab"]').contains('Attachments'),
+                addNewButton: () => cy.get('app-address-book-attachments button').contains('Add New').last(),
             }
         },
         addNewEquipmentModal: {
@@ -91,9 +95,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             assignNoteToaServiceLocationFieldOption: () => cy.get('#serviceLocationId-panel mat-option'),
             saveButton: () => cy.get('app-note-edit-form button').contains('Save')
         },
-
-
-
+        addNewAttachmentModal: {
+            noteField: () => cy.get('app-attachment-edit-form textarea#note'),
+            attachmentInput: () => cy.get('app-attachment-edit-form input#inputDocument').first(),
+            siteMapCheckbox: () => cy.get('app-attachment-edit-form input#isSiteMap'),
+            cancelButton: () => cy.get('app-attachment-edit-form button').contains('Cancel').last(),
+            saveButton: () => cy.get('app-attachment-edit-form button').contains('Save').last(),
+        },
         editCustomerModal: {
             makeInactiveButton: () => cy.get('app-customers-edit-form .modal-footer button').contains('Make Inactive'),
             makeActiveButton: () => cy.get('app-customers-edit-form .modal-footer button').contains('Make Active'),
@@ -141,10 +149,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 
     gotoAddNewCustomer = () => {
-        this.elements.moreActionsDropdown.button().click().then(()=> {
+        this.elements.moreActionsDropdown.button().click().then(() => {
             cy.get('.dropdown-menu a').contains('Add New Customer').last().click()
         })
-        
+
     }
     // searchCustomer = (text) => {
     //     this.elements.searchBox.input().clear().type(text)
@@ -177,6 +185,26 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     gotoNotesTab = () => {
         this.elements.customerOverview.notesTab.button().click()
+    }
+    gotoAttachmentsTab = () => {
+        cy.wait(1500)
+        this.elements.customerOverview.attachmentsTab.button().click()
+    }
+
+    gotoAddNewAttachmentModal = () => {
+        this.gotoAttachmentsTab()
+        cy.wait(1500)
+        this.elements.customerOverview.attachmentsTab.addNewButton().click()
+
+    }
+
+    addNewAttachment = (attachmentInfo) => {
+        attachmentInfo.attachment && this.elements.addNewAttachmentModal.attachmentInput().click()
+        attachmentInfo.attachment && this.elements.addNewAttachmentModal.attachmentInput().attachFile(attachmentInfo.attachment)
+        attachmentInfo.note && this.elements.addNewAttachmentModal.noteField().clear().type(attachmentInfo.note)
+        attachmentInfo.siteMap && this.elements.addNewAttachmentModal.siteMapCheckbox().check()
+
+        this.elements.addNewAttachmentModal.saveButton().last().click()
     }
 
     clickAddOfficeNotesButton = () => {

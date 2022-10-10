@@ -70,6 +70,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 
     gotoAddNewInventory = () => {
+        cy.visit('/settingsTab/general/setting')
         cy.wait(3000)
         this.elements.inventoryPanel().click()
         this.elements.inventoryListPanel().click()

@@ -60,7 +60,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             changeServiceLocation: () => cy.get('.topheader button+.dropdown-menu li a').contains('Change Service Location'),
             changeBillToServiceLocation: () => cy.get('.topheader button+.dropdown-menu li a').contains('Change Bill To Service Location'),
             changeCustomer: () => cy.get('.topheader button+.dropdown-menu li a').contains('Change Customer'),
-            receivePayment: () => cy.get('.topheader button+.dropdown-menu li a').contains('Recieve Payment'),
+            receivePayment: () => cy.get('.topheader button+.dropdown-menu li a').contains('Receive Payment'),
             sendReminder: () => cy.get('.topheader button+.dropdown-menu li a').contains('Send Reminder')
         },
         changeServiceLocation: {
