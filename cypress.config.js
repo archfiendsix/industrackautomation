@@ -42,5 +42,6 @@ module.exports = defineConfig({
   pageLoadTimeout: 100000,
   chromeWebSecurity: false,
   screenshotOnRunFailure: true,
+  defaultCommandTimeout: 10000                                                                                                                                                                                        
 
 });

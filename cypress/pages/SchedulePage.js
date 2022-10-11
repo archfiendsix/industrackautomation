@@ -50,8 +50,9 @@ class SchedulePage {
             tasksTab: {
                 addNewButton: () => cy.get('job-task-form button').contains('New Task'),
                 taskNameTextbox: () => cy.get('#taskslist #task1 .form-group input').first(),
-                serviceTypeField: ()=> cy.get('#taskslist #task1 .form-group select').first(),
-                taskListItem: ()=> cy.get('#taskslist .panel.taskbox'),
+                serviceTypeField: () => cy.get('#taskslist #task1 .form-group select').first(),
+                taskListCarousel: () => cy.get('#taskslist .panel.taskbox .panel-heading'),
+                taskListItem: () => cy.get('#taskslist .panel.taskbox'),
 
             },
             selectJobTemplateModal: {
@@ -94,6 +95,10 @@ class SchedulePage {
                 searchTextbox: () => cy.get('input[name="searchText"]'),
                 jobRowCell: () => cy.get('app-jobs-assigned table tbody tr td'),
 
+            },
+            onHoldJobsTab: {
+                button: () => cy.get('div[role="tab"]').contains('On Hold'),
+                jobRowCell: () => cy.get('app-jobs-on-hold table tbody tr td'),
             }
         }
 
@@ -286,20 +291,22 @@ class SchedulePage {
         })
 
         // Check added tasks
-        this.elements.addNewJobModal.tasksTabButton().click().then(()=> {
-            jobInformation.tasks.forEach(task=> {
-                this.elements.addNewJobModal.tasksTab.taskListItem().contains(task.taskName).then(($el)=> {
-                    cy.wrap($el).invoke('text').then(text=> {
-                        expect(text.trim()).to.equal(task.taskName.trim())
-                    })
-                    cy.wrap($el).click()
-                    cy.wait(2500)
-                    cy.wrap($el).find('input').invoke('val').then(val=> {
-                        expect(val.trim()).to.equal(task.taskName.trim())
-                    })
-                })  
+        this.elements.addNewJobModal.tasksTabButton().click().then(() => {
+            jobInformation.tasks.forEach(task => {
+                this.elements.addNewJobModal.tasksTab.taskListCarousel().contains(task.taskName).click()
+                cy.wait(1000)
+                // this.elements.addNewJobModal.tasksTab.taskListCarousel().contains(task.taskName).parent().then(($el) => {
+                //     // cy.wrap($el).invoke('text').then(text => {
+                //     //     expect(text.trim()).to.equal(task.taskName.trim())
+                //     // })
+                //     // cy.wrap($el).click()
+                //     cy.wait(2500)
+                //     cy.wrap($el).find('.panel-body input').invoke('val').then(val => {
+                //         expect(val.trim()).to.equal(task.taskName.trim())
+                //     })
+                // }) //-> Still Have to refine code
             })
-            
+
         })
 
     }
@@ -361,13 +368,51 @@ class SchedulePage {
         this.elements.jobsQueueModal.assignedJobsTab.button().click()
     }
 
-    searchJobAndClickOnJobRow = (jobDescription) => {
-        cy.wait(10000)
-        this.elements.jobsQueueModal.assignedJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el=> {
+    gotoOnHoldJobsTab = () => {
+        this.elements.jobsQueueModal.onHoldJobsTab.button().click()
+    }
+    // searchJobAndClickOnJobRow
+
+    searchUnasignedJobsTab = (jobDescription) => {
+        cy.wait(15000) // Putting wait because the job doesn't appear immediately on the job list when created
+        this.elements.jobsQueueModal.assignedJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el => {
             cy.wrap($el).type('{enter}')
         })
-        cy.wait(3500)
-        this.elements.jobsQueueModal.assignedJobsTab.jobRowCell().contains(jobDescription).first().parent().dblclick()
+        cy.wait(4000)
+        this.elements.jobsQueueModal.searchUnasignedJobsTab.jobRowCell().should('be.visible').contains(jobDescription).first().parent().dblclick()
+    }
+
+    searchAssignedJobsTab = (jobDescription) => {
+        cy.wait(15000) // Putting wait because the job doesn't appear immediately on the job list when created
+        this.elements.jobsQueueModal.assignedJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el => {
+            cy.wrap($el).type('{enter}')
+        })
+        cy.wait(5500)
+        this.elements.jobsQueueModal.assignedJobsTab
+            .jobRowCell()
+            .contains(jobDescription)
+            .first()
+            .should($el => {
+                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+            })
+            .parent()
+            .dblclick()
+    }
+
+    searchOnHoldJobsTab = (jobDescription) => {
+        // cy.wait(15000) // Putting wait because the job doesn't appear immediately on the job list when created
+        this.elements.jobsQueueModal.assignedJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el => {
+            cy.wrap($el).type('{enter}')
+        })
+        cy.wait(5500)
+        this.elements.jobsQueueModal.onHoldJobsTab
+            .jobRowCell()
+            .contains(jobDescription)
+            .first()
+            .should($el => {
+                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+            })
+            .parent().dblclick()
     }
 
 }
