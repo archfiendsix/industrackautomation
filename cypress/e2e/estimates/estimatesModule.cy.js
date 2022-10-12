@@ -239,7 +239,7 @@ describe('New Estimate module', () => {
     })
 
     /* Skipped becaus ef error in reading iframe */
-    it.skip('Create estimate with notes and description added and check on preview.', () => {
+    it.only('Create estimate with notes and description added and check on preview.', () => {
         // Dashboard.clickEstimatesTab()
         cy.visit('/estimatesTab/list')
         Dashboard.preventNotificationCard()

@@ -44,7 +44,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
                 save: () => cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').first().contains('Save'),
                 preview: () => cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').contains('Preview'),
                 changeServiceLocation: () => cy.get('button[data-toggle="dropdown"]+.dropdown-menu li a').contains('Change Bill To Service Location'),
-            }
+            },
+            billToButton: () => cy.get('.billTo button')
         },
         receivePaymentModal: {
             paymentMethodField: () => cy.get('app-payment-editor-dialog .mat-dialog-content form .row .col-lg-4.col-md-6:nth-child(2) mat-select'),
@@ -113,7 +114,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         },
         previewiFrame: {
             custName: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').then(cy.wrap).find('.custName'),
-            note: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('.total.row h3+p'),
+            note: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('.serviceparts h3+p'),
             description: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('#reportContent .col-lg-4.col-md-4:nth-child(3) h3+span'),
             invoiceNumber: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('#reportContent .proposalInfo tr:first-child() td:last-child()'),
             customerInfo: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('.customerInfo'),
@@ -262,9 +263,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     changeServiceLocation = (serviceLocation) => {
         cy.wait(4500)
-        this.elements.actionsDropdown.button().last().click()
-        cy.wait(4000)
-        this.elements.actionsDropdown.changeServiceLocation().last().click()
+        // this.elements.actionsDropdown.button().last().click()
+        // cy.wait(4000)
+        // this.elements.actionsDropdown.changeServiceLocation().last().click()
+        this.elements.addingNewInvoiceModal.billToButton().click().then(() => {
+            cy.get('.mat-menu-content button').contains('Change Service Location').click()
+        })
+
         cy.wait(4000)
         this.elements.changeServiceLocation.serviceLocations().contains(serviceLocation).click()
         cy.wait(4000)
@@ -273,9 +278,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     changeBillToServiceLocation = (serviceLocation) => {
         cy.wait(4000)
-        this.elements.actionsDropdown.button().last().click()
-        cy.wait(4000)
-        this.elements.actionsDropdown.changeBillToServiceLocation().last().click()
+        // this.elements.actionsDropdown.button().last().click()
+        // cy.wait(4000)
+        // this.elements.actionsDropdown.changeBillToServiceLocation().last().click()
+        this.elements.addingNewInvoiceModal.billToButton().click().then(() => {
+            cy.get('.mat-menu-content button').contains('Change Bill To Service Location').click()
+        })
         cy.wait(4000)
         this.elements.changeBillToServiceLocation.serviceLocations().contains(serviceLocation).last().click()
         cy.wait(4000)
@@ -284,10 +292,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     changeCustomer = (customerName) => {
         cy.wait(4000)
-        this.elements.actionsDropdown.button().last().click()
-        cy.wait(4000)
-        this.elements.actionsDropdown.changeCustomer().last().click()
-        cy.wait(4000)
+        // this.elements.actionsDropdown.button().last().click()
+        // cy.wait(4000)
+        // this.elements.actionsDropdown.changeBillToServiceLocation().last().click()
+        this.elements.addingNewInvoiceModal.billToButton().click().then(() => {
+            cy.get('.mat-menu-content button').contains('Change Customer').click()
+        })
         this.elements.changeCustomer.selectCustomerTextbox().last().type(`${customerName}{enter}`)
         cy.wait(3500)
         this.elements.changeCustomer.customerListItems().contains(customerName).first().click()

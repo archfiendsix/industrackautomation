@@ -106,7 +106,7 @@ describe('Invoices Module', () => {
 
 
     /* Skipped because it still has error */
-    it.skip('Add invoice with 1 NON-INVENTORY type, with description, with terms selected, with discount and with tax and save the invoice with the correct total due', () => {
+    it('Add invoice with 1 NON-INVENTORY type, with description, with terms selected, with discount and with tax and save the invoice with the correct total due', () => {
         const invoiceInfo = {
             customer: 'a1a58',
             inventoriesToAdd: ['Add Inventory - Taxable no SN'],
@@ -288,7 +288,8 @@ describe('Invoices Module', () => {
         InvoiceOverviewPage.checkInvoiceStatus('Paid')
     })
 
-    it('For Unpaid and Overdue invoices - Send reminder', () => {
+    // Skipped due to email still not set/added to industrack account
+    it.skip('For Unpaid and Overdue invoices - Send reminder', () => {
         const invoiceInfo = {
             customer: 'Ace Hardware',
             inventoriesToAdd: ['Add Inventory - Taxable no SN'],

@@ -26,7 +26,7 @@ class EstimatesPage {
         },
         previewiFrame: {
             custName: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').then(cy.wrap).find('.custName'),
-            note: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('#reportContent h3+p'),
+            note: () => cy.get('.iframe #contentHolder').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('.total.row h3+p'),
         },
         addDiscountRowElement: () => cy.get('a[data-target="#modalAddDiscountPartLine"]'),
 
@@ -39,11 +39,11 @@ class EstimatesPage {
         invoiceTax: () => cy.get('.table.invoice-total tr:nth-child(3) td:nth-child(2)'),
         invoiceTotal: () => cy.get('.table.invoice-total tr.total td:nth-child(2)'),
         invoiceTotals: () => cy.get('.table.invoice-total tbody tr:first-child() td:nth-child(2), .table.invoice-total tr.total td:nth-child(2)'),
-        invoiceTaxButton: () => cy.get('input#mat-input-11'),
+        invoiceTaxButton: () => cy.get('app-tax-selector input'),
         createNewTaxButton: () => cy.get('button').contains('Create new'),
         setTaxModal: {
-            taxNameTextbox: () => cy.get('app-tax-selector-dialog input#mat-input-16'),
-            taxValueTextbox: () => cy.get('app-tax-selector-dialog input#mat-input-17'),
+            taxNameTextbox: () => cy.get('app-tax-selector-dialog input').eq(0),
+            taxValueTextbox: () => cy.get('app-tax-selector-dialog input').eq(1),
             saveButton: () => cy.get('app-tax-selector-dialog button').contains('Save'),
         },
         sendToEmailModal: {
@@ -238,7 +238,9 @@ class EstimatesPage {
     checkEstimatePreviewValues = (customerInfo) => {
         // this.elements.previewiFrame.note().should('have.value', customerInfo.note.toString())
         cy.frameLoaded('#contentHolder')
-        cy.iframe('#contentHolder').find('p')
+        cy.wait(2000)
+        this.elements.previewiFrame.note().should('have.text', customerInfo.note.toString())
+        // cy.iframe('#contentHolder').find('p')
     }
 
     calcGrandTotal = (subTotal, discount) => {

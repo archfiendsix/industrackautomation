@@ -18,7 +18,7 @@ class Dashboard {
         taskTemplates: () => cy.get('ul#side-menu li ul.nav-second-level li a').contains('Task Templates'),
         notification: {
             icon: () => cy.get('a[title="Reminders"]'),
-            card: () => cy.get('ul.dropdown-menu.dropdown-reminders'),
+            card: () => cy.get('a[title="Reminders"]+ul.dropdown-menu.dropdown-reminders'),
         },
         user: {
             avatarButton: () => cy.get('.nav.navbar-top-links.navbar-right li:last-child() a'),
@@ -85,10 +85,12 @@ class Dashboard {
 
 
     preventNotificationCard = () => {
+        cy.get('.navbar-collapse').first().click('topRight')
         cy.wait(4000)
         cy.get("body").then($body => {
             // @ts-ignore
             if (this.elements.notification.card().first().length > 0) {
+                this.elements.notification.card().first().invoke('hide')
                 this.elements.notification.card().then($el => {
                     if ($el.is(':visible')) {
                         this.elements.notification.icon().click({ force: true })
