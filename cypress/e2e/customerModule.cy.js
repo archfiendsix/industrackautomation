@@ -193,7 +193,7 @@ describe('Add Customer', () => {
   //   CustomerPage.gotoAddNewEstimate()
 
   // })
-  it.only('Make customer inactive - Check unsearchability - Make Customer active again - Check searchability', () => {
+  it('Make customer inactive - Check unsearchability - Make Customer active again - Check searchability', () => {
     const cn = `CN-${uuidv4().substring(0, 5)}`
     const customerInfo = {
       customerNumber: cn,

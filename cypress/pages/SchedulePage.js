@@ -383,7 +383,7 @@ class SchedulePage {
     }
 
     searchAssignedJobsTab = (jobDescription) => {
-        cy.wait(15000) // Putting wait because the job doesn't appear immediately on the job list when created
+        cy.wait(20000) // Putting wait because the job doesn't appear immediately on the job list when created
         this.elements.jobsQueueModal.assignedJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el => {
             cy.wrap($el).type('{enter}')
         })
