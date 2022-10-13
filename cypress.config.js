@@ -43,5 +43,5 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   screenshotOnRunFailure: false,
   defaultCommandTimeout: 10000,                                                                                                                                                                                    
-  video: true,
+  video: false,
 });
