@@ -24,3 +24,12 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import { v4 as uuidv4 } from 'uuid';
+
+var accessToken = null;  //this is a global variable at top of file
+Cypress.Commands.add('resetLocalStorage', () => {
+    if (!accessToken) {
+        accessToken = localStorage.getItem('access_token');
+    }
+    window.localStorage.setItem('access_token', accessToken);
+
+})
