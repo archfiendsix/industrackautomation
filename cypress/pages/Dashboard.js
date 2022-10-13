@@ -85,6 +85,7 @@ class Dashboard {
 
 
     preventNotificationCard = () => {
+        cy.wait(2000)
         cy.get('.navbar-collapse').first().click('topRight')
         cy.wait(4000)
         cy.get("body").then($body => {

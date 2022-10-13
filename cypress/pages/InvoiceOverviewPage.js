@@ -5,7 +5,7 @@ class InvoiceOverviewPage {
     }
 
     checkInvoiceStatus = (statusToCheck) => {
-        this.elements.statusLabel().contains(statusToCheck)
+        this.elements.statusLabel().contains(statusToCheck.toString())
     }
 }
 

@@ -99,6 +99,11 @@ class SchedulePage {
             onHoldJobsTab: {
                 button: () => cy.get('div[role="tab"]').contains('On Hold'),
                 jobRowCell: () => cy.get('app-jobs-on-hold table tbody tr td'),
+            },
+            completedJobsTab: {
+                button: () => cy.get('div[role="tab"]').contains('Completed Jobs'),
+                jobRowCell: () => cy.get('app-jobs-completed table tbody tr td'),
+                searchTextbox: () => cy.get('input[name="searchText"]'),
             }
         }
 
@@ -290,6 +295,24 @@ class SchedulePage {
             })
         })
 
+        // Check Employees
+        this.elements.addNewJobModal.employeesTabButton().click().then(() => {
+            jobInformation.employee.forEach(employee => {
+                this.elements.addNewJobModal.employeeTab.employeeTableRow().contains(employee.addCrew).parent().find('.cDuration .form-group .form-inline input').first().invoke('val')
+                    .then(val => {
+                        expect(val, 'Checking employee hours field...').to.equal(employee.duration.h)
+                    })
+
+                this.elements.addNewJobModal.employeeTab.employeeTableRow().contains(employee.addCrew).parent().find('.cDuration .form-group .form-inline input').last().invoke('val')
+                    .then(val => {
+                        expect(val, 'Checking employee minutes field...').to.equal(employee.duration.m)
+                    })
+
+                // durationHrs: () => cy.get('.cDuration .form-group .form-inline input').first(),
+                // durationMin: () => cy.get('.cDuration .form-group .form-inline input').last(),
+            })
+        })
+
         // Check added tasks
         this.elements.addNewJobModal.tasksTabButton().click().then(() => {
             jobInformation.tasks.forEach(task => {
@@ -371,6 +394,10 @@ class SchedulePage {
     gotoOnHoldJobsTab = () => {
         this.elements.jobsQueueModal.onHoldJobsTab.button().click()
     }
+
+    gotoCompletedJobsTab = () => {
+        this.elements.jobsQueueModal.completedJobsTab.button().click()
+    }
     // searchJobAndClickOnJobRow
 
     searchUnasignedJobsTab = (jobDescription) => {
@@ -413,6 +440,26 @@ class SchedulePage {
                 expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
             })
             .parent().dblclick()
+    }
+
+    searchCompletedJobsTab = (jobDescription) => {
+        this.elements.jobsQueueModal.completedJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el => {
+            cy.wrap($el).type('{enter}')
+        })
+        cy.wait(5500)
+        this.elements.jobsQueueModal.completedJobsTab
+            .jobRowCell()
+            .contains(jobDescription)
+            .first()
+            .should($el => {
+                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+            })
+            .parent()
+            .find('button')
+            .click().then(() => {
+                cy.wait(500)
+                cy.get('.btn-group.actions .dropdown-menu a').contains('View Job').click()
+            })
     }
 
 }

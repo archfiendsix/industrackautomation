@@ -151,7 +151,7 @@ describe('Add Customer', () => {
   })
 
   it('Test with one tag and verify that tags are assigned to customer', () => {
-    Dashboard.preventNotificationCard()
+    // Dashboard.preventNotificationCard()
     const rand = uuidv4().substring(0, 5)
     const customerInfo = {
       customerNumber: `CN-${rand}`,
@@ -159,7 +159,7 @@ describe('Add Customer', () => {
       validateAddress: true
     }
     AddCustomerPage.fillData(customerInfo)
-    Dashboard.preventNotificationCard()
+    // Dashboard.preventNotificationCard()
     AddCustomerPage.validateAddress()
 
 
@@ -169,31 +169,33 @@ describe('Add Customer', () => {
     const tags = ['Tag 1', 'Tag 2', 'Tag 3']
     AddCustomerPage.addTags(tags)
     AddCustomerPage.clickBackButton()
-
-    CustomerPage.searchAndVerifyTags(tags, customerInfo.customerNumber) // -> modify this
+    cy.get('body').scrollTo('bottom')
+    CustomerPage.searchAndVerifyTags(tags, customerInfo.customerNumber, customerInfo.companyName) // -> modify this
 
 
   })
 
-  // /* Skipped because of iframe problem */
-  // it.skip('Create estimate with notes and description added and check on preview.', () => {
-  //   Dashboard.preventNotificationCard()
-  //   const customerInfo = {
-  //     customerNumber: `CN-${uuidv4()}`,
-  //     companyName: 'Add Note to this customer and check',
-  //      validateAddress: true
-  //   }
-  //   AddCustomerPage.fillData(customerInfo)
-  //   Dashboard.preventNotificationCard()
-  //   AddCustomerPage.validateAddress()
+  /* Skipped because of iframe problem */
+  it.skip('Create estimate with notes and description added and check on preview.', () => {
+    Dashboard.preventNotificationCard()
+    const customerInfo = {
+      customerNumber: `CN-${uuidv4()}`,
+      companyName: 'Add Note to this customer and check',
+       validateAddress: true
+    }
+    AddCustomerPage.fillData(customerInfo)
+    Dashboard.preventNotificationCard()
+    AddCustomerPage.validateAddress()
 
-  //   AddCustomerPage.clickSaveButton()
+    AddCustomerPage.clickSaveButton()
 
-  //   CustomerPage.searchAndVerifyTags(tags, customerInfo.customerNumber) // -> modify this
-  //   CustomerPage.gotoAddNewEstimate()
+    CustomerPage.searchAndVerifyTags(tags, customerInfo.customerNumber, customerInfo.companyName) // -> modify this
+    CustomerPage.gotoAddNewEstimate()
 
-  // })
-  it('Make customer inactive - Check unsearchability - Make Customer active again - Check searchability', () => {
+  })
+
+   // 'Make Customer active' button being covered by support avatar
+    it.skip('Make customer inactive - Check unsearchability - Make Customer active again - Check searchability', () => {
     const cn = `CN-${uuidv4().substring(0, 5)}`
     const customerInfo = {
       customerNumber: cn,
@@ -210,7 +212,7 @@ describe('Add Customer', () => {
 
     CustomerPage.confirmUnsearchability(customerInfo.customerNumber)
     CustomerPage.showInactiveCustomers()
-    CustomerPage.makeCustomerActive(customerInfo.customerNumber)
+    CustomerPage.makeCustomerActive(customerInfo.customerNumber) // -> 'Make Customer active' button being covered by support avatar
     AddCustomerPage.clickBackButton()
 
     CustomerPage.searchCustomer(customerInfo.customerNumber)
@@ -297,7 +299,7 @@ describe('Add Customer', () => {
   })
 
   it('Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)', () => {
-    Dashboard.preventNotificationCard()
+    // Dashboard.preventNotificationCard()
 
     const rand = uuidv4().substring(0, 5)
     const customerInfo = {

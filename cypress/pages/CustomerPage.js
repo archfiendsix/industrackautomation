@@ -50,6 +50,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             lastNameSortHeader: () => cy.get('.mat-table thead th.mat-column-lastName'),
             numberCell: () => cy.get('.mat-table tbody tr td:first-child()'),
             tagscell: () => cy.get('.mat-table tbody tr td.mat-column-tags'),
+            companyNameCell: () => cy.get('.mat-table tbody tr td.mat-column-companyName'),
             tagsRow: () => cy.get('.mat-table tbody tr td'),
 
             paginationDropdown: () => cy.get('.mat-paginator-page-size-label+mat-form-field'),
@@ -57,6 +58,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             itemsPerPageDropdown: () => cy.get('mat-select[aria-label="Items per page:"]'),
             paginationRightArrow: () => cy.get('.mat-paginator-range-actions button[aria-label="Next page"]'),
             paginationRange: () => cy.get('.mat-paginator-range-actions .mat-paginator-range-label'),
+            inactiveCustomers: {
+                numberCell: () => cy.get('.mat-table tbody tr td:nth-child(2)'),
+            }
         },
         notesTable: {
             notesCell: () => cy.get('#notesGrid tbody tr td')
@@ -231,21 +235,20 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 
 
-    searchAndVerifyTags = (tags, customerNumber) => {
+    searchAndVerifyTags = (tags, customerNumber, companyName) => {
         // this.setItemsPerPage()
         tags.forEach(tag => {
             cy.log(tag)
             const custNumber = customerNumber.toString()
-            cy.get('body').scrollTo('bottom')
             this.elements.customerTable.itemsPerPageDropdown().last().click().then(() => {
                 cy.wait(500)
                 cy.get('mat-option').contains('100').click()
             })
-            cy.get('body').scrollTo('top')
-            this.elements.searchBox.input().clear().type(tag)
+            // cy.get('body').scrollTo('top')
+            this.elements.searchBox.input().clear().type(customerNumber)
             this.elements.searchBox.searchIcon().click()
-            var searchTrue = false
-            this.elements.customerTable.tagscell().contains(tag.toString()).parent().find('td').eq(0).contains(custNumber)
+            cy.wait(2000)
+            this.elements.customerTable.companyNameCell().contains(companyName.slice(5)).parent().find('td').eq(9).should('contain', tag)
         })
 
     }
@@ -275,7 +278,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
     makeNewCustomerActive = () => {
         this.elements.customerOverview.editContactButton().click()
-        this.elements.editCustomerModal.makeActiveButton().should('be.visible').click()
+        cy.get('#titlediv').trigger('mouseover').then(() => {
+            cy.get('.siqico-close').click({ force: true })
+            cy.get('#zsalesiq').invoke('d-none')
+        })
+        this.elements.editCustomerModal.makeActiveButton().should('be.visible').click('bottomRight')
         cy.get('dialog-overview-modal button').contains('Yes').click()
         this.elements.editCustomerModal.closeButton().click()
 
@@ -314,7 +321,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     makeCustomerActive = (customerNumber) => {
         // this.elements.searchBox.input().clear().type(customerNumber)
-        this.elements.customerTable.numberCell().should('contain', customerNumber).first().parent().click()
+        cy.wait(3000)
+        this.elements.customerTable.inactiveCustomers.numberCell().contains(customerNumber).first().parent().click()
         this.makeNewCustomerActive()
     }
 

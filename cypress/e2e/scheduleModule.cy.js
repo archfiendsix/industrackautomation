@@ -573,6 +573,84 @@ describe('Schedule Module', () => {
 
     })
 
+    it.only('Add default Job - Start Job - Mark as completed- assert info', () => {
+
+        SchedulePage.gotoAddNewJob()
+        let jobInformation = {
+            selectCustomer: 'Eqp-f1439',
+            jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+            jobStatus: 'Started',
+            notes: `Note-${uuidv4().substring(0, 5)}`,
+            serviceType: 'Maintenance',
+            jobPriority: 'Low',
+            jobColor: 'Maintenance',
+            partsServiceEquipment: [
+                {
+                    name: 'Add Inventory - Taxable no SN',
+                    qty: '1'
+                },
+                {
+                    name: '0e835-Service',
+                    qty: '1'
+                },
+                {
+                    name: 'Assembly-',
+                    qty: '1'
+                },
+                {
+                    name: 'Cement Nail GUN (Equipment)',
+                    qty: '1'
+                },
+            ],
+            existingCustomerEquipment: ['Cement Nail GUN (Equipment)'],
+            attachments: [
+                {
+                    url: 'https://cloudinary.hbs.edu/hbsit/image/upload/s--Fm3oHP0m--/f_auto,c_fill,h_375,w_750,/v20200101/79015AB87FD6D3284472876E1ACC3428.jpg',
+                    addAFile: 'doc.doc'
+                }
+            ],
+            employee: [
+                {
+                    addCrew: 'Employee One',
+                    duration: {
+                        h: '8',
+                        m: '0'
+                    }
+                },
+            ],
+            tasks: [
+                {
+                    taskName: `Task - ${uuidv4().substring(0, 5)}`,
+                    serviceType: 'Maintenance'
+                }
+            ]
+        }
+        SchedulePage.addNewJob(jobInformation)
+
+        SchedulePage.saveJob()
+
+
+        SchedulePage.gotoJobsQueue()
+        SchedulePage.gotoAssignedJobsTab()
+        SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription)
+
+        let jobInformationEdit = {
+            jobStatus: 'Complete'
+        }
+        SchedulePage.addNewJob(jobInformationEdit)
+        SchedulePage.saveJob()
+
+        SchedulePage.gotoCompletedJobsTab()
+        SchedulePage.searchCompletedJobsTab(jobInformation.jobDescription)
+        
+        SchedulePage.verifyCustomerInformation({ ...jobInformation, ...jobInformationEdit })
+
+        SchedulePage.saveJob()
+
+        
+
+    })
+
 
 
 })
