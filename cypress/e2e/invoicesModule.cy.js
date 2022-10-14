@@ -6,7 +6,7 @@ import InvoiceOverviewPage from "../pages/InvoiceOverviewPage";
 import { v4 as uuidv4 } from 'uuid';
 require('cypress-plugin-tab');
 
-describe('Invoices Module', () => {
+describe.only('Invoices Module', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log(err);
         return false;

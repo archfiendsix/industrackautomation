@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 require('cypress-plugin-tab');
 
-describe('Add Customer', () => {
+describe.only('Add Customer', () => {
   Cypress.on('uncaught:exception', (err, runnable) => {
     console.log(err);
     return false;

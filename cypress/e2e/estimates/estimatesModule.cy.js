@@ -9,7 +9,7 @@ import InvoiceOverviewPage from "../../pages/InvoiceOverviewPage";
 import { v4 as uuidv4 } from 'uuid';
 import InvoicesPage from "../../pages/InvoicesPage";
 
-describe('New Estimate module', () => {
+describe.only('New Estimate module', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log(err);
         return false;
