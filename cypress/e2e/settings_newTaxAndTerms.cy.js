@@ -4,7 +4,7 @@ import { TaxAndTermsPage } from "../pages/settings/company_settings";
 
 require('cypress-plugin-tab');
 
-describe('New Tax and Terms Module', () => {
+xdescribe('New Tax and Terms Module', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log(err);
         return false;

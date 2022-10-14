@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 require('cypress-plugin-tab');
 
-describe('Add Inventory', () => {
+xdescribe('Add Inventory', () => {
   Cypress.on('uncaught:exception', (err, runnable) => {
     console.log(err);
     return false;
