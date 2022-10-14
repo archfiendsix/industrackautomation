@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 require('cypress-plugin-tab');
 
-describe('Schedule Module', () => {
+describe.only('Schedule Module', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log(err);
         return false;
