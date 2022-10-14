@@ -75,13 +75,13 @@ class EstimatesPage {
         this.typeSearchInput(customer_name)
         cy.wait(1000)
         this.clickSearch()
-        cy.wait(1000)
+        cy.wait(1500)
         this.elements.searchItem().click()
         cy.wait(1000)
         this.elements.proceedButton().click()
     }
 
-    inventorySelect(searchItem) {
+    inventorySelect(searchItem, itemInfo = { profit: 1 }) {
         this.elements.partsSearch()
             .last()
             .type(searchItem)
@@ -90,6 +90,9 @@ class EstimatesPage {
             .last()
             .type('{downArrow}')
             .type('{enter}')
+
+        // this.
+        cy.get('.serviceparts table tr:nth-last-child(3) td input').eq(4).last().clear().type(itemInfo.profit)
     }
 
     saveEstimate() {
