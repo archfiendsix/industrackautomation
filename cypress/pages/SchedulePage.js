@@ -104,6 +104,11 @@ class SchedulePage {
                 button: () => cy.get('div[role="tab"]').contains('Completed Jobs'),
                 jobRowCell: () => cy.get('app-jobs-completed table tbody tr td'),
                 searchTextbox: () => cy.get('input[name="searchText"]'),
+            },
+            approvedForInvoiceJobsTab: {
+                button: () => cy.get('div[role="tab"]').contains('Approved for Invoice'),
+                jobRowCell: () => cy.get('app-jobs-approved table tbody tr td'),
+                searchTextbox: () => cy.get('input[name="searchText"]'),
             }
         }
 
@@ -297,7 +302,7 @@ class SchedulePage {
 
         // Check Employees
         this.elements.addNewJobModal.employeesTabButton().click().then(() => {
-            jobInformation.employee.forEach(employee => {
+            jobInformation.employees && jobInformation.employees.forEach(employee => {
                 this.elements.addNewJobModal.employeeTab.employeeTableRow().contains(employee.addCrew).parent().find('.cDuration .form-group .form-inline input').first().invoke('val')
                     .then(val => {
                         expect(val, 'Checking employee hours field...').to.equal(employee.duration.h)
@@ -310,12 +315,12 @@ class SchedulePage {
 
                 // durationHrs: () => cy.get('.cDuration .form-group .form-inline input').first(),
                 // durationMin: () => cy.get('.cDuration .form-group .form-inline input').last(),
-            })
+            });
         })
 
         // Check added tasks
         this.elements.addNewJobModal.tasksTabButton().click().then(() => {
-            jobInformation.tasks.forEach(task => {
+            jobInformation.tasks && jobInformation.tasks.forEach(task => {
                 this.elements.addNewJobModal.tasksTab.taskListCarousel().contains(task.taskName).click()
                 cy.wait(1000)
                 // this.elements.addNewJobModal.tasksTab.taskListCarousel().contains(task.taskName).parent().then(($el) => {
@@ -398,6 +403,10 @@ class SchedulePage {
     gotoCompletedJobsTab = () => {
         this.elements.jobsQueueModal.completedJobsTab.button().click()
     }
+
+    gotoApprovedForInvoiceTab = () => {
+        this.elements.jobsQueueModal.approvedForInvoiceJobsTab.button().click()
+    }
     // searchJobAndClickOnJobRow
 
     searchUnasignedJobsTab = (jobDescription) => {
@@ -460,6 +469,48 @@ class SchedulePage {
                 cy.wait(500)
                 cy.get('.btn-group.actions .dropdown-menu a').contains('View Job').click()
             })
+    }
+
+    searchApproveCompletedJobTab = (jobDescription) => {
+        this.elements.jobsQueueModal.completedJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el => {
+            cy.wrap($el).clear().type('{enter}')
+        })
+        cy.wait(5500)
+        this.elements.jobsQueueModal.completedJobsTab
+            .jobRowCell()
+            .contains(jobDescription)
+            .first()
+            .should($el => {
+                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+            })
+            .parent()
+            .find('button')
+            .click().then(() => {
+                cy.wait(500)
+                cy.get('.btn-group.actions .dropdown-menu a').contains('Approve').click()
+            })
+    }
+
+    searchViewJobReportValidate = (jobDescription) => {
+        this.elements.jobsQueueModal.approvedForInvoiceJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el => {
+            cy.wrap($el).clear().type('{enter}')
+        })
+        cy.wait(5500)
+        this.elements.jobsQueueModal.approvedForInvoiceJobsTab
+            .jobRowCell()
+            .contains(jobDescription)
+            .first()
+            .should($el => {
+                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+            })
+            .parent()
+            .find('button')
+            .click().then(() => {
+                cy.wait(500)
+                cy.get('.btn-group.actions .dropdown-menu a').contains('View Job Report').click()
+            })
+
+        cy.log('Checking preview...')
     }
 
 }
