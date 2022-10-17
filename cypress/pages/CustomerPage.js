@@ -247,7 +247,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             // cy.get('body').scrollTo('top')
             this.elements.searchBox.input().clear().type(customerNumber)
             this.elements.searchBox.searchIcon().click()
-            cy.wait(2000)
+            cy.wait(3500)
             this.elements.customerTable.companyNameCell().contains(companyName.slice(5)).parent().find('td').eq(9).should('contain', tag)
         })
 

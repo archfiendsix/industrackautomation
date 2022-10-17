@@ -109,6 +109,11 @@ class SchedulePage {
                 button: () => cy.get('div[role="tab"]').contains('Approved for Invoice'),
                 jobRowCell: () => cy.get('app-jobs-approved table tbody tr td'),
                 searchTextbox: () => cy.get('input[name="searchText"]'),
+            },
+            invoicedJobsTab: {
+                button: () => cy.get('div[role="tab"]').contains('Invoiced'),
+                jobRowCell: () => cy.get('app-jobs-invoiced table tbody tr td'),
+                searchTextbox: () => cy.get('input[name="searchText"]'),
             }
         }
 
@@ -197,7 +202,7 @@ class SchedulePage {
 
         /* Employee Tab */
 
-        jobInformation.employee && jobInformation.employee.forEach(employee => {
+        jobInformation.employees && jobInformation.employees.forEach(employee => {
             this.elements.addNewJobModal.employeesTabButton().click()
             this.elements.addNewJobModal.employeeTab.addCrewField().click().then(() => {
                 cy.wait(1000)
@@ -407,6 +412,10 @@ class SchedulePage {
     gotoApprovedForInvoiceTab = () => {
         this.elements.jobsQueueModal.approvedForInvoiceJobsTab.button().click()
     }
+
+    gotoInvoicedTab = () => {
+        this.elements.jobsQueueModal.invoicedJobsTab.button().click()
+    }
     // searchJobAndClickOnJobRow
 
     searchUnasignedJobsTab = (jobDescription) => {
@@ -428,9 +437,9 @@ class SchedulePage {
             .jobRowCell()
             .contains(jobDescription)
             .first()
-            .should($el => {
-                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
-            })
+            // .should($el => {
+            //     expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+            // })
             .parent()
             .dblclick()
     }
@@ -445,9 +454,6 @@ class SchedulePage {
             .jobRowCell()
             .contains(jobDescription)
             .first()
-            .should($el => {
-                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
-            })
             .parent().dblclick()
     }
 
@@ -460,9 +466,6 @@ class SchedulePage {
             .jobRowCell()
             .contains(jobDescription)
             .first()
-            .should($el => {
-                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
-            })
             .parent()
             .find('button')
             .click().then(() => {
@@ -480,14 +483,28 @@ class SchedulePage {
             .jobRowCell()
             .contains(jobDescription)
             .first()
-            .should($el => {
-                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
-            })
             .parent()
             .find('button')
             .click().then(() => {
                 cy.wait(500)
                 cy.get('.btn-group.actions .dropdown-menu a').contains('Approve').click()
+            })
+    }
+
+    searchConvertToInvoiceJobTab = (jobDescription) => {
+        this.elements.jobsQueueModal.approvedForInvoiceJobsTab.searchTextbox().clear().type(jobDescription.slice(-5)).then($el => {
+            cy.wrap($el).clear().type('{enter}')
+        })
+        cy.wait(5500)
+        this.elements.jobsQueueModal.approvedForInvoiceJobsTab
+            .jobRowCell()
+            .contains(jobDescription)
+            .first()
+            .parent()
+            .find('button')
+            .click().then(() => {
+                cy.wait(500)
+                cy.get('.btn-group.actions .dropdown-menu a').contains('Convert to Invoice').click()
             })
     }
 
@@ -500,9 +517,6 @@ class SchedulePage {
             .jobRowCell()
             .contains(jobDescription)
             .first()
-            .should($el => {
-                expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
-            })
             .parent()
             .find('button')
             .click().then(() => {
