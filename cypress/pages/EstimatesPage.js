@@ -264,12 +264,12 @@ class EstimatesPage {
 
   checkEstimatePreview = () => {
     this.elements.estimatePreviewModalTitle().contains("Estimate Preview");
-    cy.wait(4500);
+    cy.wait(5000);
     this.elements.previewiFrame.custName().should("be.visible");
     let verifyThis = {
       customername: "Genius Game Inc.",
     };
-    cy.wait(3000);
+    cy.wait(4000);
     this.elements.previewiFrame.custName().contains(verifyThis.customername);
   };
 

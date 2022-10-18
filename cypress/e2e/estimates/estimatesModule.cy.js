@@ -135,7 +135,7 @@ describe("New Estimate module", () => {
     InvoiceOverviewPage.checkInvoiceStatus("Unpaid");
   });
 
-  
+    
   it("Should change Customer", () => {
     Dashboard.clickEstimatesTab();
     Dashboard.preventNotificationCard();
@@ -153,7 +153,7 @@ describe("New Estimate module", () => {
   });
 
   /* Skipped because of error in iframe */
-  it("Should proceed to Estimate preview", () => {
+  it.only("Should proceed to Estimate preview", () => {
     Dashboard.clickEstimatesTab();
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
