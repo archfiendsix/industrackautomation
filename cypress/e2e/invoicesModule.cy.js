@@ -281,19 +281,19 @@ describe("Invoices Module", () => {
     // InvoiceOverviewPage.checkPayment()
   });
 
-  // Skipped due to email still not set/added to industrack account
-  it.skip("For Unpaid and Overdue invoices - Send reminder", () => {
-    const invoiceInfo = {
-      customer: "Ace Hardware",
-      inventoriesToAdd: ["Add Inventory - Taxable no SN"],
-      description: "Test Description",
-      tax: "None",
-      term: "AutoOverdue",
-    };
-    InvoicesPage.addNewInvoice(invoiceInfo);
-    InvoicesPage.addInvoiceDiscount("0");
-    InvoicesPage.saveInvoice();
+  // // Skipped due to email still not set/added to industrack account
+  // it.skip("For Unpaid and Overdue invoices - Send reminder", () => {
+  //   const invoiceInfo = {
+  //     customer: "Ace Hardware",
+  //     inventoriesToAdd: ["Add Inventory - Taxable no SN"],
+  //     description: "Test Description",
+  //     tax: "None",
+  //     term: "AutoOverdue",
+  //   };
+  //   InvoicesPage.addNewInvoice(invoiceInfo);
+  //   InvoicesPage.addInvoiceDiscount("0");
+  //   InvoicesPage.saveInvoice();
 
-    InvoicesPage.sendReminder();
-  });
+  //   InvoicesPage.sendReminder();
+  // });
 });

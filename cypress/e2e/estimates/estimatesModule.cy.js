@@ -153,7 +153,7 @@ describe("New Estimate module", () => {
   });
 
   /* Skipped because of error in iframe */
-  it.only("Should proceed to Estimate preview", () => {
+  it("Should proceed to Estimate preview", () => {
     Dashboard.clickEstimatesTab();
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
@@ -166,68 +166,68 @@ describe("New Estimate module", () => {
     EstimatesPage.checkEstimatePreview(); /* Add more Preview verifications in this method */
   });
 
-  /* Skipped because of a changed flow */
-  it.skip("Should send estimate as email", () => {
-    Dashboard.clickEstimatesTab();
-    Dashboard.preventNotificationCard();
-    EstimatesPage.clickAddNew();
-    cy.wait(4000);
-    EstimatesPage.selectCustomer("Genius Giant Game Inc.");
-    EstimatesPage.inventorySelect("Inventory Item 1");
-    EstimatesPage.saveEstimate();
-    cy.wait(4000);
-    EstimatesPage.sendToEmail();
-  });
+  // /* Skipped because of a changed flow */
+  // it.skip("Should send estimate as email", () => {
+  //   Dashboard.clickEstimatesTab();
+  //   Dashboard.preventNotificationCard();
+  //   EstimatesPage.clickAddNew();
+  //   cy.wait(4000);
+  //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
+  //   EstimatesPage.inventorySelect("Inventory Item 1");
+  //   EstimatesPage.saveEstimate();
+  //   cy.wait(4000);
+  //   EstimatesPage.sendToEmail();
+  // });
 
   /* Have to refine formulas */
-  it.skip("Should have correct Row total upon adding discount", () => {
-    Dashboard.clickEstimatesTab();
-    Dashboard.preventNotificationCard();
-    EstimatesPage.clickAddNew();
-    cy.wait(4000);
-    EstimatesPage.selectCustomer("Genius Giant Game Inc.");
-    EstimatesPage.inventorySelect("Air Filter");
-    cy.wait(4000);
-    EstimatesPage.inventorySelect("Inventory Item 1");
-    cy.wait(4000);
-    EstimatesPage.inventorySelect("Gaming Chair");
-    cy.wait(4000);
+  // it.skip("Should have correct Row total upon adding discount", () => {
+  //   Dashboard.clickEstimatesTab();
+  //   Dashboard.preventNotificationCard();
+  //   EstimatesPage.clickAddNew();
+  //   cy.wait(4000);
+  //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
+  //   EstimatesPage.inventorySelect("Air Filter");
+  //   cy.wait(4000);
+  //   EstimatesPage.inventorySelect("Inventory Item 1");
+  //   cy.wait(4000);
+  //   EstimatesPage.inventorySelect("Gaming Chair");
+  //   cy.wait(4000);
 
-    EstimatesPage.addDiscountInRow(0, 30, "%", 3);
-    EstimatesPage.checkInvoiceSubtotal();
-    EstimatesPage.addDiscountInRow(0, 25, "$", 3);
-    EstimatesPage.checkInvoiceSubtotal();
-    EstimatesPage.saveEstimate();
-    cy.wait(4000);
+  //   EstimatesPage.addDiscountInRow(0, 30, "%", 3);
+  //   EstimatesPage.checkInvoiceSubtotal();
+  //   EstimatesPage.addDiscountInRow(0, 25, "$", 3);
+  //   EstimatesPage.checkInvoiceSubtotal();
+  //   EstimatesPage.saveEstimate();
+  //   cy.wait(4000);
 
-    EstimatesPage.checkRowsTotal();
-  });
+  //   EstimatesPage.checkRowsTotal();
+  // });
 
   /* have to refine calculation */
-  it.skip("Should change input values and have correct calculations after save", () => {
-    Dashboard.clickEstimatesTab();
-    // cy.visit('/estimatesTab/list')
-    Dashboard.preventNotificationCard();
-    EstimatesPage.clickAddNew();
-    cy.wait(4000);
-    EstimatesPage.selectCustomer("Genius Giant Game Inc.");
-    EstimatesPage.inventorySelect("Air Filter");
-    cy.wait(4000);
-    EstimatesPage.inventorySelect("Inventory Item 1");
-    cy.wait(4000);
-    EstimatesPage.inventorySelect("Gaming Chair");
-    cy.wait(4000);
+  // it.skip("Should change input values and have correct calculations after save", () => {
+  //   Dashboard.clickEstimatesTab();
+  //   // cy.visit('/estimatesTab/list')
+  //   Dashboard.preventNotificationCard();
+  //   EstimatesPage.clickAddNew();
+  //   cy.wait(4000);
+  //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
+  //   EstimatesPage.inventorySelect("Air Filter");
+  //   cy.wait(4000);
+  //   EstimatesPage.inventorySelect("Inventory Item 1");
+  //   cy.wait(4000);
+  //   EstimatesPage.inventorySelect("Gaming Chair");
+  //   cy.wait(4000);
 
-    EstimatesPage.addDiscountInRow(0, 30, "%", 3);
-    EstimatesPage.addDiscountInRow(0, 25, "$", 3);
-    cy.wait(4000);
+  //   EstimatesPage.addDiscountInRow(0, 30, "%", 3);
+  //   EstimatesPage.addDiscountInRow(0, 25, "$", 3);
+  //   cy.wait(4000);
 
-    EstimatesPage.changeTableValues();
-    EstimatesPage.addRandomInvoiceDiscount();
-    EstimatesPage.checkInvoiceTotal();
-    EstimatesPage.saveEstimate();
-    EstimatesPage.checkRowsTotal();
-  });
+  //   EstimatesPage.changeTableValues();
+  //   EstimatesPage.addRandomInvoiceDiscount();
+  //   EstimatesPage.checkInvoiceTotal();
+  //   EstimatesPage.saveEstimate();
+  //   EstimatesPage.checkRowsTotal();
+  // });
 
   
   it("Create estimate with notes and description added and check on preview.", () => {
@@ -266,44 +266,44 @@ describe("New Estimate module", () => {
   });
 
   // Skipped, Causing run loop
-  it.skip('Test estimate per line "hidden" function - 1 inventory added w/ hide line', () => {
-    Dashboard.clickEstimatesTab();
-    // cy.visit('/estimatesTab/list')
-    Dashboard.preventNotificationCard();
-    EstimatesPage.clickAddNew();
-    cy.wait(4000);
-    EstimatesPage.selectCustomer("Genius Giant Game Inc.");
-    EstimatesPage.inventorySelect("Air Filter");
-    cy.wait(4000);
+  // it.skip('Test estimate per line "hidden" function - 1 inventory added w/ hide line', () => {
+  //   Dashboard.clickEstimatesTab();
+  //   // cy.visit('/estimatesTab/list')
+  //   Dashboard.preventNotificationCard();
+  //   EstimatesPage.clickAddNew();
+  //   cy.wait(4000);
+  //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
+  //   EstimatesPage.inventorySelect("Air Filter");
+  //   cy.wait(4000);
 
-    const hiddenOrder = [true];
-    EstimatesPage.setRowsToHiddenLine(hiddenOrder);
+  //   const hiddenOrder = [true];
+  //   EstimatesPage.setRowsToHiddenLine(hiddenOrder);
 
-    // EstimatesPage.previewEstimate() // Can't find element
-  });
+  //   // EstimatesPage.previewEstimate() // Can't find element
+  // });
 
   // Skipped, Causing run loop
-  it.skip('Test estimate per line "hidden" function - 3 inventory added w/ 1 visible, 1 hidden line, 1 hidden price', () => {
-    Dashboard.clickEstimatesTab();
-    // cy.visit('/estimatesTab/list')
-    Dashboard.preventNotificationCard();
-    EstimatesPage.clickAddNew();
-    cy.wait(4000);
-    EstimatesPage.selectCustomer("Genius Giant Game Inc.");
-    EstimatesPage.inventorySelect("Air Filter");
-    cy.wait(4000);
-    EstimatesPage.inventorySelect("Inventory Item 1");
-    cy.wait(4000);
-    EstimatesPage.inventorySelect("Gaming Chair");
-    cy.wait(4000);
+  // it.skip('Test estimate per line "hidden" function - 3 inventory added w/ 1 visible, 1 hidden line, 1 hidden price', () => {
+  //   Dashboard.clickEstimatesTab();
+  //   // cy.visit('/estimatesTab/list')
+  //   Dashboard.preventNotificationCard();
+  //   EstimatesPage.clickAddNew();
+  //   cy.wait(4000);
+  //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
+  //   EstimatesPage.inventorySelect("Air Filter");
+  //   cy.wait(4000);
+  //   EstimatesPage.inventorySelect("Inventory Item 1");
+  //   cy.wait(4000);
+  //   EstimatesPage.inventorySelect("Gaming Chair");
+  //   cy.wait(4000);
 
-    const hiddenOrderPrice = [false, false, true];
-    EstimatesPage.setRowsToHiddenPrice(hiddenOrderPrice);
+  //   const hiddenOrderPrice = [false, false, true];
+  //   EstimatesPage.setRowsToHiddenPrice(hiddenOrderPrice);
 
-    const hiddenOrderLine = [true, false, false];
-    EstimatesPage.setRowsToHiddenLine(hiddenOrderLine);
-    // EstimatesPage.previewEstimate() // Can't find element
-  });
+  //   const hiddenOrderLine = [true, false, false];
+  //   EstimatesPage.setRowsToHiddenLine(hiddenOrderLine);
+  //   // EstimatesPage.previewEstimate() // Can't find element
+  // });
 
   it("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
     Dashboard.clickEstimatesTab();
