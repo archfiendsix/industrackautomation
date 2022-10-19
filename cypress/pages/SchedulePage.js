@@ -211,7 +211,7 @@ class SchedulePage {
     this.elements.addNewJobModal.jobsInfoTab
       .selectCustomerField()
       .type("Genius Giant");
-    cy.wait(2000)
+    cy.wait(2000);
     this.elements.addNewJobModal.jobsInfoTab
       .selectCustomerField()
       .type("{downArrow}{enter}");
@@ -232,9 +232,10 @@ class SchedulePage {
         .clear()
         .type(jobInformation.selectCustomer)
         .then(() => {
-          cy.wait(3000)
+          cy.wait(3000); // Can't Omit this. Requires wait to find the customer
           cy.get("mat-option", { timeout: 10000 })
-            .contains(jobInformation.selectCustomer)
+            .should("be.visible", { timeout: 10000 })
+            .contains(jobInformation.selectCustomer, { timeout: 10000 })
             .click();
         });
     jobInformation.serviceLocation &&
@@ -244,14 +245,15 @@ class SchedulePage {
         .then(() => {
           // cy.wait(4000)
           cy.get(".viewport-list-item")
-            .contains(jobInformation.serviceLocation)
+            .contains(jobInformation.serviceLocation, { timeout: 10000 })
+            .should("be.visible")
             .click();
         });
     // cy.wait(2000)
     jobInformation.jobDescription &&
       this.elements.addNewJobModal.jobsInfoTab
         .jobDescriptionTexbox()
-        .should("be.visible")
+        .should("be.visible", { timout: 10000 })
         .clear()
         .type(jobInformation.jobDescription.toString());
     jobInformation.jobStatus &&
@@ -294,13 +296,14 @@ class SchedulePage {
       .then(() => {
         jobInformation.partsServiceEquipment &&
           jobInformation.partsServiceEquipment.forEach((item) => {
-            cy.wait(2500)
+            // cy.wait(2500);
             this.elements.addNewJobModal.partsServiceEquipment
               .textbox()
+              .should("be.visible", { timeout: 10000 })
               .clear()
               .type(item.name)
               .then(() => {
-                cy.wait(3000)
+                cy.wait(3000);
                 cy.get("mat-option")
                   .contains(item.name)
                   .first()
@@ -364,6 +367,50 @@ class SchedulePage {
 
     /* Employee Tab */
 
+    /*For adding Employee Groups */
+    jobInformation.employeeGroup &&
+      this.elements.addNewJobModal
+        .employeesTabButton()
+        .click()
+        .then(() => {
+          this.elements.addNewJobModal.employeeTab
+            .addCrewField()
+            .click()
+            .then(() => {
+              cy.wait(1000);
+              this.elements.addNewJobModal.employeeTab
+                .addCrewFilterTextbox()
+                .clear()
+                .type(jobInformation.employeeGroup.groupName)
+                .then(() => {
+                  cy.wait(2000);
+                  this.elements.addNewJobModal.employeeTab
+                    .addCrewListItem()
+                    .contains(jobInformation.employeeGroup.groupName)
+                    .click();
+                  jobInformation.employeeGroup.employees.forEach((employee) => {
+                    this.elements.addNewJobModal.employeeTab
+                      .employeeTableRow()
+                      .contains(employee.addCrew)
+                      .parent()
+                      .find(".form-inline input")
+                      .eq(0)
+                      .clear()
+                      .type(employee.duration.h);
+                    this.elements.addNewJobModal.employeeTab
+                      .employeeTableRow()
+                      .contains(employee.addCrew)
+                      .parent()
+                      .find(".form-inline input")
+                      .eq(1)
+                      .clear()
+                      .type(employee.duration.m);
+                  });
+                });
+            });
+        });
+
+    /*For adding individual employees */
     jobInformation.employees &&
       jobInformation.employees.forEach((employee) => {
         this.elements.addNewJobModal.employeesTabButton().click();
@@ -590,6 +637,38 @@ class SchedulePage {
             // durationHrs: () => cy.get('.cDuration .form-group .form-inline input').first(),
             // durationMin: () => cy.get('.cDuration .form-group .form-inline input').last(),
           });
+
+        jobInformation.employeeGroup.employees &&
+          jobInformation.employeeGroup.employees.forEach((employee) => {
+            this.elements.addNewJobModal.employeeTab
+              .employeeTableRow()
+              .contains(employee.addCrew)
+              .parent()
+              .find(".cDuration .form-group .form-inline input")
+              .first()
+              .invoke("val")
+              .then((val) => {
+                expect(val, "Checking employee hours field...").to.equal(
+                  employee.duration.h
+                );
+              });
+
+            this.elements.addNewJobModal.employeeTab
+              .employeeTableRow()
+              .contains(employee.addCrew)
+              .parent()
+              .find(".cDuration .form-group .form-inline input")
+              .last()
+              .invoke("val")
+              .then((val) => {
+                expect(val, "Checking employee minutes field...").to.equal(
+                  employee.duration.m
+                );
+              });
+
+            // durationHrs: () => cy.get('.cDuration .form-group .form-inline input').first(),
+            // durationMin: () => cy.get('.cDuration .form-group .form-inline input').last(),
+          });
       });
 
     // Check added tasks
@@ -723,7 +802,7 @@ class SchedulePage {
   };
 
   searchAssignedJobsTab = (jobDescription) => {
-    cy.wait(20000); // Putting wait because the job doesn't appear immediately on the job list when created
+    // cy.wait(20000); // Putting wait because the job doesn't appear immediately on the job list when created
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
@@ -731,16 +810,31 @@ class SchedulePage {
       .then(($el) => {
         cy.wrap($el).type("{enter}");
       });
-    cy.wait(5500);
+    // cy.wait(5500);
+    cy.get("app-loading-mask").should("not.be.visible", { timeout: 10000 });
     this.elements.jobsQueueModal.assignedJobsTab
       .jobRowCell()
       .contains(jobDescription)
-      .first()
-      // .should($el => {
-      //     expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
-      // })
-      .parent()
-      .dblclick();
+      .then(($el) => {
+        while ($el.length < 0) {
+          cy.wait(1000)
+          this.elements.jobsQueueModal.assignedJobsTab
+            .searchTextbox()
+            .clear()
+            .type(jobDescription.slice(-5))
+            .then(($el) => {
+              cy.wrap($el).type("{enter}");
+            });
+        }
+
+        cy.wrap($el)
+          .first()
+          // .should($el => {
+          //     expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+          // })
+          .parent()
+          .dblclick();
+      });
   };
 
   searchOnHoldJobsTab = (jobDescription) => {
@@ -752,7 +846,10 @@ class SchedulePage {
       .then(($el) => {
         cy.wrap($el).type("{enter}");
       });
-    cy.wait(5500);
+    // cy.wait(5500);
+    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+      timeout: 10000,
+    });
     this.elements.jobsQueueModal.onHoldJobsTab
       .jobRowCell()
       .contains(jobDescription)
@@ -769,7 +866,10 @@ class SchedulePage {
       .then(($el) => {
         cy.wrap($el).type("{enter}");
       });
-    cy.wait(5500);
+    // cy.wait(5500);
+    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+      timeout: 10000,
+    });
     this.elements.jobsQueueModal.completedJobsTab
       .jobRowCell()
       .contains(jobDescription)
@@ -793,7 +893,10 @@ class SchedulePage {
       .then(($el) => {
         cy.wrap($el).clear().type("{enter}");
       });
-    cy.wait(5500);
+    // cy.wait(5500);
+    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+      timeout: 10000,
+    });
     this.elements.jobsQueueModal.completedJobsTab
       .jobRowCell()
       .contains(jobDescription)
@@ -817,7 +920,10 @@ class SchedulePage {
       .then(($el) => {
         cy.wrap($el).clear().type("{enter}");
       });
-    cy.wait(5500);
+    // cy.wait(5500);
+    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+      timeout: 10000,
+    });
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab
       .jobRowCell()
       .contains(jobDescription)
@@ -841,7 +947,10 @@ class SchedulePage {
       .then(($el) => {
         cy.wrap($el).clear().type("{enter}");
       });
-    cy.wait(5500);
+    // cy.wait(5500);
+    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+      timeout: 10000,
+    });
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab
       .jobRowCell()
       .contains(jobDescription)
