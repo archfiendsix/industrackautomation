@@ -211,10 +211,9 @@ class SchedulePage {
     this.elements.addNewJobModal.jobsInfoTab
       .selectCustomerField()
       .type("Genius Giant");
-    // cy.wait(2000)
+    cy.wait(2000)
     this.elements.addNewJobModal.jobsInfoTab
       .selectCustomerField()
-      .should("be.visible")
       .type("{downArrow}{enter}");
     this.elements.addNewJobModal.jobsInfoTab
       .jobDescriptionTexbox()
@@ -233,7 +232,7 @@ class SchedulePage {
         .clear()
         .type(jobInformation.selectCustomer)
         .then(() => {
-          // cy.wait(3000)
+          cy.wait(3000)
           cy.get("mat-option", { timeout: 10000 })
             .contains(jobInformation.selectCustomer)
             .click();
@@ -295,18 +294,16 @@ class SchedulePage {
       .then(() => {
         jobInformation.partsServiceEquipment &&
           jobInformation.partsServiceEquipment.forEach((item) => {
-            // cy.wait(2500)
+            cy.wait(2500)
             this.elements.addNewJobModal.partsServiceEquipment
               .textbox()
-              .should("be.visible")
               .clear()
               .type(item.name)
               .then(() => {
-                // cy.wait(3000)
+                cy.wait(3000)
                 cy.get("mat-option")
                   .contains(item.name)
                   .first()
-                  .should("be.visible")
                   .click()
                   .then(() => {
                     this.elements.addNewJobModal.partsServiceEquipment
