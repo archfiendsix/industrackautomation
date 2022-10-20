@@ -18,7 +18,7 @@ describe("New Estimate module", () => {
     cy.viewport(1560, 992);
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
-    cy.wait(4250);
+    // cy.wait(4250);
 
     /* Prevent the notification card from interfering */
     Dashboard.preventNotificationCard();

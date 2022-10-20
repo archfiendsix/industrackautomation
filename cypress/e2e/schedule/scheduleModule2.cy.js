@@ -17,7 +17,7 @@ describe("Schedule Module", () => {
 
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
-    cy.wait(4250);
+    // cy.wait(4250);
     Dashboard.preventNotificationCard();
     cy.visit("/schedulingTab");
     // Dashboard.clickScheduleTab()
@@ -179,7 +179,7 @@ describe("Schedule Module", () => {
     SchedulePage.searchConvertToInvoiceJobTab(jobInformation.jobDescription);
   });
 
-  it.only("Add default Job - Assign employee group - Start Job - Hold Job - Resume - Mark as completed- Approve for invoice - Convert to Invoice - assert info", () => {
+  it("Add default Job - Assign employee group - Start Job - Hold Job - Resume - Mark as completed- Approve for invoice - Convert to Invoice - assert info", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqp-f1439",

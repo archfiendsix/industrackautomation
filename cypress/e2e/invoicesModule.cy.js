@@ -15,12 +15,14 @@ describe("Invoices Module", () => {
   beforeEach(() => {
     cy.viewport(1280, 1024);
     cy.visit("/login");
+    cy.intercept('**/api/**').as('api')
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
-    cy.wait(4250);
+    cy.wait('@api')
     Dashboard.preventNotificationCard();
+    cy.intercept('**/api/**').as('api')
     cy.visit("/invoicesTab");
+    cy.wait('@api')
     Dashboard.preventNotificationCard();
-    Dashboard.clickInvoicesTab();
   });
 
   it("Add an invoice - Receive partial payment", () => {

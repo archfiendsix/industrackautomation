@@ -14,7 +14,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
         addNewButton: () => cy.get('button[data-target="#modalAddNewCustomer"]'),
         moreActionsDropdown: {
-            button: () => cy.get('app-customers-list .btn-group.actions'),
+            button: () => cy.get('app-customers-list .btn-group.actions button', {timeout: 10000}),
             addNewCustomer: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Add New Customer'),
             manageCustomerGroups: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Manage Customer Groups'),
             showInactiveCustomers: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Show Inactive Customers'),
@@ -153,6 +153,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 
     gotoAddNewCustomer = () => {
+        // cy.get("app-loading-mask").should("not.be.visible", { timeout: 10000 });
         this.elements.moreActionsDropdown.button().click().then(() => {
             cy.get('.dropdown-menu a').contains('Add New Customer').last().click()
         })

@@ -21,35 +21,35 @@ describe("New Estimate module", () => {
 
   beforeEach(() => {
     //cy.viewport(1560, 992)
+    // cy.intercept("**/api/**").as("api");
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
-    // cy.get('ul.dropdown-menu.dropdown-reminders').invoke('hide')
-    cy.wait(4250);
+    
+    // cy.wait("@api");
 
-    /* Prevent the notification card from interfering */
     Dashboard.preventNotificationCard();
   });
 
   // Script that creates 1 new customer, 1 new inventory, then creates an estimate that contains the new inventory and customer
   // New customer, with 1 service location, address is being validated, no tags, no discounts or taxes, no service agreements or subscriptions, no equipment, notes, geofences, reminders.
   it("New customer, New Inventory, New Estimate e2e", () => {
+    
     /*new customer */
     Dashboard.clickCustomerTab();
-    // cy.visit('/estimatesTab/list')
     Dashboard.clickAddCustomerButton();
     const customerInfo = {
       validateAddress: true,
     };
+    cy.intercept('**/api/**').as('api')
     AddCustomerPage.fillData(customerInfo);
-
-    cy.wait(2500);
+    cy.wait('@api');
     AddCustomerPage.elements.saveButton().should("not.be.disabled");
     AddCustomerPage.elements.saveButton().click();
 
     // AddCustomerPage.confirmValidityYes()
 
     /*new inventory */
-    cy.wait(3500);
+    cy.wait('@api');
 
     InventoryListPage.gotoAddNewInventory();
     const inventoryInfo = {
@@ -63,39 +63,37 @@ describe("New Estimate module", () => {
 
     /*newEstimate*/
     Dashboard.clickEstimatesTab();
-
-    Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
+    cy.wait('@api');
     EstimatesPage.selectCustomer("Genius Giant Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
     EstimatesPage.saveAndCloseEstimate();
   });
 
   it("Should have status Won", () => {
+    cy.intercept('**/api/**').as('api')
     Dashboard.clickEstimatesTab();
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
+    cy.wait('@api');
     EstimatesPage.selectCustomer("Genius Giant Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
     EstimatesPage.saveEstimate();
-    cy.wait(3000);
     EstimatesPage.markAsWon();
-    cy.wait(3000);
     EstimatesPage.confirmYes();
     EstimatesPage.checkEstimateStatus("Won");
   });
 
   it("Should have status Lost", () => {
+    cy.intercept('**/api/**').as('api')
     Dashboard.clickEstimatesTab();
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
+    cy.wait('@api');
     EstimatesPage.selectCustomer("Genius Giant Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
+    
     EstimatesPage.saveEstimate();
-    cy.wait(3000);
     EstimatesPage.markAslost();
     cy.wait(3000);
     EstimatesPage.confirmYes();
@@ -106,15 +104,11 @@ describe("New Estimate module", () => {
     Dashboard.clickEstimatesTab();
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
     EstimatesPage.saveEstimate();
-    cy.wait(3000);
     EstimatesPage.convertToJob();
-    cy.wait(3000);
     EstimatesPage.confirmYes();
-    cy.wait(5500);
     EstimatesPage.checkAddNewJobModalTitle();
   });
 
@@ -122,46 +116,34 @@ describe("New Estimate module", () => {
     Dashboard.clickEstimatesTab();
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
     EstimatesPage.saveEstimate();
-    cy.wait(3000);
     EstimatesPage.convertToInvoice();
-    cy.wait(3000);
     EstimatesPage.confirmYes();
     EstimatesPage.checkConvertedToInvoiceSuccess();
-    cy.wait(1500);
     InvoiceOverviewPage.checkInvoiceStatus("Unpaid");
   });
 
-    
   it("Should change Customer", () => {
     Dashboard.clickEstimatesTab();
-    Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
     EstimatesPage.saveEstimate();
-    cy.wait(4000);
     EstimatesPage.changeCustomer("Change to this customer");
-    cy.wait(4000);
     EstimatesPage.saveEstimate();
-    cy.wait(2500);
     EstimatesPage.checkBillToCustomerName("Change to this customer");
   });
 
-  /* Skipped because of error in iframe */
+  /* Strangely doesnt work on local - Skipped because of error in iframe */
   it("Should proceed to Estimate preview", () => {
     Dashboard.clickEstimatesTab();
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
     EstimatesPage.saveEstimate();
-    cy.wait(4000);
     EstimatesPage.previewEstimate();
     EstimatesPage.checkEstimatePreview(); /* Add more Preview verifications in this method */
   });
@@ -229,16 +211,13 @@ describe("New Estimate module", () => {
   //   EstimatesPage.checkRowsTotal();
   // });
 
-  
   it("Create estimate with notes and description added and check on preview.", () => {
     // Dashboard.clickEstimatesTab()
     cy.visit("/estimatesTab/list");
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Air Filter");
-    cy.wait(4000);
 
     const note = "This is a test note";
     EstimatesPage.addNote(note);
@@ -254,15 +233,15 @@ describe("New Estimate module", () => {
     // cy.visit('/estimatesTab/list')
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
+    // cy.wait(4000);
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Air Filter");
-    cy.wait(4000);
+    // cy.wait(4000);
 
     const hiddenOrder = [true];
     EstimatesPage.setRowsToHiddenPrice(hiddenOrder);
 
-    // EstimatesPage.previewEstimate() // Can't find element
+    EstimatesPage.previewEstimate() // Can't find element
   });
 
   // Skipped, Causing run loop
@@ -310,15 +289,10 @@ describe("New Estimate module", () => {
     // cy.visit('/estimatesTab/list')
     Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Air Filter");
-    cy.wait(4000);
     EstimatesPage.inventorySelect("Inventory Item 1");
-    cy.wait(4000);
     EstimatesPage.inventorySelect("Gaming Chair");
-    cy.wait(4000);
     EstimatesPage.inventorySelect("Add Inventory - Taxable no SN");
-    cy.wait(4000);
   });
 });

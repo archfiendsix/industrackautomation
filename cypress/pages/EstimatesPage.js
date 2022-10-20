@@ -10,8 +10,7 @@ class EstimatesPage {
     proceedButton: () => cy.get("button.btn.btn-primary").contains("Proceed"),
     partsSearch: () =>
       cy.get('.editable input[aria-label="Parts & services search"]'),
-    actionsDropdown: () =>
-      cy.get("estimate-edit button").contains("Actions").last(),
+    actionsDropdown: () => cy.get("estimate-edit button").contains("Actions"),
     dropDownItems: () => cy.get("li a"),
     changeCustomerButton: () => cy.get("button#changeCustomerBtn"),
     tableRowEllipse: () => cy.get(".dataTable tbody tr td:last-child() button"),
@@ -33,10 +32,12 @@ class EstimatesPage {
     previewiFrame: {
       custName: () =>
         cy
-          .get(".iframe #contentHolder")
+          .get("iframe#contentHolder")
           .its("0.contentDocument.body")
           .then(cy.wrap)
-          .find(".custName"),
+          .find(".customerInfo li")
+          .should("have.class", "custName")
+          .first(),
       note: () =>
         cy
           .get(".iframe #contentHolder")
@@ -98,9 +99,8 @@ class EstimatesPage {
       cy.get("#modalAddDiscount .btn.btn-primary"),
     notesForCustomerField: () => cy.get('textarea[name="notes"]'),
     changeCustomer: {
-      selectCustomerTextbox: () =>
-        cy.get("#changeCustomer input"),
-      customerListItems: () => cy.get("#changeCustomer .list-group-item"),
+      selectCustomerTextbox: () => cy.get("#changeCustomer input"),
+      customerListItems: () => cy.get(".list-group-item").find("b"),
       proceedButton: () => cy.get("#changeCustomer button").contains("Proceed"),
     },
 
@@ -109,8 +109,24 @@ class EstimatesPage {
     },
   };
 
+  // changeCustomer(customerName) {
+  //   cy.intercept("**/api/**").as("api");
+  //   cy.intercept('https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetServiceLocations/**').as('GetServiceLocations')
+  //   // this.elements.actionsDropdown().click();
+  //   // this.elements.dropDownItems().contains("Edit").click();
+  //   this.elements.changeCustomerButton().click();
+  //   this.elements.selectCustomerTextBox().type(customerName);
+  //   this.elements.searchButton().click();
+  //   cy.wait("@api");
+  //   cy.wait("@GetServiceLocations");
+  //   this.elements.customerSearchItems().contains(customerName).click();
+  //   this.elements.proceedButton().click();
+  // }
+
   changeCustomer = (customerName) => {
-    cy.wait(4000);
+    cy.intercept("**/api/**").as("api");
+
+    cy.wait("@api");
     // this.elements.actionsDropdown.button().last().click()
     // cy.wait(4000)
     // this.elements.actionsDropdown.changeBillToServiceLocation().last().click()
@@ -120,24 +136,34 @@ class EstimatesPage {
       .then(() => {
         cy.get(".mat-menu-content button").contains("Change Customer").click();
       });
+
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
+    ).as("AddressBookLiveSearchExt");
     this.elements.changeCustomer
       .selectCustomerTextbox()
       .last()
-      .type(`${customerName}{enter}`);
-    cy.wait(3500);
-    this.elements.changeCustomer
-      .customerListItems()
-      .contains(customerName)
-      .first()
-      .click();
+      .type(`${customerName}`)
+      .then(() => {
+        cy.wait("@api");
+        cy.wait("@AddressBookLiveSearchExt");
+        this.elements.changeCustomer
+          .customerListItems()
+          .contains(customerName)
+          .first()
+          .click();
+      });
+
     // cy.wait(4000)
     // this.elements.changeCustomer.customerListItems().contains(customerName).last().click()
-    cy.wait(4000);
+    cy.wait("@AddressBookLiveSearchExt");
     this.elements.changeCustomer.proceedButton().last().click();
   };
 
   clickAddNew = () => {
+    cy.intercept("**/api/**").as("api");
     this.elements.addNewEstimateButton().click();
+    cy.wait("@api");
   };
 
   typeSearchInput(input) {
@@ -148,19 +174,35 @@ class EstimatesPage {
     this.elements.searchButton().click({ force: true });
   }
   selectCustomer(customer_name) {
+    cy.intercept("**/api/**").as("api");
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
+    ).as("AddressBookLiveSearchExt");
     this.typeSearchInput(customer_name);
-    cy.wait(1000);
+    cy.wait("@AddressBookLiveSearchExt");
     this.clickSearch();
-    cy.wait(1500);
     this.elements.searchItem().click();
-    cy.wait(1000);
     this.elements.proceedButton().click();
   }
 
   inventorySelect(searchItem, itemInfo = { profit: 1 }) {
-    this.elements.partsSearch().last().type(searchItem);
-    cy.wait(2500);
-    this.elements.partsSearch().last().type("{downArrow}").type("{enter}");
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/Inventory/InventoryViewLiveSearch**"
+    ).as("InventoryViewLiveSearch");
+    this.elements
+      .partsSearch()
+      .last()
+      .type(searchItem)
+      .then(($el) => {
+        cy.wait("@InventoryViewLiveSearch");
+        // cy.contains(".mat-autocomplete-panel .mat-option", searchItem)
+        //   .first()
+        //   .click();
+        // cy.get(".mat-autocomplete-panel .mat-option").contains(searchItem);
+        cy.wrap($el).type('{downArrow}{enter}')
+      });
+
+    // this.elements.partsSearch().last().type("{downArrow}").type("{enter}");
 
     // this.
     cy.get(".serviceparts table tr:nth-last-child(3) td input")
@@ -171,8 +213,15 @@ class EstimatesPage {
   }
 
   saveEstimate() {
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/estimates/CreateEstimate"
+    // ).as("CreateEstimate");
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
+    ).as("GetEstimate");
     this.elements.actionsDropdown().first().click();
     this.elements.dropDownItems().contains("Save").click();
+    cy.wait("@GetEstimate");
   }
 
   saveAndCloseEstimate() {
@@ -183,10 +232,20 @@ class EstimatesPage {
     // this.elements.dropDownSave().contains('Save and Close').click()
   }
 
-  previewEstimate() {
+  previewEstimate = () => {
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/Reminders/GetNumberOfReminders**"
+    ).as("GetNumberOfReminders");
+    cy.intercept("https://webprintprod.industrack.com/preview/estimates/**").as(
+      "estimates"
+    );
+    // cy.wait('@GetNumberOfReminders')
+
     this.elements.actionsDropdown().first().click();
+
     this.elements.dropDownItems().contains("Preview").click();
-  }
+    cy.wait("@estimates");
+  };
 
   sendToEmail() {
     this.elements.actionsDropdown().click();
@@ -200,13 +259,21 @@ class EstimatesPage {
   }
 
   convertToInvoice() {
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
+    ).as("GetEstimate");
     this.elements.actionsDropdown().click();
     this.elements.dropDownItems().contains("Convert to Invoice").click();
+    cy.wait("@GetEstimate");
   }
 
   convertToJob() {
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
+    ).as("GetEstimate");
     this.elements.actionsDropdown().click();
     this.elements.dropDownItems().contains("Convert to job").click();
+    cy.wait("@GetEstimate");
   }
 
   markAsWon() {
@@ -233,19 +300,13 @@ class EstimatesPage {
     this.elements.dropDownItems().contains("Delete").click();
   }
 
-  changeCustomer(customerName) {
-    this.elements.actionsDropdown().click();
-    this.elements.dropDownItems().contains("Edit").click();
-    this.elements.changeCustomerButton().click();
-    this.elements.selectCustomerTextBox().type(customerName);
-    this.elements.searchButton().click();
-    cy.wait(3400);
-    this.elements.customerSearchItems().contains(customerName).click();
-    this.elements.proceedButton().click();
-  }
-
   confirmYes() {
-    this.elements.confirmYesButton().click();
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimateJobs/**"
+    ).as("GetEstimateJobs");
+    cy.contains(".btn.btn-primary", "Yes");
+    this.elements.confirmYesButton().click({ force: true });
+    cy.wait("@GetEstimateJobs");
   }
 
   checkAddNewJobModalTitle() {
@@ -253,9 +314,11 @@ class EstimatesPage {
   }
 
   checkConvertedToInvoiceSuccess = () => {
+    cy.intercept("**/api/**").as("api");
     this.elements
       .savedNotification()
       .contains("Estimate has been successfully converted");
+    cy.wait("@api");
   };
 
   checkBillToCustomerName = (customerName) => {
@@ -263,13 +326,25 @@ class EstimatesPage {
   };
 
   checkEstimatePreview = () => {
+    // cy.intercept("**/api/**").as("api");
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
+    ).as("GetEstimate");
+    cy.get("mat-dialog-container app-report-preview-dialog").should(
+      "be.visible"
+    );
     this.elements.estimatePreviewModalTitle().contains("Estimate Preview");
-    cy.wait(5000);
-    this.elements.previewiFrame.custName().should("be.visible");
+    // cy.wait("@api");
+    cy.wait("@GetEstimate");
+    // cy.wait(6000);
+    this.elements.previewiFrame
+      .custName()
+      .should("be.visible", { timeout: 10000 });
     let verifyThis = {
       customername: "Genius Game Inc.",
     };
-    cy.wait(4000);
+    // cy.wait("@api");
+    // cy.wait("@GetEstimate");
     this.elements.previewiFrame.custName().contains(verifyThis.customername);
   };
 
@@ -318,9 +393,10 @@ class EstimatesPage {
   };
 
   checkEstimatePreviewValues = (customerInfo) => {
+    cy.intercept("**/api/**").as("api");
     // this.elements.previewiFrame.note().should('have.value', customerInfo.note.toString())
     cy.frameLoaded("#contentHolder");
-    cy.wait(2000);
+    cy.wait("@api");
     this.elements.previewiFrame
       .note()
       .should("have.text", customerInfo.note.toString());
@@ -341,13 +417,14 @@ class EstimatesPage {
   };
 
   addDiscountInRow(min, max, discountKind, numberOfRows) {
+    cy.intercept("**/api/**").as("api");
     for (let i = 1; i <= numberOfRows; i++) {
       const randomRow = this.getRandomInt(0, numberOfRows);
       this.elements
         .addDiscountRowElement()
         .eq(randomRow - 1)
         .click();
-      cy.wait(2000);
+      cy.wait("@api");
       if (discountKind === "$") {
         this.elements
           .setDiscountValueInput()

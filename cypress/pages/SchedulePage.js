@@ -233,6 +233,8 @@ class SchedulePage {
         .type(jobInformation.selectCustomer)
         .then(() => {
           cy.wait(3000); // Can't Omit this. Requires wait to find the customer
+          // cy.intercept('https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearch').as('AddressBookLiveSearch')
+          // cy.wait('@AddressBookLiveSearch')
           cy.get("mat-option", { timeout: 10000 })
             .should("be.visible", { timeout: 10000 })
             .contains(jobInformation.selectCustomer, { timeout: 10000 })
@@ -638,7 +640,7 @@ class SchedulePage {
             // durationMin: () => cy.get('.cDuration .form-group .form-inline input').last(),
           });
 
-        jobInformation.employeeGroup.employees &&
+        jobInformation.employeeGroup &&
           jobInformation.employeeGroup.employees.forEach((employee) => {
             this.elements.addNewJobModal.employeeTab
               .employeeTableRow()
@@ -817,7 +819,7 @@ class SchedulePage {
       .contains(jobDescription)
       .then(($el) => {
         while ($el.length < 0) {
-          cy.wait(1000)
+          cy.wait(1000);
           this.elements.jobsQueueModal.assignedJobsTab
             .searchTextbox()
             .clear()
@@ -878,8 +880,9 @@ class SchedulePage {
       .find("button")
       .click()
       .then(() => {
-        cy.wait(500);
-        cy.get(".btn-group.actions .dropdown-menu a")
+        // cy.wait(500);
+        cy.get(".btn-group.actions .dropdown-menu a", { timeout: 10000 })
+          .should("be.visible", { timeout: 10000 })
           .contains("View Job")
           .click();
       });
@@ -905,9 +908,10 @@ class SchedulePage {
       .find("button")
       .click()
       .then(() => {
-        cy.wait(500);
-        cy.get(".btn-group.actions .dropdown-menu a")
+        // cy.wait(500);
+        cy.get(".btn-group.actions .dropdown-menu a", { timeout: 10000 })
           .contains("Approve")
+          .should("be.visible", { timeout: 10000 })
           .click();
       });
   };
@@ -932,9 +936,10 @@ class SchedulePage {
       .find("button")
       .click()
       .then(() => {
-        cy.wait(500);
+        // cy.wait(500);
         cy.get(".btn-group.actions .dropdown-menu a")
-          .contains("Convert to Invoice")
+          .contains("Convert to Invoice", { timeout: 10000 })
+          .should("be.visible", { timeout: 10000 })
           .click();
       });
   };

@@ -16,11 +16,11 @@ describe('Add Customer', () => {
     cy.viewport(1560, 992)
     cy.visit('/login')
     LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
-    cy.wait(4250)
+    // cy.wait(4250)
     Dashboard.preventNotificationCard()
     // Dashboard.clickCustomerTab()
     cy.visit('/crmTab/list')
-    cy.wait(4250)
+    // cy.wait(4250)
     Dashboard.preventNotificationCard()
     CustomerPage.gotoAddCustomerModal()
 
@@ -44,8 +44,8 @@ describe('Add Customer', () => {
 
 
 
-    cy.wait(2500)
-    AddCustomerPage.elements.saveButton().should('not.be.disabled')
+    // cy.wait(2500)
+    AddCustomerPage.elements.saveButton().should('not.be.disabled', {timeout: 10000})
 
 
 
@@ -86,8 +86,8 @@ describe('Add Customer', () => {
     AddCustomerPage.fillData(customerInfo)
 
 
-    cy.wait(2500)
-    AddCustomerPage.elements.saveButton().should('not.be.disabled')
+    // cy.wait(2500)
+    AddCustomerPage.elements.saveButton().should('not.be.disabled', {timeout: 10000})
 
     AddCustomerPage.elements.saveButton().click()
 

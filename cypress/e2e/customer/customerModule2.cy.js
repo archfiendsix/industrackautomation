@@ -16,11 +16,7 @@ describe("Add Customer", () => {
     cy.viewport(1560, 992);
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
-    cy.wait(4250);
-    Dashboard.preventNotificationCard();
-    // Dashboard.clickCustomerTab()
-    cy.visit("/crmTab/list");
-    cy.wait(4250);
+    // cy.wait(4250);
     Dashboard.preventNotificationCard();
     CustomerPage.gotoAddCustomerModal();
   });
