@@ -199,7 +199,8 @@ class EstimatesPage {
         //   .first()
         //   .click();
         // cy.get(".mat-autocomplete-panel .mat-option").contains(searchItem);
-        cy.wrap($el).type('{downArrow}{enter}')
+        cy.wrap($el).type('{downArrow}')
+        cy.wrap($el).type('{enter}')
       });
 
     // this.elements.partsSearch().last().type("{downArrow}").type("{enter}");
@@ -339,7 +340,7 @@ class EstimatesPage {
     // cy.wait(6000);
     this.elements.previewiFrame
       .custName()
-      .should("be.visible", { timeout: 10000 });
+      .should("be.visible", { timeout: 3500 });
     let verifyThis = {
       customername: "Genius Game Inc.",
     };

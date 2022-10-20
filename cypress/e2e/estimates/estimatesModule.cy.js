@@ -27,7 +27,7 @@ describe("New Estimate module", () => {
     
     // cy.wait("@api");
 
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
   });
 
   // Script that creates 1 new customer, 1 new inventory, then creates an estimate that contains the new inventory and customer
@@ -73,7 +73,7 @@ describe("New Estimate module", () => {
   it("Should have status Won", () => {
     cy.intercept('**/api/**').as('api')
     Dashboard.clickEstimatesTab();
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
     cy.wait('@api');
     EstimatesPage.selectCustomer("Genius Giant Inc.");
@@ -87,7 +87,7 @@ describe("New Estimate module", () => {
   it("Should have status Lost", () => {
     cy.intercept('**/api/**').as('api')
     Dashboard.clickEstimatesTab();
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
     cy.wait('@api');
     EstimatesPage.selectCustomer("Genius Giant Inc.");
@@ -102,7 +102,7 @@ describe("New Estimate module", () => {
 
   it("Should proceed to Add New Job Screen after converting to Job", () => {
     Dashboard.clickEstimatesTab();
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
@@ -114,7 +114,7 @@ describe("New Estimate module", () => {
 
   it("Should successfully convert estimate to invoice", () => {
     Dashboard.clickEstimatesTab();
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
@@ -139,7 +139,7 @@ describe("New Estimate module", () => {
   /* Strangely doesnt work on local - Skipped because of error in iframe */
   it("Should proceed to Estimate preview", () => {
     Dashboard.clickEstimatesTab();
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Inventory Item 1");
@@ -151,7 +151,7 @@ describe("New Estimate module", () => {
   // /* Skipped because of a changed flow */
   // it.skip("Should send estimate as email", () => {
   //   Dashboard.clickEstimatesTab();
-  //   Dashboard.preventNotificationCard();
+  //   // Dashboard.preventNotificationCard();
   //   EstimatesPage.clickAddNew();
   //   cy.wait(4000);
   //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
@@ -164,7 +164,7 @@ describe("New Estimate module", () => {
   /* Have to refine formulas */
   // it.skip("Should have correct Row total upon adding discount", () => {
   //   Dashboard.clickEstimatesTab();
-  //   Dashboard.preventNotificationCard();
+  //   // Dashboard.preventNotificationCard();
   //   EstimatesPage.clickAddNew();
   //   cy.wait(4000);
   //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
@@ -189,7 +189,7 @@ describe("New Estimate module", () => {
   // it.skip("Should change input values and have correct calculations after save", () => {
   //   Dashboard.clickEstimatesTab();
   //   // cy.visit('/estimatesTab/list')
-  //   Dashboard.preventNotificationCard();
+  //   // Dashboard.preventNotificationCard();
   //   EstimatesPage.clickAddNew();
   //   cy.wait(4000);
   //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
@@ -214,7 +214,7 @@ describe("New Estimate module", () => {
   it("Create estimate with notes and description added and check on preview.", () => {
     // Dashboard.clickEstimatesTab()
     cy.visit("/estimatesTab/list");
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Air Filter");
@@ -231,7 +231,7 @@ describe("New Estimate module", () => {
   it('Test estimate per line "hidden" function - 1 inventory added w/ hide price', () => {
     Dashboard.clickEstimatesTab();
     // cy.visit('/estimatesTab/list')
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
     // cy.wait(4000);
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
@@ -248,7 +248,7 @@ describe("New Estimate module", () => {
   // it.skip('Test estimate per line "hidden" function - 1 inventory added w/ hide line', () => {
   //   Dashboard.clickEstimatesTab();
   //   // cy.visit('/estimatesTab/list')
-  //   Dashboard.preventNotificationCard();
+  //   // Dashboard.preventNotificationCard();
   //   EstimatesPage.clickAddNew();
   //   cy.wait(4000);
   //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
@@ -265,7 +265,7 @@ describe("New Estimate module", () => {
   // it.skip('Test estimate per line "hidden" function - 3 inventory added w/ 1 visible, 1 hidden line, 1 hidden price', () => {
   //   Dashboard.clickEstimatesTab();
   //   // cy.visit('/estimatesTab/list')
-  //   Dashboard.preventNotificationCard();
+  //   // Dashboard.preventNotificationCard();
   //   EstimatesPage.clickAddNew();
   //   cy.wait(4000);
   //   EstimatesPage.selectCustomer("Genius Giant Game Inc.");
@@ -287,7 +287,7 @@ describe("New Estimate module", () => {
   it("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
     Dashboard.clickEstimatesTab();
     // cy.visit('/estimatesTab/list')
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Air Filter");

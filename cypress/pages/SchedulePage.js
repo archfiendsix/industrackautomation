@@ -229,16 +229,39 @@ class SchedulePage {
     jobInformation.selectCustomer &&
       this.elements.addNewJobModal.jobsInfoTab
         .selectCustomerField()
-        .clear()
-        .type(jobInformation.selectCustomer)
-        .then(() => {
+        .then(($el) => {
+          cy.intercept(
+            "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearch"
+          ).as("AddressBookLiveSearch");
+          cy.wrap($el).clear().type(`${jobInformation.selectCustomer}`);
+          // cy.wait("@AddressBookLiveSearch");
+          cy.wrap($el)
+            .invoke("val")
+            .then((val) => {
+              expect(val.length).to.equal(val.length);
+              cy.wait("@AddressBookLiveSearch");
+            });
+          // cy.wrap($el).type("{downArrow} {enter}");
           cy.wait(3000); // Can't Omit this. Requires wait to find the customer
-          // cy.intercept('https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearch').as('AddressBookLiveSearch')
+
           // cy.wait('@AddressBookLiveSearch')
-          cy.get("mat-option", { timeout: 10000 })
-            .should("be.visible", { timeout: 10000 })
-            .contains(jobInformation.selectCustomer, { timeout: 10000 })
-            .click();
+          // cy.get("mat-option", { timeout: 3500 }).should("be.visible", {
+          //   timeout: 10000,
+          // });
+
+          cy.get(".mat-autocomplete-panel").should(
+            "have.class",
+            "mat-autocomplete-visible",
+            { timeout: 3500 }
+          );
+          cy.wait("@AddressBookLiveSearch");
+          cy.get("mat-option", { timeout: 3500 })
+            .should("be.visible", { timeout: 3500 })
+            .then(($el) => {
+              cy.wrap($el)
+                .contains(jobInformation.selectCustomer, { timeout: 3500 })
+                .click();
+            });
         });
     jobInformation.serviceLocation &&
       this.elements.addNewJobModal.jobsInfoTab
@@ -247,7 +270,7 @@ class SchedulePage {
         .then(() => {
           // cy.wait(4000)
           cy.get(".viewport-list-item")
-            .contains(jobInformation.serviceLocation, { timeout: 10000 })
+            .contains(jobInformation.serviceLocation, { timeout: 3500 })
             .should("be.visible")
             .click();
         });
@@ -301,7 +324,7 @@ class SchedulePage {
             // cy.wait(2500);
             this.elements.addNewJobModal.partsServiceEquipment
               .textbox()
-              .should("be.visible", { timeout: 10000 })
+              .should("be.visible", { timeout: 3500 })
               .clear()
               .type(item.name)
               .then(() => {
@@ -813,7 +836,7 @@ class SchedulePage {
         cy.wrap($el).type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask").should("not.be.visible", { timeout: 10000 });
+    cy.get("app-loading-mask").should("not.be.visible", { timeout: 3500 });
     this.elements.jobsQueueModal.assignedJobsTab
       .jobRowCell()
       .contains(jobDescription)
@@ -849,7 +872,7 @@ class SchedulePage {
         cy.wrap($el).type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
       timeout: 10000,
     });
     this.elements.jobsQueueModal.onHoldJobsTab
@@ -869,7 +892,7 @@ class SchedulePage {
         cy.wrap($el).type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
       timeout: 10000,
     });
     this.elements.jobsQueueModal.completedJobsTab
@@ -881,8 +904,8 @@ class SchedulePage {
       .click()
       .then(() => {
         // cy.wait(500);
-        cy.get(".btn-group.actions .dropdown-menu a", { timeout: 10000 })
-          .should("be.visible", { timeout: 10000 })
+        cy.get(".btn-group.actions .dropdown-menu a", { timeout: 3500 })
+          .should("be.visible", { timeout: 3500 })
           .contains("View Job")
           .click();
       });
@@ -897,7 +920,7 @@ class SchedulePage {
         cy.wrap($el).clear().type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
       timeout: 10000,
     });
     this.elements.jobsQueueModal.completedJobsTab
@@ -909,9 +932,9 @@ class SchedulePage {
       .click()
       .then(() => {
         // cy.wait(500);
-        cy.get(".btn-group.actions .dropdown-menu a", { timeout: 10000 })
+        cy.get(".btn-group.actions .dropdown-menu a", { timeout: 3500 })
           .contains("Approve")
-          .should("be.visible", { timeout: 10000 })
+          .should("be.visible", { timeout: 3500 })
           .click();
       });
   };
@@ -925,7 +948,7 @@ class SchedulePage {
         cy.wrap($el).clear().type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
       timeout: 10000,
     });
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab
@@ -938,8 +961,8 @@ class SchedulePage {
       .then(() => {
         // cy.wait(500);
         cy.get(".btn-group.actions .dropdown-menu a")
-          .contains("Convert to Invoice", { timeout: 10000 })
-          .should("be.visible", { timeout: 10000 })
+          .contains("Convert to Invoice", { timeout: 3500 })
+          .should("be.visible", { timeout: 3500 })
           .click();
       });
   };
@@ -953,7 +976,7 @@ class SchedulePage {
         cy.wrap($el).clear().type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 10000 }).should("not.be.visible", {
+    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
       timeout: 10000,
     });
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab

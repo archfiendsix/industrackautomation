@@ -15,7 +15,7 @@ describe('New Tax and Terms Module', () => {
         cy.visit('/login')
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
         // cy.wait(4250)
-        Dashboard.preventNotificationCard()
+        // Dashboard.preventNotificationCard()
         Dashboard.gotoTaxAndTermsPage()
 
     })

@@ -14,7 +14,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
         addNewButton: () => cy.get('button[data-target="#modalAddNewCustomer"]'),
         moreActionsDropdown: {
-            button: () => cy.get('app-customers-list .btn-group.actions button', {timeout: 10000}),
+            button: () => cy.get('app-customers-list .btn-group.actions button', {timeout: 3000}),
             addNewCustomer: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Add New Customer'),
             manageCustomerGroups: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Manage Customer Groups'),
             showInactiveCustomers: () => cy.get('app-customers-list .btn-group.actions button+.dropdown-menu li a').contains('Show Inactive Customers'),
@@ -141,6 +141,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         this.elements.customerOverview.equipmentTab.button().click()
         this.elements.customerOverview.equipmentTab.addNewEquipmentButton().click()
         equipmentInformation.upuodFromInventory && this.elements.addNewEquipmentModal.upuodFromInventoryTextbox().clear().type(equipmentInformation.upuodFromInventory).then(() => {
+            cy.wait(3000)
             cy.get('mat-option').contains(equipmentInformation.upuodFromInventory).first().click()
         })
         cy.wait(3000)
@@ -153,7 +154,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     }
 
     gotoAddNewCustomer = () => {
-        // cy.get("app-loading-mask").should("not.be.visible", { timeout: 10000 });
+        // cy.get("app-loading-mask").should("not.be.visible", { timeout: 3500 });
         this.elements.moreActionsDropdown.button().click().then(() => {
             cy.get('.dropdown-menu a').contains('Add New Customer').last().click()
         })
@@ -242,7 +243,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             cy.log(tag)
             const custNumber = customerNumber.toString()
             this.elements.customerTable.itemsPerPageDropdown().last().click().then(() => {
-                cy.wait(500)
+                cy.wait(1000)
                 cy.get('mat-option').contains('100').click()
             })
             // cy.get('body').scrollTo('top')

@@ -67,22 +67,22 @@ class Dashboard {
     this.elements.timesheetTab().click();
   };
   clickPurchaseOrderTab = () => {
-    this.elements.purchaseOrderTab().click();
+    this.elements.purchaseOrderTab().dblclick();
   };
 
   clickScheduleTab = () => {
-    this.elements.scheduleTab().click();
+    this.elements.scheduleTab().dblclick();
   };
 
   clickSchedulingTab = () => {
-    this.elements.schedulingTab().click();
+    this.elements.schedulingTab().dblclick();
   };
 
   clickInvoicesTab = () => {
-    this.elements.invoicesTab().click();
+    this.elements.invoicesTab().dblclick();
   };
   clickTaskTemplatesTab = () => {
-    this.elements.taskTemplates().click();
+    this.elements.taskTemplates().dblclick();
   };
 
   gotoTaxAndTermsPage = () => {
@@ -94,7 +94,7 @@ class Dashboard {
 
   gotoJobTemplates = () => {
     this.clickSettings();
-    this.elements.scheduleTab().click();
+    this.elements.scheduleTab().dblclick();
   };
 
   preventNotificationCard = () => {

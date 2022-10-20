@@ -285,8 +285,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   addNewInvoice = (newInvoiceInfo) => {
-    cy.intercept("https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBooksWithPaging?**").as("api2");
-    
+    cy.intercept("wss://onetrack.industrack.com/__socket/**").as("api2");
+
     const inputInvoiceInfo = {
       customer: newInvoiceInfo.customer || "Ace Hardware",
       description: newInvoiceInfo.description || "Test Desc",
@@ -294,17 +294,27 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       inventoriesToAdd: newInvoiceInfo.inventoriesToAdd || ["Inventory Item 1"],
       tax: newInvoiceInfo.tax || "None",
     };
-    
+    cy.intercept("**/api/**").as("api");
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/Customers/GetCustomerGeneralSetting**"
+    ).as("api3");
+    cy.wait(0);
     this.elements.addNewInvoiceButton().click();
-    cy.wait("@api2");
-    cy.get("app-loading-mask").should("not.be.visible", { timeout: 10000 });
-    
+    // cy.get("app-loading-mask").should("not.be.visible", { timeout: 3500 });
+    // cy.get("invoice-edit").should("be.visible");
+    // cy.wait("@api3");
     this.elements.addingNewInvoiceModal
       .searchField()
       .type(inputInvoiceInfo.customer);
-    cy.wait("@api");
-    this.elements.addingNewInvoiceModal.searchItem().click();
-    cy.wait("@api");
+    cy.wait(2000);
+    cy.wait("@api3");
+    inputInvoiceInfo.customer &&
+      this.elements.addingNewInvoiceModal
+        .searchItem()
+        .should("have.value", inputInvoiceInfo.customer)
+        .click();
+
+    // cy.wait("@api2");
     this.elements.addingNewInvoiceModal.proceedButton().click();
     newInvoiceInfo.description &&
       this.elements.addingNewInvoiceModal
@@ -329,12 +339,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     inputInvoiceInfo.inventoriesToAdd.forEach((item) => {
       this.elements.addingNewInvoiceModal
         .partsSearch()
-        .type(item.toString()).then(($el)=> {
-          cy.wait("@api");
+        .type(item.toString())
+        .then(($el) => {
+          cy.wait(0);
           cy.wrap($el).type("{downArrow}{enter}");
-        })
-        
-      cy.wait("@api");
+        });
+
+      // cy.wait("@api");
     });
   };
 
@@ -344,12 +355,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     this.elements.setDiscountModal.saveButton().click();
   };
 
-  
-
   selectOneSerialNumber = () => {
-    cy.intercept('**/api/**').as('api')
+    cy.intercept("**/api/**").as("api");
     this.elements.selectSerialNumberModal.serialNumberSelect().type("{enter}");
-    cy.wait('@api');
+    cy.wait("@api");
     this.elements.selectSerialNumberModal.saveButton().click();
   };
 
@@ -553,6 +562,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         .paymentMethodField()
         .click()
         .then(() => {
+          cy.wait(1000);
           cy.get("mat-option").contains("Cash").click();
         });
     paymentDetails.referenceNumber &&

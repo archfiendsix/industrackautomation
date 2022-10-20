@@ -17,11 +17,13 @@ describe("Add Customer", () => {
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
     // cy.wait(4250);
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
+    Dashboard.clickCustomerTab();
+    // cy.visit('/crmTab/list')
+    cy.get("body").contains("Tags");
     CustomerPage.gotoAddCustomerModal();
   });
   it("Test with one tag and verify that tags are assigned to customer", () => {
-    // Dashboard.preventNotificationCard()
     const rand = uuidv4().substring(0, 5);
     const customerInfo = {
       customerNumber: `CN-${rand}`,
@@ -29,11 +31,9 @@ describe("Add Customer", () => {
       validateAddress: true,
     };
     AddCustomerPage.fillData(customerInfo);
-    // Dashboard.preventNotificationCard()
     AddCustomerPage.validateAddress();
 
     AddCustomerPage.clickSaveButton();
-    // const tags = [`${uuidv4().substring(0, 5)}-Tag`, `${uuidv4().substring(0, 5)}-Tag`, `${uuidv4().substring(0, 5)}-Tag`]
     const tags = ["Tag 1", "Tag 2", "Tag 3"];
     AddCustomerPage.addTags(tags);
     AddCustomerPage.clickBackButton();
@@ -145,7 +145,7 @@ describe("Add Customer", () => {
   });
 
   // it.skip("Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)", () => {
-  //   // Dashboard.preventNotificationCard()
+  //   // // Dashboard.preventNotificationCard()
 
   //   const rand = uuidv4().substring(0, 5);
   //   const customerInfo = {

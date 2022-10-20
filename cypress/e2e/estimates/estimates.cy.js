@@ -21,12 +21,12 @@ describe("New Estimate module", () => {
     // cy.wait(4250);
 
     /* Prevent the notification card from interfering */
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
   });
 
   it("Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items", () => {
     Dashboard.clickCustomerTab();
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     CustomerPage.gotoAddNewCustomer();
     // Add new Customer
     const rand = uuidv4().substring(0, 5);
@@ -139,7 +139,7 @@ describe("New Estimate module", () => {
     // Add New Estimate
     Dashboard.clickEstimatesTab();
     // cy.visit('/estimatesTab/list')
-    Dashboard.preventNotificationCard();
+    // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
     EstimatesPage.selectCustomer(customerInfo.companyName);
     EstimatesPage.inventorySelect(inventoryInfo.name);
