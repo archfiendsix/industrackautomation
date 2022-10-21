@@ -16,6 +16,7 @@ describe("Invoices Module", () => {
     cy.viewport(1280, 1024);
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
+    cy.get("body").contains("Invoices");
     // Dashboard.preventNotificationCard();
     Dashboard.clickInvoicesTab();
     // Dashboard.preventNotificationCard();

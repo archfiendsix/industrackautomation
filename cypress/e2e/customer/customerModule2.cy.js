@@ -15,8 +15,9 @@ describe("Add Customer", () => {
   beforeEach(() => {
     cy.viewport(1560, 992);
     cy.visit("/login");
+    cy.get("body").contains("Login to Account");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
-    // cy.wait(4250);
+    cy.get("body").contains("Customer");
     // Dashboard.preventNotificationCard();
     Dashboard.clickCustomerTab();
     // cy.visit('/crmTab/list')

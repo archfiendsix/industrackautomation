@@ -17,12 +17,11 @@ describe("Add Customer", () => {
     cy.visit("/login");
     cy.get("body").contains("Login to Account");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
-
+    cy.get("body").contains("Customer");
     // Dashboard.preventNotificationCard()
     Dashboard.clickCustomerTab();
     // cy.visit('/crmTab/list')
     cy.get("body").contains("Tags");
-    // Dashboard.preventNotificationCard()
     CustomerPage.gotoAddCustomerModal();
   });
 

@@ -19,7 +19,7 @@ describe("New Estimate module", () => {
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
     // cy.wait(4250);
-
+    cy.get("body").contains("Estimates");
     /* Prevent the notification card from interfering */
     // Dashboard.preventNotificationCard();
   });

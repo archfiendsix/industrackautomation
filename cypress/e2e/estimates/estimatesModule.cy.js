@@ -24,7 +24,7 @@ describe("New Estimate module", () => {
     // cy.intercept("**/api/**").as("api");
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
-    
+    cy.get("body").contains("Estimates");
     // cy.wait("@api");
 
     // Dashboard.preventNotificationCard();

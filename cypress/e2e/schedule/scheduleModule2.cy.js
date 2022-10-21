@@ -17,6 +17,7 @@ describe("Schedule Module", () => {
 
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
+    cy.get("body").contains("Schedule");
     // cy.wait(4250);
     // Dashboard.preventNotificationCard();
     cy.visit("/schedulingTab");
