@@ -95,38 +95,41 @@ class AddCustomerPage {
       validateAddress: newCustomerInfo.validateAddress,
     };
     // cy.wait(1000);
-    newCustomerInfo.customerNumber && this.elements
-      .customerNumberTextBox()
-      .clear()
-      .type(inputCustomerInfo.customerNumber);
+    newCustomerInfo.customerNumber &&
+      this.elements
+        .customerNumberTextBox()
+        .should("be.visible")
+        .then(($el) => {
+          cy.wrap($el).should("be.visible").clear().type(inputCustomerInfo.customerNumber);
+        });
     // cy.wait(1000);
     this.elements
       .companyNameTextBox()
       .clear()
       .type(inputCustomerInfo.companyName);
-    this.elements.firstNameTextBox().clear().type(inputCustomerInfo.firstName);
-    this.elements.lastNameTextBox().clear().type(inputCustomerInfo.lastName);
+    this.elements.firstNameTextBox().should("be.visible").clear().type(inputCustomerInfo.firstName);
+    this.elements.lastNameTextBox().should("be.visible").clear().type(inputCustomerInfo.lastName);
     this.elements
       .websiteAddressTextBox()
       .clear()
       .type(inputCustomerInfo.companyWebsite);
-    this.elements.phoneNumberTextBox().clear().type(inputCustomerInfo.phone);
-    this.elements.phoneNumberTextBox().clear().type(inputCustomerInfo.phone);
-    this.elements.emailAddressTextBox().clear().type(inputCustomerInfo.email);
-    this.elements.faxNumberTextBox().clear().type(inputCustomerInfo.mobile);
+    this.elements.phoneNumberTextBox().should("be.visible").clear().type(inputCustomerInfo.phone);
+    this.elements.phoneNumberTextBox().should("be.visible").clear().type(inputCustomerInfo.phone);
+    this.elements.emailAddressTextBox().should("be.visible").clear().type(inputCustomerInfo.email);
+    this.elements.faxNumberTextBox().should("be.visible").clear().type(inputCustomerInfo.mobile);
     this.elements
-      .locationNameTextBox()
+      .locationNameTextBox().should("be.visible")
       .clear()
       .type(inputCustomerInfo.locationName);
-    this.elements.streetAddressTextBox().clear().type(inputCustomerInfo.street);
+    this.elements.streetAddressTextBox().should("be.visible").clear().type(inputCustomerInfo.street);
     this.elements
-      .unitNumberTextBox()
+      .unitNumberTextBox().should("be.visible")
       .clear()
       .type(inputCustomerInfo.unitNumber);
-    this.elements.cityTextBox().clear().type(inputCustomerInfo.city);
-    this.elements.stateTextBox().clear().type(inputCustomerInfo.state);
-    this.elements.postCodeTextBox().clear().type(inputCustomerInfo.zip);
-    this.elements.countryTextBox().clear().type(inputCustomerInfo.country);
+    this.elements.cityTextBox().should("be.visible").clear().type(inputCustomerInfo.city);
+    this.elements.stateTextBox().should("be.visible").clear().type(inputCustomerInfo.state);
+    this.elements.postCodeTextBox().should("be.visible").clear().type(inputCustomerInfo.zip);
+    this.elements.countryTextBox().should("be.visible").clear().type(inputCustomerInfo.country);
     this.elements
       .chooseFileButton()
       .attachFile(inputCustomerInfo.uploadDocument);

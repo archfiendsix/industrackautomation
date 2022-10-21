@@ -162,8 +162,9 @@ class EstimatesPage {
 
   clickAddNew = () => {
     cy.intercept("**/api/**").as("api");
-    this.elements.addNewEstimateButton().click();
+    this.elements.addNewEstimateButton().should("be.visible");
     cy.wait("@api");
+    this.elements.addNewEstimateButton().click();
   };
 
   typeSearchInput(input) {
@@ -186,21 +187,29 @@ class EstimatesPage {
   }
 
   inventorySelect(searchItem, itemInfo = { profit: 1 }) {
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/Inventory/InventoryViewLiveSearch**"
-    ).as("InventoryViewLiveSearch");
     this.elements
       .partsSearch()
       .last()
-      .type(searchItem)
       .then(($el) => {
+        cy.intercept(
+          "GET",
+          "https://onetrackwebapiprod.azurewebsites.net/api/Inventory/InventoryViewLiveSearch**"
+        ).as("InventoryViewLiveSearch");
+        cy.wrap($el).should("be.visible");
+
+        cy.wrap($el).type(`${searchItem.trim()}`);
         cy.wait("@InventoryViewLiveSearch");
-        // cy.contains(".mat-autocomplete-panel .mat-option", searchItem)
-        //   .first()
-        //   .click();
-        // cy.get(".mat-autocomplete-panel .mat-option").contains(searchItem);
-        cy.wrap($el).type('{downArrow}')
-        cy.wrap($el).type('{enter}')
+        cy.wrap($el).click();
+        cy.wrap($el).type("{downArrow}");
+        cy.wrap($el).type("{enter}");
+        // .invoke("val")
+        // .then(($el) => {
+        //   // if (val.length > 0) {
+        //     cy.wait("@InventoryViewLiveSearch");
+        //
+        //     // cy.get(".newcardsearchresult mat-option").contains(searchItem.trim()).click();
+        //   // }
+        // });
       });
 
     // this.elements.partsSearch().last().type("{downArrow}").type("{enter}");
@@ -260,12 +269,12 @@ class EstimatesPage {
   }
 
   convertToInvoice() {
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
-    ).as("GetEstimate");
+    // cy.intercept(
+    //   "**/api/**"
+    // ).as("GetEstimate");
     this.elements.actionsDropdown().click();
     this.elements.dropDownItems().contains("Convert to Invoice").click();
-    cy.wait("@GetEstimate");
+    // cy.wait("@GetEstimate");
   }
 
   convertToJob() {
@@ -302,12 +311,16 @@ class EstimatesPage {
   }
 
   confirmYes() {
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimateJobs/**"
-    ).as("GetEstimateJobs");
-    cy.contains(".btn.btn-primary", "Yes");
-    this.elements.confirmYesButton().click({ force: true });
-    cy.wait("@GetEstimateJobs");
+    // cy.intercept(
+    //   "**/api/**"
+    // ).as("GetEstimateJobs");
+    // cy.get("mat-dialog-container").should("be.visible", { timeout: 2500 });
+    // cy.wait("@GetEstimateJobs");
+    cy.wait(1000);
+    this.elements
+      .confirmYesButton()
+      // .should("be.visible", { timeout: 3500 })
+      .click();
   }
 
   checkAddNewJobModalTitle() {
@@ -328,15 +341,12 @@ class EstimatesPage {
 
   checkEstimatePreview = () => {
     // cy.intercept("**/api/**").as("api");
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
-    ).as("GetEstimate");
+
     cy.get("mat-dialog-container app-report-preview-dialog").should(
       "be.visible"
     );
     this.elements.estimatePreviewModalTitle().contains("Estimate Preview");
     // cy.wait("@api");
-    cy.wait("@GetEstimate");
     // cy.wait(6000);
     this.elements.previewiFrame
       .custName()
@@ -418,14 +428,12 @@ class EstimatesPage {
   };
 
   addDiscountInRow(min, max, discountKind, numberOfRows) {
-    cy.intercept("**/api/**").as("api");
     for (let i = 1; i <= numberOfRows; i++) {
       const randomRow = this.getRandomInt(0, numberOfRows);
       this.elements
         .addDiscountRowElement()
         .eq(randomRow - 1)
         .click();
-      cy.wait("@api");
       if (discountKind === "$") {
         this.elements
           .setDiscountValueInput()

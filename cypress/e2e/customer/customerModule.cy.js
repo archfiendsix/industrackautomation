@@ -57,7 +57,7 @@ describe("Add Customer", () => {
     AddCustomerPage.elements.stateTextBox().clear();
     AddCustomerPage.elements.postCodeTextBox().clear();
 
-    cy.wait(3000);
+    // cy.wait(3000);
     AddCustomerPage.elements.sameAsCompanyCheckbox().click();
     AddCustomerPage.elements
       .saveButton()

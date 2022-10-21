@@ -61,28 +61,28 @@ class Dashboard {
   };
 
   clickEstimatesTab = () => {
-    this.elements.estimatesTab().click();
+    this.elements.estimatesTab().should('be.visible').dblclick();
   };
   clickTimesheetTab = () => {
-    this.elements.timesheetTab().click();
+    this.elements.timesheetTab().should('be.visible').dblclick();
   };
   clickPurchaseOrderTab = () => {
-    this.elements.purchaseOrderTab().dblclick();
+    this.elements.purchaseOrderTab().should('be.visible').dblclick();
   };
 
   clickScheduleTab = () => {
-    this.elements.scheduleTab().dblclick();
+    this.elements.scheduleTab().should('be.visible').dblclick();
   };
 
   clickSchedulingTab = () => {
-    this.elements.schedulingTab().dblclick();
+    this.elements.schedulingTab().should('be.visible').dblclick();
   };
 
   clickInvoicesTab = () => {
-    this.elements.invoicesTab().dblclick();
+    this.elements.invoicesTab().should('be.visible').dblclick();
   };
   clickTaskTemplatesTab = () => {
-    this.elements.taskTemplates().dblclick();
+    this.elements.taskTemplates().should('be.visible').dblclick();
   };
 
   gotoTaxAndTermsPage = () => {

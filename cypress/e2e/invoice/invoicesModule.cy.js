@@ -17,7 +17,7 @@ describe("Invoices Module", () => {
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
     // Dashboard.preventNotificationCard();
-    Dashboard.clickInvoicesTab()
+    Dashboard.clickInvoicesTab();
     // Dashboard.preventNotificationCard();
   });
 
@@ -117,12 +117,12 @@ describe("Invoices Module", () => {
     // Dashboard.preventNotificationCard();
 
     EstimatesPage.clickAddNew();
-    cy.wait(4000);
+    // cy.wait(4000);
     EstimatesPage.selectCustomer("01223"); //01223-Add 2 service location to this customer
     EstimatesPage.inventorySelect("Inventory Item 1");
-    cy.wait(4000);
+    // cy.wait(4000);
     EstimatesPage.inventorySelect("Gaming Chair");
-    cy.wait(4000);
+    // cy.wait(4000);
     EstimatesPage.inventorySelect("Add Inventory - Taxable no SN");
     EstimatesPage.randomLineMove();
     const noteText = "This is a sample Note";
@@ -131,9 +131,9 @@ describe("Invoices Module", () => {
     EstimatesPage.addDiscountInRow(0, 30, "%", 3);
     EstimatesPage.saveEstimate();
 
-    cy.wait(4000);
+    // cy.wait(4000);
     EstimatesPage.convertToInvoice();
-    cy.wait(3000);
+    // cy.wait(3000);
     EstimatesPage.confirmYes();
     EstimatesPage.checkConvertedToInvoiceSuccess();
     cy.wait(1500);
@@ -154,5 +154,4 @@ describe("Invoices Module", () => {
     };
     InvoicesPage.checkPreview(overviewValues); // Checks for invoice preview values vs invoice overview
   });
-  
 });

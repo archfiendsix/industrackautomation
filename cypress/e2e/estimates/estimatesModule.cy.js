@@ -16,7 +16,7 @@ describe("New Estimate module", () => {
   });
 
   before(() => {
-    cy.resetLocalStorage();
+    cy.resetStorage();
   });
 
   beforeEach(() => {

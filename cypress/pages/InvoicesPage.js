@@ -70,7 +70,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       notesForCustomerTextarea: () => cy.get('textarea[name="notes"]'),
       actionsDropdown: {
         button: () =>
-          cy.get('button[data-toggle="dropdown"]').contains("Actions"),
+          cy
+            .get('invoice-edit button[data-toggle="dropdown"]')
+            .contains("Actions")
+            .first(),
         save: () =>
           cy
             .get('button[data-toggle="dropdown"]+.dropdown-menu li a')
@@ -285,8 +288,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   addNewInvoice = (newInvoiceInfo) => {
-    cy.intercept("wss://onetrack.industrack.com/__socket/**").as("api2");
-
+    /* Final */
     const inputInvoiceInfo = {
       customer: newInvoiceInfo.customer || "Ace Hardware",
       description: newInvoiceInfo.description || "Test Desc",
@@ -294,32 +296,59 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       inventoriesToAdd: newInvoiceInfo.inventoriesToAdd || ["Inventory Item 1"],
       tax: newInvoiceInfo.tax || "None",
     };
-    cy.intercept("**/api/**").as("api");
     cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/Customers/GetCustomerGeneralSetting**"
-    ).as("api3");
-    cy.wait(0);
+      " https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBooksWithPaging**"
+    ).as("GetAddressBooksWithPaging");
     this.elements.addNewInvoiceButton().click();
-    // cy.get("app-loading-mask").should("not.be.visible", { timeout: 3500 });
-    // cy.get("invoice-edit").should("be.visible");
-    // cy.wait("@api3");
+    cy.wait("@GetAddressBooksWithPaging");
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
+    ).as("AddressBookLiveSearchExt");
+
     this.elements.addingNewInvoiceModal
       .searchField()
+      .should("be.visible")
       .type(inputInvoiceInfo.customer);
-    cy.wait(2000);
-    cy.wait("@api3");
-    inputInvoiceInfo.customer &&
-      this.elements.addingNewInvoiceModal
-        .searchItem()
-        .should("have.value", inputInvoiceInfo.customer)
-        .click();
+    cy.wait("@AddressBookLiveSearchExt");
 
-    // cy.wait("@api2");
+    this.elements.addingNewInvoiceModal
+      .searchItem()
+      .contains(inputInvoiceInfo.customer)
+      .click();
+
     this.elements.addingNewInvoiceModal.proceedButton().click();
+
+    /* Add inventory */
+    inputInvoiceInfo.inventoriesToAdd &&
+      inputInvoiceInfo.inventoriesToAdd.forEach((item) => {
+        this.elements.addingNewInvoiceModal.partsSearch().then(($el) => {
+          cy.intercept(
+            "GET",
+            "https://onetrackwebapiprod.azurewebsites.net/api/Inventory/InventoryViewLiveSearch**"
+          ).as("InventoryViewLiveSearch");
+          cy.wrap($el).should("be.visible");
+          cy.wrap($el).type(`${item.trim()}`);
+          cy.wait("@InventoryViewLiveSearch");
+          cy.wrap($el).click();
+          cy.wrap($el).type("{downArrow}");
+          cy.wrap($el).type("{enter}");
+          // cy.wrap($el)
+          //   .type(item.trim())
+          //   .invoke("val")
+          //   .then((val) => {
+          //     if (val.length > 0) {
+          //       cy.wait("@InventoryViewLiveSearch");
+          //       cy.get(".newcardsearchresult mat-option").contains(item.trim()).click();
+          //     }
+          //   });
+        });
+      });
+
     newInvoiceInfo.description &&
       this.elements.addingNewInvoiceModal
         .descriptionTextbox()
         .type(inputInvoiceInfo.description);
+    cy.wait(2000);
     newInvoiceInfo.notesForCustomer &&
       this.elements.addingNewInvoiceModal
         .notesForCustomerTextarea()
@@ -329,24 +358,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       .termSelect()
       .select(inputInvoiceInfo.term);
     // this.elements.addingNewInvoiceModal.taxTextbox().dblclick({ force: true })
+
     this.elements.addingNewInvoiceModal
       .taxTextbox()
       .type(inputInvoiceInfo.tax)
       .type("{downArrow}")
       .type("{downArrow}{enter}");
-
     // this.elements.addingNewInvoiceModal.taxOption().first().contains(inputInvoiceInfo.tax).click()
-    inputInvoiceInfo.inventoriesToAdd.forEach((item) => {
-      this.elements.addingNewInvoiceModal
-        .partsSearch()
-        .type(item.toString())
-        .then(($el) => {
-          cy.wait(0);
-          cy.wrap($el).type("{downArrow}{enter}");
-        });
-
-      // cy.wait("@api");
-    });
   };
 
   addInvoiceDiscount = (discountValue) => {
@@ -362,29 +380,44 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     this.elements.selectSerialNumberModal.saveButton().click();
   };
 
+  /* From here */
   saveInvoice = () => {
-    cy.wait(4000);
-    this.elements.addingNewInvoiceModal.actionsDropdown.button().click();
-    this.elements.addingNewInvoiceModal.actionsDropdown.save().click();
+    // cy.wait(4000);
+
+    this.elements.addingNewInvoiceModal.actionsDropdown
+      .button()
+      .should("be.visible")
+      .click();
+    this.elements.addingNewInvoiceModal.actionsDropdown
+      .save()
+      .should("be.visible")
+      .click();
+    cy.get(".alert.alert-success .close").should("be.visible").click();
   };
 
   previewInvoice = () => {
-    cy.wait(4000);
-    this.elements.addingNewInvoiceModal.actionsDropdown.button().click();
-    cy.wait(2000);
+    // cy.get(".alert.alert-success .close").should("be.visible").click();
+    this.elements.addingNewInvoiceModal.actionsDropdown
+      .button()
+      .should("be.visible")
+      .click();
+
     this.elements.addingNewInvoiceModal.actionsDropdown
       .preview()
+      .should("be.visible")
       .click({ force: true });
   };
 
   checkPreview = (whatToCheck) => {
-    cy.wait(4000);
+    // cy.wait(4000);
+    // cy.get(".alert.alert-success .close").should("be.visible").click();
+    this.elements.invoicePreviewModal.header().should("be.visible");
 
     // Check if the preview modal is displayed
     this.elements.invoicePreviewModal.header().then(($el) => {
       const header = $el.text().toString();
       expect(header).to.equal("Invoice Preview");
-      cy.wait(4000);
+      // cy.wait(4000);
     });
 
     // Check Invoice Note
@@ -457,7 +490,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   closePreview = () => {
-    cy.wait(4000);
+    // cy.wait(4000);
     this.elements.invoicePreviewModal.closeButton().last().dblclick();
   };
 
@@ -481,7 +514,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   changeServiceLocation = (serviceLocation) => {
-    cy.wait(4500);
+    // cy.wait(4500);
     // this.elements.actionsDropdown.button().last().click()
     // cy.wait(4000)
     // this.elements.actionsDropdown.changeServiceLocation().last().click()
@@ -494,12 +527,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .click();
       });
 
-    cy.wait(4000);
+    // cy.wait(4000);
     this.elements.changeServiceLocation
       .serviceLocations()
+      .should("be.visible")
       .contains(serviceLocation)
       .click();
-    cy.wait(4000);
+    // cy.wait(4000);
     this.elements.changeServiceLocation.proceedButton().last().click();
   };
 

@@ -46,30 +46,30 @@ describe("Add Customer", () => {
   });
 
 
-  // // 'Make Customer active' button being covered by support avatar
-  // it.skip("Make customer inactive - Check unsearchability - Make Customer active again - Check searchability", () => {
-  //   const cn = `CN-${uuidv4().substring(0, 5)}`;
-  //   const customerInfo = {
-  //     customerNumber: cn,
-  //     companyName: "Make this Customer Inactive - then Active again",
-  //     validateAddress: true,
-  //   };
-  //   AddCustomerPage.fillData(customerInfo);
-  //   AddCustomerPage.clickSaveButton();
-  //   CustomerPage.makeNewCustomerInactive();
-  //   AddCustomerPage.clickBackButton();
+  // 'Make Customer active' button being covered by support avatar
+  it("Make customer inactive - Check unsearchability - Make Customer active again - Check searchability", () => {
+    const cn = `CN-${uuidv4().substring(0, 5)}`;
+    const customerInfo = {
+      customerNumber: cn,
+      companyName: "Make this Customer Inactive - then Active again",
+      validateAddress: true,
+    };
+    AddCustomerPage.fillData(customerInfo);
+    AddCustomerPage.clickSaveButton();
+    CustomerPage.makeNewCustomerInactive();
+    AddCustomerPage.clickBackButton();
 
-  //   CustomerPage.searchCustomer(customerInfo.customerNumber);
+    CustomerPage.searchCustomer(customerInfo.customerNumber);
 
-  //   CustomerPage.confirmUnsearchability(customerInfo.customerNumber);
-  //   CustomerPage.showInactiveCustomers();
-  //   CustomerPage.makeCustomerActive(customerInfo.customerNumber); // -> 'Make Customer active' button being covered by support avatar
-  //   AddCustomerPage.clickBackButton();
+    CustomerPage.confirmUnsearchability(customerInfo.customerNumber);
+    CustomerPage.showInactiveCustomers();
+    CustomerPage.makeCustomerActive(customerInfo.customerNumber); // -> 'Make Customer active' button being covered by support avatar
+    AddCustomerPage.clickBackButton();
 
-  //   CustomerPage.searchCustomer(customerInfo.customerNumber);
-  //   CustomerPage.showActiveCustomers();
-  //   CustomerPage.searchAndClickCustomer(customerInfo.customerNumber);
-  // });
+    CustomerPage.searchCustomer(customerInfo.customerNumber);
+    CustomerPage.showActiveCustomers();
+    CustomerPage.searchAndClickCustomer(customerInfo.customerNumber);
+  });
 
   it("Create customer - Create Group - Assign customer to group - Check customer inclusion to group ", () => {
     const rand = uuidv4().substring(0, 5);
@@ -116,7 +116,7 @@ describe("Add Customer", () => {
       uploadDocument: "img.jpg",
       validateAddress: true,
     };
-    cy.wait(1000);
+    // cy.wait(1000);
     AddCustomerPage.fillData(customerInfo);
     AddCustomerPage.clickSaveButton();
     // AddCustomerPage.confirmValidityYes()
