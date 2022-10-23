@@ -503,7 +503,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
   validateAddress = () => {
     this.elements.validateAddress().click();
-    cy.wait(4000);
+    // cy.wait(4000);
+    cy.get(".preloader").should("not.be.visible");
     this.elements.validateAddressModal.okButton().click({ force: true });
   };
 
@@ -511,7 +512,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     asssignedNotesInfo.forEach((i) => {
       i.assignNoteToAServiceLocation &&
         this.elements.notesTable.notesCell().should("contain", "Site Note");
-      cy.wait(1000);
+      // cy.wait(1000);
+      this.elements.notesTable.notesCell().should("be.visible");
       expect(i.noteText);
       this.elements.notesTable
         .notesCell()
@@ -527,7 +529,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   fillOfficeNoteForm = (officeNoteInfo) => {
-    cy.wait(1000);
+    // cy.wait(1000);
+    this.elements.addNewNoteModal.noteTextTextarea().should("be.visible");
     this.elements.addNewNoteModal
       .noteTextTextarea()
       .clear()
@@ -645,7 +648,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         country: newCustomerInfo.country || "United States of America",
         selectATaxRate: newCustomerInfo.selectATaxRate || "Not Selected",
       };
-      cy.wait(2500);
+      // cy.wait(2500);
+      cy.get("preloader").should("not.be.visible");
       this.elements.addNewServiceLocationModal
         .firstNameTextBox()
         .clear()

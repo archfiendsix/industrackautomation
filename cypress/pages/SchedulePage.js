@@ -239,10 +239,19 @@ class SchedulePage {
             .invoke("val")
             .then((val) => {
               expect(val.length).to.equal(val.length);
-              cy.wait("@AddressBookLiveSearch");
+              // cy.wait("@AddressBookLiveSearch");
             });
           // cy.wrap($el).type("{downArrow} {enter}");
-          cy.wait(3000); // Can't Omit this. Requires wait to find the customer
+          cy.wait(800); // Can't Omit this. Requires wait to find the customer
+          // cy.get('app-job-edit-form').should('be.visible')
+          // cy.get('.sk-spinner').should('not.be.visible')
+          cy.get('.mat-autocomplete-panel[role="listbox"] mat-option').should(
+            "exist"
+          );
+          cy.get('.mat-autocomplete-panel[role="listbox"] mat-option').should(
+            "have.length.gt",
+            1
+          );
 
           // cy.wait('@AddressBookLiveSearch')
           // cy.get("mat-option", { timeout: 3500 }).should("be.visible", {
@@ -255,7 +264,7 @@ class SchedulePage {
             { timeout: 3500 }
           );
           cy.wait("@AddressBookLiveSearch");
-          cy.get("mat-option", { timeout: 3500 })
+          cy.get('.mat-autocomplete-panel[role="listbox"] mat-option')
             .should("be.visible", { timeout: 3500 })
             .then(($el) => {
               cy.wrap($el)
@@ -328,7 +337,8 @@ class SchedulePage {
               .clear()
               .type(item.name)
               .then(() => {
-                cy.wait(3000);
+                cy.wait(500); // Cannot Omit this wait - needed for loading service equipment
+                cy.get(".sk-spinner").should("not.be.visible");
                 cy.get("mat-option")
                   .contains(item.name)
                   .first()
@@ -339,14 +349,14 @@ class SchedulePage {
                       .clear()
                       .type(item.qty);
                   });
-                cy.wait(2000);
+                // cy.wait(2000);
               });
 
             this.elements.addNewJobModal.partsServiceEquipment
               .addButton()
               .should("be.visible")
               .click();
-            cy.wait(1500);
+            // cy.wait(1500);
           });
       });
     this.elements.addNewJobModal.attachments
@@ -358,16 +368,19 @@ class SchedulePage {
             this.elements.addNewJobModal.attachments
               .urlTextbox()
               .clear()
-              .type(item.url);
-            cy.wait(4000);
-            this.elements.addNewJobModal.attachments.addUrlButton().click();
-            cy.wait(1000);
+              .type(item.url)
+              .then(() => {
+                this.elements.addNewJobModal.attachments.addUrlButton().click();
+              });
+            // cy.wait(4000);
+
+            // cy.wait(1000);
             this.elements.addNewJobModal.attachments.addAfileInput().click();
-            cy.wait(1000);
+            // cy.wait(1000);
             this.elements.addNewJobModal.attachments
               .addAfileInput()
               .attachFile(item.addAFile);
-            cy.wait(2000);
+            // cy.wait(2000);
           });
       });
 
@@ -385,7 +398,7 @@ class SchedulePage {
                 this.elements.addNewJobModal.existingCustomerEquipment
                   .addButton()
                   .click();
-                cy.wait(2500);
+                // cy.wait(2500);
               });
           });
       });
@@ -402,13 +415,13 @@ class SchedulePage {
             .addCrewField()
             .click()
             .then(() => {
-              cy.wait(1000);
+              // cy.wait(1000);
               this.elements.addNewJobModal.employeeTab
                 .addCrewFilterTextbox()
                 .clear()
                 .type(jobInformation.employeeGroup.groupName)
                 .then(() => {
-                  cy.wait(2000);
+                  // cy.wait(2000);
                   this.elements.addNewJobModal.employeeTab
                     .addCrewListItem()
                     .contains(jobInformation.employeeGroup.groupName)
@@ -443,20 +456,21 @@ class SchedulePage {
           .addCrewField()
           .click()
           .then(() => {
-            cy.wait(1000);
+            // cy.wait(1000);
             this.elements.addNewJobModal.employeeTab
               .addCrewFilterTextbox()
               .clear()
               .type(employee.addCrew)
-              .then(() => {
-                cy.wait(2000);
+              .then(($el) => {
+                // cy.wait(500);
+                cy.wrap($el).type("{downArrow}{enter}");
                 this.elements.addNewJobModal.employeeTab
                   .addCrewListItem()
                   .contains(employee.addCrew)
                   .click();
-                cy.wait(2000);
+                // cy.wait(2000);
                 this.elements.addNewJobModal.employeesTabButton().click();
-                cy.wait(2000);
+                // cy.wait(2000);
                 this.elements.addNewJobModal.employeeTab
                   .employeeTableRow()
                   .contains(employee.addCrew)
@@ -837,29 +851,49 @@ class SchedulePage {
       });
     // cy.wait(5500);
     cy.get("app-loading-mask").should("not.be.visible", { timeout: 3500 });
-    this.elements.jobsQueueModal.assignedJobsTab
-      .jobRowCell()
-      .contains(jobDescription)
-      .then(($el) => {
-        while ($el.length < 0) {
-          cy.wait(1000);
-          this.elements.jobsQueueModal.assignedJobsTab
-            .searchTextbox()
-            .clear()
-            .type(jobDescription.slice(-5))
-            .then(($el) => {
-              cy.wrap($el).type("{enter}");
-            });
-        }
+    this.elements.jobsQueueModal.assignedJobsTab.jobRowCell().then(($el) => {
+      while ($el.length < 0) {
+        // cy.wait(1000);
+        this.elements.jobsQueueModal.assignedJobsTab
+          .type(jobDescription.slice(-5))
+          .then(($el) => {
+            cy.wrap($el).type("{enter}");
+          });
+      }
 
-        cy.wrap($el)
-          .first()
-          // .should($el => {
-          //     expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
-          // })
-          .parent()
-          .dblclick();
-      });
+      cy.wrap($el)
+        .contains(jobDescription)
+        .first()
+        // .should($el => {
+        //     expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+        // })
+        .parent()
+        .dblclick();
+    });
+    // var rowExisting = true;
+    // while (rowExisting) {
+    //   this.elements.jobsQueueModal.assignedJobsTab
+    //     .jobRowCell()
+    //     .as("cell")
+    //     .invoke("is", "visible")
+    //     .then((initial) => {
+    //       if (initial) {
+    //         this.elements.jobsQueueModal.assignedJobsTab
+    //           .jobRowCell()
+    //           .contains(jobDescription)
+    //           .first()
+    //           .parent()
+    //           .dblclick();
+
+    //         rowExisting = true;
+    //       } else {
+    //         this.elements.jobsQueueModal.assignedJobsTab
+    //           .searchTextbox()
+    //           .type("{enter}");
+    //         rowExisting = false;
+    //       }
+    //     });
+    // }
   };
 
   searchOnHoldJobsTab = (jobDescription) => {

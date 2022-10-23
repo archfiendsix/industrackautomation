@@ -94,7 +94,7 @@ class AddCustomerPage {
       uploadDocument: newCustomerInfo.uploadDocument || "img.jpg",
       validateAddress: newCustomerInfo.validateAddress,
     };
-    // cy.wait(1000);
+    cy.get('preloader').should('not.be.visible')
     newCustomerInfo.customerNumber &&
       this.elements
         .customerNumberTextBox()

@@ -45,47 +45,64 @@ class Dashboard {
     },
   };
 
+  checkLoadPage = () => {
+    cy.intercept("https://m.stripe.com/**").as("page");
+    cy.get("body").should("be.visible");
+    cy.wait("@page");
+  };
+
   clickCustomerTab = () => {
+    this.checkLoadPage();
     this.elements.customerTab().click();
   };
 
   clickAddCustomerButton = () => {
+    this.checkLoadPage();
     this.elements.addCustomerButton().click();
   };
 
   clickSettings = () => {
     // this.elements.settingsButton().first().click({ force: true })
     // this.elements.settingsButton().first().click({ force: true })
+    this.checkLoadPage();
     cy.visit("/settingsTab");
     cy.wait(6000);
   };
 
   clickEstimatesTab = () => {
-    this.elements.estimatesTab().should('be.visible').dblclick();
+    this.checkLoadPage();
+    this.elements.estimatesTab().should("be.visible").dblclick();
   };
   clickTimesheetTab = () => {
-    this.elements.timesheetTab().should('be.visible').dblclick();
+    this.checkLoadPage();
+    this.elements.timesheetTab().should("be.visible").dblclick();
   };
   clickPurchaseOrderTab = () => {
-    this.elements.purchaseOrderTab().should('be.visible').dblclick();
+    this.checkLoadPage();
+    this.elements.purchaseOrderTab().should("be.visible").dblclick();
   };
 
   clickScheduleTab = () => {
-    this.elements.scheduleTab().should('be.visible').dblclick();
+    this.checkLoadPage();
+    this.elements.scheduleTab().should("be.visible").dblclick();
   };
 
   clickSchedulingTab = () => {
-    this.elements.schedulingTab().should('be.visible').dblclick();
+    this.checkLoadPage();
+    this.elements.schedulingTab().should("be.visible").dblclick();
   };
 
   clickInvoicesTab = () => {
-    this.elements.invoicesTab().should('be.visible').dblclick();
+    this.checkLoadPage();
+    this.elements.invoicesTab().should("be.visible").dblclick();
   };
   clickTaskTemplatesTab = () => {
-    this.elements.taskTemplates().should('be.visible').dblclick();
+    this.checkLoadPage();
+    this.elements.taskTemplates().should("be.visible").dblclick();
   };
 
   gotoTaxAndTermsPage = () => {
+    this.checkLoadPage();
     // this.clickSettings()
     cy.visit("/settingsTab");
     this.elements.companySettings().click();
@@ -93,6 +110,7 @@ class Dashboard {
   };
 
   gotoJobTemplates = () => {
+    this.checkLoadPage();
     this.clickSettings();
     this.elements.scheduleTab().dblclick();
   };
