@@ -199,6 +199,14 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     },
 
     timesheetRecordsModal: {
+      filterSection: {
+        endDateTextbox: () =>
+          cy
+            .get(
+              'app-timesheet-overview app-date-time-picker input[placeholder="MM/DD/YYYY"]'
+            )
+            .eq(1),
+      },
       fieldEmployeeDropdown: () => cy.get("mat-select.select-employee"),
       fieldEmployeeDropdownOptions: () =>
         cy.get(".mat-select-panel-wrap mat-option"),
@@ -277,6 +285,14 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
   clickAddNewTimesheetButton = () => {
     this.elements.addTimesheetButton().click();
+    
+  };
+
+  setEndDateFilter = (endDate) => {
+    this.elements.timesheetRecordsModal.filterSection
+      .endDateTextbox()
+      .clear()
+      .type(endDate);
   };
   addNewTimesheet = (timesheetInfo) => {
     // cy.get('.col-lg-5.control-label').contains('Driver').invoke('hide')
@@ -356,6 +372,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   selectFieldEmployee = (employeeName) => {
+    this.setEndDateFilter("1/1/2030");
     this.elements.timesheetRecordsModal.fieldEmployeeDropdown().click();
     this.elements.timesheetRecordsModal
       .fieldEmployeeDropdownOptions()
