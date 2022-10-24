@@ -15,9 +15,6 @@ describe("New Estimate module", () => {
     return false;
   });
 
-  before(() => {
-    cy.resetStorage();
-  });
 
   beforeEach(() => {
     //cy.viewport(1560, 992)
@@ -95,7 +92,7 @@ describe("New Estimate module", () => {
     
     EstimatesPage.saveEstimate();
     EstimatesPage.markAslost();
-    cy.wait(3000);
+    // cy.wait(3000);
     EstimatesPage.confirmYes();
     EstimatesPage.checkEstimateStatus("Lost");
   });
