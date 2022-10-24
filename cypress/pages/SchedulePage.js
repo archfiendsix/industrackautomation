@@ -851,25 +851,64 @@ class SchedulePage {
       });
     // cy.wait(5500);
     cy.get("app-loading-mask").should("not.be.visible", { timeout: 3500 });
-    this.elements.jobsQueueModal.assignedJobsTab.jobRowCell().then(($el) => {
-      while ($el.length < 0) {
-        // cy.wait(1000);
-        this.elements.jobsQueueModal.assignedJobsTab
-          .type(jobDescription.slice(-5))
-          .then(($el) => {
-            cy.wrap($el).type("{enter}");
-          });
-      }
+    cy.get(".preloader").should("not.be.visible");
+    this.elements.jobsQueueModal.assignedJobsTab
+      .jobRowCell()
+      .if()
+      .then(($el) => {
+        while ($el.length < 0) {
+          // cy.wait(1000);
+          this.elements.jobsQueueModal.assignedJobsTab
+            .type(jobDescription.slice(-5))
+            .then(($el) => {
+              cy.wrap($el).type("{enter}");
+            });
+        }
 
-      cy.wrap($el)
-        .contains(jobDescription)
-        .first()
-        // .should($el => {
-        //     expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
-        // })
-        .parent()
-        .dblclick();
-    });
+        cy.wrap($el)
+          .contains(jobDescription)
+          .first()
+          // .should($el => {
+          //     expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+          // })
+          .parent()
+          .dblclick();
+      })
+      .else(() => {
+        cy.log("The Job search did not return result...");
+      });
+
+    /* try conditional */
+    // var search = true;
+    // var y = 0;
+    // while (search && y <= 3) {
+    //   // cy.wait(800);
+    //   this.elements.jobsQueueModal.assignedJobsTab
+    //     .jobRowCell()
+    //     .if("visible")
+    //     .then(($el) => {
+    //       cy.get(".preloader").should("not.be.visible");
+    //       this.elements.jobsQueueModal.assignedJobsTab
+    //         .jobRowCell()
+    //         .contains(jobDescription)
+    //         .dblclick();
+    //       search = false;
+    //     })
+    //     .else()
+    //     .then(() => {
+    //       cy.wait(5000)
+    //       this.elements.jobsQueueModal.assignedJobsTab
+    //         .searchTextbox()
+    //         .type("{enter}");
+    //       search = true;
+    //       // cy.wait(800);
+    //     });
+    //   y++;
+
+    //   cy.log(search)
+    //   // cy.wait(800);
+    // }
+
     // var rowExisting = true;
     // while (rowExisting) {
     //   this.elements.jobsQueueModal.assignedJobsTab

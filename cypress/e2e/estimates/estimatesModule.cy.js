@@ -17,7 +17,7 @@ describe("New Estimate module", () => {
 
 
   beforeEach(() => {
-    //cy.viewport(1560, 992)
+    cy.viewport(1250, 1024)
     // cy.intercept("**/api/**").as("api");
     cy.visit("/login");
     LoginPage.loginAdmin("andreiv@industrack.com", "admin");
@@ -208,10 +208,9 @@ describe("New Estimate module", () => {
   //   EstimatesPage.checkRowsTotal();
   // });
 
-  it("Create estimate with notes and description added and check on preview.", () => {
-    // Dashboard.clickEstimatesTab()
-    cy.visit("/estimatesTab/list");
-    // Dashboard.preventNotificationCard();
+  it.only("Create estimate with notes and description added and check on preview.", () => {
+    Dashboard.clickEstimatesTab()
+    // cy.visit("/estimatesTab/list");
     EstimatesPage.clickAddNew();
     EstimatesPage.selectCustomer("Genius Giant Game Inc.");
     EstimatesPage.inventorySelect("Air Filter");
@@ -225,7 +224,7 @@ describe("New Estimate module", () => {
     EstimatesPage.checkEstimatePreviewValues(customerInfoToCheck); // Can't find element
   });
 
-  it('Test estimate per line "hidden" function - 1 inventory added w/ hide price', () => {
+  it.only('Test estimate per line "hidden" function - 1 inventory added w/ hide price', () => {
     Dashboard.clickEstimatesTab();
     // cy.visit('/estimatesTab/list')
     // Dashboard.preventNotificationCard();
@@ -281,7 +280,7 @@ describe("New Estimate module", () => {
   //   // EstimatesPage.previewEstimate() // Can't find element
   // });
 
-  it("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
+  it.only("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
     Dashboard.clickEstimatesTab();
     // cy.visit('/estimatesTab/list')
     // Dashboard.preventNotificationCard();

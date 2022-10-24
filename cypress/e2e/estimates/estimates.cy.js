@@ -143,17 +143,17 @@ describe("New Estimate module", () => {
     EstimatesPage.clickAddNew();
     EstimatesPage.selectCustomer(customerInfo.companyName);
     EstimatesPage.inventorySelect(inventoryInfo.name);
-    cy.wait(4000);
+    // cy.wait(4000);
     EstimatesPage.inventorySelect(nonInventoryInfo.name);
-    cy.wait(4000);
+    // cy.wait(4000);
     EstimatesPage.inventorySelect(serviceInfo.name);
-    cy.wait(4000);
+    // cy.wait(4000);
     EstimatesPage.inventorySelect(assemblyInfo.name);
 
     // Assign discounts on rows
     EstimatesPage.addDiscountInRow(0, 30, "%", 3);
     EstimatesPage.addDiscountInRow(0, 25, "$", 3);
-    cy.wait(4000);
+    // cy.wait(4000);
 
     // Add random discounts
     EstimatesPage.addRandomInvoiceDiscount();

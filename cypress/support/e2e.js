@@ -17,6 +17,7 @@
 import './commands'
 import 'cypress-iframe'
 import 'cypress-file-upload'
+import 'cypress-if'
 // import '@shelex/cypress-allure-plugin'
 // import 'cypress-mochawesome-reporter/register'
 // Alternatively you can use CommonJS syntax:

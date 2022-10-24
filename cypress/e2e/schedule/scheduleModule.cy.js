@@ -31,7 +31,7 @@ describe("Schedule Module", () => {
     let jobInformation = {
       selectCustomer: "01223",
       serviceLocation: "Mercer Street",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Not Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -55,7 +55,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Customer Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Not Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -89,7 +89,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Customer Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Not Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -123,7 +123,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Customer Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Not Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -157,7 +157,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Customer Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Not Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -191,7 +191,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Customer Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Not Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -228,7 +228,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Customer Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -274,7 +274,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -337,7 +337,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -399,7 +399,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -473,7 +473,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -567,7 +567,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -668,11 +668,11 @@ describe("Schedule Module", () => {
     SchedulePage.saveJob();
   });
 
-  it.only("Add default Job - Start Job - Mark as completed- Approve for invoice - assert info", () => {
+  it("Add default Job - Start Job - Mark as completed- Approve for invoice - assert info", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqp-f1439",
-      jobDescription: `Description-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",

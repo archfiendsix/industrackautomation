@@ -16,7 +16,7 @@ describe('Add Customer', () => {
         cy.visit('/login')
         LoginPage.loginAdmin('andreiv@industrack.com', 'admin')
         cy.wait(4250)
-        Dashboard.preventNotificationCard()
+        // Dashboard.preventNotificationCard()
         // Dashboard.clickCustomerTab()
 
     })
@@ -37,7 +37,7 @@ describe('Add Customer', () => {
     })
 
 
-    it.only('Test descending/ascending for customer page', () => {
+    it('Test descending/ascending for customer page', () => {
         Maps.elements.sortByDropdown().select('Sort by Status')
        
     })
