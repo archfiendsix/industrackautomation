@@ -225,7 +225,6 @@ class EstimatesPage {
 
     // this.
 
-    
     cy.get(".serviceparts table tr:nth-last-child(3) td input")
       .eq(4)
       .last()
@@ -266,6 +265,8 @@ class EstimatesPage {
 
     this.elements.dropDownItems().contains("Preview").click();
     cy.wait("@estimates");
+
+    cy.get("app-estimates-overview info-box > div").should("have.length.lt", 1);
   };
 
   sendToEmail() {

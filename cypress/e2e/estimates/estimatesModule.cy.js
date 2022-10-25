@@ -208,7 +208,7 @@ describe("New Estimate module", () => {
   //   EstimatesPage.checkRowsTotal();
   // });
 
-  it.only("Create estimate with notes and description added and check on preview.", () => {
+  it("Create estimate with notes and description added and check on preview.", () => {
     Dashboard.clickEstimatesTab()
     // cy.visit("/estimatesTab/list");
     EstimatesPage.clickAddNew();
@@ -224,7 +224,7 @@ describe("New Estimate module", () => {
     EstimatesPage.checkEstimatePreviewValues(customerInfoToCheck); // Can't find element
   });
 
-  it.only('Test estimate per line "hidden" function - 1 inventory added w/ hide price', () => {
+  it('Test estimate per line "hidden" function - 1 inventory added w/ hide price', () => {
     Dashboard.clickEstimatesTab();
     // cy.visit('/estimatesTab/list')
     // Dashboard.preventNotificationCard();
@@ -280,7 +280,7 @@ describe("New Estimate module", () => {
   //   // EstimatesPage.previewEstimate() // Can't find element
   // });
 
-  it.only("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
+  it("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
     Dashboard.clickEstimatesTab();
     // cy.visit('/estimatesTab/list')
     // Dashboard.preventNotificationCard();

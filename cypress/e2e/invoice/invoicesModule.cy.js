@@ -74,6 +74,7 @@ describe("Invoices Module", () => {
       invoiceNumber:
         InvoicesPage.elements.addingNewInvoiceModal.invoiceNumber(),
     };
+    // InvoicesPage.saveInvoice()
     InvoicesPage.previewInvoice();
 
     InvoicesPage.checkPreview(overviewValues);

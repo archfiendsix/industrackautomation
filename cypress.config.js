@@ -1,7 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  // projectId: "15zbgq", // Key for test dashboard runs
+  // projectId: "15zbgq", // Key for t/est dashboard runs
   projectId: "vsg82k", // Key for Industrack 
   e2e: {
     setupNodeEvents(on, config) {
@@ -35,11 +35,11 @@ module.exports = defineConfig({
   "compilerOptions": {
     "types": ["jest", "node"]
   },
-  requestTimeout: 30000,
+  requestTimeout: 5000,
   numTestsKeptInMemory: 0,
   "numTestsKeptInMemory": 0,
-  responseTimeout: 50000,
-  pageLoadTimeout: 100000,
+  responseTimeout: 6000,
+  pageLoadTimeout: 10000,
   chromeWebSecurity: false,
   screenshotOnRunFailure: false,
   defaultCommandTimeout: 10000,                                                                                                                                                                                    

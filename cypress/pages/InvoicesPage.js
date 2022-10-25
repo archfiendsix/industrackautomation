@@ -230,6 +230,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       closeButton: () => cy.get('button[aria-label="Close dialog"]'),
     },
     previewiFrame: {
+      body: () => {
+        cy.get(".iframe #contentHolder").its("0.contentDocument.body").then(cy.wrap);
+      },
       custName: () =>
         cy
           .get(".iframe #contentHolder")
@@ -242,7 +245,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .its("0.contentDocument.body")
           .should("not.be.empty")
           .then(cy.wrap)
-          .find(".serviceparts h3+p"),
+          .find(".total.row h3+p"),
       description: () =>
         cy
           .get(".iframe #contentHolder")
@@ -396,7 +399,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   previewInvoice = () => {
-    // cy.get(".alert.alert-success .close").should("be.visible").click();
+    cy.intercept(
+      "https://webprintprod.industrack.com/preview/invoices/**"
+    ).as("preview"); // Intercept waited at checkPreview function
     this.elements.addingNewInvoiceModal.actionsDropdown
       .button()
       .should("be.visible")
@@ -409,6 +414,17 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   checkPreview = (whatToCheck) => {
+    // cy.get(
+    //   "invoice-edit form .col-lg-12:first-child() .alert-success > .close"
+    // ).click();
+    cy.get(
+      "invoice-edit form .col-lg-12:first-child() .alert-success > strong"
+    ).should("have.length.lt", 1);
+    cy.get("preloader").should("not.be.visible");
+    cy.get("mat-dialog-container app-report-preview-dialog").should(
+      "be.visible"
+    );
+    cy.get("app-report-preview preloader").should("not.be.visible");
     // cy.wait(4000);
     // cy.get(".alert.alert-success .close").should("be.visible").click();
     this.elements.invoicePreviewModal.header().should("be.visible");
@@ -419,7 +435,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       expect(header).to.equal("Invoice Preview");
       // cy.wait(4000);
     });
+    cy.wait("@preview");
 
+    
     // Check Invoice Note
     whatToCheck.note &&
       this.elements.previewiFrame.note().then(($el) => {
