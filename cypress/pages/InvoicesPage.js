@@ -425,6 +425,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     // cy.get(
     //   "invoice-edit form .col-lg-12:first-child() .alert-success > .close"
     // ).click();
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     cy.get(
       "invoice-edit form .col-lg-12:first-child() .alert-success > strong"
     ).should("have.length.lt", 1);
@@ -435,6 +440,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     cy.get("app-report-preview preloader").should("not.be.visible");
     // cy.wait(4000);
     // cy.get(".alert.alert-success .close").should("be.visible").click();
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     this.elements.invoicePreviewModal.header().should("be.visible");
 
     // Check if the preview modal is displayed
@@ -445,16 +455,29 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     });
     cy.wait("@preview");
 
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
+    cy.get("preloader").should("not.be.visible");
+    cy.get("app-report-preview .iframe")
+      .find("iframe")
+      .should("have.length.gt", 0);
     // Check Invoice Note
     whatToCheck.note &&
-      this.elements.previewiFrame.note().then(($el) => {
-        cy.get(".dropdown-menu.dropdown-reminders").invoke(
-          "css",
-          "display",
-          "none"
-        );
-        expect($el.text()).to.equal(whatToCheck.note.toString());
-      });
+      this.elements.previewiFrame
+        .note()
+        .should("be.visible")
+        .invoke("text")
+        .then((text) => {
+          cy.get(".dropdown-menu.dropdown-reminders").invoke(
+            "css",
+            "display",
+            "none"
+          );
+          expect(text).to.equal(whatToCheck.note.toString());
+        });
 
     // Check Description
     whatToCheck.description &&
@@ -462,6 +485,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         cy.log($el);
         this.elements.previewiFrame
           .description()
+          .should("be.visible")
           .invoke("text")
           .then(($el2) => {
             cy.get(".dropdown-menu.dropdown-reminders").invoke(
@@ -479,6 +503,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         cy.log($el);
         this.elements.previewiFrame
           .invoiceNumber()
+          .should("be.visible")
           .invoke("text")
           .then(($el2) => {
             cy.get(".dropdown-menu.dropdown-reminders").invoke(
@@ -500,6 +525,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     whatToCheck.billToCustomerName &&
       this.elements.addingNewInvoiceModal
         .billToCustomerName()
+        .should("be.visible")
         .invoke("text")
         .then(($el) => {
           cy.log($el);
@@ -521,6 +547,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     whatToCheck.serviceLocationCustomerName &&
       this.elements.addingNewInvoiceModal
         .serviceLocationCustomerName()
+        .should("be.visible")
         .invoke("text")
         .then(($el) => {
           cy.log($el);
@@ -656,8 +683,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       "none"
     );
     // cy.get(".dropdown-menu").invoke("css", "display", "none");
-    this.elements.changeCustomer
-      .customerListItems().should('be.visible')
+    this.elements.changeCustomer.customerListItems().should("be.visible");
     this.elements.changeCustomer
       .customerListItems()
       .contains(customerName)
@@ -685,7 +711,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         .paymentMethodField()
         .click()
         .then(() => {
-          cy.wait(600);
+          // cy.wait(600);
+          cy.get(".dropdown-menu.dropdown-reminders").invoke(
+            "css",
+            "display",
+            "none"
+          );
           cy.get("mat-option").contains("Cash").click();
         });
     paymentDetails.referenceNumber &&

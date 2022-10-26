@@ -236,6 +236,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         .type(equipmentInformation.upuodFromInventory)
         .then(() => {
           //   cy.wait(3000);
+          cy.get(".dropdown-menu.dropdown-reminders").invoke(
+            "css",
+            "display",
+            "none"
+          );
           cy.get("mat-option")
             .contains(equipmentInformation.upuodFromInventory)
             .first()
@@ -390,7 +395,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         .last()
         .click()
         .then(() => {
-          cy.wait(1000);
+          // cy.wait(600);
+          cy.get(".dropdown-menu.dropdown-reminders").invoke(
+            "css",
+            "display",
+            "none"
+          );
           cy.get("mat-option").contains("100").click();
         });
       // cy.get('body').scrollTo('top')
@@ -469,7 +479,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   searchAndClickCustomer = (customerNumber) => {
-    cy.get(".preloader").should("not.be.visible");
+    cy.get("preloader").should("not.be.visible");
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     this.elements.customerTable
       .numberCell()
       .should("contain", customerNumber)

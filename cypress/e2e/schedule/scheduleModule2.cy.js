@@ -217,7 +217,7 @@ describe("Schedule Module", () => {
         },
       ],
       employeeGroup: {
-        groupName: 'Group of 2',
+        groupName: "Group of 2",
         employees: [
           {
             addCrew: "Raymon Howard",
@@ -284,7 +284,7 @@ describe("Schedule Module", () => {
       ...jobInformationEdit,
     });
 
-    SchedulePage.saveJob()
+    SchedulePage.saveJob();
 
     /* Approve for invoice - Convert to Invoice - assert info" */
 
@@ -322,7 +322,7 @@ describe("Schedule Module", () => {
       notes: `Completed at: ${datetime}`,
     };
 
-    SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription)
+    SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
     SchedulePage.addNewJob(jobInformationEdit);
     SchedulePage.saveJob();
 
@@ -344,7 +344,214 @@ describe("Schedule Module", () => {
 
     SchedulePage.searchConvertToInvoiceJobTab(jobInformation.jobDescription);
 
+    InvoicesPage.previewInvoice();
+  });
 
-    InvoicesPage.previewInvoice()
+  it("Add default Job - Customer with 2 equipment - Equipment - Add attachments - Assert: customer details, service location - assert info after creation", () => {
+    SchedulePage.gotoAddNewJob();
+    let jobInformation = {
+      selectCustomer: "Customer Eqp-f1439",
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobStatus: "Not Started",
+      notes: `Note-${uuidv4().substring(0, 5)}`,
+      serviceType: "Maintenance",
+      jobPriority: "Low",
+      jobColor: "Maintenance",
+      partsServiceEquipment: [
+        {
+          name: "Cement Nail GUN (Equipment)",
+          qty: "1",
+        },
+      ],
+      existingCustomerEquipment: [
+        "Cement Nail GUN (Equipment)",
+        "Gaming Chair",
+      ],
+      attachments: [
+        {
+          url: "https://cloudinary.hbs.edu/hbsit/image/upload/s--Fm3oHP0m--/f_auto,c_fill,h_375,w_750,/v20200101/79015AB87FD6D3284472876E1ACC3428.jpg",
+          addAFile: "doc.doc",
+        },
+      ],
+    };
+    SchedulePage.addNewJob(jobInformation);
+
+    SchedulePage.saveJob();
+
+    SchedulePage.gotoJobsQueue();
+    SchedulePage.clickFirstUnassignedJob();
+
+    SchedulePage.verifyCustomerInformation(jobInformation);
+  });
+
+  it("Add default Job - Customer with 1 equipment - Add Inventory, Service, Assembly, Equipment  -Add attachments - Assert: customer details, service location - assert info after creation", () => {
+    SchedulePage.gotoAddNewJob();
+    let jobInformation = {
+      selectCustomer: "Customer Eqp-f1439",
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobStatus: "Started",
+      notes: `Note-${uuidv4().substring(0, 5)}`,
+      serviceType: "Maintenance",
+      jobPriority: "Low",
+      jobColor: "Maintenance",
+      partsServiceEquipment: [
+        {
+          name: "Add Inventory - Taxable no SN",
+          qty: "1",
+        },
+        {
+          name: "0e835-Service",
+          qty: "1",
+        },
+        {
+          name: "Assembly-",
+          qty: "1",
+        },
+        {
+          name: "Cement Nail GUN (Equipment)",
+          qty: "1",
+        },
+      ],
+      existingCustomerEquipment: ["Cement Nail GUN (Equipment)"],
+      attachments: [
+        {
+          url: "https://cloudinary.hbs.edu/hbsit/image/upload/s--Fm3oHP0m--/f_auto,c_fill,h_375,w_750,/v20200101/79015AB87FD6D3284472876E1ACC3428.jpg",
+          addAFile: "doc.doc",
+        },
+      ],
+    };
+    SchedulePage.addNewJob(jobInformation);
+
+    SchedulePage.saveJob();
+
+    SchedulePage.gotoJobsQueue();
+    SchedulePage.clickFirstUnassignedJob();
+
+    SchedulePage.verifyCustomerInformation(jobInformation);
+  });
+
+  it("Add default Job - Customer with 1 equipment - Add an Equipment - Add 1 Employee -Add attachments - Assert: customer details, service location - assert info after creation", () => {
+    SchedulePage.gotoAddNewJob();
+    let jobInformation = {
+      selectCustomer: "Eqp-f1439",
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobStatus: "Started",
+      notes: `Note-${uuidv4().substring(0, 5)}`,
+      serviceType: "Maintenance",
+      jobPriority: "Low",
+      jobColor: "Maintenance",
+      partsServiceEquipment: [
+        {
+          name: "Add Inventory - Taxable no SN",
+          qty: "1",
+        },
+        {
+          name: "0e835-Service",
+          qty: "1",
+        },
+        {
+          name: "Assembly-",
+          qty: "1",
+        },
+        {
+          name: "Cement Nail GUN (Equipment)",
+          qty: "1",
+        },
+      ],
+      existingCustomerEquipment: ["Cement Nail GUN (Equipment)"],
+      attachments: [
+        {
+          url: "https://cloudinary.hbs.edu/hbsit/image/upload/s--Fm3oHP0m--/f_auto,c_fill,h_375,w_750,/v20200101/79015AB87FD6D3284472876E1ACC3428.jpg",
+          addAFile: "doc.doc",
+        },
+      ],
+      employees: [
+        {
+          addCrew: "Raymon Howard",
+          duration: {
+            h: "8",
+            m: "0",
+          },
+        },
+        {
+          addCrew: "Employee One",
+          duration: {
+            h: "8",
+            m: "0",
+          },
+        },
+      ],
+    };
+    SchedulePage.addNewJob(jobInformation);
+
+    SchedulePage.saveJob();
+
+    SchedulePage.gotoJobsQueue();
+    SchedulePage.gotoAssignedJobsTab();
+    SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
+
+    SchedulePage.verifyCustomerInformation(jobInformation);
+  });
+
+  it("Add default Job - Customer with 1 equipment - Add an Equipment - Add 1 Employee -Add attachments - Add a Task - Assert: customer details, service location - assert info after creation", () => {
+    SchedulePage.gotoAddNewJob();
+    let jobInformation = {
+      selectCustomer: "Eqp-f1439",
+      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobStatus: "Started",
+      notes: `Note-${uuidv4().substring(0, 5)}`,
+      serviceType: "Maintenance",
+      jobPriority: "Low",
+      jobColor: "Maintenance",
+      partsServiceEquipment: [
+        {
+          name: "Add Inventory - Taxable no SN",
+          qty: "1",
+        },
+        {
+          name: "0e835-Service",
+          qty: "1",
+        },
+        {
+          name: "Assembly-",
+          qty: "1",
+        },
+        {
+          name: "Cement Nail GUN (Equipment)",
+          qty: "1",
+        },
+      ],
+      existingCustomerEquipment: ["Cement Nail GUN (Equipment)"],
+      attachments: [
+        {
+          url: "https://cloudinary.hbs.edu/hbsit/image/upload/s--Fm3oHP0m--/f_auto,c_fill,h_375,w_750,/v20200101/79015AB87FD6D3284472876E1ACC3428.jpg",
+          addAFile: "doc.doc",
+        },
+      ],
+      employees: [
+        {
+          addCrew: "Employee One",
+          duration: {
+            h: "8",
+            m: "0",
+          },
+        },
+      ],
+      tasks: [
+        {
+          taskName: `Task - ${uuidv4().substring(0, 5)}`,
+          serviceType: "Maintenance",
+        },
+      ],
+    };
+    SchedulePage.addNewJob(jobInformation);
+
+    SchedulePage.saveJob();
+
+    SchedulePage.gotoJobsQueue();
+    SchedulePage.gotoAssignedJobsTab();
+    SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
+
+    SchedulePage.verifyCustomerInformation(jobInformation);
   });
 });
