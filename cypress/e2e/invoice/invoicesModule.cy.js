@@ -117,7 +117,7 @@ describe("Invoices Module", () => {
   it("1. Make sure that the correct info is shown in preview from invoice (estimate converted to invoice).", () => {
     Dashboard.clickEstimatesTab();
     // Dashboard.preventNotificationCard();
-
+    
     EstimatesPage.clickAddNew();
     // cy.wait(4000);
     EstimatesPage.selectCustomer("01223"); //01223-Add 2 service location to this customer

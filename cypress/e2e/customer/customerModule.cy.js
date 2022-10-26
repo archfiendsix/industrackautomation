@@ -38,90 +38,9 @@ describe("Add Customer", () => {
     AddCustomerPage.fillData(customerInfo);
 
     // cy.wait(2500)
-    AddCustomerPage.elements
-      .saveButton()
-      .should("not.be.disabled");
+    AddCustomerPage.elements.saveButton().should("not.be.disabled");
 
     AddCustomerPage.elements.saveButton().click();
-  });
-
-  it("Should disable save if required fields are not filled", () => {
-    const customerInfo = {
-      validateAddress: true,
-    };
-    AddCustomerPage.fillData(customerInfo);
-
-    AddCustomerPage.elements.streetAddressTextBox().clear();
-    AddCustomerPage.elements.cityTextBox().clear();
-    AddCustomerPage.elements.stateTextBox().clear();
-    AddCustomerPage.elements.postCodeTextBox().clear();
-
-    // cy.wait(3000);
-    AddCustomerPage.elements.sameAsCompanyCheckbox().click();
-    AddCustomerPage.elements
-      .saveButton()
-      .click({ force: true })
-      .should("be.disabled");
-
-    /* Check textboxes to be in red(invalid entries) */
-    AddCustomerPage.elements
-      .streetAddressTextBox()
-      .should("have.class", "ng-invalid");
-    AddCustomerPage.elements.cityTextBox().should("have.class", "ng-invalid");
-    AddCustomerPage.elements.stateTextBox().should("have.class", "ng-invalid");
-    AddCustomerPage.elements
-      .postCodeTextBox()
-      .should("have.class", "ng-invalid");
-  });
-
-  it("Shows warning when saving unvalidated address", () => {
-    const customerInfo = {
-      validateAddress: false,
-    };
-    AddCustomerPage.fillData(customerInfo);
-
-    AddCustomerPage.elements
-      .saveButton()
-      .should("not.be.disabled");
-
-    AddCustomerPage.elements.saveButton().click();
-
-    AddCustomerPage.checkWarningDialog(
-      "This address book doesn't have valid coordinates and may not be visible in the mobile app. Do you want to save without validating the address?"
-    );
-  });
-
-  it("Disable save if email is invalid", () => {
-    const customerInfo = {
-      email: "dina.schill@",
-      validateAddress: true,
-    };
-    AddCustomerPage.fillData(customerInfo);
-
-    AddCustomerPage.checkEmailErrorMessage("Incorrect email");
-    // AddCustomerPage.clickSaveButton()
-    AddCustomerPage.checkSaveButtonDisabled();
-  });
-
-  it("Add Service Location to a newly created Customer - Added Location has no selected tax rate", () => {
-    const rand = uuidv4().substring(0, 5);
-    const customerInfo = {
-      customerNumber: `CN-${rand}`,
-      companyName: "Add service location to this customer",
-      validateAddress: true,
-    };
-    AddCustomerPage.fillData(customerInfo);
-    AddCustomerPage.clickSaveButton();
-    // AddCustomerPage.confirmValidityYes()
-    CustomerPage.clickAddNewServiceLocation();
-    const serviceLocationInfo = {};
-    CustomerPage.addNewServiceLocationModal.fillServiceLocationData(
-      serviceLocationInfo
-    );
-    CustomerPage.addNewServiceLocationModal.clickSaveButton();
-    // cy.wait(5000)
-    // Dashboard.clickCustomerTab()
-    // CustomerPage.searchCustomer(customerInfo.companyName) //--> Have to refine this script
   });
 
   it("Add Service Location to a newly created Customer - Tax Rate Added to Added Location", () => {
