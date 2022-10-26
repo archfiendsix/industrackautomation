@@ -231,7 +231,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     },
     previewiFrame: {
       body: () => {
-        cy.get(".iframe #contentHolder").its("0.contentDocument.body").then(cy.wrap);
+        cy.get(".iframe #contentHolder")
+          .its("0.contentDocument.body")
+          .then(cy.wrap);
       },
       custName: () =>
         cy
@@ -252,7 +254,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .its("0.contentDocument.body")
           .should("not.be.empty")
           .then(cy.wrap)
-          .find("#reportContent .col-lg-4.col-md-4:nth-child(3) h3+span"),
+          .find("#reportContent h3+span"),
       invoiceNumber: () =>
         cy
           .get(".iframe #contentHolder")
@@ -299,9 +301,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       inventoriesToAdd: newInvoiceInfo.inventoriesToAdd || ["Inventory Item 1"],
       tax: newInvoiceInfo.tax || "None",
     };
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     cy.intercept(
       " https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBooksWithPaging**"
     ).as("GetAddressBooksWithPaging");
+
     this.elements.addNewInvoiceButton().click();
     cy.wait("@GetAddressBooksWithPaging");
     cy.intercept(
@@ -351,7 +359,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       this.elements.addingNewInvoiceModal
         .descriptionTextbox()
         .type(inputInvoiceInfo.description);
-    cy.wait(2000);
+    cy.wait(800);
     newInvoiceInfo.notesForCustomer &&
       this.elements.addingNewInvoiceModal
         .notesForCustomerTextarea()
@@ -399,9 +407,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   previewInvoice = () => {
-    cy.intercept(
-      "https://webprintprod.industrack.com/preview/invoices/**"
-    ).as("preview"); // Intercept waited at checkPreview function
+    cy.intercept("https://webprintprod.industrack.com/preview/invoices/**").as(
+      "preview"
+    ); // Intercept waited at checkPreview function
     this.elements.addingNewInvoiceModal.actionsDropdown
       .button()
       .should("be.visible")
@@ -437,10 +445,14 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     });
     cy.wait("@preview");
 
-    
     // Check Invoice Note
     whatToCheck.note &&
       this.elements.previewiFrame.note().then(($el) => {
+        cy.get(".dropdown-menu.dropdown-reminders").invoke(
+          "css",
+          "display",
+          "none"
+        );
         expect($el.text()).to.equal(whatToCheck.note.toString());
       });
 
@@ -452,6 +464,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .description()
           .invoke("text")
           .then(($el2) => {
+            cy.get(".dropdown-menu.dropdown-reminders").invoke(
+              "css",
+              "display",
+              "none"
+            );
             expect($el2.toString()).to.equal($el.toString());
           });
       });
@@ -464,6 +481,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .invoiceNumber()
           .invoke("text")
           .then(($el2) => {
+            cy.get(".dropdown-menu.dropdown-reminders").invoke(
+              "css",
+              "display",
+              "none"
+            );
             expect($el2.toString()).to.equal($el.toString());
           });
       });
@@ -486,6 +508,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             .find(".custPerson")
             .invoke("text")
             .then(($el2) => {
+              cy.get(".dropdown-menu.dropdown-reminders").invoke(
+                "css",
+                "display",
+                "none"
+              );
               expect($el2.toString()).to.equal($el.toString());
             });
         });
@@ -502,6 +529,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             .find(".servlocName")
             .invoke("text")
             .then(($el2) => {
+              cy.get(".dropdown-menu.dropdown-reminders").invoke(
+                "css",
+                "display",
+                "none"
+              );
               expect($el2.toString()).to.equal($el.toString());
             });
         });
@@ -536,6 +568,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     // this.elements.actionsDropdown.button().last().click()
     // cy.wait(4000)
     // this.elements.actionsDropdown.changeServiceLocation().last().click()
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     this.elements.addingNewInvoiceModal
       .billToButton()
       .click()
@@ -546,17 +583,27 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       });
 
     // cy.wait(4000);
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     this.elements.changeServiceLocation
       .serviceLocations()
       .should("be.visible")
       .contains(serviceLocation)
       .click();
     // cy.wait(4000);
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     this.elements.changeServiceLocation.proceedButton().last().click();
   };
 
   changeBillToServiceLocation = (serviceLocation) => {
-    cy.wait(4000);
+    cy.wait(500);
     // this.elements.actionsDropdown.button().last().click()
     // cy.wait(4000)
     // this.elements.actionsDropdown.changeBillToServiceLocation().last().click()
@@ -568,18 +615,27 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .contains("Change Bill To Service Location")
           .click();
       });
-    cy.wait(4000);
+    cy.wait(500);
     this.elements.changeBillToServiceLocation
       .serviceLocations()
       .contains(serviceLocation)
       .last()
       .click();
-    cy.wait(4000);
+    cy.wait(500);
+    this.elements.changeBillToServiceLocation
+      .proceedButton()
+      .should("be.enabled");
     this.elements.changeBillToServiceLocation.proceedButton().last().click();
   };
 
   changeCustomer = (customerName) => {
-    cy.wait(4000);
+    // cy.wait(500);
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
+    // cy.get(".dropdown-menu").invoke("css", "display", "none");
     // this.elements.actionsDropdown.button().last().click()
     // cy.wait(4000)
     // this.elements.actionsDropdown.changeBillToServiceLocation().last().click()
@@ -592,8 +648,16 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     this.elements.changeCustomer
       .selectCustomerTextbox()
       .last()
-      .type(`${customerName}{enter}`);
-    cy.wait(3500);
+      .type(`${customerName}`);
+    cy.wait(1000);
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
+    // cy.get(".dropdown-menu").invoke("css", "display", "none");
+    this.elements.changeCustomer
+      .customerListItems().should('be.visible')
     this.elements.changeCustomer
       .customerListItems()
       .contains(customerName)
@@ -601,7 +665,14 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       .click();
     // cy.wait(4000)
     // this.elements.changeCustomer.customerListItems().contains(customerName).last().click()
-    cy.wait(4000);
+    // cy.wait(500);
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
+    // cy.get(".dropdown-menu").invoke("css", "display", "none");
+    this.elements.changeCustomer.proceedButton().should("be.enabled");
     this.elements.changeCustomer.proceedButton().last().click();
   };
 
@@ -614,7 +685,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         .paymentMethodField()
         .click()
         .then(() => {
-          cy.wait(1000);
+          cy.wait(600);
           cy.get("mat-option").contains("Cash").click();
         });
     paymentDetails.referenceNumber &&
@@ -650,9 +721,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   sendReminder = () => {
-    cy.wait(4000);
+    cy.wait(500);
     this.elements.actionsDropdown.button().click();
-    cy.wait(4000);
+    cy.wait(500);
     this.elements.actionsDropdown.sendReminder().click();
     this.elements.sendInvoiceModal.sendButton().click();
   };

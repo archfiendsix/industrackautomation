@@ -91,7 +91,7 @@ describe("Invoices Module", () => {
 
     // Change Customer
     cy.log("// Change Customer");
-    const customerName = "White Petals";
+    const customerName = "GG001";
     InvoicesPage.changeCustomer(customerName);
 
     overviewValues = {

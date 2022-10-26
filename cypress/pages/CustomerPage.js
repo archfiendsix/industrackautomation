@@ -14,9 +14,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     addNewButton: () => cy.get('button[data-target="#modalAddNewCustomer"]'),
     moreActionsDropdown: {
       button: () =>
-        cy.get("app-customers-list .btn-group.actions button", {
-          timeout: 3000,
-        }),
+        cy.get("app-customers-list .btn-group.actions button"),
       addNewCustomer: () =>
         cy
           .get(
@@ -249,11 +247,16 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   clickAddCustomerButton = () => {
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     this.elements.addNewButton().click();
   };
 
   gotoAddNewCustomer = () => {
-    // cy.get("app-loading-mask").should("not.be.visible", { timeout: 3500 });
+    // cy.get("app-loading-mask").should("not.be.visible");
     this.elements.moreActionsDropdown
       .button()
       .click()
@@ -267,7 +270,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   // }
 
   clickAddNewServiceLocation = () => {
-    cy.wait(2500);
+    cy.wait(800);
     this.elements.customerOverview.addNewButton().click();
   };
 
@@ -366,6 +369,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     cy.intercept(
       "https://onetrackwebapiprod.azurewebsites.net/api/AddressBookGroups/AddressBookGroupDetail/**"
     ).as("AddressBookGroupDetail");
+    cy.wait(500)
     this.elements.manageCustomerGroupsModal
       .groupNameCell()
       .contains(groupName)

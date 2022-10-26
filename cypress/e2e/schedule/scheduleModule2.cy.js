@@ -181,7 +181,7 @@ describe("Schedule Module", () => {
     SchedulePage.searchConvertToInvoiceJobTab(jobInformation.jobDescription);
   });
 
-  it.only("Add default Job - Assign employee group - Start Job - Hold Job - Resume - Mark as completed- Approve for invoice - Convert to Invoice - assert info", () => {
+  it("Add default Job - Assign employee group - Start Job - Hold Job - Resume - Mark as completed- Approve for invoice - Convert to Invoice - assert info", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqp-f1439",

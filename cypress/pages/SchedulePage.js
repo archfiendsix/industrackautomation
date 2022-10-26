@@ -254,21 +254,20 @@ class SchedulePage {
           );
 
           // cy.wait('@AddressBookLiveSearch')
-          // cy.get("mat-option", { timeout: 3500 }).should("be.visible", {
-          //   timeout: 10000,
-          // });
+          // cy.get("mat-option").should("be.visible"
+          //  
+          // );
 
           cy.get(".mat-autocomplete-panel").should(
             "have.class",
-            "mat-autocomplete-visible",
-            { timeout: 3500 }
+            "mat-autocomplete-visible"
           );
           cy.wait("@AddressBookLiveSearch");
           cy.get('.mat-autocomplete-panel[role="listbox"] mat-option')
-            .should("be.visible", { timeout: 3500 })
+            .should("be.visible")
             .then(($el) => {
               cy.wrap($el)
-                .contains(jobInformation.selectCustomer, { timeout: 3500 })
+                .contains(jobInformation.selectCustomer,)
                 .click();
             });
         });
@@ -279,7 +278,7 @@ class SchedulePage {
         .then(() => {
           // cy.wait(4000)
           cy.get(".viewport-list-item")
-            .contains(jobInformation.serviceLocation, { timeout: 3500 })
+            .contains(jobInformation.serviceLocation)
             .should("be.visible")
             .click();
         });
@@ -287,7 +286,7 @@ class SchedulePage {
     jobInformation.jobDescription &&
       this.elements.addNewJobModal.jobsInfoTab
         .jobDescriptionTexbox()
-        .should("be.visible", { timout: 10000 })
+        .should("be.visible")
         .clear()
         .type(jobInformation.jobDescription.toString());
     jobInformation.jobStatus &&
@@ -333,7 +332,7 @@ class SchedulePage {
             // cy.wait(2500);
             this.elements.addNewJobModal.partsServiceEquipment
               .textbox()
-              .should("be.visible", { timeout: 3500 })
+              .should("be.visible")
               .clear()
               .type(item.name)
               .then(() => {
@@ -791,12 +790,12 @@ class SchedulePage {
   };
 
   gotoJobsQueue = () => {
-    cy.wait(2500);
+    cy.wait(800);
     this.elements.actionsDropdown.button().click();
     this.elements.actionsDropdown.jobsQueue().click();
   };
   clickFirstUnassignedJob = () => {
-    cy.wait(3500);
+    cy.wait(800);
     this.elements.jobsQueueModal.unassignedJobsTab.tableFirstRow().dblclick();
   };
 
@@ -830,7 +829,7 @@ class SchedulePage {
       .then(($el) => {
         cy.wrap($el).type("{enter}");
       });
-    cy.wait(4000);
+    cy.wait(800);
     this.elements.jobsQueueModal.searchUnasignedJobsTab
       .jobRowCell()
       .should("be.visible")
@@ -850,7 +849,7 @@ class SchedulePage {
         cy.wrap($el).type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask").should("not.be.visible", { timeout: 3500 });
+    cy.get("app-loading-mask").should("not.be.visible");
     cy.get(".preloader").should("not.be.visible");
     this.elements.jobsQueueModal.assignedJobsTab
       .jobRowCell()
@@ -945,9 +944,7 @@ class SchedulePage {
         cy.wrap($el).type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
-      timeout: 10000,
-    });
+    cy.get("app-loading-mask").should("not.be.visible");
     this.elements.jobsQueueModal.onHoldJobsTab
       .jobRowCell()
       .contains(jobDescription)
@@ -965,9 +962,7 @@ class SchedulePage {
         cy.wrap($el).type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
-      timeout: 10000,
-    });
+    cy.get("app-loading-mask").should("not.be.visible");
     this.elements.jobsQueueModal.completedJobsTab
       .jobRowCell()
       .contains(jobDescription)
@@ -977,8 +972,8 @@ class SchedulePage {
       .click()
       .then(() => {
         // cy.wait(500);
-        cy.get(".btn-group.actions .dropdown-menu a", { timeout: 3500 })
-          .should("be.visible", { timeout: 3500 })
+        cy.get(".btn-group.actions .dropdown-menu a")
+          .should("be.visible")
           .contains("View Job")
           .click();
       });
@@ -993,9 +988,7 @@ class SchedulePage {
         cy.wrap($el).clear().type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
-      timeout: 10000,
-    });
+    cy.get("app-loading-mask").should("not.be.visible");
     this.elements.jobsQueueModal.completedJobsTab
       .jobRowCell()
       .contains(jobDescription)
@@ -1005,9 +998,9 @@ class SchedulePage {
       .click()
       .then(() => {
         // cy.wait(500);
-        cy.get(".btn-group.actions .dropdown-menu a", { timeout: 3500 })
+        cy.get(".btn-group.actions .dropdown-menu a")
           .contains("Approve")
-          .should("be.visible", { timeout: 3500 })
+          .should("be.visible")
           .click();
       });
   };
@@ -1021,9 +1014,7 @@ class SchedulePage {
         cy.wrap($el).clear().type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
-      timeout: 10000,
-    });
+    cy.get("app-loading-mask").should("not.be.visible");
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab
       .jobRowCell()
       .contains(jobDescription)
@@ -1034,8 +1025,8 @@ class SchedulePage {
       .then(() => {
         // cy.wait(500);
         cy.get(".btn-group.actions .dropdown-menu a")
-          .contains("Convert to Invoice", { timeout: 3500 })
-          .should("be.visible", { timeout: 3500 })
+          .contains("Convert to Invoice")
+          .should("be.visible")
           .click();
       });
   };
@@ -1049,9 +1040,7 @@ class SchedulePage {
         cy.wrap($el).clear().type("{enter}");
       });
     // cy.wait(5500);
-    cy.get("app-loading-mask", { timeout: 3500 }).should("not.be.visible", {
-      timeout: 10000,
-    });
+    cy.get("app-loading-mask").should("not.be.visible");
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab
       .jobRowCell()
       .contains(jobDescription)

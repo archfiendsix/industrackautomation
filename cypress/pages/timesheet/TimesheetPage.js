@@ -368,6 +368,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   clickAddNewTimesheetForEmployee = () => {
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     this.elements.timesheetRecordsModal.addNewTimesheetRecordButton().click();
   };
 

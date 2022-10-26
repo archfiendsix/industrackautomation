@@ -103,7 +103,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
   gotoAddNewInventory = () => {
     cy.visit("/settingsTab/general/setting");
-    cy.wait(3000);
+    cy.wait(800);
     this.elements.inventoryPanel().click();
     this.elements.inventoryListPanel().click();
     // cy.visit("settingsTab/inventory/list")
@@ -133,13 +133,13 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   addNewNonInventory = (nonInventoryInfo) => {
-    cy.wait(1500);
+    cy.wait(800);
     nonInventoryInfo.name &&
       this.elements.addNonInventoryModal
         .nameTextbox()
         .clear()
         .type(nonInventoryInfo.name);
-    cy.wait(1500);
+    cy.wait(800);
     nonInventoryInfo.sku &&
       this.elements.addNonInventoryModal
         .skuTextbox()
@@ -234,7 +234,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .partSearchTextbox()
           .clear()
           .type(`${i.name}`);
-        cy.wait(1000);
+        // cy.wait(1000);
+        this.elements.addAssemblyModal.partSearchSelect().should('be.visible')
         this.elements.addAssemblyModal.partSearchSelect().first().click();
         this.elements.addAssemblyModal.partSearchQty().clear().type(`${i.qty}`);
         this.elements.addAssemblyModal.addPartButton().click();

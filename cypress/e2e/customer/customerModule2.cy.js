@@ -21,7 +21,7 @@ describe("Add Customer", () => {
     // Dashboard.preventNotificationCard();
     Dashboard.clickCustomerTab();
     // cy.visit('/crmTab/list')
-    cy.get("body").contains("Tags");
+    // cy.get("body").contains("Tags");
     CustomerPage.gotoAddCustomerModal();
   });
   it("Test with one tag and verify that tags are assigned to customer", () => {
@@ -45,7 +45,6 @@ describe("Add Customer", () => {
       customerInfo.companyName
     ); // -> modify this
   });
-
 
   // 'Make Customer active' button being covered by support avatar
   it("Make customer inactive - Check unsearchability - Make Customer active again - Check searchability", () => {
@@ -141,8 +140,6 @@ describe("Add Customer", () => {
       CustomerPage.gotoAddNewAttachmentModal();
       CustomerPage.addNewAttachment(info);
     });
-
-  
   });
 
   // it.skip("Create new Customer - Add 2 service locations - Add Notes - Check if correctly assigned to the service location(s)", () => {

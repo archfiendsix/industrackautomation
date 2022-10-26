@@ -96,7 +96,7 @@ describe("New Estimate module", () => {
     // let serviceRandName = uuidv4().substring(0, 5)
     let serviceRandSKU = uuidv4().substring(0, 5);
     const serviceInfo = {
-      name: `Service-`,
+      name: `Service-4c324`,
       // name: `Service-${serviceRandName}`,
       sku: `SKU-${serviceRandSKU}`,
       nonTaxable: false,
@@ -111,7 +111,7 @@ describe("New Estimate module", () => {
     // let assemblyRandName = uuidv4().substring(0, 5)
     let assemblyRandSKU = uuidv4().substring(0, 5);
     const assemblyInfo = {
-      name: `Assembly-`,
+      name: `35b07-Assembly`,
       // name: `Assembly-${assemblyRandName}`,
       sku: `SKU-${assemblyRandSKU}`,
       nonTaxable: false,
@@ -149,10 +149,9 @@ describe("New Estimate module", () => {
     EstimatesPage.inventorySelect(serviceInfo.name);
     // cy.wait(4000);
     EstimatesPage.inventorySelect(assemblyInfo.name);
-
     // Assign discounts on rows
-    EstimatesPage.addDiscountInRow(0, 30, "%", 3);
-    EstimatesPage.addDiscountInRow(0, 25, "$", 3);
+    // EstimatesPage.addDiscountInRow(0, 30, "%", 3);
+    // EstimatesPage.addDiscountInRow(0, 25, "$", 3);
     // cy.wait(4000);
 
     // Add random discounts

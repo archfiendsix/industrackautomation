@@ -69,7 +69,7 @@ describe("Timesheet module", () => {
       type: "Shift",
       costCode: "123",
       vehicle: "Bumble Bee",
-      job: "Job-80a0c",
+      job: "GG test",
       time: {
         start: {
           date: `${getRandomInt(1, 12)}/${getRandomInt(1, 28)}/${getRandomInt(
@@ -105,7 +105,7 @@ describe("Timesheet module", () => {
       type: "Job",
       costCode: "123",
       vehicle: "Bumble Bee",
-      job: "Job-80a0c",
+      job: "GG test",
       time: {
         start: {
           date: `${getRandomInt(1, 12)}/${getRandomInt(1, 28)}/${getRandomInt(
@@ -141,7 +141,7 @@ describe("Timesheet module", () => {
       type: "Break",
       costCode: "123",
       vehicle: "Bumble Bee",
-      job: "Job-80a0c",
+      job: "GG test",
       time: {
         start: {
           date: `${getRandomInt(1, 12)}/${getRandomInt(1, 28)}/${getRandomInt(
@@ -177,7 +177,7 @@ describe("Timesheet module", () => {
       type: "Travel",
       costCode: "123",
       vehicle: "Bumble Bee",
-      job: "Job-80a0c",
+      job: "GG test",
       time: {
         start: {
           date: `${getRandomInt(1, 12)}/${getRandomInt(1, 28)}/${getRandomInt(

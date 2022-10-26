@@ -21,7 +21,7 @@ describe("Add Customer", () => {
     // Dashboard.preventNotificationCard()
     Dashboard.clickCustomerTab();
     // cy.visit('/crmTab/list')
-    cy.get("body").contains("Tags");
+    // cy.get("body").contains("Tags");
     CustomerPage.gotoAddCustomerModal();
   });
 
@@ -40,7 +40,7 @@ describe("Add Customer", () => {
     // cy.wait(2500)
     AddCustomerPage.elements
       .saveButton()
-      .should("not.be.disabled", { timeout: 3000 });
+      .should("not.be.disabled");
 
     AddCustomerPage.elements.saveButton().click();
   });
@@ -82,7 +82,7 @@ describe("Add Customer", () => {
 
     AddCustomerPage.elements
       .saveButton()
-      .should("not.be.disabled", { timeout: 3000 });
+      .should("not.be.disabled");
 
     AddCustomerPage.elements.saveButton().click();
 

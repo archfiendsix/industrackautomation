@@ -47,58 +47,73 @@ class Dashboard {
 
   checkLoadPage = () => {
     // cy.intercept("https://m.stripe.com/**").as("page");
-    cy.get("body").should("have.length.gt",0);
+    cy.get("body").should("be.visible");
+    cy.get(".dropdown-menu.dropdown-reminders").invoke(
+      "css",
+      "display",
+      "none"
+    );
     // cy.wait("@page");
   };
 
   clickCustomerTab = () => {
+    // cy.wait(100);
     this.checkLoadPage();
     this.elements.customerTab().click();
+    this.checkLoadPage();
   };
 
   clickAddCustomerButton = () => {
     this.checkLoadPage();
     this.elements.addCustomerButton().click();
+    this.checkLoadPage();
   };
 
   clickSettings = () => {
-    // this.elements.settingsButton().first().click({ force: true })
-    // this.elements.settingsButton().first().click({ force: true })
+    // this.elements.settingsButton().first().click()
+    // this.elements.settingsButton().first().click()
     this.checkLoadPage();
     cy.visit("/settingsTab");
-    cy.wait(6000);
+    this.checkLoadPage();
   };
 
   clickEstimatesTab = () => {
     this.checkLoadPage();
     this.elements.estimatesTab().should("be.visible").dblclick();
+    this.checkLoadPage();
   };
   clickTimesheetTab = () => {
     this.checkLoadPage();
     this.elements.timesheetTab().should("be.visible").dblclick();
+    this.checkLoadPage();
   };
   clickPurchaseOrderTab = () => {
     this.checkLoadPage();
     this.elements.purchaseOrderTab().should("be.visible").dblclick();
+    this.checkLoadPage();
   };
 
   clickScheduleTab = () => {
     this.checkLoadPage();
     this.elements.scheduleTab().should("be.visible").dblclick();
+    this.checkLoadPage();
   };
 
   clickSchedulingTab = () => {
     this.checkLoadPage();
     this.elements.schedulingTab().should("be.visible").dblclick();
+    this.checkLoadPage();
   };
 
   clickInvoicesTab = () => {
     this.checkLoadPage();
     this.elements.invoicesTab().should("be.visible").dblclick();
+    this.checkLoadPage();
   };
   clickTaskTemplatesTab = () => {
     this.checkLoadPage();
     this.elements.taskTemplates().should("be.visible").dblclick();
+    this.checkLoadPage();
   };
 
   gotoTaxAndTermsPage = () => {
@@ -113,6 +128,7 @@ class Dashboard {
     this.checkLoadPage();
     this.clickSettings();
     this.elements.scheduleTab().dblclick();
+    this.checkLoadPage();
   };
 
   preventNotificationCard = () => {
