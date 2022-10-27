@@ -194,8 +194,9 @@ class EstimatesPage {
       "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
     ).as("AddressBookLiveSearchExt");
     this.typeSearchInput(customer_name);
-    cy.wait("@AddressBookLiveSearchExt");
+
     this.clickSearch();
+    cy.wait("@AddressBookLiveSearchExt");
     this.elements.searchItem().click();
     this.elements.proceedButton().click();
   }
