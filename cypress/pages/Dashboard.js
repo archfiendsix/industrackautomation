@@ -53,6 +53,7 @@ class Dashboard {
       "display",
       "none"
     );
+    cy.get("body").should("have.length.gt", 0).should("be.visible");
     // cy.wait("@page");
   };
 

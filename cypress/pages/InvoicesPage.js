@@ -312,19 +312,27 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     this.elements.addNewInvoiceButton().click();
     cy.wait("@GetAddressBooksWithPaging");
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
-    ).as("AddressBookLiveSearchExt");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
+    // ).as("AddressBookLiveSearchExt");
 
     this.elements.addingNewInvoiceModal
       .searchField()
       .should("be.visible")
       .type(inputInvoiceInfo.customer);
-    cy.wait("@AddressBookLiveSearchExt");
-
+    // cy.wait("@AddressBookLiveSearchExt");
+    cy.get(".preloader").should("have.css", "display", "none", {
+      errorMessage: "Search loading too slow",
+    });
+    this.elements.addingNewInvoiceModal.searchItem().should("be.visible");
     this.elements.addingNewInvoiceModal
       .searchItem()
       .contains(inputInvoiceInfo.customer)
+      .should("be.visible");
+    this.elements.addingNewInvoiceModal
+      .searchItem()
+      .contains(inputInvoiceInfo.customer)
+      .first()
       .click();
 
     this.elements.addingNewInvoiceModal.proceedButton().click();
@@ -483,9 +491,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     whatToCheck.description &&
       whatToCheck.description.invoke("val").then(($el) => {
         cy.log($el);
+        this.elements.previewiFrame.description().should("be.visible");
         this.elements.previewiFrame
           .description()
-          .should("be.visible")
           .invoke("text")
           .then(($el2) => {
             cy.get(".dropdown-menu.dropdown-reminders").invoke(
@@ -602,11 +610,14 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     );
     this.elements.addingNewInvoiceModal
       .billToButton()
+      .should("be.visible")
       .click()
       .then(() => {
-        cy.get(".mat-menu-content button")
-          .contains("Change Service Location")
-          .click();
+        cy.get(".mat-menu-content").should("be.visible");
+        cy.contains(
+          ".mat-menu-content button",
+          "Change Service Location"
+        ).click();
       });
 
     // cy.wait(4000);
@@ -615,10 +626,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       "display",
       "none"
     );
+    this.elements.changeServiceLocation.serviceLocations().should("be.visible");
     this.elements.changeServiceLocation
       .serviceLocations()
-      .should("be.visible")
       .contains(serviceLocation)
+      .should("be.visible")
       .click();
     // cy.wait(4000);
     cy.get(".dropdown-menu.dropdown-reminders").invoke(
@@ -683,7 +695,12 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       "none"
     );
     // cy.get(".dropdown-menu").invoke("css", "display", "none");
+
     this.elements.changeCustomer.customerListItems().should("be.visible");
+    this.elements.changeCustomer
+      .customerListItems()
+      .contains(customerName)
+      .should("be.visible");
     this.elements.changeCustomer
       .customerListItems()
       .contains(customerName)
