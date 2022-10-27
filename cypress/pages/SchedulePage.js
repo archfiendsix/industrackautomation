@@ -245,6 +245,11 @@ class SchedulePage {
           cy.wait(800); // Can't Omit this. Requires wait to find the customer
           // cy.get('app-job-edit-form').should('be.visible')
           // cy.get('.sk-spinner').should('not.be.visible')
+          cy.get('.mat-autocomplete-panel[role="listbox"]').invoke(
+            "css",
+            "display",
+            "block"
+          );
           cy.get('.mat-autocomplete-panel[role="listbox"] mat-option').should(
             "exist"
           );
@@ -255,7 +260,7 @@ class SchedulePage {
 
           // cy.wait('@AddressBookLiveSearch')
           // cy.get("mat-option").should("be.visible"
-          //  
+          //
           // );
 
           cy.get(".mat-autocomplete-panel").should(
@@ -266,9 +271,7 @@ class SchedulePage {
           cy.get('.mat-autocomplete-panel[role="listbox"] mat-option')
             .should("be.visible")
             .then(($el) => {
-              cy.wrap($el)
-                .contains(jobInformation.selectCustomer,)
-                .click();
+              cy.wrap($el).contains(jobInformation.selectCustomer).click();
             });
         });
     jobInformation.serviceLocation &&
@@ -1049,6 +1052,15 @@ class SchedulePage {
       .find("button")
       .click()
       .then(() => {
+        // cy.get('app-jobs-approved ul.dropdown-menu').invoke('css','display','block')
+        this.elements.jobsQueueModal.approvedForInvoiceJobsTab
+          .jobRowCell()
+          .contains(jobDescription)
+          .first()
+          .parent()
+          .find("ul.dropdown-menu")
+          .invoke("css", "display", "block");
+        cy.get(".btn-group.actions .dropdown-menu a").should("be.visible");
         cy.wait(500);
         cy.get(".btn-group.actions .dropdown-menu a")
           .contains("View Job Report")

@@ -13,8 +13,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     addNewButton: () => cy.get('button[data-target="#modalAddNewCustomer"]'),
     moreActionsDropdown: {
-      button: () =>
-        cy.get("app-customers-list .btn-group.actions button"),
+      button: () => cy.get("app-customers-list .btn-group.actions button"),
       addNewCustomer: () =>
         cy
           .get(
@@ -241,9 +240,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             "display",
             "none"
           );
-          cy.get("mat-option")
-            .contains(equipmentInformation.upuodFromInventory)
+          cy.contains("mat-option", equipmentInformation.upuodFromInventory)
             .first()
+            .should("be.visible")
             .click();
         });
     cy.wait(3000);
@@ -374,7 +373,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     cy.intercept(
       "https://onetrackwebapiprod.azurewebsites.net/api/AddressBookGroups/AddressBookGroupDetail/**"
     ).as("AddressBookGroupDetail");
-    cy.wait(500)
+    cy.wait(500);
     this.elements.manageCustomerGroupsModal
       .groupNameCell()
       .contains(groupName)
@@ -401,7 +400,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             "display",
             "none"
           );
-          cy.get("mat-option").contains("100").click();
+          cy.contains("mat-option", "100").should("be.visible").click();
         });
       // cy.get('body').scrollTo('top')
       this.elements.searchBox.input().clear().type(customerNumber);
@@ -488,6 +487,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     this.elements.customerTable
       .numberCell()
       .should("contain", customerNumber)
+      .first()
+      .should("be.visible")
       .parent()
       .click();
   };

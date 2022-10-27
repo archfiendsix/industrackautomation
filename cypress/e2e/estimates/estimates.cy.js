@@ -24,7 +24,7 @@ describe("New Estimate module", () => {
     // Dashboard.preventNotificationCard();
   });
 
-  it("Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items", () => {
+  it.only("Add Customer with one added Service Location - Add Inventory - Add Non-inventory - Add Service - Add Assembly - New Estimates w/ all items", () => {
     Dashboard.clickCustomerTab();
     // Dashboard.preventNotificationCard();
     CustomerPage.gotoAddNewCustomer();

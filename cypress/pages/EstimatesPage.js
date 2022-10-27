@@ -336,7 +336,7 @@ class EstimatesPage {
     // ).as("GetEstimateJobs");
     // cy.get("mat-dialog-container").should("be.visible");
     // cy.wait("@GetEstimateJobs");
-    cy.wait(1000);
+    cy.wait(600);
     this.elements
       .confirmYesButton()
       // .should("be.visible")
