@@ -234,7 +234,8 @@ class SchedulePage {
             "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearch"
           ).as("AddressBookLiveSearch");
           cy.wrap($el).clear().type(`${jobInformation.selectCustomer}`);
-          // cy.wait("@AddressBookLiveSearch");
+          cy.wait(300); //do not omit
+          cy.wait("@AddressBookLiveSearch");
           cy.wrap($el)
             .invoke("val")
             .then((val) => {
@@ -267,10 +268,13 @@ class SchedulePage {
             "have.class",
             "mat-autocomplete-visible"
           );
+          cy.wait(300);
           cy.wait("@AddressBookLiveSearch");
-          cy.get('.mat-autocomplete-panel[role="listbox"] mat-option')
+          cy.get('.mat-autocomplete-panel[role="listbox"]')
+            .find("mat-option")
             .should("be.visible")
             .then(($el) => {
+              cy.wrap($el).first().should("be.visible");
               cy.wrap($el).contains(jobInformation.selectCustomer).click();
             });
         });
@@ -795,31 +799,68 @@ class SchedulePage {
   gotoJobsQueue = () => {
     cy.wait(800);
     this.elements.actionsDropdown.button().click();
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetUnassignedJobsWithPaging**"
+    ).as("GetUnassignedJobsWithPaging");
     this.elements.actionsDropdown.jobsQueue().click();
+    cy.wait(300);
+    cy.wait("@GetUnassignedJobsWithPaging");
   };
   clickFirstUnassignedJob = () => {
-    cy.wait(800);
+    // cy.wait(800);
+    cy.get("app-jobs-unassigned app-loading-mask").should("be.visible");
+    cy.get("app-jobs-unassigned app-loading-mask .preloader").should(
+      "have.css",
+      "display",
+      "none"
+    );
+    cy.get("app-jobs-unassigned table").should("be.visible");
+    this.elements.jobsQueueModal.unassignedJobsTab
+      .tableFirstRow()
+      .should("be.visible");
     this.elements.jobsQueueModal.unassignedJobsTab.tableFirstRow().dblclick();
   };
 
   gotoAssignedJobsTab = () => {
+    // cy.wait(300);
+    // cy.get(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetAssignedJobsWithPaging**"
+    // ).as("GetAssignedJobsWithPaging");
+
     this.elements.jobsQueueModal.assignedJobsTab.button().click();
+    // cy.wait("@GetAssignedJobsWithPaging");
   };
 
   gotoOnHoldJobsTab = () => {
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetOnHoldJobsWithPaging**"
+    ).as("GetOnHoldJobsWithPaging");
     this.elements.jobsQueueModal.onHoldJobsTab.button().click();
+    cy.wait("@GetOnHoldJobsWithPaging");
   };
 
   gotoCompletedJobsTab = () => {
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetCompletedJobsWithPaging**"
+    ).as("GetCompletedJobsWithPaging");
     this.elements.jobsQueueModal.completedJobsTab.button().click();
+    cy.wait("@GetCompletedJobsWithPaging");
   };
 
   gotoApprovedForInvoiceTab = () => {
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetApprovedJobsWithPaging**"
+    ).as("GetApprovedJobsWithPaging");
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab.button().click();
+    cy.wait("@GetApprovedJobsWithPaging");
   };
 
   gotoInvoicedTab = () => {
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetOnHoldJobsWithPaging**"
+    ).as("GetInvoicedJobsWithPaging");
     this.elements.jobsQueueModal.invoicedJobsTab.button().click();
+    cy.wait("@GetInvoicedJobsWithPaging");
   };
   // searchJobAndClickOnJobRow
 

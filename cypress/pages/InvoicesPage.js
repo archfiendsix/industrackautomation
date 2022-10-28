@@ -231,33 +231,33 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     },
     previewiFrame: {
       body: () => {
-        cy.get(".iframe #contentHolder")
+        cy.get("iframe#contentHolder")
           .its("0.contentDocument.body")
           .then(cy.wrap);
       },
       custName: () =>
         cy
-          .get(".iframe #contentHolder")
+          .get("iframe#contentHolder")
           .its("0.contentDocument.body")
           .then(cy.wrap)
           .find(".custName"),
       note: () =>
         cy
-          .get(".iframe #contentHolder")
+          .get("iframe#contentHolder")
           .its("0.contentDocument.body")
           .should("not.be.empty")
           .then(cy.wrap)
           .find(".total.row h3+p"),
       description: () =>
         cy
-          .get(".iframe #contentHolder")
+          .get("iframe#contentHolder")
           .its("0.contentDocument.body")
           .should("not.be.empty")
           .then(cy.wrap)
           .find("#reportContent h3+span"),
       invoiceNumber: () =>
         cy
-          .get(".iframe #contentHolder")
+          .get("iframe#contentHolder")
           .its("0.contentDocument.body")
           .should("not.be.empty")
           .then(cy.wrap)
@@ -266,14 +266,14 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           ),
       customerInfo: () =>
         cy
-          .get(".iframe #contentHolder")
+          .get("iframe#contentHolder")
           .its("0.contentDocument.body")
           .should("not.be.empty")
           .then(cy.wrap)
           .find(".customerInfo"),
       customerServiceLocation: () =>
         cy
-          .get(".iframe #contentHolder")
+          .get("iframe#contentHolder")
           .its("0.contentDocument.body")
           .should("not.be.empty")
           .then(cy.wrap)
@@ -472,6 +472,11 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     cy.get("app-report-preview .iframe")
       .find("iframe")
       .should("have.length.gt", 0);
+
+    cy.enter("iframe#contentHolder").then((getBody) => {
+      getBody().find(".total.row h3+p").should("be.visible");
+    });
+
     // Check Invoice Note
     whatToCheck.note &&
       this.elements.previewiFrame

@@ -35,13 +35,13 @@ module.exports = defineConfig({
   "compilerOptions": {
     "types": ["jest", "node"]
   },
-  requestTimeout: 5000,
+  requestTimeout: 30000,
   numTestsKeptInMemory: 0,
   "numTestsKeptInMemory": 0,
-  responseTimeout: 6000,
+  responseTimeout: 30000,
   pageLoadTimeout: 60000,
   chromeWebSecurity: false,
   screenshotOnRunFailure: false,
-  defaultCommandTimeout: 10000,                                                                                                                                                                                    
+  defaultCommandTimeout: 30000,                                                                                                                                                                                    
   video: true,
 });

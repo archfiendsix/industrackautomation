@@ -171,6 +171,7 @@ class EstimatesPage {
 
   clickAddNew = () => {
     cy.intercept("**/api/**").as("api");
+    cy.wait(300)
     cy.get(".dropdown-menu.dropdown-reminders").invoke(
       "css",
       "display",
@@ -378,6 +379,10 @@ class EstimatesPage {
     cy.wait("@api");
     // cy.wait("@GetEstimate");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
+
+    cy.enter("iframe#contentHolder").then((getBody) => {
+      getBody().find(".comp-header .col-lg-4:last-child() span").should("be.visible");
+    });
     this.elements.previewiFrame.description().contains(verifyThis.customername);
   };
 

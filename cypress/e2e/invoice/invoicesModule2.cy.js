@@ -21,7 +21,7 @@ describe("Invoices Module", () => {
     Dashboard.clickInvoicesTab();
     // Dashboard.preventNotificationCard();
   });
-  it.only("For unpaid invoices, test the following: Change invoice Bill to any service location, Change invoice to any service location - Then check Preview values", () => {
+  it("For unpaid invoices, test the following: Change invoice Bill to any service location, Change invoice to any service location - Then check Preview values", () => {
     const invoiceInfo = {
       customer: "01223",
       inventoriesToAdd: ["Add Inventory - Taxable no SN"],
