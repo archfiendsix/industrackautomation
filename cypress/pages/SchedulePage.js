@@ -218,10 +218,21 @@ class SchedulePage {
     this.elements.addNewJobModal.jobsInfoTab
       .jobDescriptionTexbox()
       .type("Test Description");
+    this.elements.addNewJobModal.jobsInfoTab
+      .jobStatusField()
+      .should("be.visible");
     this.elements.addNewJobModal.jobsInfoTab.jobStatusField().select("Started");
+    this.elements.addNewJobModal.jobsInfoTab
+      .notesTextarea()
+      .should("be.visible");
     this.elements.addNewJobModal.jobsInfoTab.notesTextarea().type("Test Note");
+    this.elements.addNewJobModal.jobsInfoTab
+      .jobPriorityField()
+      .should("be.visible");
     this.elements.addNewJobModal.jobsInfoTab.jobPriorityField().select("High");
+    this.elements.addNewJobModal.jobsInfoTab.startDate().should("be.visible");
     this.elements.addNewJobModal.jobsInfoTab.startDate().type("09/01/2022");
+    this.elements.addNewJobModal.jobsInfoTab.endDate().should("be.visible");
     this.elements.addNewJobModal.jobsInfoTab.endDate().type("09/30/2022");
   };
 
@@ -270,11 +281,20 @@ class SchedulePage {
           );
           cy.wait(300);
           cy.wait("@AddressBookLiveSearch");
+          cy.get('.mat-autocomplete-panel[role="listbox"]').should(
+            "be.visible"
+          );
+          cy.get('.mat-autocomplete-panel[role="listbox"]')
+          .find("mat-option")
+          .should("be.visible")
           cy.get('.mat-autocomplete-panel[role="listbox"]')
             .find("mat-option")
-            .should("be.visible")
             .then(($el) => {
-              cy.wrap($el).first().should("be.visible");
+              cy.contains(
+                "mat-option",
+                jobInformation.selectCustomer
+              )
+              cy.wait(500)
               cy.wrap($el).contains(jobInformation.selectCustomer).click();
             });
         });
@@ -286,6 +306,7 @@ class SchedulePage {
           // cy.wait(4000)
           cy.get(".viewport-list-item")
             .contains(jobInformation.serviceLocation)
+            .scrollIntoView()
             .should("be.visible")
             .click();
         });
@@ -297,10 +318,17 @@ class SchedulePage {
         .clear()
         .type(jobInformation.jobDescription.toString());
     jobInformation.jobStatus &&
-      this.elements.addNewJobModal.jobsInfoTab
-        .jobStatusField()
-        .should("be.visible")
-        .select(jobInformation.jobStatus);
+      this.elements.addNewJobModal.jobsInfoTab.jobStatusField().then(($el) => {
+        cy.get("app-job-edit-form").should("exist");
+        cy.get("app-job-edit-form").find(".modal-header").should("be.visible");
+        cy.wrap($el).should("be.visible");
+        cy.contains(
+          "app-job-edit-form form select#jobState",
+          jobInformation.jobStatus.toString().trim()
+        ).scrollIntoView();
+        cy.wrap($el).select(jobInformation.jobStatus);
+      });
+
     jobInformation.notes &&
       this.elements.addNewJobModal.jobsInfoTab
         .notesTextarea()
@@ -314,7 +342,7 @@ class SchedulePage {
         .click()
         .then(() => {
           cy.get("mat-option")
-            .contains(jobInformation.serviceType)
+            .contains(jobInformation.serviceType).scrollIntoView()
             .should("be.visible")
             .click();
         });
@@ -348,6 +376,7 @@ class SchedulePage {
                 cy.get("mat-option")
                   .contains(item.name)
                   .first()
+                  .scrollIntoView()
                   .click()
                   .then(() => {
                     this.elements.addNewJobModal.partsServiceEquipment
@@ -400,7 +429,7 @@ class SchedulePage {
               .dropdown()
               .click()
               .then(() => {
-                cy.get("mat-option").contains(item).click();
+                cy.get("mat-option").contains(item).scrollIntoView().click();
                 this.elements.addNewJobModal.existingCustomerEquipment
                   .addButton()
                   .click();
@@ -531,9 +560,13 @@ class SchedulePage {
     jobInformation.jobStatus &&
       this.elements.addNewJobModal.jobsInfoTab
         .jobStatusField()
+        .should("be.visible")
         .invoke("val")
         .then((val) => {
           // cy.log($el.text().toString())
+          this.elements.addNewJobModal.jobsInfoTab
+            .jobStatusField()
+            .should("be.visible");
           this.elements.addNewJobModal.jobsInfoTab
             .jobStatusField()
             .contains(jobInformation.jobStatus)
@@ -1101,6 +1134,8 @@ class SchedulePage {
           .parent()
           .find("ul.dropdown-menu")
           .invoke("css", "display", "block");
+        cy.get(".btn-group.actions").should("be.visible");
+        cy.get(".btn-group.actions .dropdown-menu").should("be.visible");
         cy.get(".btn-group.actions .dropdown-menu a").should("be.visible");
         cy.wait(500);
         cy.get(".btn-group.actions .dropdown-menu a")

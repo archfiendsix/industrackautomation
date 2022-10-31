@@ -53,6 +53,8 @@ class Dashboard {
       "display",
       "none"
     );
+    // cy.get(".dropdown-menu").should('not.be.visible')
+    cy.wait(500)
     cy.get("body").should("have.length.gt", 0).should("be.visible");
     // cy.wait("@page");
   };

@@ -309,7 +309,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     cy.intercept(
       " https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBooksWithPaging**"
     ).as("GetAddressBooksWithPaging");
-
+    this.elements.addNewInvoiceButton().should("be.visible");
     this.elements.addNewInvoiceButton().click();
     cy.wait("@GetAddressBooksWithPaging");
     // cy.intercept(
@@ -473,9 +473,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       .find("iframe")
       .should("have.length.gt", 0);
 
-    cy.enter("iframe#contentHolder").then((getBody) => {
-      getBody().find(".total.row h3+p").should("be.visible");
-    });
+    // cy.enter("iframe#contentHolder").then((getBody) => {
+    //   cy.wait(600);
+    //   getBody().find(".total.row h3").should("be.visible");
+    // });
 
     // Check Invoice Note
     whatToCheck.note &&
@@ -495,7 +496,6 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     // Check Description
     whatToCheck.description &&
       whatToCheck.description.invoke("val").then(($el) => {
-        cy.log($el);
         this.elements.previewiFrame.description().should("be.visible");
         this.elements.previewiFrame
           .description()
@@ -513,7 +513,6 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     // Check Invoice Number
     whatToCheck.invoiceNumber &&
       whatToCheck.invoiceNumber.invoke("val").then(($el) => {
-        cy.log($el);
         this.elements.previewiFrame
           .invoiceNumber()
           .should("be.visible")
@@ -541,7 +540,6 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         .should("be.visible")
         .invoke("text")
         .then(($el) => {
-          cy.log($el);
           this.elements.previewiFrame
             .customerInfo()
             .find(".custPerson")
@@ -563,7 +561,6 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         .should("be.visible")
         .invoke("text")
         .then(($el) => {
-          cy.log($el);
           this.elements.previewiFrame
             .customerServiceLocation()
             .find(".servlocName")
@@ -693,14 +690,14 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       .selectCustomerTextbox()
       .last()
       .type(`${customerName}`);
-    cy.wait(1000);
+    cy.wait(600);
     cy.get(".dropdown-menu.dropdown-reminders").invoke(
       "css",
       "display",
       "none"
     );
     // cy.get(".dropdown-menu").invoke("css", "display", "none");
-
+    cy.wait(600);
     this.elements.changeCustomer.customerListItems().should("be.visible");
     this.elements.changeCustomer
       .customerListItems()
@@ -710,6 +707,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       .customerListItems()
       .contains(customerName)
       .first()
+      .scrollIntoView() 
       .click();
     // cy.wait(4000)
     // this.elements.changeCustomer.customerListItems().contains(customerName).last().click()
@@ -725,7 +723,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   receiveInvoicePayment = (paymentDetails) => {
-    cy.wait(4000);
+    // cy.wait(4000);
+    this.elements.actionsDropdown.button().should("be.visible");
     this.elements.actionsDropdown.button().last().click();
     this.elements.actionsDropdown.receivePayment().click();
     paymentDetails.paymentMethod &&
@@ -774,7 +773,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   sendReminder = () => {
-    cy.wait(500);
+    // cy.wait  (500);
+    this.elements.actionsDropdown.button().should("be.visible");
     this.elements.actionsDropdown.button().click();
     cy.wait(500);
     this.elements.actionsDropdown.sendReminder().click();

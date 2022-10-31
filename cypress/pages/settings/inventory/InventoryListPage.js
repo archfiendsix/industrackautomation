@@ -246,7 +246,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .serviceSearchTextbox()
           .clear()
           .type(`${i.name}`);
-        cy.wait(1000);
+        cy.wait(700);
+        this.elements.addAssemblyModal.partSearchSelect(),should('be.visible')
         this.elements.addAssemblyModal.partSearchSelect().first().click();
         this.elements.addAssemblyModal
           .serviceSearchQty()
