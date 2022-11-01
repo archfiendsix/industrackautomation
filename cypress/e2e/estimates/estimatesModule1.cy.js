@@ -25,96 +25,97 @@ describe("New Estimate module", () => {
 
     // Dashboard.preventNotificationCard();
   });
+  context("test", () => {
+    it("New customer, New Inventory, New Estimate e2e", () => {
+      /*new customer */
+      Dashboard.clickCustomerTab();
+      Dashboard.clickAddCustomerButton();
+      const customerInfo = {
+        validateAddress: true,
+      };
+      cy.intercept("**/api/**").as("api");
+      AddCustomerPage.fillData(customerInfo);
+      cy.wait("@api");
+      AddCustomerPage.elements.saveButton().should("not.be.disabled");
+      AddCustomerPage.elements.saveButton().click();
 
-  it("New customer, New Inventory, New Estimate e2e", () => {
-    /*new customer */
-    Dashboard.clickCustomerTab();
-    Dashboard.clickAddCustomerButton();
-    const customerInfo = {
-      validateAddress: true,
-    };
-    cy.intercept("**/api/**").as("api");
-    AddCustomerPage.fillData(customerInfo);
-    cy.wait("@api");
-    AddCustomerPage.elements.saveButton().should("not.be.disabled");
-    AddCustomerPage.elements.saveButton().click();
+      // AddCustomerPage.confirmValidityYes()
 
-    // AddCustomerPage.confirmValidityYes()
+      /*new inventory */
+      cy.wait("@api");
 
-    /*new inventory */
-    cy.wait("@api");
+      InventoryListPage.gotoAddNewInventory();
+      const inventoryInfo = {
+        name: "Add Inventory",
+        useSerialNumbers: false,
+        nonTaxable: true,
+      };
+      AddNewInventoryPage.fillData(inventoryInfo);
+      AddNewInventoryPage.clickSaveButton();
+      AddNewInventoryPage.checkSaveSuccess();
 
-    InventoryListPage.gotoAddNewInventory();
-    const inventoryInfo = {
-      name: "Add Inventory",
-      useSerialNumbers: false,
-      nonTaxable: true,
-    };
-    AddNewInventoryPage.fillData(inventoryInfo);
-    AddNewInventoryPage.clickSaveButton();
-    AddNewInventoryPage.checkSaveSuccess();
+      /*newEstimate*/
+      Dashboard.clickEstimatesTab();
+      EstimatesPage.clickAddNew();
+      cy.wait("@api");
+      EstimatesPage.selectCustomer("Genius Giant Inc.");
+      EstimatesPage.inventorySelect("Inventory Item 1");
+      EstimatesPage.saveAndCloseEstimate();
+    });
 
-    /*newEstimate*/
-    Dashboard.clickEstimatesTab();
-    EstimatesPage.clickAddNew();
-    cy.wait("@api");
-    EstimatesPage.selectCustomer("Genius Giant Inc.");
-    EstimatesPage.inventorySelect("Inventory Item 1");
-    EstimatesPage.saveAndCloseEstimate();
-  });
+    it("Should have status Won", () => {
+      cy.intercept("**/api/**").as("api");
+      Dashboard.clickEstimatesTab();
+      // Dashboard.preventNotificationCard();
+      EstimatesPage.clickAddNew();
+      cy.wait("@api");
+      EstimatesPage.selectCustomer("Genius Giant Inc.");
+      EstimatesPage.inventorySelect("Inventory Item 1");
+      EstimatesPage.saveEstimate();
+      EstimatesPage.markAsWon();
+      EstimatesPage.confirmYes();
+      EstimatesPage.checkEstimateStatus("Won");
+    });
 
-  it("Should have status Won", () => {
-    cy.intercept("**/api/**").as("api");
-    Dashboard.clickEstimatesTab();
-    // Dashboard.preventNotificationCard();
-    EstimatesPage.clickAddNew();
-    cy.wait("@api");
-    EstimatesPage.selectCustomer("Genius Giant Inc.");
-    EstimatesPage.inventorySelect("Inventory Item 1");
-    EstimatesPage.saveEstimate();
-    EstimatesPage.markAsWon();
-    EstimatesPage.confirmYes();
-    EstimatesPage.checkEstimateStatus("Won");
-  });
+    it("Should have status Lost", () => {
+      cy.intercept("**/api/**").as("api");
+      Dashboard.clickEstimatesTab();
+      // Dashboard.preventNotificationCard();
+      EstimatesPage.clickAddNew();
+      cy.wait("@api");
+      EstimatesPage.selectCustomer("Genius Giant Inc.");
+      EstimatesPage.inventorySelect("Inventory Item 1");
 
-  it("Should have status Lost", () => {
-    cy.intercept("**/api/**").as("api");
-    Dashboard.clickEstimatesTab();
-    // Dashboard.preventNotificationCard();
-    EstimatesPage.clickAddNew();
-    cy.wait("@api");
-    EstimatesPage.selectCustomer("Genius Giant Inc.");
-    EstimatesPage.inventorySelect("Inventory Item 1");
+      EstimatesPage.saveEstimate();
+      EstimatesPage.markAslost();
+      // cy.wait(3000);
+      EstimatesPage.confirmYes();
+      EstimatesPage.checkEstimateStatus("Lost");
+    });
 
-    EstimatesPage.saveEstimate();
-    EstimatesPage.markAslost();
-    // cy.wait(3000);
-    EstimatesPage.confirmYes();
-    EstimatesPage.checkEstimateStatus("Lost");
-  });
+    it("Should proceed to Add New Job Screen after converting to Job", () => {
+      Dashboard.clickEstimatesTab();
+      // Dashboard.preventNotificationCard();
+      EstimatesPage.clickAddNew();
+      EstimatesPage.selectCustomer("Genius Giant Game Inc.");
+      EstimatesPage.inventorySelect("Inventory Item 1");
+      EstimatesPage.saveEstimate();
+      EstimatesPage.convertToJob();
+      EstimatesPage.confirmYes();
+      EstimatesPage.checkAddNewJobModalTitle();
+    });
 
-  it("Should proceed to Add New Job Screen after converting to Job", () => {
-    Dashboard.clickEstimatesTab();
-    // Dashboard.preventNotificationCard();
-    EstimatesPage.clickAddNew();
-    EstimatesPage.selectCustomer("Genius Giant Game Inc.");
-    EstimatesPage.inventorySelect("Inventory Item 1");
-    EstimatesPage.saveEstimate();
-    EstimatesPage.convertToJob();
-    EstimatesPage.confirmYes();
-    EstimatesPage.checkAddNewJobModalTitle();
-  });
-
-  it("Should successfully convert estimate to invoice", () => {
-    Dashboard.clickEstimatesTab();
-    // Dashboard.preventNotificationCard();
-    EstimatesPage.clickAddNew();
-    EstimatesPage.selectCustomer("Genius Giant Game Inc.");
-    EstimatesPage.inventorySelect("Inventory Item 1");
-    EstimatesPage.saveEstimate();
-    EstimatesPage.convertToInvoice();
-    EstimatesPage.confirmYes();
-    EstimatesPage.checkConvertedToInvoiceSuccess();
-    InvoiceOverviewPage.checkInvoiceStatus("Unpaid");
+    it("Should successfully convert estimate to invoice", () => {
+      Dashboard.clickEstimatesTab();
+      // Dashboard.preventNotificationCard();
+      EstimatesPage.clickAddNew();
+      EstimatesPage.selectCustomer("Genius Giant Game Inc.");
+      EstimatesPage.inventorySelect("Inventory Item 1");
+      EstimatesPage.saveEstimate();
+      EstimatesPage.convertToInvoice();
+      EstimatesPage.confirmYes();
+      EstimatesPage.checkConvertedToInvoiceSuccess();
+      InvoiceOverviewPage.checkInvoiceStatus("Unpaid");
+    });
   });
 });

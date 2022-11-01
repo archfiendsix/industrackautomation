@@ -9,6 +9,7 @@ class LoginPage {
     this.elements.usernameTextBox().type(username);
     this.elements.passwordTextBox().type(password);
     this.elements.loginButton().click();
+    cy.get("app-map-tab").should("be.visible");
     cy.get(".navbar-brand").should("be.visible");
     const navs = [
       "Map",

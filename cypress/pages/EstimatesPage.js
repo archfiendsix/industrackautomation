@@ -170,15 +170,22 @@ class EstimatesPage {
   };
 
   clickAddNew = () => {
-    cy.intercept("**/api/**").as("api");
-    cy.wait(300)
+    // cy.intercept("**/api/**").as("api");
+    cy.wait(300);
+
     cy.get(".dropdown-menu.dropdown-reminders").invoke(
       "css",
       "display",
       "none"
     );
+    cy.get("app-estimates-list")
+      .should("exist")
+      .then(($el) => {
+        cy.wrap($el).find("my-dialog").should("exist");
+      });
     this.elements.addNewEstimateButton().should("be.visible");
-    cy.wait("@api");
+
+    // cy.wait("@api");
     this.elements.addNewEstimateButton().click();
   };
 
@@ -198,6 +205,7 @@ class EstimatesPage {
 
     this.clickSearch();
     cy.wait("@AddressBookLiveSearchExt");
+    this.elements.searchItem().should("be.visible");
     this.elements.searchItem().click();
     this.elements.proceedButton().click();
   }
@@ -381,7 +389,9 @@ class EstimatesPage {
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
 
     cy.enter("iframe#contentHolder").then((getBody) => {
-      getBody().find(".comp-header .col-lg-4:last-child() span").should("be.visible");
+      getBody()
+        .find(".comp-header .col-lg-4:last-child() span")
+        .should("be.visible");
     });
     this.elements.previewiFrame.description().contains(verifyThis.customername);
   };

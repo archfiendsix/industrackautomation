@@ -309,6 +309,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     cy.intercept(
       " https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBooksWithPaging**"
     ).as("GetAddressBooksWithPaging");
+    cy.get(".table-responsive").should("be.visible");
+    cy.get(".pull-right").should("be.visible");
     this.elements.addNewInvoiceButton().should("be.visible");
     this.elements.addNewInvoiceButton().click();
     cy.wait("@GetAddressBooksWithPaging");
@@ -628,9 +630,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       "display",
       "none"
     );
-    cy.wait(800);
+    cy.wait(200);
     this.elements.changeServiceLocation.serviceLocations().should("be.visible");
-
+    cy.wait(500);
     cy.contains(
       "app-customer-selector .list-group-item",
       serviceLocation

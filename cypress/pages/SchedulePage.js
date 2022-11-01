@@ -285,16 +285,13 @@ class SchedulePage {
             "be.visible"
           );
           cy.get('.mat-autocomplete-panel[role="listbox"]')
-          .find("mat-option")
-          .should("be.visible")
+            .find("mat-option")
+            .should("be.visible");
           cy.get('.mat-autocomplete-panel[role="listbox"]')
             .find("mat-option")
             .then(($el) => {
-              cy.contains(
-                "mat-option",
-                jobInformation.selectCustomer
-              )
-              cy.wait(500)
+              cy.contains("mat-option", jobInformation.selectCustomer);
+              cy.wait(500);
               cy.wrap($el).contains(jobInformation.selectCustomer).click();
             });
         });
@@ -342,7 +339,8 @@ class SchedulePage {
         .click()
         .then(() => {
           cy.get("mat-option")
-            .contains(jobInformation.serviceType).scrollIntoView()
+            .contains(jobInformation.serviceType)
+            .scrollIntoView()
             .should("be.visible")
             .click();
         });
@@ -841,12 +839,18 @@ class SchedulePage {
   };
   clickFirstUnassignedJob = () => {
     // cy.wait(800);
+    cy.get("app-jobs")
+    .should("exist")
+    .then(($el) => {
+      cy.wrap($el).find("my-dialog").should("exist");
+    });
     cy.get("app-jobs-unassigned app-loading-mask").should("be.visible");
     cy.get("app-jobs-unassigned app-loading-mask .preloader").should(
       "have.css",
       "display",
       "none"
     );
+   
     cy.get("app-jobs-unassigned table").should("be.visible");
     this.elements.jobsQueueModal.unassignedJobsTab
       .tableFirstRow()
