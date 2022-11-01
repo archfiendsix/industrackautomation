@@ -299,7 +299,7 @@ describe("Schedule Module", () => {
     SchedulePage.saveJob();
   });
 
-  it("Add default Job - Start Job - Mark as completed- Approve for invoice - assert info", () => {
+  it.only("Add default Job - Start Job - Mark as completed- Approve for invoice - assert info", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqp-f1439",

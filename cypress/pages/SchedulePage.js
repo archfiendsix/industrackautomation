@@ -547,11 +547,16 @@ class SchedulePage {
     jobInformation.jobDescription &&
       this.elements.addNewJobModal.jobsInfoTab
         .jobDescriptionTexbox()
-        .invoke("val")
-        .then((text) => {
-          expect(text, "Checking Job Description...").to.equal(
-            jobInformation.jobDescription
-          );
+        .should("be.visible")
+        .then(($el) => {
+          cy.wrap($el).should("be.visible");
+          cy.wrap($el)
+            .invoke("val")
+            .then((text) => {
+              expect(text, "Checking Job Description...").to.equal(
+                jobInformation.jobDescription
+              );
+            });
         });
 
     // Check Job Status
@@ -840,17 +845,17 @@ class SchedulePage {
   clickFirstUnassignedJob = () => {
     // cy.wait(800);
     cy.get("app-jobs")
-    .should("exist")
-    .then(($el) => {
-      cy.wrap($el).find("my-dialog").should("exist");
-    });
+      .should("exist")
+      .then(($el) => {
+        cy.wrap($el).find("my-dialog").should("exist");
+      });
     cy.get("app-jobs-unassigned app-loading-mask").should("be.visible");
     cy.get("app-jobs-unassigned app-loading-mask .preloader").should(
       "have.css",
       "display",
       "none"
     );
-   
+
     cy.get("app-jobs-unassigned table").should("be.visible");
     this.elements.jobsQueueModal.unassignedJobsTab
       .tableFirstRow()
