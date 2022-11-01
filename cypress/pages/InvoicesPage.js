@@ -628,12 +628,18 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       "display",
       "none"
     );
+    cy.wait(800);
     this.elements.changeServiceLocation.serviceLocations().should("be.visible");
-    this.elements.changeServiceLocation
-      .serviceLocations()
-      .contains(serviceLocation)
-      .should("be.visible")
-      .click();
+
+    cy.contains(
+      "app-customer-selector .list-group-item",
+      serviceLocation
+    ).click();
+    // this.elements.changeServiceLocation
+    //   .serviceLocations()
+    //   .contains(serviceLocation)
+    //   .should("be.visible")
+    //   .click();
     // cy.wait(4000);
     cy.get(".dropdown-menu.dropdown-reminders").invoke(
       "css",
@@ -707,7 +713,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       .customerListItems()
       .contains(customerName)
       .first()
-      .scrollIntoView() 
+      .scrollIntoView()
       .click();
     // cy.wait(4000)
     // this.elements.changeCustomer.customerListItems().contains(customerName).last().click()
