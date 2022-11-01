@@ -543,6 +543,8 @@ class SchedulePage {
   };
 
   verifyCustomerInformation = (jobInformation) => {
+    cy.get("app-job-edit-form").should("exist");
+    cy.get("app-job-edit-form").find("form").should("be.visible");
     // Check Job Description
     jobInformation.jobDescription &&
       this.elements.addNewJobModal.jobsInfoTab
@@ -855,8 +857,8 @@ class SchedulePage {
       "display",
       "none"
     );
-
-    cy.get("app-jobs-unassigned table").should("be.visible");
+    cy.get("app-jobs-unassigned").should("be.visible");
+    cy.get("app-jobs-unassigned").find("table").should("be.visible");
     this.elements.jobsQueueModal.unassignedJobsTab
       .tableFirstRow()
       .should("be.visible");
