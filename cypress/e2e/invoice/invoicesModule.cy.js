@@ -76,7 +76,6 @@ describe("Invoices Module", () => {
     };
     // InvoicesPage.saveInvoice()
     InvoicesPage.previewInvoice();
-
     InvoicesPage.checkPreview(overviewValues);
   });
 

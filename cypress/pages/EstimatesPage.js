@@ -372,9 +372,11 @@ class EstimatesPage {
   checkEstimatePreview = () => {
     // cy.intercept("**/api/**").as("api");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
+    
     cy.get("mat-dialog-container app-report-preview-dialog").should(
       "be.visible"
     );
+    cy.wait(3000)
     this.elements.estimatePreviewModalTitle().contains("Estimate Preview");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
     cy.wait("@api");
@@ -441,12 +443,14 @@ class EstimatesPage {
   };
 
   checkEstimatePreviewValues = (customerInfo) => {
+    cy.wait(2000)
     cy.intercept("**/api/**").as("api");
     // this.elements.previewiFrame.note().should('have.value', customerInfo.note.toString())
     cy.frameLoaded("#contentHolder");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
     cy.wait("@api");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
+    
     this.elements.previewiFrame
       .note()
       .should("contain", customerInfo.note.toString().trim());
