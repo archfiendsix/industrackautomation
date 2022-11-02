@@ -435,7 +435,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     // cy.get(
     //   "invoice-edit form .col-lg-12:first-child() .alert-success > .close"
     // ).click();
-    cy.wait(3000)
+    cy.wait(2500)
     cy.get(".dropdown-menu.dropdown-reminders").invoke(
       "css",
       "display",

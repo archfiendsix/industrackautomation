@@ -88,7 +88,7 @@ describe("New Estimate module", () => {
 
       EstimatesPage.saveEstimate();
       EstimatesPage.markAslost();
-      // cy.wait(3000);
+      // cy.wait(2500);
       EstimatesPage.confirmYes();
       EstimatesPage.checkEstimateStatus("Lost");
     });

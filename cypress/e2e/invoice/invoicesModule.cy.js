@@ -134,7 +134,7 @@ describe("Invoices Module", () => {
 
     // cy.wait(4000);
     EstimatesPage.convertToInvoice();
-    // cy.wait(3000);
+    // cy.wait(2500);
     EstimatesPage.confirmYes();
     EstimatesPage.checkConvertedToInvoiceSuccess();
     cy.wait(1500);

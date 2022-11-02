@@ -234,7 +234,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
         .clear()
         .type(equipmentInformation.upuodFromInventory)
         .then(() => {
-          //   cy.wait(3000);
+          //   cy.wait(2500);
           cy.get(".dropdown-menu.dropdown-reminders").invoke(
             "css",
             "display",
@@ -245,7 +245,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
             .should("be.visible")
             .click();
         });
-    cy.wait(3000);
+    cy.wait(2500);
     this.elements.addNewEquipmentModal.loadButton().click();
     this.elements.addNewEquipmentModal.saveButton().click();
   };
@@ -504,7 +504,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
   makeCustomerActive = (customerNumber) => {
     // this.elements.searchBox.input().clear().type(customerNumber)
-    // cy.wait(3000);
+    // cy.wait(2500);
     // cy.intercept(
     //   "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBooksWithPaging?**"
     // ).as("GetAddressBooksWithPaging");

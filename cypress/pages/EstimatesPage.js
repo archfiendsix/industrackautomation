@@ -376,7 +376,7 @@ class EstimatesPage {
     cy.get("mat-dialog-container app-report-preview-dialog").should(
       "be.visible"
     );
-    cy.wait(3000)
+    cy.wait(2500)
     this.elements.estimatePreviewModalTitle().contains("Estimate Preview");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
     cy.wait("@api");
