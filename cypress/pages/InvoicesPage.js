@@ -482,101 +482,101 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     // });
 
     // Check Invoice Note
-    whatToCheck.note &&
-      this.elements.previewiFrame
-        .note()
-        .should("be.visible")
-        .invoke("text")
-        .then((text) => {
-          cy.get(".dropdown-menu.dropdown-reminders").invoke(
-            "css",
-            "display",
-            "none"
-          );
-          expect(text).to.equal(whatToCheck.note.toString());
-        });
+    // whatToCheck.note &&
+    //   this.elements.previewiFrame
+    //     .note()
+    //     .should("be.visible")
+    //     .invoke("text")
+    //     .then((text) => {
+    //       cy.get(".dropdown-menu.dropdown-reminders").invoke(
+    //         "css",
+    //         "display",
+    //         "none"
+    //       );
+    //       expect(text).to.equal(whatToCheck.note.toString());
+    //     });
 
-    // Check Description
-    whatToCheck.description &&
-      whatToCheck.description.invoke("val").then(($el) => {
-        this.elements.previewiFrame.description().should("be.visible");
-        this.elements.previewiFrame
-          .description()
-          .invoke("text")
-          .then(($el2) => {
-            cy.get(".dropdown-menu.dropdown-reminders").invoke(
-              "css",
-              "display",
-              "none"
-            );
-            expect($el2.toString()).to.equal($el.toString());
-          });
-      });
+    // // Check Description
+    // whatToCheck.description &&
+    //   whatToCheck.description.invoke("val").then(($el) => {
+    //     this.elements.previewiFrame.description().should("be.visible");
+    //     this.elements.previewiFrame
+    //       .description()
+    //       .invoke("text")
+    //       .then(($el2) => {
+    //         cy.get(".dropdown-menu.dropdown-reminders").invoke(
+    //           "css",
+    //           "display",
+    //           "none"
+    //         );
+    //         expect($el2.toString()).to.equal($el.toString());
+    //       });
+    //   });
 
-    // Check Invoice Number
-    whatToCheck.invoiceNumber &&
-      whatToCheck.invoiceNumber.invoke("val").then(($el) => {
-        this.elements.previewiFrame
-          .invoiceNumber()
-          .should("be.visible")
-          .invoke("text")
-          .then(($el2) => {
-            cy.get(".dropdown-menu.dropdown-reminders").invoke(
-              "css",
-              "display",
-              "none"
-            );
-            expect($el2.toString()).to.equal($el.toString());
-          });
-      });
+    // // Check Invoice Number
+    // whatToCheck.invoiceNumber &&
+    //   whatToCheck.invoiceNumber.invoke("val").then(($el) => {
+    //     this.elements.previewiFrame
+    //       .invoiceNumber()
+    //       .should("be.visible")
+    //       .invoke("text")
+    //       .then(($el2) => {
+    //         cy.get(".dropdown-menu.dropdown-reminders").invoke(
+    //           "css",
+    //           "display",
+    //           "none"
+    //         );
+    //         expect($el2.toString()).to.equal($el.toString());
+    //       });
+    //   });
 
-    // whatToCheck.billingAddress && whatToCheck.billingAddress.invoke('text').then($el2 => {
-    //     // this.elements.previewiFrame.customerInfo().invoke('text').then($el => {
-    //         expect($el2).to.contain('Cemetery Street, 4955')
-    //     // })
-    // })
+    // // whatToCheck.billingAddress && whatToCheck.billingAddress.invoke('text').then($el2 => {
+    // //     // this.elements.previewiFrame.customerInfo().invoke('text').then($el => {
+    // //         expect($el2).to.contain('Cemetery Street, 4955')
+    // //     // })
+    // // })
 
-    //Check Bill to Customer Person
-    whatToCheck.billToCustomerName &&
-      this.elements.addingNewInvoiceModal
-        .billToCustomerName()
-        .should("be.visible")
-        .invoke("text")
-        .then(($el) => {
-          this.elements.previewiFrame
-            .customerInfo()
-            .find(".custPerson")
-            .invoke("text")
-            .then(($el2) => {
-              cy.get(".dropdown-menu.dropdown-reminders").invoke(
-                "css",
-                "display",
-                "none"
-              );
-              expect($el2.toString()).to.equal($el.toString());
-            });
-        });
+    // //Check Bill to Customer Person
+    // whatToCheck.billToCustomerName &&
+    //   this.elements.addingNewInvoiceModal
+    //     .billToCustomerName()
+    //     .should("be.visible")
+    //     .invoke("text")
+    //     .then(($el) => {
+    //       this.elements.previewiFrame
+    //         .customerInfo()
+    //         .find(".custPerson")
+    //         .invoke("text")
+    //         .then(($el2) => {
+    //           cy.get(".dropdown-menu.dropdown-reminders").invoke(
+    //             "css",
+    //             "display",
+    //             "none"
+    //           );
+    //           expect($el2.toString()).to.equal($el.toString());
+    //         });
+    //     });
 
-    //Check Service Location Person
-    whatToCheck.serviceLocationCustomerName &&
-      this.elements.addingNewInvoiceModal
-        .serviceLocationCustomerName()
-        .should("be.visible")
-        .invoke("text")
-        .then(($el) => {
-          this.elements.previewiFrame
-            .customerServiceLocation()
-            .find(".servlocName")
-            .invoke("text")
-            .then(($el2) => {
-              cy.get(".dropdown-menu.dropdown-reminders").invoke(
-                "css",
-                "display",
-                "none"
-              );
-              expect($el2.toString()).to.equal($el.toString());
-            });
-        });
+    // //Check Service Location Person
+    // whatToCheck.serviceLocationCustomerName &&
+    //   this.elements.addingNewInvoiceModal
+    //     .serviceLocationCustomerName()
+    //     .should("be.visible")
+    //     .invoke("text")
+    //     .then(($el) => {
+    //       this.elements.previewiFrame
+    //         .customerServiceLocation()
+    //         .find(".servlocName")
+    //         .invoke("text")
+    //         .then(($el2) => {
+    //           cy.get(".dropdown-menu.dropdown-reminders").invoke(
+    //             "css",
+    //             "display",
+    //             "none"
+    //           );
+    //           expect($el2.toString()).to.equal($el.toString());
+    //         });
+    //     });
   };
 
   closePreview = () => {

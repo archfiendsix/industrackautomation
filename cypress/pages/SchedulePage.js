@@ -281,13 +281,18 @@ class SchedulePage {
           );
           cy.wait(300);
           cy.wait("@AddressBookLiveSearch");
-          cy.get('.mat-autocomplete-panel[role="listbox"]').should(
-            "be.visible"
-          );
-          cy.get('.mat-autocomplete-panel[role="listbox"]')
+          cy.get(
+            '.mat-autocomplete-panel[role="listbox"].mat-autocomplete-visible'
+          ).should("be.visible");
+          cy.get(
+            '.mat-autocomplete-panel[role="listbox"].mat-autocomplete-visible'
+          )
             .find("mat-option")
             .should("be.visible");
-          cy.get('.mat-autocomplete-panel[role="listbox"]')
+          cy.wait(500);
+          cy.get(
+            '.mat-autocomplete-panel[role="listbox"].mat-autocomplete-visible'
+          )
             .find("mat-option")
             .then(($el) => {
               cy.contains("mat-option", jobInformation.selectCustomer);
@@ -851,7 +856,7 @@ class SchedulePage {
       .then(($el) => {
         cy.wrap($el).find("my-dialog").should("exist");
       });
-    cy.get("app-jobs-unassigned app-loading-mask").should("be.visible");
+    // cy.get("app-jobs-unassigned app-loading-mask").should("be.visible");
     cy.get("app-jobs-unassigned app-loading-mask .preloader").should(
       "have.css",
       "display",
@@ -910,6 +915,16 @@ class SchedulePage {
 
   searchUnasignedJobsTab = (jobDescription) => {
     cy.wait(15000); // Putting wait because the job doesn't appear immediately on the job list when created
+    cy.get(".preloader").then(($el) => {
+      expect("Checking if preloading is finished...", $el).to.have(
+        "css",
+        "display",
+        "none"
+      );
+    });
+    cy.get("table").then(($el) => {
+      expect("Checking if table is loaded...", $el).to.be("visible");
+    });
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
@@ -920,7 +935,6 @@ class SchedulePage {
     cy.wait(800);
     this.elements.jobsQueueModal.searchUnasignedJobsTab
       .jobRowCell()
-      .should("be.visible")
       .contains(jobDescription)
       .first()
       .parent()
@@ -929,6 +943,16 @@ class SchedulePage {
 
   searchAssignedJobsTab = (jobDescription) => {
     // cy.wait(20000); // Putting wait because the job doesn't appear immediately on the job list when created
+    cy.get(".preloader").then(($el) => {
+      expect("Checking if preloading is finished...", $el).to.have(
+        "css",
+        "display",
+        "none"
+      );
+    });
+    cy.get("table").then(($el) => {
+      expect("Checking if table is loaded...", $el).to.be("visible");
+    });
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
@@ -1024,6 +1048,16 @@ class SchedulePage {
 
   searchOnHoldJobsTab = (jobDescription) => {
     // cy.wait(15000) // Putting wait because the job doesn't appear immediately on the job list when created
+    cy.get(".preloader").then(($el) => {
+      expect("Checking if preloading is finished...", $el).to.have(
+        "css",
+        "display",
+        "none"
+      );
+    });
+    cy.get("table").then(($el) => {
+      expect("Checking if table is loaded...", $el).to.be("visible");
+    });
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
@@ -1042,6 +1076,16 @@ class SchedulePage {
   };
 
   searchCompletedJobsTab = (jobDescription) => {
+    cy.get(".preloader").then(($el) => {
+      expect("Checking if preloading is finished...", $el).to.have(
+        "css",
+        "display",
+        "none"
+      );
+    });
+    cy.get("table").then(($el) => {
+      expect("Checking if table is loaded...", $el).to.be("visible");
+    });
     this.elements.jobsQueueModal.completedJobsTab
       .searchTextbox()
       .clear()
@@ -1061,13 +1105,22 @@ class SchedulePage {
       .then(() => {
         // cy.wait(500);
         cy.get(".btn-group.actions .dropdown-menu a")
-          .should("be.visible")
           .contains("View Job")
           .click();
       });
   };
 
   searchApproveCompletedJobTab = (jobDescription) => {
+    cy.get(".preloader").then(($el) => {
+      expect("Checking if preloading is finished...", $el).to.have(
+        "css",
+        "display",
+        "none"
+      );
+    });
+    cy.get("table").then(($el) => {
+      expect("Checking if table is loaded...", $el).to.be("visible");
+    });
     this.elements.jobsQueueModal.completedJobsTab
       .searchTextbox()
       .clear()
@@ -1094,6 +1147,16 @@ class SchedulePage {
   };
 
   searchConvertToInvoiceJobTab = (jobDescription) => {
+    cy.get(".preloader").then(($el) => {
+      expect("Checking if preloading is finished...", $el).to.have(
+        "css",
+        "display",
+        "none"
+      );
+    });
+    cy.get("table").then(($el) => {
+      expect("Checking if table is loaded...", $el).to.be("visible");
+    });
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab
       .searchTextbox()
       .clear()
@@ -1120,6 +1183,16 @@ class SchedulePage {
   };
 
   searchViewJobReportValidate = (jobDescription) => {
+    cy.get(".preloader").then(($el) => {
+      expect("Checking if preloading is finished...", $el).to.have(
+        "css",
+        "display",
+        "none"
+      );
+    });
+    cy.get("table").then(($el) => {
+      expect("Checking if table is loaded...", $el).to.be("visible");
+    });
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab
       .searchTextbox()
       .clear()

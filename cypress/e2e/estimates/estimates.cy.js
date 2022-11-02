@@ -78,6 +78,7 @@ describe("New Estimate module", () => {
       // InventoryListPage.gotoAddNewNonInventoryModal()
       // let randName = uuidv4().substring(0, 5)
       let randSKU = uuidv4().substring(0, 5);
+      let randDesc = uuidv4().substring(0, 6);
       const nonInventoryInfo = {
         name: `NonInventory-`,
         // name: `NonInventory-${randName}
@@ -85,7 +86,7 @@ describe("New Estimate module", () => {
         vendor: "Genius Vendor",
         nonTaxable: false,
         salesPriceRate: "150",
-        salesDescription: "This is a test description",
+        salesDescription: `Description-${randDesc}`,
         cost: "100",
         mainWarehouseQuantityOnHand: "1",
       };
@@ -158,7 +159,7 @@ describe("New Estimate module", () => {
       EstimatesPage.addRandomInvoiceDiscount();
 
       //Check invoice total
-      EstimatesPage.checkInvoiceTotal();
+      EstimatesPage.Total();
       EstimatesPage.saveEstimate();
 
       //Check row totals
