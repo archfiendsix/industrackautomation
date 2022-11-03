@@ -297,7 +297,7 @@ class SchedulePage {
             .find("mat-option")
             .then(($el) => {
               cy.contains("mat-option", jobInformation.selectCustomer);
-              cy.wait(500);
+              cy.wait(1000);
               cy.wrap($el).contains(jobInformation.selectCustomer).click();
             });
         });
