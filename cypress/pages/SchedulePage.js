@@ -241,6 +241,7 @@ class SchedulePage {
       this.elements.addNewJobModal.jobsInfoTab
         .selectCustomerField()
         .then(($el) => {
+          cy.get(".preloader").should("not.be.visible");
           cy.intercept(
             "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearch"
           ).as("AddressBookLiveSearch");
@@ -867,7 +868,9 @@ class SchedulePage {
     this.elements.jobsQueueModal.unassignedJobsTab
       .tableFirstRow()
       .should("be.visible");
-    this.elements.jobsQueueModal.unassignedJobsTab.tableFirstRow().dblclick();
+    this.elements.jobsQueueModal.unassignedJobsTab
+      .tableFirstRow()
+      .dblclick({ force: true });
   };
 
   gotoAssignedJobsTab = () => {
