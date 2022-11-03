@@ -56,7 +56,7 @@ class SchedulePage {
           cy.get("app-job-edit-form form div.selectservicelocation"),
         jobDescriptionTexbox: () =>
           cy.get("app-job-edit-form form input#jobName "),
-        jobStatusField: () => cy.get("app-job-edit-form form select#jobState"),
+        jobStatusField: () => cy.get("select#jobState"),
         notesTextarea: () =>
           cy.get("app-job-edit-form form textarea#customerSiteNote"),
         jobPriorityField: () =>
@@ -298,7 +298,9 @@ class SchedulePage {
             .then(($el) => {
               cy.contains("mat-option", jobInformation.selectCustomer);
               cy.wait(1000);
-              cy.wrap($el).contains(jobInformation.selectCustomer).click();
+              cy.get("mat-option")
+                .contains(jobInformation.selectCustomer)
+                .click();
             });
         });
     jobInformation.serviceLocation &&
@@ -332,7 +334,7 @@ class SchedulePage {
           jobInformation.jobStatus.toString().trim()
         ).scrollIntoView();
         cy.wrap($el).select(jobInformation.jobStatus);
-      }); 
+      });
 
     jobInformation.notes &&
       this.elements.addNewJobModal.jobsInfoTab
@@ -1279,7 +1281,7 @@ cy.get("table").then(($el) => {
         cy.wait(500);
         cy.get(".btn-group.actions .dropdown-menu a")
           .contains("View Job Report")
-          .click();
+          .click({ force: true });
       });
 
     cy.log("Checking preview...");
