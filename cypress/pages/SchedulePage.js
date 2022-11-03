@@ -332,7 +332,7 @@ class SchedulePage {
           jobInformation.jobStatus.toString().trim()
         ).scrollIntoView();
         cy.wrap($el).select(jobInformation.jobStatus);
-      });
+      }); 
 
     jobInformation.notes &&
       this.elements.addNewJobModal.jobsInfoTab
@@ -344,7 +344,7 @@ class SchedulePage {
       this.elements.addNewJobModal.jobsInfoTab
         .serviceTypeSelect()
         .should("have.length.gt", 0)
-        .then(() => {
+        .then(($el) => {
           cy.wrap($el).click();
           cy.wait(600);
           cy.get("mat-option")
@@ -377,7 +377,7 @@ class SchedulePage {
               .should("be.visible")
               .clear()
               .type(item.name)
-              .then(() => {
+              .then(($el) => {
                 cy.wait(500); // Cannot Omit this wait - needed for loading service equipment
                 cy.get(".sk-spinner").should("not.be.visible");
                 cy.get("mat-option")
