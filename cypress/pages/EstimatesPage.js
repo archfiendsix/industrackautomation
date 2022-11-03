@@ -186,7 +186,7 @@ class EstimatesPage {
     this.elements.addNewEstimateButton().should("be.visible");
 
     // cy.wait("@api");
-    this.elements.addNewEstimateButton().click();
+    this.elements.addNewEstimateButton().click({ force: true });
   };
 
   typeSearchInput(input) {
@@ -474,7 +474,7 @@ class EstimatesPage {
 
   addDiscountInRow(min, max, discountKind, numberOfRows) {
     for (let i = 1; i <= numberOfRows; i++) {
-      cy.wait(500)
+      cy.wait(500);
       const randomRow = this.getRandomInt(0, numberOfRows);
       this.elements
         .addDiscountRowElement()

@@ -234,8 +234,8 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .partSearchTextbox()
           .clear()
           .type(`${i.name}`);
-        // cy.wait(1000);
-        this.elements.addAssemblyModal.partSearchSelect().should('be.visible')
+        cy.wait(500);
+        this.elements.addAssemblyModal.partSearchSelect().should("have.length.gt", 0);
         this.elements.addAssemblyModal.partSearchSelect().first().click();
         this.elements.addAssemblyModal.partSearchQty().clear().type(`${i.qty}`);
         this.elements.addAssemblyModal.addPartButton().click();
@@ -247,7 +247,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           .clear()
           .type(`${i.name}`);
         cy.wait(700);
-        this.elements.addAssemblyModal.partSearchSelect().should('be.visible')
+        this.elements.addAssemblyModal
+          .partSearchSelect()
+          .should("have.length.gt", 0);
         this.elements.addAssemblyModal.partSearchSelect().first().click();
         this.elements.addAssemblyModal
           .serviceSearchQty()

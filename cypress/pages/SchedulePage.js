@@ -322,9 +322,11 @@ class SchedulePage {
         .type(jobInformation.jobDescription.toString());
     jobInformation.jobStatus &&
       this.elements.addNewJobModal.jobsInfoTab.jobStatusField().then(($el) => {
-        cy.get("app-job-edit-form").should("exist");
+        cy.wait(600);
+        cy.get("app-job-edit-form").should("be.visible");
         cy.get("app-job-edit-form").find(".modal-header").should("be.visible");
-        cy.wrap($el).should("be.visible");
+        cy.wrap($el).should("have.length.gt", 0);
+        cy.wait(600);
         cy.contains(
           "app-job-edit-form form select#jobState",
           jobInformation.jobStatus.toString().trim()
@@ -335,15 +337,16 @@ class SchedulePage {
     jobInformation.notes &&
       this.elements.addNewJobModal.jobsInfoTab
         .notesTextarea()
-        .should("be.visible")
+        .should("have.length.gt", 0)
         .clear()
         .type(jobInformation.notes);
     jobInformation.serviceType &&
       this.elements.addNewJobModal.jobsInfoTab
         .serviceTypeSelect()
-        .should("be.visible")
-        .click()
+        .should("have.length.gt", 0)
         .then(() => {
+          cy.wrap($el).click();
+          cy.wait(600);
           cy.get("mat-option")
             .contains(jobInformation.serviceType)
             .scrollIntoView()

@@ -159,7 +159,7 @@ describe("New Estimate module", () => {
       EstimatesPage.addRandomInvoiceDiscount();
 
       //Check invoice total
-      EstimatesPage.Total();
+      EstimatesPage.checkInvoiceTotal();
       EstimatesPage.saveEstimate();
 
       //Check row totals
