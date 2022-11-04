@@ -1222,14 +1222,11 @@ cy.get("table").then(($el) => {
       .first()
       .parent()
       .find("button")
-      .click()
-      .then(() => {
-        // cy.wait(500);
-        cy.get(".btn-group.actions .dropdown-menu a")
-          .contains("Convert to Invoice")
-          .should("be.visible")
-          .click();
-      });
+      .click();
+    cy.wait(500);
+    cy.get(".btn-group.actions .dropdown-menu a")
+      .contains("Convert to Invoice")
+      .click();
   };
 
   searchViewJobReportValidate = (jobDescription) => {
