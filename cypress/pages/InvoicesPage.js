@@ -352,7 +352,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
           cy.wait("@InventoryViewLiveSearch");
           cy.wrap($el).click();
           cy.wrap($el).type("{downArrow}");
-          cy.wrap($el).type("{enter}");
+          cy.wrap($el)
+            .type("{enter}")
+            .then(() => {
+              cy.wrap($el)
+                .invoke("val")
+                .then((val) => {
+                  cy.log(`[Item search ${val} added to items list](http://example.com)`);
+                });
+            });
           // cy.wrap($el)
           //   .type(item.trim())
           //   .invoke("val")
@@ -435,7 +443,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     // cy.get(
     //   "invoice-edit form .col-lg-12:first-child() .alert-success > .close"
     // ).click();
-    cy.wait(2500)
+    cy.wait(2500);
     cy.get(".dropdown-menu.dropdown-reminders").invoke(
       "css",
       "display",

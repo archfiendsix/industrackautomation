@@ -226,7 +226,16 @@ class EstimatesPage {
         cy.wrap($el).click();
         cy.wait(500);
         cy.wrap($el).type("{downArrow}");
-        cy.wrap($el).type("{enter}");
+        cy.wrap($el)
+          .type("{enter}")
+          .then(() => {
+            cy.wrap($el)
+              .invoke("val")
+              .then((val) => {
+                cy.log(`[Item search ${val} added to items list](http://example.com)`);
+              });
+          });
+
         // .invoke("val")
         // .then(($el) => {
         //   // if (val.length > 0) {

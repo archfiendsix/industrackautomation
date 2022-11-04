@@ -56,7 +56,7 @@ class SchedulePage {
           cy.get("app-job-edit-form form div.selectservicelocation"),
         jobDescriptionTexbox: () =>
           cy.get("app-job-edit-form form input#jobName "),
-        jobStatusField: () => cy.get("#jobState"),
+        jobStatusField: () => cy.get("app-job-edit-form form select#jobState"),
         notesTextarea: () =>
           cy.get("app-job-edit-form form textarea#customerSiteNote"),
         jobPriorityField: () =>
@@ -237,6 +237,19 @@ class SchedulePage {
   };
 
   addNewJob = (jobInformation) => {
+    jobInformation.jobStatus &&
+      this.elements.addNewJobModal.jobsInfoTab.jobStatusField().then(($el) => {
+        cy.wait(500);
+        cy.get("app-job-edit-form").should("be.visible");
+        cy.get("app-job-edit-form").find(".modal-header").should("be.visible");
+        cy.wrap($el).should("have.length.gt", 0);
+        cy.wait(500);
+        // cy.contains(
+        //   "#jobState",
+        //   jobInformation.jobStatus.toString().trim()
+        // ).scrollIntoView();
+        cy.wrap($el).select(jobInformation.jobStatus);
+      });
     jobInformation.selectCustomer &&
       this.elements.addNewJobModal.jobsInfoTab
         .selectCustomerField()
@@ -303,19 +316,7 @@ class SchedulePage {
                 .click();
             });
         });
-    jobInformation.jobStatus &&
-      this.elements.addNewJobModal.jobsInfoTab.jobStatusField().then(($el) => {
-        cy.wait(500);
-        cy.get("app-job-edit-form").should("be.visible");
-        cy.get("app-job-edit-form").find(".modal-header").should("be.visible");
-        cy.wrap($el).should("have.length.gt", 0);
-        cy.wait(500);
-        // cy.contains(
-        //   "#jobState",
-        //   jobInformation.jobStatus.toString().trim()
-        // ).scrollIntoView();
-        cy.wrap($el).select(jobInformation.jobStatus);
-      });
+
     jobInformation.serviceLocation &&
       this.elements.addNewJobModal.jobsInfoTab
         .selectServiceLocation()
@@ -573,7 +574,8 @@ class SchedulePage {
         });
 
     // Check Job Status
-    jobInformation.jobStatus &&
+    if (jobInformation.jobStatus) {
+      cy.wait(1500);
       this.elements.addNewJobModal.jobsInfoTab
         .jobStatusField()
         .should("be.visible")
@@ -591,6 +593,7 @@ class SchedulePage {
               // expect(val, 'Checking Job Status...').to.equal(value) //-> To fix this assertion
             });
         });
+    }
 
     // Check Notes
     jobInformation.notes &&
@@ -863,11 +866,11 @@ class SchedulePage {
         cy.wrap($el).find("my-dialog").should("exist");
       });
     // cy.get("app-jobs-unassigned app-loading-mask").should("be.visible");
-    cy.get("app-jobs-unassigned app-loading-mask .preloader").should(
-      "have.css",
-      "display",
-      "none"
-    );
+    // cy.get("app-jobs-unassigned app-loading-mask .preloader").should(
+    //   "have.css",
+    //   "display",
+    //   "none"
+    // );
     cy.get("app-jobs-unassigned").should("be.visible");
     cy.get("app-jobs-unassigned").find("table").should("be.visible");
     this.elements.jobsQueueModal.unassignedJobsTab
@@ -975,41 +978,101 @@ cy.get("table").then(($el) => {
       })
     });
 */
+    // this.elements.jobsQueueModal.assignedJobsTab
+    //   .searchTextbox()
+    //   .clear()
+    //   .type(jobDescription.slice(-5))
+    //   .then(($el) => {
+    //     cy.wrap($el).type("{enter}");
+    //   });
+    // cy.wait(5500);
+
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
       .type(jobDescription.slice(-5))
       .then(($el) => {
         cy.wrap($el).type("{enter}");
-      });
-    // cy.wait(5500);
-    cy.get("app-loading-mask").should("not.be.visible");
-    cy.get(".preloader").should("not.be.visible");
-    this.elements.jobsQueueModal.assignedJobsTab
-      .jobRowCell()
-      .if()
-      .then(($el) => {
-        while ($el.length < 0) {
-          // cy.wait(1000);
-          this.elements.jobsQueueModal.assignedJobsTab
-            .type(jobDescription.slice(-5))
-            .then(($el) => {
-              cy.wrap($el).type("{enter}");
-            });
-        }
-
-        cy.wrap($el)
-          .contains(jobDescription)
-          .first()
-          // .should($el => {
-          //     expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
-          // })
+        cy.get("app-loading-mask").should("not.be.visible");
+        cy.get(".preloader").should("not.be.visible");
+        this.elements.jobsQueueModal.assignedJobsTab
+          .jobRowCell()
+          .if()
+          .contains(jobDescription.slice(-5))
           .parent()
-          .dblclick();
-      })
-      .else(() => {
-        cy.log("The Job search did not return result...");
+          .should("be.visible")
+          .dblclick()
+          .else()
+          .then(() => {
+            cy.wait(15000);
+            this.elements.jobsQueueModal.assignedJobsTab
+              .searchTextbox()
+              .type(jobDescription.slice(-5))
+              .then(($el) => {
+                cy.wrap($el).type("{enter}");
+              });
+            cy.wait(1000);
+            this.elements.jobsQueueModal.assignedJobsTab
+              .jobRowCell()
+              .contains(jobDescription.slice(-5))
+              .parent()
+              .dblclick();
+            cy.wrap($el)
+              .invoke("text")
+              .then((text) => {
+                throw new Error(
+                  "The search action did not return any table entries"
+                );
+                cy.log(
+                  `[The search action did not return any value](http://example.com)`
+                );
+              });
+          });
       });
+
+    // this.elements.jobsQueueModal.assignedJobsTab
+    //   .jobRowCell()
+    //   .if()
+    //   .then(($el) => {
+    // while ($el.length < 0) {
+    // cy.wait(1000);
+
+    // }
+
+    // cy.wrap($el)
+    //   .contains(jobDescription)
+    //   .if()
+    //   .first()
+    //   // .should($el => {
+    //   //     expect(Cypress.dom.isAttached($el), 'is attached').to.eq(true) // retry if false
+    //   // })
+    //   .parent()
+    //   .dblclick()
+    //   .else(($el) => {
+    //     cy.wrap($el)
+    //       .invoke("text")
+    //       .then((text) => {
+    //         throw new Error(
+    //           "The search action did not return any table entries"
+    //         );
+    //         cy.log(
+    //           `[The search action did not return any value](http://example.com)`
+    //         );
+    //       });
+
+    //     cy.wait(15000);
+    //     this.elements.jobsQueueModal.assignedJobsTab
+    //       .type(jobDescription.slice(-5))
+    //       .then(($el) => {
+    //         cy.wrap($el).type("{enter}");
+    //       });
+
+    //     cy.wrap($el).contains(jobDescription).first().parent().dblclick();
+    //   });
+    // })
+    // .else(() => {
+    //   cy.log("The Job search did not return result...");
+    // });
 
     /* try conditional */
     // var search = true;
@@ -1184,8 +1247,7 @@ cy.get("table").then(($el) => {
         // cy.wait(500);
         cy.get(".btn-group.actions .dropdown-menu a")
           .contains("Approve")
-          .should("be.visible")
-          .click();
+          .click({ force: true });
       });
   };
 
