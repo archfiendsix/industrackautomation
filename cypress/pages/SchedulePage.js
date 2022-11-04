@@ -305,15 +305,15 @@ class SchedulePage {
         });
     jobInformation.jobStatus &&
       this.elements.addNewJobModal.jobsInfoTab.jobStatusField().then(($el) => {
-        cy.wait(600);
+        cy.wait(500);
         cy.get("app-job-edit-form").should("be.visible");
         cy.get("app-job-edit-form").find(".modal-header").should("be.visible");
         cy.wrap($el).should("have.length.gt", 0);
-        cy.wait(600);
-        cy.contains(
-          "app-job-edit-form form select#jobState",
-          jobInformation.jobStatus.toString().trim()
-        ).scrollIntoView();
+        cy.wait(500);
+        // cy.contains(
+        //   "#jobState",
+        //   jobInformation.jobStatus.toString().trim()
+        // ).scrollIntoView();
         cy.wrap($el).select(jobInformation.jobStatus);
       });
     jobInformation.serviceLocation &&
