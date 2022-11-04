@@ -284,8 +284,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     this.elements.statusLabel().contains("Unpaid");
   };
   clickAddNewTimesheetButton = () => {
-    this.elements.addTimesheetButton().click();
-    
+    this.elements.addTimesheetButton().click({ force: true });
   };
 
   setEndDateFilter = (endDate) => {

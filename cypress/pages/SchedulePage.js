@@ -56,7 +56,7 @@ class SchedulePage {
           cy.get("app-job-edit-form form div.selectservicelocation"),
         jobDescriptionTexbox: () =>
           cy.get("app-job-edit-form form input#jobName "),
-        jobStatusField: () => cy.get("select#jobState"),
+        jobStatusField: () => cy.get("#jobState"),
         notesTextarea: () =>
           cy.get("app-job-edit-form form textarea#customerSiteNote"),
         jobPriorityField: () =>
@@ -203,7 +203,7 @@ class SchedulePage {
 
   gotoAddNewJob = () => {
     this.elements.actionsDropdown.button().click();
-    this.elements.actionsDropdown.addNewJob().click();
+    this.elements.actionsDropdown.addNewJob().click({ force: true });
   };
 
   fillData = () => {
@@ -303,6 +303,19 @@ class SchedulePage {
                 .click();
             });
         });
+    jobInformation.jobStatus &&
+      this.elements.addNewJobModal.jobsInfoTab.jobStatusField().then(($el) => {
+        cy.wait(600);
+        cy.get("app-job-edit-form").should("be.visible");
+        cy.get("app-job-edit-form").find(".modal-header").should("be.visible");
+        cy.wrap($el).should("have.length.gt", 0);
+        cy.wait(600);
+        cy.contains(
+          "app-job-edit-form form select#jobState",
+          jobInformation.jobStatus.toString().trim()
+        ).scrollIntoView();
+        cy.wrap($el).select(jobInformation.jobStatus);
+      });
     jobInformation.serviceLocation &&
       this.elements.addNewJobModal.jobsInfoTab
         .selectServiceLocation()
@@ -322,19 +335,6 @@ class SchedulePage {
         .should("be.visible")
         .clear()
         .type(jobInformation.jobDescription.toString());
-    jobInformation.jobStatus &&
-      this.elements.addNewJobModal.jobsInfoTab.jobStatusField().then(($el) => {
-        cy.wait(600);
-        cy.get("app-job-edit-form").should("be.visible");
-        cy.get("app-job-edit-form").find(".modal-header").should("be.visible");
-        cy.wrap($el).should("have.length.gt", 0);
-        cy.wait(600);
-        cy.contains(
-          "app-job-edit-form form select#jobState",
-          jobInformation.jobStatus.toString().trim()
-        ).scrollIntoView();
-        cy.wrap($el).select(jobInformation.jobStatus);
-      });
 
     jobInformation.notes &&
       this.elements.addNewJobModal.jobsInfoTab
@@ -554,7 +554,7 @@ class SchedulePage {
   };
 
   verifyCustomerInformation = (jobInformation) => {
-    cy.get("app-job-edit-form").should("exist");
+    // cy.get("app-job-edit-form").should("exist");
     cy.get("app-job-edit-form").find("form").should("be.visible");
     // Check Job Description
     jobInformation.jobDescription &&
