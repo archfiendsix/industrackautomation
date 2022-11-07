@@ -10,7 +10,7 @@ module.exports = defineConfig({
     baseUrl: "https://onetrack.industrack.com",
     numTestsKeptInMemory: 0,
     numTestsKeptInMemory: 0,
-    experimentalSessionAndOrigin: true,
+    // experimentalSessionAndOrigin: true,
   },
   integration: {
     baseUrl: "https://onetrack.industrack.com",
