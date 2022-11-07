@@ -232,7 +232,9 @@ class EstimatesPage {
             cy.wrap($el)
               .invoke("val")
               .then((val) => {
-                cy.log(`[Item search ${val} added to items list](http://example.com)`);
+                cy.log(
+                  `[Item search ${val} added to items list](http://example.com)`
+                );
               });
           });
 
@@ -268,7 +270,7 @@ class EstimatesPage {
     cy.intercept(
       "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
     ).as("GetEstimate");
-    this.elements.actionsDropdown().first().click();
+    this.elements.actionsDropdown().first().click({ force: true });
     this.elements.dropDownItems().contains("Save").click();
     cy.wait("@GetEstimate");
   }
@@ -311,7 +313,7 @@ class EstimatesPage {
 
   convertToInvoice() {
     // cy.intercept(
-    //   "**/api/**"
+    //   "**/api/**"500
     // ).as("GetEstimate");
     this.elements.actionsDropdown().click();
     this.elements.dropDownItems().contains("Convert to Invoice").click();
@@ -483,8 +485,8 @@ class EstimatesPage {
 
   addDiscountInRow(min, max, discountKind, numberOfRows) {
     for (let i = 1; i <= numberOfRows; i++) {
-      cy.wait(500);
       const randomRow = this.getRandomInt(0, numberOfRows);
+      cy.wait(800);
       this.elements
         .addDiscountRowElement()
         .eq(randomRow - 1)
