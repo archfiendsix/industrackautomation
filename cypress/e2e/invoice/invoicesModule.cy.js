@@ -95,7 +95,7 @@ describe("Invoices Module", () => {
     InvoicesPage.checkSavedPDF();
   });
 
-  it.only("Add invoice with 1 NON-INVENTORY type, with description, with terms selected, with discount and with tax and save the invoice with the correct total due", () => {
+  it("Add invoice with 1 NON-INVENTORY type, with description, with terms selected, with discount and with tax and save the invoice with the correct total due", () => {
     const invoiceInfo = {
       customer: "a1a58",
       inventoriesToAdd: ["Add Inventory - Taxable no SN"],

@@ -997,6 +997,7 @@ cy.get("table").then(($el) => {
         cy.get(".preloader").should("not.be.visible");
         this.elements.jobsQueueModal.assignedJobsTab
           .jobRowCell()
+          .should("be.visible")
           .if()
           .contains(jobDescription.slice(-5))
           .parent()
@@ -1004,6 +1005,9 @@ cy.get("table").then(($el) => {
           .dblclick()
           .else()
           .then(() => {
+            cy.log(
+              `[The search action did not return any value](http://example.com)`
+            );
             cy.wait(15000);
             this.elements.jobsQueueModal.assignedJobsTab
               .searchTextbox()
