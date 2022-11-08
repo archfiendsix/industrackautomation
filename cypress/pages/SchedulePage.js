@@ -309,11 +309,12 @@ class SchedulePage {
           )
             .find("mat-option")
             .then(($el) => {
-              cy.contains("mat-option", jobInformation.selectCustomer);
               cy.wait(1000);
-              cy.get("mat-option")
-                .contains(jobInformation.selectCustomer)
-                .click();
+              cy.contains("mat-option", jobInformation.selectCustomer);
+              cy.wrap($el).contains(jobInformation.selectCustomer).click();
+              // cy.get("mat-option")
+              //   .contains(jobInformation.selectCustomer)
+              //   .click();
             });
         });
 
@@ -986,7 +987,11 @@ cy.get("table").then(($el) => {
     //     cy.wrap($el).type("{enter}");
     //   });
     // cy.wait(5500);
-
+    cy.intercept(
+      `https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetAssignedJobsWithPaging?filter=${jobDescription.slice(
+        -5
+      )}**`
+    ).as("assigneJobSearchRequest");
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
@@ -995,43 +1000,95 @@ cy.get("table").then(($el) => {
         cy.wrap($el).type("{enter}");
         cy.get("app-loading-mask").should("not.be.visible");
         cy.get(".preloader").should("not.be.visible");
-        this.elements.jobsQueueModal.assignedJobsTab
-          .jobRowCell()
-          .should("be.visible")
-          .if()
-          .contains(jobDescription.slice(-5))
-          .parent()
-          .should("be.visible")
-          .dblclick()
-          .else()
-          .then(() => {
-            cy.log(
-              `[The search action did not return any value](http://example.com)`
-            );
-            cy.wait(15000);
-            this.elements.jobsQueueModal.assignedJobsTab
-              .searchTextbox()
-              .type(jobDescription.slice(-5))
-              .then(($el) => {
-                cy.wrap($el).type("{enter}");
-              });
-            cy.wait(1000);
-            this.elements.jobsQueueModal.assignedJobsTab
-              .jobRowCell()
-              .contains(jobDescription.slice(-5))
-              .parent()
-              .dblclick();
-            cy.wrap($el)
-              .invoke("text")
-              .then((text) => {
-                throw new Error(
-                  "The search action did not return any table entries"
-                );
-                cy.log(
-                  `[The search action did not return any value](http://example.com)`
-                );
-              });
+        cy.wait("@assigneJobSearchRequest")
+          .its("response.body")
+          .then((response) => {
+            if (response.recordsCount >= 1) {
+              this.elements.jobsQueueModal.assignedJobsTab
+                .jobRowCell()
+                .contains(jobDescription.slice(-5))
+                .parent()
+                .dblclick();
+            } else {
+              throw new Error(
+                `The search entry:${jobDescription.slice(
+                  -5
+                )} did not return any table entries`
+              );
+            }
           });
+        // cy.get("app-jobs-assigned table tbody")
+        //   .children()
+        //   .its("length")
+        //   .invoke((length) => {
+        //     if (length > 0) {
+        //       this.elements.jobsQueueModal.assignedJobsTab
+        //         .jobRowCell()
+        //         .contains(jobDescription.slice(-5))
+        //         .parent()
+        //         .dblclick();
+        //     } else {
+        //       throw new Error(
+        //         "The search action did not return any table entries"
+        //       );
+        //     }
+        //   });
+
+        // cy.get("app-jobs-assigned table tbody")
+        //   .children()
+        //   .its("length")
+        //   .should("be.gte", 1)
+        //   .if()
+        //   .then(() => {
+        //     this.elements.jobsQueueModal.assignedJobsTab
+        //       .jobRowCell()
+        //       .contains(jobDescription.slice(-5))
+        //       .parent()
+        //       .dblclick();
+        //   })
+        //   .else(() => {
+        //     throw new Error(
+        //       "The search action did not return any table entries"
+        //     );
+        //   });
+
+        // this.elements.jobsQueueModal.assignedJobsTab
+        //   .jobRowCell()
+        //   .should("be.visible")
+        //   .if()
+        //   .contains(jobDescription.slice(-5))
+        //   .parent()
+        //   .should("be.visible")
+        //   .dblclick()
+        //   .else()
+        //   .then(() => {
+        //     cy.log(
+        //       `[The search action did not return any value](http://example.com)`
+        //     );
+        //     cy.wait(15000);
+        //     this.elements.jobsQueueModal.assignedJobsTab
+        //       .searchTextbox()
+        //       .type(jobDescription.slice(-5))
+        //       .then(($el) => {
+        //         cy.wrap($el).type("{enter}");
+        //       });
+        //     cy.wait(1000);
+        //     this.elements.jobsQueueModal.assignedJobsTab
+        //       .jobRowCell()
+        //       .contains(jobDescription.slice(-5))
+        //       .parent()
+        //       .dblclick();
+        //     cy.wrap($el)
+        //       .invoke("text")
+        //       .then((text) => {
+        //         throw new Error(
+        //           "The search action did not return any table entries"
+        //         );
+        //         cy.log(
+        //           `[The search action did not return any value](http://example.com)`
+        //         );
+        //       });
+        //   });
       });
 
     // this.elements.jobsQueueModal.assignedJobsTab
