@@ -1410,6 +1410,12 @@ cy.get("table").then(($el) => {
       .should("be.visible")
       .click();
   };
+  getJobNumber = () => {
+    // var jn = any;
+    // cy.get("input#jobNumberIncrement").invoke("disabled", "false");
+    cy.get("input#jobNumberIncrement").as('increment');
+     
+  };
 }
 
 module.exports = new SchedulePage();

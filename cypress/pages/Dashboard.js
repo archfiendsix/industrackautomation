@@ -15,6 +15,7 @@ class Dashboard {
     invoicesTab: () => cy.get('.nav.navbar-nav a[href="/invoicesTab"]'),
     purchaseOrderTab: () =>
       cy.get('.nav.navbar-nav a[href="/purchaseOrderTab"]'),
+    reportsTab: () => cy.get('.nav.navbar-nav a[href="/reportsTab"]'),
     companySettings: () =>
       cy.get("ul#side-menu li a").contains("Company Settings"),
     schedulingTab: () => cy.get("ul#side-menu li a").contains("Scheduling"),
@@ -54,7 +55,7 @@ class Dashboard {
       "none"
     );
     // cy.get(".dropdown-menu").should('not.be.visible')
-    cy.wait(500)
+    cy.wait(500);
     cy.get("body").should("have.length.gt", 0).should("be.visible");
     // cy.wait("@page");
   };
@@ -90,6 +91,11 @@ class Dashboard {
     this.elements.timesheetTab().should("be.visible").dblclick();
     this.checkLoadPage();
   };
+  clickReportsTab = () => {
+    this.checkLoadPage();
+    this.elements.reportsTab().should("be.visible").dblclick();
+    this.checkLoadPage();
+  };
   clickPurchaseOrderTab = () => {
     this.checkLoadPage();
     this.elements.purchaseOrderTab().should("be.visible").dblclick();
@@ -104,7 +110,7 @@ class Dashboard {
 
   clickSchedulingTab = () => {
     this.checkLoadPage();
-    this.elements.schedulingTab().should("be.visible").dblclick();
+    this.elements.scheduleTab().should("be.visible").dblclick();
     this.checkLoadPage();
   };
 
