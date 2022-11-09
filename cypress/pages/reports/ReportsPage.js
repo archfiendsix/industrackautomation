@@ -129,7 +129,7 @@ class ReportsPage {
         employeeListItem: () => cy.get("app-report .crewlist li"),
       },
       getReportButton: () => cy.get("app-report button").contains("Get Report"),
-      sortByJobNumber: ()=> cy.get('table  th span').contains('Job #')
+      sortByJobNumber: () => cy.get("table th.jobNumberHeader").contains("Job #"),
     },
   };
 
@@ -148,12 +148,18 @@ class ReportsPage {
       .contains(searchEntry)
       .should("be.visible")
       .click();
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/TimesheetReports/BuildTimesheetInOutReportData/"
+    ).as("BuildTimesheetInOutReportData");
     this.elements.timesheetInOutReport.getReportButton().click();
+    cy.wait("@BuildTimesheetInOutReportData");
   };
 
-  sortTableByJobNumber = ()=> {
-    this.elements.timesheetInOutReport.sortByJobNumber().click()
-  }
+  sortTableByJobNumber = () => {
+    cy.get(".preloader").should("not.be.visible");
+    // cy.contains("span", "Job #");
+    this.elements.timesheetInOutReport.sortByJobNumber().dblclick();
+  };
 }
 
 module.exports = new ReportsPage();
