@@ -421,7 +421,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     cy.intercept(
       "https://onetrackwebapiprod.azurewebsites.net/api/Timesheets/Update"
     ).as("update");
-    this.elements.addTimesheetModal.saveChangesButton().click();
+    this.elements.addTimesheetModal.saveChangesButton().click({ force: true });
 
     // cy.log('@update')
 

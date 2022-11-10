@@ -120,6 +120,8 @@ class ReportsPage {
         button: () => cy.get("#side-menu a .nav-label").contains("Timesheet"),
         timeSheetInOut: () =>
           cy.get("#side-menu li a").contains("Timesheet In/Out"),
+        timesheetDetails: () =>
+          cy.get("#side-menu li a").contains("Timesheet Details"),
       },
     },
     timesheetInOutReport: {
@@ -129,13 +131,18 @@ class ReportsPage {
         employeeListItem: () => cy.get("app-report .crewlist li"),
       },
       getReportButton: () => cy.get("app-report button").contains("Get Report"),
-      sortByJobNumber: () => cy.get("table th.jobNumberHeader").contains("Job #"),
+      sortByJobNumber: () =>
+        cy.get("table th.jobNumberHeader").contains("Job #"),
     },
   };
 
   gotoTimesheetInOut = () => {
     this.elements.leftPanel.timeSheet.button().click();
     this.elements.leftPanel.timeSheet.timeSheetInOut().click();
+  };
+  gotoTimesheetDetails = () => {
+    this.elements.leftPanel.timeSheet.button().click();
+    this.elements.leftPanel.timeSheet.timesheetDetails().click();
   };
   selectEmployee = (searchEntry) => {
     this.elements.timesheetInOutReport.selectEmployee.button().click();
