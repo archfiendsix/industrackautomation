@@ -58,7 +58,7 @@ class EstimatesPage {
 
     addInvoiceDiscountButton: () =>
       cy.get('a[data-target="#modalAddDiscount"]'),
-    tableRows: () => cy.get(".dataTable tbody tr.gradeA.odd.ng-star-inserted"),
+    tableRows: () => cy.get(".dataTable tbody tr.gradeA"),
     rowTotal: () => cy.get(".dataTable tbody tr td:nth-last-child(2) span"),
     invoiceSubTotal: () =>
       cy.get(".table.invoice-total tbody tr:first-child() td:nth-child(2)"),

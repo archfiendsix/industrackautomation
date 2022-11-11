@@ -19,7 +19,7 @@ describe("New Estimate module", () => {
     cy.viewport(1250, 1024);
     // cy.intercept("**/api/**").as("api");
     cy.visit("/login");
-    LoginPage.loginAdmin("andreiv@industrack.com", "admin");
+    LoginPage.loginAdmin(Cypress.env('login_username'), Cypress.env('login_password'));
     cy.get("body").contains("Estimates");
     // cy.wait("@api");
 

@@ -6,8 +6,15 @@ class LoginPage {
   };
 
   loginAdmin = (username, password) => {
+    cy.get("#mat-input-0")
+      .should("be.visible")
+      .and("have.class", "mat-input-element");
     this.elements.usernameTextBox().type(username);
+    cy.get("#mat-input-1")
+      .should("be.visible")
+      .and("have.class", "mat-input-element");
     this.elements.passwordTextBox().type(password);
+    cy.contains(".mat-focus-indicator", "LOGIN");
     this.elements.loginButton().click();
     cy.get("app-map-tab").should("be.visible");
     cy.get(".navbar-brand").should("be.visible");

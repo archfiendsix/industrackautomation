@@ -17,7 +17,7 @@ describe("New Estimate module", () => {
   beforeEach(() => {
     cy.viewport(1560, 992);
     cy.visit("/login");
-    LoginPage.loginAdmin("andreiv@industrack.com", "admin");
+    LoginPage.loginAdmin(Cypress.env('login_username'), Cypress.env('login_password'));
     // cy.wait(4250);
     cy.get("body").contains("Estimates");
     /* Prevent the notification card from interfering */

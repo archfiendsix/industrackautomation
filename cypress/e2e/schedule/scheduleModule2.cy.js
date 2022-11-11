@@ -17,7 +17,7 @@ describe("Schedule Module", () => {
     cy.viewport(1280, 768);
 
     cy.visit("/login");
-    LoginPage.loginAdmin("andreiv@industrack.com", "admin");
+    LoginPage.loginAdmin(Cypress.env('login_username'), Cypress.env('login_password'));
     cy.get("body").contains("Schedule");
     // cy.wait(4250);
     // Dashboard.preventNotificationCard();

@@ -12,6 +12,10 @@ module.exports = defineConfig({
     numTestsKeptInMemory: 0,
     // experimentalSessionAndOrigin: true,
   },
+  env: {
+    login_username: "andreiv@industrack.com",
+    login_password: "admin",
+  },
   integration: {
     baseUrl: "https://onetrack.industrack.com",
   },
@@ -45,4 +49,10 @@ module.exports = defineConfig({
   screenshotOnRunFailure: false,
   defaultCommandTimeout: 30000,
   video: true,
+  experimentalSingleTabRunMode: true,
+  watchForFileChanges: false,
+  retries: {
+    runMode: 1,
+    openMode: 1,
+  },
 });

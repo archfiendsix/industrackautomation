@@ -20,7 +20,7 @@ describe("New Estimate module", () => {
     cy.viewport(1250, 1024)
     // cy.intercept("**/api/**").as("api");
     cy.visit("/login");
-    LoginPage.loginAdmin("andreiv@industrack.com", "admin");
+    LoginPage.loginAdmin(Cypress.env('login_username'), Cypress.env('login_password'));
     cy.get("body").contains("Estimates");
     // cy.wait("@api");
 
@@ -189,7 +189,7 @@ describe("New Estimate module", () => {
   //   // EstimatesPage.previewEstimate() // Can't find element
   // });
 
-  it("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
+  it.only("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
     Dashboard.clickEstimatesTab();
     // cy.visit('/estimatesTab/list')
     // Dashboard.preventNotificationCard();

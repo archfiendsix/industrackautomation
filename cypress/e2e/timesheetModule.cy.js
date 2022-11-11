@@ -16,7 +16,7 @@ describe("Timesheet module", () => {
   beforeEach(() => {
     cy.viewport(1366, 1250);
     cy.visit("/login");
-    LoginPage.loginAdmin("andreiv@industrack.com", "admin");
+    LoginPage.loginAdmin(Cypress.env('login_username'), Cypress.env('login_password'));
     //cy.wait(4250)
     // Dashboard.preventNotificationCard()
     // cy.visit('/timesheetTab')

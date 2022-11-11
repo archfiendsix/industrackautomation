@@ -15,7 +15,7 @@ describe("Invoices Module", () => {
   beforeEach(() => {
     cy.viewport(1280, 1024);
     cy.visit("/login");
-    LoginPage.loginAdmin("andreiv@industrack.com", "admin");
+    LoginPage.loginAdmin(Cypress.env('login_username'), Cypress.env('login_password'));
     cy.get("body").contains("Invoices");
     // Dashboard.preventNotificationCard();
     Dashboard.clickInvoicesTab();
