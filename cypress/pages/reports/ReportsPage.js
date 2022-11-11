@@ -123,6 +123,13 @@ class ReportsPage {
         timesheetDetails: () =>
           cy.get("#side-menu li a").contains("Timesheet Details"),
       },
+
+      scheduling: {
+        button: () => cy.get("#side-menu a .nav-label").contains("Scheduling"),
+        jobsByTech: () =>
+          cy.get("#side-menu li a").contains("Jobs by Tech"),
+       
+      },
     },
     timesheetInOutReport: {
       selectEmployee: {
@@ -143,6 +150,11 @@ class ReportsPage {
   gotoTimesheetDetails = () => {
     this.elements.leftPanel.timeSheet.button().click();
     this.elements.leftPanel.timeSheet.timesheetDetails().click();
+  };
+
+  gotoJobsByTech = () => {
+    this.elements.leftPanel.scheduling.button().click();
+    this.elements.leftPanel.scheduling.jobsByTech().click();
   };
   selectEmployee = (searchEntry) => {
     this.elements.timesheetInOutReport.selectEmployee.button().click();
@@ -165,6 +177,7 @@ class ReportsPage {
   sortTableByJobNumber = () => {
     cy.get(".preloader").should("not.be.visible");
     // cy.contains("span", "Job #");
+    cy.contains('Job #')
     this.elements.timesheetInOutReport.sortByJobNumber().dblclick();
   };
 }
