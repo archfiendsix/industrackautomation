@@ -189,7 +189,7 @@ describe("New Estimate module", () => {
   //   // EstimatesPage.previewEstimate() // Can't find element
   // });
 
-  it.only("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
+  it("New Estimate - Arrange items - Check if items are applied/arranged correctly", () => {
     Dashboard.clickEstimatesTab();
     // cy.visit('/estimatesTab/list')
     // Dashboard.preventNotificationCard();
