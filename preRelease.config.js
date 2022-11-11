@@ -1,12 +1,12 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  projectId: "15zbgq", // Key for t/est dashboard runs
+  projectId: "vsg82k", // Key for Industrack
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl: "https://onetrack.industrack.com",
+    baseUrl: "https://onetrackuiprerelease.azurewebsites.net/",
     numTestsKeptInMemory: 0,
     numTestsKeptInMemory: 0,
     // experimentalSessionAndOrigin: true,
@@ -16,7 +16,7 @@ module.exports = defineConfig({
     login_password: "admin",
   },
   integration: {
-    baseUrl: "https://onetrack.industrack.com",
+    baseUrl: "https://onetrackuiprerelease.azurewebsites.net/",
   },
   // "numTestsKeptInMemory": 0,
   reporter: "mochawesome",
