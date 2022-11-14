@@ -438,6 +438,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
 
     // })
   };
+
+  deleteTimesheetRecords=()=> {
+    cy.get('timesheet').should('be.visible').and('have.class','ng-star-inserted')
+    cy.get('timesheet table td').contains('Employee One').parent().click()
+    cy.get('.preloader').should('not.be.visible')
+    cy.get('timesheet thead th').eq(1).click()
+    cy.get('button').contains('Delete').should('be.visible').click()
+    // cy.get('button').contains('Delete')
+  }
 }
 
 module.exports = new TimesheetPage();

@@ -93,7 +93,7 @@ class Dashboard {
   };
   clickReportsTab = () => {
     this.checkLoadPage();
-    this.elements.reportsTab().should("be.visible").dblclick();
+    this.elements.reportsTab().should("be.visible").dblclick({ force: true });
     this.checkLoadPage();
   };
   clickPurchaseOrderTab = () => {

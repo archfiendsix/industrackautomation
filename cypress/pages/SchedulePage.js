@@ -1,3 +1,5 @@
+const { stringify } = require("uuid");
+
 class SchedulePage {
   elements = {
     filterTextBox: () =>
@@ -992,6 +994,9 @@ cy.get("table").then(($el) => {
         -5
       )}**`
     ).as("assigneJobSearchRequest");
+    cy.intercept(
+      `https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetJob/**`
+    ).as("GetJob");
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
@@ -1009,6 +1014,8 @@ cy.get("table").then(($el) => {
                 .contains(jobDescription.slice(-5))
                 .parent()
                 .dblclick();
+
+              
             } else {
               throw new Error(
                 `The search entry:${jobDescription.slice(
@@ -1018,8 +1025,6 @@ cy.get("table").then(($el) => {
             }
           });
       });
-
-    
   };
 
   searchOnHoldJobsTab = (jobDescription) => {
@@ -1240,11 +1245,18 @@ cy.get("table").then(($el) => {
       .should("be.visible")
       .click();
   };
-  getJobNumber = () => {
-    // var jn = any;
-    // cy.get("input#jobNumberIncrement").invoke("disabled", "false");
-    cy.get("input#jobNumberIncrement").as('increment');
-     
+  getJobNumber = function () {
+    cy.wait(1000);
+    cy.get("input#jobNumberIncrement")
+      .should("be.visible")
+      .and("have.class", "ng-untouched");
+    // cy.get("input#jobNumberIncrement").invoke("val").as("jobNumber");
+    cy.get("input#jobNumberIncrement")
+      .invoke("val")
+      .then((val) => {
+        jobNumber = val;
+      });
+    // return jn;
   };
 }
 
