@@ -217,9 +217,9 @@ class AddCustomerPage {
   addTags = (tags) => {
     cy.contains("Service Location").should("be.visible");
     tags.forEach((i) => {
-      cy.intercept(
-        "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/SaveTag/**"
-      ).as("SaveTag");
+      // cy.intercept(
+      //   "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/SaveTag/**"
+      // ).as("SaveTag");
 
       this.elements.customerOverviewModal
         .tagsField()
@@ -229,7 +229,7 @@ class AddCustomerPage {
         .then(() => {
           cy.get("mat-option").contains(i).first().click();
         });
-      cy.wait("@SaveTag");
+      // cy.wait("@SaveTag");
       // this.elements.customerOverviewModal.tagsFieldOption().contains(i).first().click()
     });
   };

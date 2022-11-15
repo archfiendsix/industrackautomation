@@ -56,7 +56,14 @@ class Dashboard {
     );
     // cy.get(".dropdown-menu").should('not.be.visible')
     cy.wait(500);
-    cy.get("body").should("have.length.gt", 0).should("be.visible");
+    cy.get("body")
+      .should("have.length.gt", 0)
+      .should("be.visible")
+      .then(($el) => {
+        if ($el.find("#zsiq_float").length > 0) {
+          cy.get("#zsiq_float").invoke("css", "display", "none");
+        }
+      });
     // cy.wait("@page");
   };
 

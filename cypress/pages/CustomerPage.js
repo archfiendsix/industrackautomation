@@ -62,6 +62,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       rowCheckbox: () => cy.get("app-address-group table tbody tr"),
     },
     customerTable: {
+      cells: () => cy.get(".mat-table tbody tr td"),
       numberSort: () =>
         cy.get(
           '.mat-table thead button[aria-label="Change sorting for customerNumber"]'
@@ -370,9 +371,9 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   searchAndEditGroup = (groupName) => {
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/AddressBookGroups/AddressBookGroupDetail/**"
-    ).as("AddressBookGroupDetail");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/AddressBookGroups/AddressBookGroupDetail/**"
+    // ).as("AddressBookGroupDetail");
     cy.wait(500);
     this.elements.manageCustomerGroupsModal
       .groupNameCell()
@@ -381,7 +382,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       .find(".btn-group.actions button")
       .click();
     this.elements.manageCustomerGroupsModal.edit().click();
-    cy.wait("@AddressBookGroupDetail");
+    // cy.wait("@AddressBookGroupDetail");
   };
 
   searchAndVerifyTags = (tags, customerNumber, companyName) => {
@@ -405,13 +406,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       // cy.get('body').scrollTo('top')
       this.elements.searchBox.input().clear().type(customerNumber);
       this.elements.searchBox.searchIcon().click();
-      cy.wait(3500);
+      cy.wait(800);
+      cy.get(".preloader").should("not.be.visible");
       this.elements.customerTable
-        .companyNameCell()
-        .contains(companyName.slice(5))
-        .parent()
-        .find("td")
-        .eq(9)
+        .cells()
+        // .companyNameCell()
+        // .contains(companyName.slice(5))
+        // .parent()
+        // .find("td")
+        // .eq(9)
         .should("contain", tag);
     });
   };
@@ -456,7 +459,7 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     this.elements.editCustomerModal
       .makeActiveButton()
       .should("be.visible")
-      .click("bottomRight");
+      .click("bottomRight", { force: true });
     cy.get("dialog-overview-modal button").contains("Yes").click();
     this.elements.editCustomerModal.closeButton().click();
   };

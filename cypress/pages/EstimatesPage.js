@@ -197,24 +197,25 @@ class EstimatesPage {
     this.elements.searchButton().click({ force: true });
   }
   selectCustomer(customer_name) {
-    cy.intercept("**/api/**").as("api");
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
-    ).as("AddressBookLiveSearchExt");
-    this.typeSearchInput(customer_name);
-
+    // cy.intercept("**/api/**").as("api");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
+    // ).as("AddressBookLiveSearchExt");
+    this.typeSearchInput(customer_name.slice(-5));
+    // cy.wait("@AddressBookLiveSearchExt");
     this.clickSearch();
-    cy.wait("@AddressBookLiveSearchExt");
+    cy.wait(2000);
+    // cy.wait("@AddressBookLiveSearchExt");
+    this.elements.searchItem().should("have.length.gt", 0);
     this.elements.searchItem().should("be.visible");
-    this.elements.searchItem().click();
+    this.elements.searchItem().first().click();
     this.elements.proceedButton().click();
   }
 
   inventorySelect(searchItem, itemInfo = { profit: 3 }) {
-    cy.intercept(
-      "GET",
-      "https://onetrackwebapiprod.azurewebsites.net/api/Inventory/InventoryViewLiveSearch**"
-    ).as("InventoryViewLiveSearch");
+    cy.intercept("GET", "**InventoryViewLiveSearch**").as(
+      "InventoryViewLiveSearch"
+    );
     this.elements
       .partsSearch()
       .last()
@@ -264,15 +265,16 @@ class EstimatesPage {
   }
 
   saveEstimate() {
-    // cy.intercept(
-    //   "https://onetrackwebapiprod.azurewebsites.net/api/estimates/CreateEstimate"
-    // ).as("CreateEstimate");
     cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
-    ).as("GetEstimate");
+      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/CreateEstimate"
+    ).as("CreateEstimate");
+
     this.elements.actionsDropdown().first().click({ force: true });
+    // cy.intercept("**GetEstimate**").as("GetEstimate");
+    this.elements.dropDownItems().should('be.visible')
     this.elements.dropDownItems().contains("Save").click();
-    cy.wait("@GetEstimate");
+    cy.wait(1000)
+    cy.wait("@CreateEstimate");
   }
 
   saveAndCloseEstimate() {
