@@ -129,6 +129,8 @@ class ReportsPage {
         jobsByTech: () => cy.get("#side-menu li a").contains("Jobs by Tech"),
         jobsByCustomer: () =>
           cy.get("#side-menu li a").contains("Jobs by Customer"),
+        jobsByStatus: () =>
+          cy.get("#side-menu li a").contains("Jobs by Status"),
       },
     },
     timesheetInOutReport: {
@@ -160,6 +162,10 @@ class ReportsPage {
   gotoJobsByCustomer = () => {
     this.elements.leftPanel.scheduling.button().click();
     this.elements.leftPanel.scheduling.jobsByCustomer().click();
+  };
+  gotoJobsByStatus = () => {
+    this.elements.leftPanel.scheduling.button().click();
+    this.elements.leftPanel.scheduling.jobsByStatus().click();
   };
   selectEmployee = (searchEntry) => {
     this.elements.timesheetInOutReport.selectEmployee.button().click();
@@ -197,7 +203,7 @@ class ReportsPage {
     cy.wait("@BuildJobReportData");
   };
 
-  selectCustomer= (searchEntry) => {
+  selectCustomer = (searchEntry) => {
     this.elements.timesheetInOutReport.selectEmployee.button().click();
     this.elements.timesheetInOutReport.selectEmployee
       .filterTextbox()
@@ -210,9 +216,27 @@ class ReportsPage {
       .click();
     cy.intercept(
       "https://onetrackwebapiprod.azurewebsites.net/api/JobReports/BuildJobReportDataByCustomer/"
-    ).as("BuildTimesheetInOutReportData");
+    ).as("BuildJobReportDataByCustomer");
     this.elements.timesheetInOutReport.getReportButton().click();
-    cy.wait("@BuildTimesheetInOutReportData");
+    cy.wait("@BuildJobReportDataByCustomer");
+  };
+
+  selectStatus = (searchEntry) => {
+    this.elements.timesheetInOutReport.selectEmployee.button().click();
+    this.elements.timesheetInOutReport.selectEmployee
+      .filterTextbox()
+      .clear()
+      .type(searchEntry);
+    this.elements.timesheetInOutReport.selectEmployee
+      .employeeListItem()
+      .contains(searchEntry)
+      .should("be.visible")
+      .click();
+    cy.intercept(
+      "https://onetrackwebapiprod.azurewebsites.net/api/JobReports/BuildJobReportDataByStatus/"
+    ).as("BuildJobReportDataByStatus");
+    this.elements.timesheetInOutReport.getReportButton().click();
+    cy.wait("@BuildJobReportDataByStatus");
   };
 
   sortTableByJobNumber = () => {

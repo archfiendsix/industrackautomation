@@ -140,7 +140,7 @@ describe("Timesheet module", () => {
    
   });
 
-  it.only("Jobs by Tech Report >validate the reports using the job number", () => {
+  it("Jobs by Tech Report >validate the reports using the job number", () => {
     // Dashboard.clickSchedulingTab();
     /* Add Schedule */
     SchedulePage.gotoAddNewJob();
