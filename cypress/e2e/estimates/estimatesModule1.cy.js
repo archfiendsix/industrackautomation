@@ -58,7 +58,7 @@ describe("New Estimate module", () => {
       Dashboard.clickEstimatesTab();
       EstimatesPage.clickAddNew();
       cy.wait("@api");
-      EstimatesPage.selectCustomer("Genius Giant Inc.");
+      EstimatesPage.selectCustomer("Genius Game Inc.");
       EstimatesPage.inventorySelect("Inventory Item 1");
       EstimatesPage.saveAndCloseEstimate();
     });
@@ -69,7 +69,7 @@ describe("New Estimate module", () => {
       // Dashboard.preventNotificationCard();
       EstimatesPage.clickAddNew();
       cy.wait("@api");
-      EstimatesPage.selectCustomer("Genius Giant Inc.");
+      EstimatesPage.selectCustomer("Genius Game Inc.");
       EstimatesPage.inventorySelect("Inventory Item 1");
       EstimatesPage.saveEstimate();
       EstimatesPage.markAsWon();
@@ -83,7 +83,7 @@ describe("New Estimate module", () => {
       // Dashboard.preventNotificationCard();
       EstimatesPage.clickAddNew();
       cy.wait("@api");
-      EstimatesPage.selectCustomer("Genius Giant Inc.");
+      EstimatesPage.selectCustomer("Genius Game Inc.");
       EstimatesPage.inventorySelect("Inventory Item 1");
 
       EstimatesPage.saveEstimate();
@@ -97,7 +97,7 @@ describe("New Estimate module", () => {
       Dashboard.clickEstimatesTab();
       // Dashboard.preventNotificationCard();
       EstimatesPage.clickAddNew();
-      EstimatesPage.selectCustomer("Genius Giant Game Inc.");
+      EstimatesPage.selectCustomer("Genius Game Inc.");
       EstimatesPage.inventorySelect("Inventory Item 1");
       EstimatesPage.saveEstimate();
       EstimatesPage.convertToJob();
@@ -109,7 +109,7 @@ describe("New Estimate module", () => {
       Dashboard.clickEstimatesTab();
       // Dashboard.preventNotificationCard();
       EstimatesPage.clickAddNew();
-      EstimatesPage.selectCustomer("Genius Giant Game Inc.");
+      EstimatesPage.selectCustomer("Genius Game Inc.");
       EstimatesPage.inventorySelect("Inventory Item 1");
       EstimatesPage.saveEstimate();
       EstimatesPage.convertToInvoice();

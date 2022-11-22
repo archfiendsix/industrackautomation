@@ -1,7 +1,8 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  projectId: "15zbgq", // Key for t/est dashboard runs
+  // projectId: "15zbgq", // Key for t/est dashboard runs
+  projectId: "oak91e", // Key for t/est dashboard runs
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
