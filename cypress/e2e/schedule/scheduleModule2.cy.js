@@ -184,7 +184,7 @@ describe("Schedule Module", () => {
   it("Add default Job - Assign employee group - Start Job - Hold Job - Resume - Mark as completed- Approve for invoice - Convert to Invoice - assert info", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -350,7 +350,7 @@ describe("Schedule Module", () => {
   it("Add default Job - Customer with 2 equipment - Equipment - Add attachments - Assert: customer details, service location - assert info after creation", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Not Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -387,7 +387,7 @@ describe("Schedule Module", () => {
   it("Add default Job - Customer with 1 equipment - Add Inventory, Service, Assembly, Equipment  -Add attachments - Assert: customer details, service location - assert info after creation", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -433,7 +433,7 @@ describe("Schedule Module", () => {
   it("Add default Job - Customer with 1 equipment - Add an Equipment - Add 1 Employee -Add attachments - Assert: customer details, service location - assert info after creation", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -496,7 +496,7 @@ describe("Schedule Module", () => {
   it("Add default Job - Customer with 1 equipment - Add an Equipment - Add 1 Employee -Add attachments - Add a Task - Assert: customer details, service location - assert info after creation", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,

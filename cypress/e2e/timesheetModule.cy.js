@@ -31,7 +31,7 @@ describe("Timesheet module", () => {
     TimesheetPage.clickAddNewTimesheetButton();
     TimesheetPage.selectFieldEmployee("Employee One");
     const timesheetInfo = {
-      customerName: "Customer Eqp-f1439",
+      customerName: "Customer Eqpf1439",
       type: "Job",
       costCode: "123",
       vehicle: "Bumble Bee",

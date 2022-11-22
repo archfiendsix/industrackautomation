@@ -257,12 +257,14 @@ class SchedulePage {
         .selectCustomerField()
         .then(($el) => {
           cy.get(".preloader").should("not.be.visible");
-          cy.intercept(
-            "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearch"
-          ).as("AddressBookLiveSearch");
-          cy.wrap($el).clear().type(`${jobInformation.selectCustomer}`);
-          cy.wait(300); //do not omit
-          cy.wait("@AddressBookLiveSearch");
+          // cy.intercept(
+          //   "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearch"
+          // ).as("AddressBookLiveSearch");
+          cy.wrap($el)
+            .clear()
+            .type(jobInformation.selectCustomer, { keystrokeDelay: 450 });
+          cy.wait(1000); //do not omit
+          // cy.wait("@AddressBookLiveSearch");
           cy.wrap($el)
             .invoke("val")
             .then((val) => {
@@ -296,7 +298,7 @@ class SchedulePage {
             "mat-autocomplete-visible"
           );
           cy.wait(300);
-          cy.wait("@AddressBookLiveSearch");
+          // cy.wait("@AddressBookLiveSearch");
           cy.get(
             '.mat-autocomplete-panel[role="listbox"].mat-autocomplete-visible'
           ).should("be.visible");
@@ -311,7 +313,7 @@ class SchedulePage {
           )
             .find("mat-option")
             .then(($el) => {
-              cy.wait(1000);
+              cy.wait(1500);
               cy.contains("mat-option", jobInformation.selectCustomer);
               cy.wrap($el).contains(jobInformation.selectCustomer).click();
               // cy.get("mat-option")
@@ -1014,8 +1016,6 @@ cy.get("table").then(($el) => {
                 .contains(jobDescription.slice(-5))
                 .parent()
                 .dblclick();
-
-              
             } else {
               throw new Error(
                 `The search entry:${jobDescription.slice(

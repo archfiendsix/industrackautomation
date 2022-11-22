@@ -36,7 +36,7 @@ describe("Timesheet module", () => {
     SchedulePage.gotoAddNewJob();
     let randJob = uuidv4().substring(0, 5);
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${randJob}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -116,7 +116,7 @@ describe("Timesheet module", () => {
     TimesheetPage.clickAddNewTimesheetButton();
     TimesheetPage.selectFieldEmployee("Employee One");
     const timesheetInfo = {
-      customerName: "Customer Eqp-f1439",
+      customerName: "Customer Eqpf1439",
       type: "Job",
       costCode: "123",
       vehicle: "Bumble Bee",
@@ -152,7 +152,7 @@ describe("Timesheet module", () => {
     SchedulePage.gotoAddNewJob();
     let randJob = uuidv4().substring(0, 5);
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${randJob}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -232,7 +232,7 @@ describe("Timesheet module", () => {
     TimesheetPage.clickAddNewTimesheetButton();
     TimesheetPage.selectFieldEmployee("Employee One");
     const timesheetInfo = {
-      customerName: "Customer Eqp-f1439",
+      customerName: "Customer Eqpf1439",
       type: "Job",
       costCode: "123",
       vehicle: "Bumble Bee",

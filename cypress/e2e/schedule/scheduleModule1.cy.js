@@ -29,7 +29,7 @@ describe("Schedule Module", () => {
   it("Add default Job - Customer with 1 equipment - Add an Equipment - Add 1 Employee -Add attachments - Add a Task - Set Job as on hold - Assert: customer details, service location - assert info after creation", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -103,7 +103,7 @@ describe("Schedule Module", () => {
   it("Add default Job - Put on hold then resume - assert info", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -197,7 +197,7 @@ describe("Schedule Module", () => {
   it("Add default Job - Start Job - Mark as completed- assert info", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
@@ -302,7 +302,7 @@ describe("Schedule Module", () => {
   it("Add default Job - Start Job - Mark as completed- Approve for invoice - assert info", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
-      selectCustomer: "Eqp-f1439",
+      selectCustomer: "Eqpf1439",
       jobDescription: `Job-${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
