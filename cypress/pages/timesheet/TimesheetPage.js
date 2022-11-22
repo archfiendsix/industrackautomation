@@ -439,14 +439,28 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     // })
   };
 
-  deleteTimesheetRecords=()=> {
-    cy.get('timesheet').should('be.visible').and('have.class','ng-star-inserted')
-    cy.get('timesheet table td').contains('Employee One').parent().click()
-    cy.get('.preloader').should('not.be.visible')
-    cy.get('timesheet thead th').eq(1).click()
-    cy.get('button').contains('Delete').should('be.visible').click()
+  deleteTimesheetRecords = () => {
+    cy.get("timesheet")
+      .should("be.visible")
+      .and("have.class", "ng-star-inserted");
+    cy.get("timesheet table td").contains("Employee One").parent().click();
+    cy.get(".preloader").should("not.be.visible");
+    // cy.get('timesheet thead th').eq(1).click()
+    // cy.get('button').contains('Delete').should('be.visible').click()
+    cy.get("body")
+      .should("have.length.gt", 0)
+      .should("be.visible")
+      .then(($el) => {
+        if ($el.find("app-timesheet-overview table tbody tr").length > 0) {
+          cy.get(".mat-checkbox-inner-container").click(); //#mat-checkbox-53 
+          cy.get(".mat-checkbox-input").click();
+          cy.get(".btn-sm:nth-child(2)").click();
+          cy.get("#deleteMultiConfirmation .btn:nth-child(1)").click();
+        }
+      });
+
     // cy.get('button').contains('Delete')
-  }
+  };
 }
 
 module.exports = new TimesheetPage();

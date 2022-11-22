@@ -8,6 +8,8 @@ class EstimatesPage {
     searchItem: () =>
       cy.get(".ibox-content .customerList ul.list-group").first(),
     proceedButton: () => cy.get("button.btn.btn-primary").contains("Proceed"),
+    descriptionTextArea: () =>
+      cy.get('estimate-edit input[name="estimateDescription"]'),
     partsSearch: () =>
       cy.get('.editable input[aria-label="Parts & services search"]'),
     actionsDropdown: () => cy.get("estimate-edit button").contains("Actions"),
@@ -107,7 +109,8 @@ class EstimatesPage {
     notesForCustomerField: () => cy.get('textarea[name="notes"]'),
     changeCustomer: {
       selectCustomerTextbox: () => cy.get("#changeCustomer input"),
-      customerListItems: () => cy.get(".list-group-item").find("b"),
+      customerListItems: () =>
+        cy.get("#changeCustomer .list-group-item").find("b"),
       proceedButton: () => cy.get("#changeCustomer button").contains("Proceed"),
     },
 
@@ -131,31 +134,25 @@ class EstimatesPage {
   // }
 
   changeCustomer = (customerName) => {
-    cy.intercept("**/api/**").as("api");
-
-    cy.wait("@api");
-    // this.elements.actionsDropdown.button().last().click()
-    // cy.wait(4000)
-    // this.elements.actionsDropdown.changeBillToServiceLocation().last().click()
-    //
     this.elements.addingNewInvoiceModal
       .billToButton()
       .click()
       .then(() => {
         cy.get(".mat-menu-content button").contains("Change Customer").click();
       });
-
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
-    ).as("AddressBookLiveSearchExt");
+    cy.get("#changeCustomer").should("be.visible").and("have.class", "in"); //Assertion before action
+    cy.contains("#changeCustomer", "Select Customer"); //Assertion before action
+    cy.wait(2000);
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
+    // ).as("AddressBookLiveSearchExt");
     cy.get("#changeCustomer").should("have.class", "in");
     this.elements.changeCustomer
       .selectCustomerTextbox()
       .last()
       .type(`${customerName}`)
       .then(() => {
-        cy.wait("@api");
-        cy.wait("@AddressBookLiveSearchExt");
+        cy.wait(2000);
         this.elements.changeCustomer
           .customerListItems()
           .contains(customerName)
@@ -165,7 +162,7 @@ class EstimatesPage {
 
     // cy.wait(4000)
     // this.elements.changeCustomer.customerListItems().contains(customerName).last().click()
-    cy.wait("@AddressBookLiveSearchExt");
+    // cy.wait("@AddressBookLiveSearchExt");
     this.elements.changeCustomer.proceedButton().last().click();
   };
 
@@ -197,20 +194,25 @@ class EstimatesPage {
     this.elements.searchButton().click({ force: true });
   }
   selectCustomer(customer_name) {
-    // cy.intercept("**/api/**").as("api");
-    // cy.intercept(
-    //   "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
-    // ).as("AddressBookLiveSearchExt");
-    this.typeSearchInput(customer_name.slice(-5));
-    // cy.wait("@AddressBookLiveSearchExt");
+    cy.contains("estimate-edit", "Adding New Estimation");
+    this.typeSearchInput(customer_name);
     this.clickSearch();
-    cy.wait(2000);
-    // cy.wait("@AddressBookLiveSearchExt");
-    this.elements.searchItem().should("have.length.gt", 0);
-    this.elements.searchItem().should("be.visible");
-    this.elements.searchItem().first().click();
+    cy.wait(3000);
+    cy.contains(".customerlist", customer_name);
+    // cy.wait(1000); //Added wait to wait for customer list to finish loading
+    this.elements.searchItem().contains(customer_name).click();
     this.elements.proceedButton().click();
   }
+
+  addEstimateDescription = (descriptionText) => {
+    cy.get(".preloader").should("not.be.visible");
+    this.elements
+      .descriptionTextArea()
+      .first()
+      .scrollIntoView()
+      .clear()
+      .type(descriptionText);
+  };
 
   inventorySelect(searchItem, itemInfo = { profit: 3 }) {
     cy.intercept("GET", "**InventoryViewLiveSearch**").as(
@@ -265,16 +267,16 @@ class EstimatesPage {
   }
 
   saveEstimate() {
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/CreateEstimate"
-    ).as("CreateEstimate");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/estimates/CreateEstimate"
+    // ).as("CreateEstimate");
 
     this.elements.actionsDropdown().first().click({ force: true });
     // cy.intercept("**GetEstimate**").as("GetEstimate");
-    this.elements.dropDownItems().should('be.visible')
+    this.elements.dropDownItems().should("be.visible");
     this.elements.dropDownItems().contains("Save").click();
-    cy.wait(1000)
-    cy.wait("@CreateEstimate");
+    cy.wait(1000);
+    // cy.wait("@CreateEstimate");
   }
 
   saveAndCloseEstimate() {
@@ -286,9 +288,6 @@ class EstimatesPage {
   }
 
   previewEstimate = () => {
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/Reminders/GetNumberOfReminders**"
-    ).as("GetNumberOfReminders");
     cy.intercept("https://webprintprod.industrack.com/preview/estimates/**").as(
       "estimates"
     );
@@ -394,14 +393,14 @@ class EstimatesPage {
     cy.wait(2500);
     this.elements.estimatePreviewModalTitle().contains("Estimate Preview");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
-    cy.wait("@api");
+    // cy.wait("@api");
     // cy.wait(800); // cannot omit wait to load the preview completely
     // this.elements.previewiFrame.custName().should("be.visible");
     let verifyThis = {
       customername: "Genius Game Inc.",
     };
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
-    cy.wait("@api");
+    // cy.wait("@api");
     // cy.wait("@GetEstimate");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
 
@@ -459,11 +458,11 @@ class EstimatesPage {
 
   checkEstimatePreviewValues = (customerInfo) => {
     cy.wait(2000);
-    cy.intercept("**/api/**").as("api");
+    // cy.intercept("**/api/**").as("api");
     // this.elements.previewiFrame.note().should('have.value', customerInfo.note.toString())
     cy.frameLoaded("#contentHolder");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
-    cy.wait("@api");
+    // cy.wait("@api");
     cy.get("app-report-preview-dialog preloader").should("not.be.visible");
 
     this.elements.previewiFrame

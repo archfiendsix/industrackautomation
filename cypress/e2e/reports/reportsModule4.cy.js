@@ -21,8 +21,8 @@ describe("Timesheet module", () => {
       Cypress.env("login_username"),
       Cypress.env("login_password")
     );
-    // Dashboard.clickTimesheetTab()
-    // TimesheetPage.deleteTimesheetRecords()
+    Dashboard.clickTimesheetTab()
+    TimesheetPage.deleteTimesheetRecords()
     Dashboard.clickSchedulingTab();
   });
 

@@ -7,8 +7,10 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     baseUrl: "https://onetrack.industrack.com",
+    // baseUrl: "https://onetrackui.azurewebsites.net/",
     numTestsKeptInMemory: 0,
-    numTestsKeptInMemory: 0,
+    
+
     // experimentalSessionAndOrigin: true,
   },
   env: {
@@ -54,4 +56,5 @@ module.exports = defineConfig({
     runMode: 1,
     openMode: 1,
   },
+  experimentalStudio: true
 });

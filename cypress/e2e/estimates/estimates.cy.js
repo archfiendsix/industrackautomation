@@ -143,6 +143,7 @@ describe("New Estimate module", () => {
       // Dashboard.preventNotificationCard();
       EstimatesPage.clickAddNew();
       EstimatesPage.selectCustomer(customerInfo.companyName);
+      EstimatesPage.addEstimateDescription(`Estimate for ${customerInfo.companyName}`)
       EstimatesPage.inventorySelect(inventoryInfo.name);
       // cy.wait(4000);
       EstimatesPage.inventorySelect(nonInventoryInfo.name);
