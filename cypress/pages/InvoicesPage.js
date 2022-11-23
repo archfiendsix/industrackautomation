@@ -306,14 +306,15 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
       "display",
       "none"
     );
-    cy.intercept(
-      " https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBooksWithPaging**"
-    ).as("GetAddressBooksWithPaging");
+    // cy.intercept(
+    //   " https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/GetAddressBooksWithPaging**"
+    // ).as("GetAddressBooksWithPaging");
     cy.get(".table-responsive").should("be.visible");
     cy.get(".pull-right").should("be.visible");
     this.elements.addNewInvoiceButton().should("be.visible");
     this.elements.addNewInvoiceButton().click();
-    cy.wait("@GetAddressBooksWithPaging");
+    // cy.wait("@GetAddressBooksWithPaging");
+    cy.wait(2300)
     // cy.intercept(
     //   "https://onetrackwebapiprod.azurewebsites.net/api/AddressBooks/AddressBookLiveSearchExt"
     // ).as("AddressBookLiveSearchExt");
@@ -343,13 +344,14 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
     inputInvoiceInfo.inventoriesToAdd &&
       inputInvoiceInfo.inventoriesToAdd.forEach((item) => {
         this.elements.addingNewInvoiceModal.partsSearch().then(($el) => {
-          cy.intercept(
-            "GET",
-            "https://onetrackwebapiprod.azurewebsites.net/api/Inventory/InventoryViewLiveSearch**"
-          ).as("InventoryViewLiveSearch");
+          // cy.intercept(
+          //   "GET",
+          //   "https://onetrackwebapiprod.azurewebsites.net/api/Inventory/InventoryViewLiveSearch**"
+          // ).as("InventoryViewLiveSearch");
           cy.wrap($el).should("be.visible");
           cy.wrap($el).type(`${item.trim()}`);
-          cy.wait("@InventoryViewLiveSearch");
+          // cy.wait("@InventoryViewLiveSearch");
+          cy.wait(2000)
           cy.wrap($el).click();
           cy.wrap($el).type("{downArrow}");
           cy.wrap($el)
@@ -403,9 +405,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   selectOneSerialNumber = () => {
-    cy.intercept("**/api/**").as("api");
+    // cy.intercept("**/api/**").as("api");
     this.elements.selectSerialNumberModal.serialNumberSelect().type("{enter}");
-    cy.wait("@api");
+    // cy.wait("@api");
+    cy.wait(2000)
     this.elements.selectSerialNumberModal.saveButton().click();
   };
 
@@ -425,9 +428,10 @@ cy.get('button[data-target="#modalAddNewCustomer"]').click()
   };
 
   previewInvoice = () => {
-    cy.intercept("https://webprintprod.industrack.com/preview/invoices/**").as(
-      "preview"
-    ); // Intercept waited at checkPreview function
+    // cy.intercept("https://webprintprod.industrack.com/preview/invoices/**").as(
+    //   "preview"
+    // ); // Intercept waited at checkPreview function
+    cy.wait(2000)
     this.elements.addingNewInvoiceModal.actionsDropdown
       .button()
       .should("be.visible")

@@ -854,14 +854,15 @@ class SchedulePage {
   };
 
   gotoJobsQueue = () => {
-    cy.wait(800);
+    cy.wait(1000);
     this.elements.actionsDropdown.button().click();
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetUnassignedJobsWithPaging**"
-    ).as("GetUnassignedJobsWithPaging");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetUnassignedJobsWithPaging**"
+    // ).as("GetUnassignedJobsWithPaging");
+    cy.wait(2000);
     this.elements.actionsDropdown.jobsQueue().click();
-    cy.wait(300);
-    cy.wait("@GetUnassignedJobsWithPaging");
+    cy.wait(1000);
+    // cy.wait("@GetUnassignedJobsWithPaging");
   };
   clickFirstUnassignedJob = () => {
     // cy.wait(800);
@@ -897,19 +898,20 @@ class SchedulePage {
   };
 
   gotoOnHoldJobsTab = () => {
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetOnHoldJobsWithPaging**"
-    ).as("GetOnHoldJobsWithPaging");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetOnHoldJobsWithPaging**"
+    // ).as("GetOnHoldJobsWithPaging");
     this.elements.jobsQueueModal.onHoldJobsTab.button().click();
-    cy.wait("@GetOnHoldJobsWithPaging");
+    // cy.wait("@GetOnHoldJobsWithPaging");
   };
 
   gotoCompletedJobsTab = () => {
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetCompletedJobsWithPaging**"
-    ).as("GetCompletedJobsWithPaging");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetCompletedJobsWithPaging**"
+    // ).as("GetCompletedJobsWithPaging");
     this.elements.jobsQueueModal.completedJobsTab.button().click();
-    cy.wait("@GetCompletedJobsWithPaging");
+    // cy.wait("@GetCompletedJobsWithPaging");
+    cy.wait(2000);
   };
 
   gotoApprovedForInvoiceTab = () => {

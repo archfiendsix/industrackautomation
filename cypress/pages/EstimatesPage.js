@@ -215,9 +215,9 @@ class EstimatesPage {
   };
 
   inventorySelect(searchItem, itemInfo = { profit: 3 }) {
-    cy.intercept("GET", "**InventoryViewLiveSearch**").as(
-      "InventoryViewLiveSearch"
-    );
+    // cy.intercept("GET", "**InventoryViewLiveSearch**").as(
+    //   "InventoryViewLiveSearch"
+    // );
     this.elements
       .partsSearch()
       .last()
@@ -225,7 +225,8 @@ class EstimatesPage {
         cy.wrap($el).should("be.visible");
 
         cy.wrap($el).type(`${searchItem.trim()}`);
-        cy.wait("@InventoryViewLiveSearch");
+        // cy.wait("@InventoryViewLiveSearch");
+        cy.wait(2000);
         cy.wrap($el).click();
         cy.wait(500);
         cy.wrap($el).type("{downArrow}");
@@ -360,7 +361,7 @@ class EstimatesPage {
     // ).as("GetEstimateJobs");
     // cy.get("mat-dialog-container").should("be.visible");
     // cy.wait("@GetEstimateJobs");
-    cy.wait(600);
+    cy.wait(1000);
     this.elements
       .confirmYesButton()
       // .should("be.visible")
@@ -372,11 +373,12 @@ class EstimatesPage {
   }
 
   checkConvertedToInvoiceSuccess = () => {
-    cy.intercept("**/api/**").as("api");
+    // cy.intercept("**/api/**").as("api");
     this.elements
       .savedNotification()
       .contains("Estimate has been successfully converted");
-    cy.wait("@api");
+    // cy.wait("@api");
+    cy.wait(3000)
   };
 
   checkBillToCustomerName = (customerName) => {

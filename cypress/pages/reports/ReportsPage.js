@@ -178,11 +178,12 @@ class ReportsPage {
       .contains(searchEntry)
       .should("be.visible")
       .click();
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/TimesheetReports/BuildTimesheetInOutReportData/"
-    ).as("BuildTimesheetInOutReportData");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/TimesheetReports/BuildTimesheetInOutReportData/"
+    // ).as("BuildTimesheetInOutReportData");
     this.elements.timesheetInOutReport.getReportButton().click();
-    cy.wait("@BuildTimesheetInOutReportData");
+    // cy.wait("@BuildTimesheetInOutReportData");
+    cy.wait(2000)
   };
 
   selectTechReport = (searchEntry) => {
@@ -196,11 +197,12 @@ class ReportsPage {
       .contains(searchEntry)
       .should("be.visible")
       .click();
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/JobReports/BuildJobReportData/"
-    ).as("BuildJobReportData");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/JobReports/BuildJobReportData/"
+    // ).as("BuildJobReportData");
     this.elements.timesheetInOutReport.getReportButton().click();
-    cy.wait("@BuildJobReportData");
+    // cy.wait("@BuildJobReportData");
+    cy.wait(2000)
   };
 
   selectCustomer = (searchEntry) => {
@@ -214,11 +216,12 @@ class ReportsPage {
       .contains(searchEntry)
       .should("be.visible")
       .click();
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/JobReports/BuildJobReportDataByCustomer/"
-    ).as("BuildJobReportDataByCustomer");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/JobReports/BuildJobReportDataByCustomer/"
+    // ).as("BuildJobReportDataByCustomer");
     this.elements.timesheetInOutReport.getReportButton().click();
-    cy.wait("@BuildJobReportDataByCustomer");
+    // cy.wait("@BuildJobReportDataByCustomer");
+    cy.wait(2500)
   };
 
   selectStatus = (searchEntry) => {
@@ -232,11 +235,12 @@ class ReportsPage {
       .contains(searchEntry)
       .should("be.visible")
       .click();
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/JobReports/BuildJobReportDataByStatus/"
-    ).as("BuildJobReportDataByStatus");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/JobReports/BuildJobReportDataByStatus/"
+    // ).as("BuildJobReportDataByStatus");
     this.elements.timesheetInOutReport.getReportButton().click();
-    cy.wait("@BuildJobReportDataByStatus");
+    // cy.wait("@BuildJobReportDataByStatus");
+    cy.wait(2000)
   };
 
   sortTableByJobNumber = () => {
