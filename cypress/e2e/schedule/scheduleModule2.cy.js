@@ -31,7 +31,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqpf1439",
-      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -185,7 +185,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqpf1439",
-      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -351,7 +351,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqpf1439",
-      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job${uuidv4().substring(0, 5)}`,
       jobStatus: "Not Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -388,7 +388,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqpf1439",
-      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -434,7 +434,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqpf1439",
-      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -497,7 +497,7 @@ describe("Schedule Module", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqpf1439",
-      jobDescription: `Job-${uuidv4().substring(0, 5)}`,
+      jobDescription: `Job${uuidv4().substring(0, 5)}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",

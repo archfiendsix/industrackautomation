@@ -37,7 +37,7 @@ describe("Timesheet module", () => {
     let randJob = uuidv4().substring(0, 5);
     let jobInformation = {
       selectCustomer: "Eqpf1439",
-      jobDescription: `Job-${randJob}`,
+      jobDescription: `Job${randJob}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
@@ -153,7 +153,7 @@ describe("Timesheet module", () => {
     let randJob = uuidv4().substring(0, 5);
     let jobInformation = {
       selectCustomer: "Eqpf1439",
-      jobDescription: `Job-${randJob}`,
+      jobDescription: `Job${randJob}`,
       jobStatus: "Started",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
