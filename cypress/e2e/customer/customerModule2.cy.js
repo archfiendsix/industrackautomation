@@ -27,7 +27,7 @@ describe("Add Customer", () => {
   it("Test with one tag and verify that tags are assigned to customer", () => {
     const rand = uuidv4().substring(0, 5);
     const customerInfo = {
-      customerNumber: `CN-${rand}`,
+      customerNumber: `CN${rand}`,
       companyName: `${uuidv4().substring(0, 5)} - Add Tag to this customer`,
       validateAddress: true,
     };
@@ -48,7 +48,7 @@ describe("Add Customer", () => {
 
   // 'Make Customer active' button being covered by support avatar
   it("Make customer inactive - Check unsearchability - Make Customer active again - Check searchability", () => {
-    const cn = `CN-${uuidv4().substring(0, 5)}`;
+    const cn = `CN${uuidv4().substring(0, 5)}`;
     const customerInfo = {
       customerNumber: cn,
       companyName: "Make this Customer Inactive - then Active again",
@@ -147,7 +147,7 @@ describe("Add Customer", () => {
 
   //   const rand = uuidv4().substring(0, 5);
   //   const customerInfo = {
-  //     customerNumber: `Cust-${rand}`,
+  //     customerNumber: `Cust${rand}`,
   //     companyName: `${uuidv4().substring(
   //       0,
   //       5
@@ -303,7 +303,7 @@ describe("Add Customer", () => {
     const rand = uuidv4().substring(0, 5);
     const custrand = uuidv4().substring(0, 5);
     const customerInfo = {
-      customerNumber: `CN-${rand}`,
+      customerNumber: `CN${rand}`,
       companyName: `Customer Eqp-${custrand}`,
       validateAddress: true,
     };

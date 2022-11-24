@@ -34,7 +34,7 @@ describe("Add Customer", () => {
   it("Successfully create a customer", () => {
     const rand = uuidv4().substring(0, 5);
     const customerInfo = {
-      customerNumber: `CN-${rand}`,
+      customerNumber: `CN${rand}`,
       validateAddress: true,
     };
     AddCustomerPage.fillData(customerInfo);
@@ -111,7 +111,7 @@ describe("Add Customer", () => {
   it("Add Service Location to a newly created Customer - Added Location has no selected tax rate", () => {
     const rand = uuidv4().substring(0, 5);
     const customerInfo = {
-      customerNumber: `CN-${rand}`,
+      customerNumber: `CN${rand}`,
       companyName: "Add service location to this customer",
       validateAddress: true,
     };

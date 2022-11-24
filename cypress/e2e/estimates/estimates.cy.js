@@ -31,8 +31,8 @@ describe("New Estimate module", () => {
       // Add new Customer
       const rand = uuidv4().substring(0, 5);
       const customerInfo = {
-        customerNumber: `Cust-${rand}`,
-        companyName: `Company-${uuidv4().substring(0, 5)}`,
+        customerNumber: `Cust${rand}`,
+        companyName: `Company${uuidv4().substring(0, 5)}`,
         street: "Cemetery Street",
         validateAddress: true,
       };

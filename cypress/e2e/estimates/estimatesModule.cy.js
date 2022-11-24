@@ -34,8 +34,11 @@ describe("New Estimate module", () => {
   it("Should change Customer", () => {
     Dashboard.clickEstimatesTab();
     EstimatesPage.clickAddNew();
+   
     EstimatesPage.selectCustomer("Genius Game Inc.");
+    
     EstimatesPage.inventorySelect("Inventory Item 1");
+    
     EstimatesPage.saveEstimate();
     EstimatesPage.changeCustomer("Change to this customer");
     EstimatesPage.saveEstimate();
@@ -47,7 +50,9 @@ describe("New Estimate module", () => {
     Dashboard.clickEstimatesTab();
     // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
+   
     EstimatesPage.selectCustomer("Genius Game Inc.");
+    
     EstimatesPage.inventorySelect("Inventory Item 1");
     EstimatesPage.saveEstimate();
     EstimatesPage.previewEstimate();
@@ -121,7 +126,9 @@ describe("New Estimate module", () => {
     Dashboard.clickEstimatesTab()
     // cy.visit("/estimatesTab/list");
     EstimatesPage.clickAddNew();
+    
     EstimatesPage.selectCustomer("Genius Game Inc.");
+    
     EstimatesPage.inventorySelect("Air Filter");
 
     const note = "This is a test note";
@@ -194,7 +201,9 @@ describe("New Estimate module", () => {
     // cy.visit('/estimatesTab/list')
     // Dashboard.preventNotificationCard();
     EstimatesPage.clickAddNew();
+    
     EstimatesPage.selectCustomer("Genius Game Inc.");
+    
     EstimatesPage.inventorySelect("Air Filter");
     EstimatesPage.inventorySelect("Inventory Item 1");
     EstimatesPage.inventorySelect("Gaming Chair");

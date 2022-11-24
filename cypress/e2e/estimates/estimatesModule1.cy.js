@@ -33,17 +33,18 @@ describe("New Estimate module", () => {
       const customerInfo = {
         validateAddress: true,
       };
-      cy.intercept("**/api/**").as("api");
+      // cy.intercept("**/api/**").as("api");
+      cy.wait(1000)
       AddCustomerPage.fillData(customerInfo);
-      cy.wait("@api");
+      // cy.wait("@api");
       AddCustomerPage.elements.saveButton().should("not.be.disabled");
       AddCustomerPage.elements.saveButton().click();
 
       // AddCustomerPage.confirmValidityYes()
 
       /*new inventory */
-      cy.wait("@api");
-
+      // cy.wait("@api");
+      cy.wait(1000)
       InventoryListPage.gotoAddNewInventory();
       const inventoryInfo = {
         name: "Add Inventory",
@@ -57,7 +58,8 @@ describe("New Estimate module", () => {
       /*newEstimate*/
       Dashboard.clickEstimatesTab();
       EstimatesPage.clickAddNew();
-      cy.wait("@api");
+      // cy.wait("@api");
+      cy.wait(1000)
       EstimatesPage.selectCustomer("Genius Game Inc.");
       EstimatesPage.inventorySelect("Inventory Item 1");
       EstimatesPage.saveAndCloseEstimate();
