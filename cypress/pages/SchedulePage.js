@@ -1282,7 +1282,7 @@ cy.get("table").then(($el) => {
     cy.get("input#jobNumberIncrement")
       .invoke("val")
       .then((val) => {
-        jobNumber = val;
+        // jobNumber = val;
       });
     // return jn;
   };

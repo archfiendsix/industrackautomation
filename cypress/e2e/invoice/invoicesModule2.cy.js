@@ -106,7 +106,7 @@ describe("Invoices Module", () => {
     InvoicesPage.closePreview();
   });
 
-  it("Generate overdue invoice then check - Test out payment.", () => {
+  it.only("Generate overdue invoice then check - Test out payment.", () => {
     // Dashboard.preventNotificationCard();
 
     const invoiceInfo = {

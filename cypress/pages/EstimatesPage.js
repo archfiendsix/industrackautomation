@@ -12,7 +12,7 @@ class EstimatesPage {
       cy.get('estimate-edit input[name="estimateDescription"]'),
     partsSearch: () =>
       cy.get('.editable input[aria-label="Parts & services search"]'),
-    actionsDropdown: () => cy.get("estimate-edit button").contains("Actions"),
+    actionsDropdown: () => cy.get("button").contains("Actions"),
     dropDownItems: () => cy.get("li a"),
     changeCustomerButton: () => cy.get("button#changeCustomerBtn"),
     tableRowEllipse: () => cy.get(".dataTable tbody tr td:last-child() button"),
@@ -335,15 +335,20 @@ class EstimatesPage {
     // cy.intercept(
     //   "**/api/**"500
     // ).as("GetEstimate");
+    cy.wait(2000);
+    cy.get(".preloader").should("not.be.visible");
+    this.elements.actionsDropdown().should("be.visible");
+    this.elements.actionsDropdown().scrollIntoView();
     this.elements.actionsDropdown().click();
+    cy.wait(1000);
     this.elements.dropDownItems().contains("Convert to Invoice").click();
     // cy.wait("@GetEstimate");
   }
 
   convertToJob() {
-    cy.intercept(
-      "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
-    ).as("GetEstimate");
+    // cy.intercept(
+    //   "https://onetrackwebapiprod.azurewebsites.net/api/estimates/GetEstimate/**"
+    // ).as("GetEstimate");
     this.elements.actionsDropdown().click();
     this.elements.dropDownItems().contains("Convert to job").click();
     // cy.wait("@GetEstimate");

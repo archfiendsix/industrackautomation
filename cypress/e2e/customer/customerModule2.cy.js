@@ -71,7 +71,7 @@ describe("Add Customer", () => {
     CustomerPage.searchAndClickCustomer(customerInfo.customerNumber);
   });
 
-  it.only("Create customer - Create Group - Assign customer to group - Check customer inclusion to group ", () => {
+  it("Create customer - Create Group - Assign customer to group - Check customer inclusion to group ", () => {
     const rand = uuidv4().substring(0, 5);
     const cn = `${rand}-CN`;
     const companyname = `${uuidv4().substring(
