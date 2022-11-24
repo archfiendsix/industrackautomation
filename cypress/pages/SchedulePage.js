@@ -314,7 +314,20 @@ class SchedulePage {
             .find("mat-option")
             .then(($el) => {
               cy.wait(1500);
-              cy.contains("mat-option", jobInformation.selectCustomer);
+              cy.get('.cdk-overlay-pane [role="listbox"]').then(($el) => {
+                if ($el.find("mat-option").length > 0) {
+                  cy.get("mat-option")
+                    .contains(jobInformation.selectCustomer)
+                    .scrollIntoView();
+                  cy.contains("mat-option", jobInformation.selectCustomer);
+                } else {
+                  cy.log("All is good");
+                }
+              });
+
+              // cy.get(body).should('be.visible').then($el=> {
+              //     $el.find()
+              // })
               cy.wrap($el).contains(jobInformation.selectCustomer).click();
               // cy.get("mat-option")
               //   .contains(jobInformation.selectCustomer)
@@ -953,7 +966,7 @@ cy.get("table").then(($el) => {
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
-      .type(jobDescription.slice(-5))
+      .type(jobDescription)
       .then(($el) => {
         cy.wrap($el).type("{enter}");
       });
@@ -988,44 +1001,57 @@ cy.get("table").then(($el) => {
     // this.elements.jobsQueueModal.assignedJobsTab
     //   .searchTextbox()
     //   .clear()
-    //   .type(jobDescription.slice(-5))
+    //   .type(jobDescription)
     //   .then(($el) => {
     //     cy.wrap($el).type("{enter}");
     //   });
     // cy.wait(5500);
-    cy.intercept(
-      `https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetAssignedJobsWithPaging?filter=${jobDescription.slice(
-        -5
-      )}**`
-    ).as("assigneJobSearchRequest");
+    // cy.intercept(
+    //   `https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetAssignedJobsWithPaging?filter=${jobDescription.slice(
+    //     -5
+    //   )}**`
+    // ).as("assigneJobSearchRequest");
     cy.intercept(
       `https://onetrackwebapiprod.azurewebsites.net/api/Jobs/GetJob/**`
     ).as("GetJob");
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
-      .type(jobDescription.slice(-5))
+      .type(jobDescription)
       .then(($el) => {
         cy.wrap($el).type("{enter}");
         cy.get("app-loading-mask").should("not.be.visible");
         cy.get(".preloader").should("not.be.visible");
-        cy.wait("@assigneJobSearchRequest")
-          .its("response.body")
-          .then((response) => {
-            if (response.recordsCount >= 1) {
-              this.elements.jobsQueueModal.assignedJobsTab
-                .jobRowCell()
-                .contains(jobDescription.slice(-5))
-                .parent()
-                .dblclick();
-            } else {
-              throw new Error(
-                `The search entry:${jobDescription.slice(
-                  -5
-                )} did not return any table entries`
-              );
-            }
-          });
+        // cy.wait("@assigneJobSearchRequest")
+        //   .its("response.body")
+        //   .then((response) => {
+        //     if (response.recordsCount >= 1) {
+        //       this.elements.jobsQueueModal.assignedJobsTab
+        //         .jobRowCell()
+        //         .contains(jobDescription)
+        //         .parent()
+        //         .dblclick();
+        //     } else {
+        //       throw new Error(
+        //         `The search entry:${jobDescription.slice(
+        //           -5
+        //         )} did not return any table entries`
+        //       );
+        //     }
+        //   });
+        cy.get("app-jobs table tbody").then(($el) => {
+          if ($el.find("tr").length > 0) {
+            this.elements.jobsQueueModal.assignedJobsTab
+              .jobRowCell()
+              .contains(jobDescription)
+              .parent()
+              .dblclick();
+          } else {
+            throw new Error(
+              `The search entry:${jobDescription} did not return any table entries`
+            );
+          }
+        });
       });
   };
 
@@ -1051,7 +1077,7 @@ cy.get("table").then(($el) => {
     this.elements.jobsQueueModal.assignedJobsTab
       .searchTextbox()
       .clear()
-      .type(jobDescription.slice(-5))
+      .type(jobDescription)
       .then(($el) => {
         cy.wrap($el).type("{enter}");
       });
@@ -1086,7 +1112,7 @@ cy.get("table").then(($el) => {
     this.elements.jobsQueueModal.completedJobsTab
       .searchTextbox()
       .clear()
-      .type(jobDescription.slice(-5))
+      .type(jobDescription)
       .then(($el) => {
         cy.wrap($el).type("{enter}");
       });
@@ -1128,7 +1154,7 @@ cy.get("table").then(($el) => {
     this.elements.jobsQueueModal.completedJobsTab
       .searchTextbox()
       .clear()
-      .type(jobDescription.slice(-5))
+      .type(jobDescription)
       .then(($el) => {
         cy.wrap($el).clear().type("{enter}");
       });
@@ -1170,7 +1196,7 @@ cy.get("table").then(($el) => {
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab
       .searchTextbox()
       .clear()
-      .type(jobDescription.slice(-5))
+      .type(jobDescription)
       .then(($el) => {
         cy.wrap($el).clear().type("{enter}");
       });
@@ -1210,7 +1236,7 @@ cy.get("table").then(($el) => {
     this.elements.jobsQueueModal.approvedForInvoiceJobsTab
       .searchTextbox()
       .clear()
-      .type(jobDescription.slice(-5))
+      .type(jobDescription)
       .then(($el) => {
         cy.wrap($el).clear().type("{enter}");
       });
