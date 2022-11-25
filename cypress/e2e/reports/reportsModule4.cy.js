@@ -105,8 +105,8 @@ describe("Timesheet module", () => {
         cy.wrap(response.jobNumber).as("jobNumber");
       });
     SchedulePage.saveJob();
-    cy.log("@jobNumber");
-    let x = cy.wrap("@jobNumber");
+    // cy.log("@jobNumber");
+    // let x = cy.wrap("@jobNumber");
     // cy.log(this.jobNumber);
     /* End of add schedule */
 
@@ -221,8 +221,8 @@ describe("Timesheet module", () => {
         cy.wrap(response.jobNumber).as("jobNumber");
       });
     SchedulePage.saveJob();
-    cy.log("@jobNumber");
-    let x = cy.wrap("@jobNumber");
+    // cy.log("@jobNumber");
+    // let x = cy.wrap("@jobNumber");
     // cy.log(this.jobNumber);
     /* End of add schedule */
 

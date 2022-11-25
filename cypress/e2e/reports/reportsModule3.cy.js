@@ -104,8 +104,8 @@ describe("Timesheet module", () => {
         cy.wrap(response.jobNumber).as("jobNumber");
       });
     SchedulePage.saveJob();
-    cy.log("@jobNumber");
-    let x = cy.wrap("@jobNumber");
+    // cy.log("@jobNumber");
+    // let x = cy.wrap("@jobNumber");
     // cy.log(this.jobNumber);
     /* End of add schedule */
 
@@ -145,7 +145,7 @@ describe("Timesheet module", () => {
     ReportsPage.sortTableByJobNumber();
   });
 
-  it("Jobs by Tech Status : ALL > validate the reports using the job number", function () {
+  it.only("Jobs by Tech Status : ALL > validate the reports using the job number", function () {
     // Dashboard.clickSchedulingTab();
     /* Add Schedule */
     SchedulePage.gotoAddNewJob();
@@ -153,7 +153,7 @@ describe("Timesheet module", () => {
     let jobInformation = {
       selectCustomer: "Eqpf1439",
       jobDescription: `Job${randJob}`,
-      jobStatus: "Started",
+      jobStatus: "Complete",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
       jobPriority: "Low",
@@ -204,8 +204,8 @@ describe("Timesheet module", () => {
     SchedulePage.saveJob();
 
     SchedulePage.gotoJobsQueue();
-    SchedulePage.gotoAssignedJobsTab();
-    SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
+    SchedulePage.gotoCompletedJobsTab();
+    SchedulePage.searchCompletedJobsTab(jobInformation.jobDescription);
     // SchedulePage.getJobNumber();
     // cy.wait(1000);
     // cy.get("input#jobNumberIncrement")
@@ -213,15 +213,15 @@ describe("Timesheet module", () => {
     //   .and("have.class", "ng-untouched");
     // cy.get("input#jobNumberIncrement").last().invoke("val").as("jobNumber");
     // let jobNumber = SchedulePage.getJobNumber();
-    cy.wait("@GetJob")
-      .its("response.body")
-      .then((response) => {
-        cy.log(response.jobNumber);
-        cy.wrap(response.jobNumber).as("jobNumber");
-      });
+    // cy.wait("@GetJob")
+    //   .its("response.body")
+    //   .then((response) => {
+    //     cy.log(response.jobNumber);
+    //     cy.wrap(response.jobNumber).as("jobNumber");
+    //   });
     SchedulePage.saveJob();
-    cy.log("@jobNumber");
-    let x = cy.wrap("@jobNumber");
+    // cy.log("@jobNumber");
+    // let x = cy.wrap("@jobNumber");
     // cy.log(this.jobNumber);
     /* End of add schedule */
 
@@ -231,7 +231,8 @@ describe("Timesheet module", () => {
     TimesheetPage.clickAddNewTimesheetButton();
     TimesheetPage.selectFieldEmployee("Employee One");
     const timesheetInfo = {
-      customerName: "Customer Eqpf1439",
+      // customerName: "Customer Eqpf1439",
+      job: jobInformation.jobDescription,
       type: "Job",
       costCode: "123",
       vehicle: "Bumble Bee",
