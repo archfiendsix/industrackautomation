@@ -205,7 +205,7 @@ describe("Timesheet module", () => {
     // var jobNumber = cy.get("@increment").val;
     SchedulePage.saveJob();
 
-    // cy.log(jobNumber);
+    // 
     /* End of add schedule */
 
     /* Add new timesheet */
