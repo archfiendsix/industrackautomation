@@ -38,7 +38,7 @@ describe("Timesheet module", () => {
     let jobInformation = {
       selectCustomer: "Eqpf1439",
       jobDescription: `Job${randJob}`,
-      jobStatus: "Started",
+      jobStatus: "Complete",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
       jobPriority: "Low",
@@ -79,7 +79,7 @@ describe("Timesheet module", () => {
       ],
       tasks: [
         {
-          taskName: `Task - ${uuidv4().substring(0, 5)}`,
+          taskName: `Task${uuidv4().substring(0, 5)}`,
           serviceType: "Maintenance",
         },
       ],
@@ -89,8 +89,10 @@ describe("Timesheet module", () => {
     SchedulePage.saveJob();
 
     SchedulePage.gotoJobsQueue();
-    SchedulePage.gotoAssignedJobsTab();
-    SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
+    // SchedulePage.gotoAssignedJobsTab();
+    // SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
+    SchedulePage.gotoCompletedJobsTab();
+    SchedulePage.searchCompletedJobsTab(jobInformation.jobDescription);
     // SchedulePage.getJobNumber();
     // cy.wait(1000);
     // cy.get("input#jobNumberIncrement")
@@ -116,7 +118,8 @@ describe("Timesheet module", () => {
     TimesheetPage.clickAddNewTimesheetButton();
     TimesheetPage.selectFieldEmployee("Employee One");
     const timesheetInfo = {
-      customerName: "Customer Eqpf1439",
+      // customerName: "Customer Eqpf1439",
+      job: jobInformation.jobDescription,
       type: "Job",
       costCode: "123",
       vehicle: "Bumble Bee",
@@ -128,7 +131,7 @@ describe("Timesheet module", () => {
           )}`,
         },
         duration: {
-          hrs: "8",
+          hrs: "1",
           min: "0",
         },
       },
@@ -154,7 +157,7 @@ describe("Timesheet module", () => {
     let jobInformation = {
       selectCustomer: "Eqpf1439",
       jobDescription: `Job${randJob}`,
-      jobStatus: "Started",
+      jobStatus: "Complete",
       notes: `Note-${uuidv4().substring(0, 5)}`,
       serviceType: "Maintenance",
       jobPriority: "Low",
@@ -195,7 +198,7 @@ describe("Timesheet module", () => {
       ],
       tasks: [
         {
-          taskName: `Task - ${uuidv4().substring(0, 5)}`,
+          taskName: `Task${uuidv4().substring(0, 5)}`,
           serviceType: "Maintenance",
         },
       ],
@@ -205,8 +208,10 @@ describe("Timesheet module", () => {
     SchedulePage.saveJob();
 
     SchedulePage.gotoJobsQueue();
-    SchedulePage.gotoAssignedJobsTab();
-    SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
+    // SchedulePage.gotoAssignedJobsTab();
+    // SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
+    SchedulePage.gotoCompletedJobsTab();
+    SchedulePage.searchCompletedJobsTab(jobInformation.jobDescription);
     // SchedulePage.getJobNumber();
     // cy.wait(1000);
     // cy.get("input#jobNumberIncrement")
@@ -232,7 +237,8 @@ describe("Timesheet module", () => {
     TimesheetPage.clickAddNewTimesheetButton();
     TimesheetPage.selectFieldEmployee("Employee One");
     const timesheetInfo = {
-      customerName: "Customer Eqpf1439",
+      // customerName: "Customer Eqpf1439",
+      job: jobInformation.jobDescription,
       type: "Job",
       costCode: "123",
       vehicle: "Bumble Bee",
@@ -244,7 +250,7 @@ describe("Timesheet module", () => {
           )}`,
         },
         duration: {
-          hrs: "8",
+          hrs: "1",
           min: "0",
         },
       },

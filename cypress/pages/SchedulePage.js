@@ -1119,19 +1119,28 @@ cy.get("table").then(($el) => {
       });
     // cy.wait(5500);
     cy.get("app-loading-mask").should("not.be.visible");
-    this.elements.jobsQueueModal.completedJobsTab
-      .jobRowCell()
-      .contains(jobDescription)
-      .first()
-      .parent()
-      .find("button")
-      .click()
-      .then(() => {
-        // cy.wait(500);
-        cy.get(".btn-group.actions .dropdown-menu a")
-          .contains("View Job")
-          .click();
-      });
+
+    cy.get("app-jobs-completed table tbody").then(($el) => {
+      if ($el.find("tr").length > 0) {
+        this.elements.jobsQueueModal.completedJobsTab
+          .jobRowCell()
+          .contains(jobDescription)
+          .first()
+          .parent()
+          .find("button")
+          .click()
+          .then(() => {
+            cy.wait(2000);
+            cy.get(".btn-group.actions .dropdown-menu a")
+              .contains("View Job")
+              .click();
+          });
+      } else {
+        throw new Error(
+          `The search entry:${jobDescription} did not return any table entries`
+        );
+      }
+    });
   };
 
   searchApproveCompletedJobTab = (jobDescription) => {

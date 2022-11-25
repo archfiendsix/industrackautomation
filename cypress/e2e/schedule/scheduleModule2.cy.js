@@ -73,7 +73,7 @@ describe("Schedule Module", () => {
       ],
       tasks: [
         {
-          taskName: `Task - ${uuidv4().substring(0, 5)}`,
+          taskName: `Task${uuidv4().substring(0, 5)}`,
           serviceType: "Maintenance",
         },
       ],
@@ -237,7 +237,7 @@ describe("Schedule Module", () => {
       },
       tasks: [
         {
-          taskName: `Task - ${uuidv4().substring(0, 5)}`,
+          taskName: `Task${uuidv4().substring(0, 5)}`,
           serviceType: "Maintenance",
         },
       ],
@@ -493,7 +493,7 @@ describe("Schedule Module", () => {
     SchedulePage.verifyCustomerInformation(jobInformation);
   });
 
-  it("Add default Job - Customer with 1 equipment - Add an Equipment - Add 1 Employee -Add attachments - Add a Task - Assert: customer details, service location - assert info after creation", () => {
+  it("Add default Job - Customer with 1 equipment - Add an Equipment - Add 1 Employee -Add attachments - Add a TaskAssert: customer details, service location - assert info after creation", () => {
     SchedulePage.gotoAddNewJob();
     let jobInformation = {
       selectCustomer: "Eqpf1439",
@@ -539,7 +539,7 @@ describe("Schedule Module", () => {
       ],
       tasks: [
         {
-          taskName: `Task - ${uuidv4().substring(0, 5)}`,
+          taskName: `Task${uuidv4().substring(0, 5)}`,
           serviceType: "Maintenance",
         },
       ],
