@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress run --record --key 4dda6a64-230e-4fe5-8d0a-8e3a3c0d3b36 --config-file cypress.config.js --browser chrome",
-    "test-prod": "npx cypress run --record --key 4dda6a64-230e-4fe5-8d0a-8e3a3c0d3b36 --config-file production.config.js --browser chrome",
+    "test": "npx cypress run --record --key 4dda6a64-230e-4fe5-8d0a-8e3a3c0d3b36 --config-file production.config.js --browser chrome",
     "test-preRelease": "npx cypress run --record --key 4dda6a64-230e-4fe5-8d0a-8e3a3c0d3b36 --config-file preRelease.config.js --browser chrome",
     "test-ehTest": "npx cypress run --record --key 4dda6a64-230e-4fe5-8d0a-8e3a3c0d3b36 --config-file ehTest.config.js --browser chrome",
     "test-per-spec": "npx cypress run --browser chrome --reporter mochawesome --spec \"cypress/e2e/invoice/invoicesModule.cy.js\" --config-file cypress.config.js",
