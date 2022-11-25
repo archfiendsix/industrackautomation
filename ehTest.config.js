@@ -1,8 +1,8 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  // projectId: "vsg82k", // Key for Industrack
-  projectId: "oak91e", // Key for Industrack
+  projectId: "vsg82k", // Key for Industrack
+  // projectId: "oak91e", // Key for Industrack
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here

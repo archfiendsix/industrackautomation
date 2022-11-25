@@ -99,12 +99,12 @@ describe("Timesheet module", () => {
     //   .and("have.class", "ng-untouched");
     // cy.get("input#jobNumberIncrement").last().invoke("val").as("jobNumber");
     // let jobNumber = SchedulePage.getJobNumber();
-    cy.wait("@GetJob")
+    /* cy.wait("@GetJob")
       .its("response.body")
       .then((response) => {
         cy.log(response.jobNumber);
         cy.wrap(response.jobNumber).as("jobNumber");
-      });
+      }); */
     SchedulePage.saveJob();
     // cy.log("@jobNumber");
     // let x = cy.wrap("@jobNumber");
