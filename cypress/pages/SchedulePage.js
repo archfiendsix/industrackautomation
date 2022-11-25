@@ -316,6 +316,7 @@ class SchedulePage {
               cy.wait(1500);
               cy.get('.cdk-overlay-pane [role="listbox"]').then(($el) => {
                 if ($el.find("mat-option").length > 0) {
+                  cy.wait(1500);
                   cy.get("mat-option")
                     .contains(jobInformation.selectCustomer)
                     .scrollIntoView();

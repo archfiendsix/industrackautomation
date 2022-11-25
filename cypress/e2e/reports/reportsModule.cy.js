@@ -93,7 +93,7 @@ describe("Timesheet module", () => {
     SchedulePage.gotoAssignedJobsTab();
     SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
     SchedulePage.getJobNumber();
-    var jobNumber = cy.get("@increment").val;
+    // var jobNumber = cy.get("@increment").val;
     SchedulePage.saveJob();
 
     cy.log(jobNumber);
@@ -198,7 +198,7 @@ describe("Timesheet module", () => {
     SchedulePage.gotoAssignedJobsTab();
     SchedulePage.searchAssignedJobsTab(jobInformation.jobDescription);
     SchedulePage.getJobNumber();
-    var jobNumber = cy.get("@increment").val;
+    // var jobNumber = cy.get("@increment").val;
     SchedulePage.saveJob();
 
     cy.log(jobNumber);
